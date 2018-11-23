@@ -122,34 +122,7 @@
     <p class="help-block" style="margin-top: -1em;">
       {{_ "proxyBackendForm_disableApiKey_helpText" }}
     </p>
-
-    <!-- Rate limiting -->
-    <div id="rate-limiting">
-      <div class="col-md-12" id="rate-limit-mode">
-        {{> afQuickField
-          name="apiUmbrella.settings.rate_limit_mode"
-          firstOption=false
-        }}
-      </div>
-
-      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom" }}
-        <div class="col-md-12" id="rate-limits">
-          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
-        </div>
-      {{/if }}
-
-      <!-- from feature/mqtt-dashboard -->
-      {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom-header" }}
-        <div class="col-md-12" id="rate-limit-cost-header">
-          {{> afQuickField name="apiUmbrella.settings.rate_limit_cost_header" }}
-        </div>
-
-        <div class="col-md-12" id="rate-limits">
-          {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
-        </div>
-      {{/ if }}
-    </div>
-
+    
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
     
     <div data-toggle="collapse" data-target="#advance-proxy-settings">
@@ -163,7 +136,34 @@
     </div>
     
     <div id="advance-proxy-settings" class="collapse" style="margin-top: 0.5em;">
-        
+
+      <!-- Rate limiting -->
+      <div id="rate-limiting">
+        <div class="col-md-12" id="rate-limit-mode">
+          {{> afQuickField
+            name="apiUmbrella.settings.rate_limit_mode"
+            firstOption=false
+          }}
+        </div>
+
+        {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom" }}
+          <div class="col-md-12" id="rate-limits">
+            {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+          </div>
+        {{/if }}
+
+        <!-- from feature/mqtt-dashboard -->
+        {{# if afFieldValueIs name="apiUmbrella.settings.rate_limit_mode" value="custom-header" }}
+          <div class="col-md-12" id="rate-limit-cost-header">
+            {{> afQuickField name="apiUmbrella.settings.rate_limit_cost_header" }}
+          </div>
+
+          <div class="col-md-12" id="rate-limits">
+            {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
+          </div>
+        {{/ if }}
+      </div>
+
       <!-- IDP App Id -->
       <div class="col-md-12" id="advanced-settings">
         {{> afQuickField
