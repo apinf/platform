@@ -5,18 +5,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiMonitoring">
   {{# if apiMonitoringSettings.enabled }}
   <h2 style="font-size:1.4em;margin-top:0;">
-    Status Messages
+    {{_ "apiMonitoring_title_text" }}
   </h2>
   <p style="color:#6d859e;">
-    Historical data on API availability
+    {{_ "apiMonitoring_title_text_below" }}
   </p>
   <table class="rtable">
     <thead>
       <tr>
-        <th>Time</th>
-        <th>Endpoint</th>
-        <th>Status</th>
-        <th>Details</th>
+        <th>{{_ "apiMonitoring_table_title_timestamp" }}</th>
+        <th>{{_ "apiMonitoring_table_title_endpoint" }}</th>
+        <th>{{_ "apiMonitoring_table_title_status" }}</th>
+        <th>{{_ "apiMonitoring_table_title_details" }}</th>
       </tr>
     </thead>
     <tbody>
@@ -61,9 +61,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="input-group">
         <!-- API url addon -->
           <span class="input-group-addon" id="api-url">
-          {{ api.url }}
+            {{ api.url }}
           </span>
-          {{> afFieldInput name='endPoint' value=endPoint }}
+          {{> afFieldInput 
+            name='endPoint' 
+            value=endPoint
+          }}
       </div>
       {{# if afFieldIsInvalid name='endPoint' }}
         <p class="text-danger">

@@ -72,7 +72,7 @@ Template.apiMonitoring.helpers({
         return result;
       });
       if (monitoringData) {
-        return responses;
+        return responses.reverse();
       }
     }
     return [];
