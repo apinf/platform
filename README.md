@@ -31,7 +31,7 @@
 
 [![](https://images.microbadger.com/badges/image/apinf/platform.svg)](http://microbadger.com/images/apinf/platform) [![](https://images.microbadger.com/badges/version/apinf/platform.svg)](http://microbadger.com/images/apinf/platform)
 
-# API Umbrella Dashboard
+# APInf  Dashboard
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
 
 For API consumers APInf provides simple key management, key usage analytics and API discovery along with API documentation. Managers have simplified workflow for common tasks, such as key management, rate limiting and viewing API usage analytics.
