@@ -1267,6 +1267,7 @@
   "settings_errorMessage": "Invalid Settings! Something is not right or a field is missing.",
   "settings_successMessage": "Settings saved",
   "settings_title_supportsGraphql": "API Umbrella proxy supports GraphQL requests",
+  "settingsPage_title": "General",
   "settingsPage_title_settings": "Settings",
   "settingsMenu_title": "Platform preferences",
   "settingsMenu_profile": "Profile",
