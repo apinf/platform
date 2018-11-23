@@ -1261,6 +1261,7 @@
   "settings_successMessage": "Settings saved",
   "settings_title_supportsGraphql": "API Umbrella proxy supports GraphQL requests",
   "settingsPage_title_settings": "Settings",
+  "settingsMenu_title": "Platform preferences",
   "settingsMenu_profile": "Profile",
   "settingsMenu_account": "Account Settings",
   "settingsMenu_branding": "Branding",
