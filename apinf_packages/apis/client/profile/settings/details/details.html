@@ -18,16 +18,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       type="update" }}
     {{> afQuickField name='name' id="api-name" }}
     <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
-      Your API name
+      {{_ "apiSettingsDetails_name_text" }}
     </p>
-    <counter>Remaining:&nbsp;<span id="counter"></span></counter>
+    <counter>{{_ "apiSettingsDetails_description_remaining" }}:&nbsp;<span id="counter"></span></counter>
     {{> afQuickField name='description' id="api-description" }}
     <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
-      Desribe your API
+      {{_ "apiSettingsDetails_description_text" }}
     </p>
     {{> afQuickField name='url' id="api-url" }}
     <p style="color: #6d859e;margin-top: -1em;margin-bottom: 2em;">
-      Your API BASE PATH
+      {{_ "apiSettingsDetails_url_text" }}
     </p>
     <button type="submit" class="btn btn-success btn-success-special" id="save-settings">
       {{_ "apiSettingsDetails_saveButton" }}

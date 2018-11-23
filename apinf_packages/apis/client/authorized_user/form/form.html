@@ -5,10 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiUserAuthorizationForm">
   <h3 style="font-size:16px; margin-top:0;">
-    Add new collaborator
+    {{_ "apiUserAuthorizationForm_title" }}
   </h3>
   <p style="color:#6d859e;">
-    Give either username or email address
+    {{_ "apiUserAuthorizationForm_helpText" }}
   </p>
   {{# autoForm
     schema=emailSchema
@@ -23,7 +23,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     </fieldset>
 
     <button type="submit" class="btn btn-primary">
-      Add collaborator
+      {{_ "apiUserAuthorizationForm_addButton_text" }}
     </button>
   {{/ autoForm }}
 </template>
