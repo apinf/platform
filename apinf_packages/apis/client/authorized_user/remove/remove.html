@@ -11,6 +11,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     aria-labelledby="apiRemoveAuthorizedUserModalLabel">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <!-- header -->
         <div class="modal-header">
           <button
             type="button"
@@ -18,24 +19,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             data-dismiss="modal"
             aria-label="Close">
               <span aria-hidden="true">&times;</span>
-            </button>
+          </button>
           <h2 class="modal-title" id="apiRemoveAuthorizedUserModalLabel">
             {{_ "apiRemoveAuthorizedUser_modalTitle" }}
           </h2>
         </div>
-          <div class="modal-body">
-            {{_ "apiRemoveAuthorizedUser_confirmation_text" }}
+        <!-- body -->
+        <div class="modal-body">
+          {{_ "apiRemoveAuthorizedUser_confirmation_text" }}
+        </div>
+        <!-- footer -->
+        <div class="modal-footer">
+          <div class="btn-group pull-right">
+            <button id="cancel" class="btn btn-primary" data-dismiss="modal">
+              {{_ "apiRemoveAuthorizedUser_cancelButton_text" }}
+            </button>
+            <button id="confirm-remove" class="btn btn-danger">
+              {{_ "apiRemoveAuthorizedUser_removeButton_text" }}
+            </button>
           </div>
-          <div class="modal-footer">
-            <div class="btn-group pull-right">
-              <button id="cancel" class="btn btn-primary" data-dismiss="modal">
-                {{_ "apiRemoveAuthorizedUser_cancelButton_text" }}
-              </button>
-              <button id="confirm-remove" class="btn btn-danger">
-                {{_ "apiRemoveAuthorizedUser_removeButton_text" }}
-              </button>
-            </div>
-          </div>
+        </div>
       </div>
     </div>
   </div>

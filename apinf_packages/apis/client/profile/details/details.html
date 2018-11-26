@@ -89,10 +89,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <div style="margin-top:2em;">
                     <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1em;">
                       <span class="num">2</span>
-                      Authorization (X-Api-Key)
+                      {{_ "apiDetails_xApiKey_header" }}
                     </h2>
                     <p style="color:#6d859e;margin-top:1.5em;">
-                      Get your X-Api-Key by visiting "Authentication" tab.
+                      {{_ "apiDetails_xApiKey_messageGet" }}
                     </p>
                   </div>
                 {{/ if }}
@@ -112,10 +112,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       {{ else }}
         <h2 style="font-size:1.3em;margin-top:0;text-transform: none;margin-bottom: 1em;">
-          <a href="{{ pathFor 'signUp' }}">Sign up</a> to start using this and hundreds of other APIs.
+          <a href="{{ pathFor 'signUp' }}">{{_ "apiDetails_signUp_text" }}</a> {{_ "apiDetails_signUp_text_continue" }}
         </h2>
         <p style="color:#6d859e;margin-top:0.5em;margin-bottom:0;">
-          Have an account? <a href="{{ pathFor 'signIn' }}">Sign in</a>
+          {{_ "apiDetails_account_text" }} <a href="{{ pathFor 'signIn' }}">{{_ "apiDetails_signIn_text" }}</a>
         </p>
       {{/ if }}
     </div>

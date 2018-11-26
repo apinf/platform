@@ -14,7 +14,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <div class="organization-header-logo" id="organization-file-browse">
         {{# if organization.currentUserCanManage }}
           <span class="organization-header-logo_hover">
-            Upload new logo
+            {{_ "organizationProfileHeader_tabs_newLogo" }}
           </span>
         {{/ if }}
         {{> viewOrganizationLogo organization=organization }}
@@ -26,13 +26,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <li id="organization-apis-tab" class="active">
           <a href="#apis" data-toggle="tab">
             <!-- {{_ "organizationProfileHeader_tabs_apis" }} -->
-            Profile
+            {{_ "organizationProfileHeader_tabs_profile" }}
           </a>
         </li>
         {{# if organization.currentUserCanManage }}
         <li id="organization-managers-tab">
           <a href="#managers" data-toggle="tab">
-            Managers
+            {{_ "organizationProfileHeader_tabs_managers" }}
           </a>
         </li>
         {{/ if }}
