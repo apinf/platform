@@ -103,6 +103,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                   {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
                 </h2>
+                <p style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
+                  {{_ "apiAnalyticPageBody_timelineChartTitle_requests_help" }}
+                </p>
                 {{# if timelineChartData }}
                   {{> requestTimeline
                     chartData=timelineChartData
@@ -125,6 +128,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
                   {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
                 </h2>
+                <p style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
+                  {{_ 'apiAnalyticPageBody_timelineChartTitle_time_help' }}
+                </p>
                 {{# if timelineChartData }}
                   {{> responseTimeTimeline
                     chartData=timelineChartData
