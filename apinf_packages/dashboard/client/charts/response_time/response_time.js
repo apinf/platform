@@ -161,16 +161,16 @@ Template.responseTimeTimeline.onRendered(function () {
       legend: {
         onHover (e) {
           e.target.style.cursor = 'pointer';
-        }
+        },
       },
       hover: {
         onHover (e) {
           const point = this.getElementAtEvent(e);
           if (point.length) e.target.style.cursor = 'pointer';
           else e.target.style.cursor = 'default';
-        }
-      }
-    }
+        },
+      },
+    };
 
 
     // Update chart with relevant data
