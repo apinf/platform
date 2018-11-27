@@ -259,7 +259,8 @@
   "apiMonitoring_panelTitle_Monitoring": "API Health Monitoring",
   "apiMonitoring_helpIcon_text_1": "API Monitoring indicates current state of your API. API monitoring is done by using HTTP requests and responses to it. ",
   "apiMonitoring_helpIcon_text_2": "Choose one of your API's GET methods to be monitored. (By using GET method no accidental data is inserted in your API). ",
-  "apiMonitoring_helpIcon_text_3": "When monitoring is set up, the health of your API (based on calls made in monitoring) is indicated with a dot next to your API's name.  Green = OK, Red = not OK. API is polled once/hour. You can force refresh by clicking save button.",
+  "apiMonitoring_helpIcon_text_3": "When monitoring is set up, the health of your API (based on calls made in monitoring) is indicated with a dot next to your API's name.  Green = OK, Red = not OK.",
+  "apiMonitoring_helpIcon_text_4": "API is polled once/hour. You can force refresh by clicking the SAVE button.",
   "apiMonitoring_saveButton_text": "Save",
   "apiMonitoringForm_successMessage": "The API Monitoring settings are successfully saved!",
   "apiMonitoringForm_errorMessage": "Endpoint to monitor is required",
@@ -764,6 +765,8 @@
   "relatedMedia_addButton_help": "Add embedded related media content",
   "relatedMedia_addButton": "Add related media",
   "relatedMedia_Title": "Links",
+  "relatedMedia_addLink": "Add link",
+  "relatedMedia_addNew": "Add new",
   "relatedMedia_text_noRelatedMedia": {
     "api": "You don't have any media related to this API",
     "organization": "The organization doesn't have any related media"
