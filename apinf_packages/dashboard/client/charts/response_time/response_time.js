@@ -155,9 +155,6 @@ Template.responseTimeTimeline.onRendered(function () {
     };
 
     instance.chart.options = {
-      tooltips: {
-        mode: 'dataset',
-      },
       legend: {
         onHover (e) {
           e.target.style.cursor = 'pointer';
