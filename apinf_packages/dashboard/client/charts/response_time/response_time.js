@@ -183,7 +183,7 @@ Template.responseTimeTimeline.onRendered(function () {
     // Get Date format
     const dateFormat = Template.currentData().dateFormat;
 
-    // If it's Day format
+    // If it is Day format
     if (dateFormat === 'L') {
       xAxesLabel = TAPi18n.__('responseTimeTimeline_xAxisTitle_days');
     } else {
