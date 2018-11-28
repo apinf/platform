@@ -180,7 +180,7 @@ Meteor.methods({
       // Make ES request to aggregated by hour
       response = Meteor.call('totalNumberRequestFromElasticsearch', params, proxyBackendIds);
     } else {
-      // Last N days 
+      // Last N days
       // Fetch from MongoDB
       response = Meteor.call('totalNumberRequestsAndTrend', params, proxyBackendIds);
     }
