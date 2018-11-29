@@ -164,7 +164,7 @@ Meteor.methods({
               requestPath: dataset.key,
               // Get value of request code status
               status: status.key,
-              // Get value of request number
+              // Get value of request count
               calls: status.doc_count,
             });
           });
