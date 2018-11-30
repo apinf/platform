@@ -100,7 +100,7 @@ Meteor.methods({
       const settings = Settings.findOne();
 
       if (settings) {
-        // Enable/disable accounts email features based on email configuration
+        // With login methods it is controlled, whether different logins are visible or hidden
         if (settings.loginMethods) {
           return settings;
         }
