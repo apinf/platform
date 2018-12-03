@@ -99,13 +99,15 @@ Meteor.methods({
       // Get Settings collection
       const settings = Settings.findOne();
 
-      // Enable/disable accounts email features based on email configuration
-      if (settings.loginMethods) {
-        return settings;
+      if (settings) {
+        // With login methods it is controlled, whether different logins are visible or hidden
+        if (settings.loginMethods) {
+          return settings;
+        }
       }
     } catch (error) {
       // otherwise prepare message about error
-      const message = `Update mail configuration: ${error}`;
+      const message = `Reading settings failed: ${error}`;
 
       // Show an error message
       throw new Meteor.Error(message);
