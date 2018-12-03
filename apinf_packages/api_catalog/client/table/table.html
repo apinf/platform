@@ -20,9 +20,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     {{/ if }}
                     {{> viewApiLogo api=api }}
                   <h4 class="api-catalog-table-title special-headings">
-                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
-                      &nbsp;{{ api.name }} &nbsp;/&nbsp;
-                      <span style="font-weight: 400;">
+                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" 
+                       style="font-weight: 500;">
+                      &nbsp;<span title="Name of the API">{{ api.name }}</span> &nbsp;/&nbsp;
+                      <span style="font-weight: 400;" title="Name of Organization/Manager">
                         {{# if api.organization }}
                           {{ api.organization.name }}
                         {{ else }}
