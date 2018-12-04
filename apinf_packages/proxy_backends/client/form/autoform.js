@@ -52,7 +52,7 @@ AutoForm.hooks({
 
         // Empty fields case, check doc exists & has apiUmbrella object
         if (proxyBackend.type === 'apiUmbrella') {
-          // Make sure all required fileds are filled
+          // Make sure all required fields are filled
           const requiredFields = requiredFieldsFilled(proxyBackend);
 
           if (!requiredFields) {
@@ -74,7 +74,7 @@ AutoForm.hooks({
                   return false;
                 }
 
-                  // If response has errors object, notify about it
+                // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
                   // Notify about error
                   sAlert.error(response.errors.default[0], { timeout: 'none' });
