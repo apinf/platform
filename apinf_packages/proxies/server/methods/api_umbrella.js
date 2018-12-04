@@ -146,9 +146,22 @@ Meteor.methods({
       errors: {},
     };
 
+    // Force removal of emptied sub settings
     if (backend.api.sub_settings === undefined) {
       // eslint-disable-next-line dot-notation
       backend.api['sub_settings'] = [];
+    }
+    // Force removal of emptied headers string
+    if (backend.api.settings.headers_string === undefined) {
+      backend.api.settings.headers_string = null;
+    }
+    // Force removal of emptied query string parameters
+    if (backend.api.settings.append_query_string === undefined) {
+      backend.api.settings.append_query_string = null;
+    }
+    // Force removal of emptied IDP app ID
+    if (backend.api.settings.idp_app_id === undefined) {
+      backend.api.settings.idp_app_id = null;
     }
 
     try {
