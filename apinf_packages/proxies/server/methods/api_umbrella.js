@@ -146,6 +146,17 @@ Meteor.methods({
       errors: {},
     };
 
+    /* Extra handling to update emptied fields to apiUmbrella:
+
+       Empty (or just emptied) fields are not in object in DB.
+
+       Because only the fields, which are present in object, 
+       are sent to apiUmbrella, we force including empty fields
+       in object as value NULL.
+
+       NOTE! When adding a new field for apiUmbrella update, 
+       add also handling of emptying case here!
+    */
     // Force removal of emptied sub settings
     if (backend.api.sub_settings === undefined) {
       // eslint-disable-next-line dot-notation
