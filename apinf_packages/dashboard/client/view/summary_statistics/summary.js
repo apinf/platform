@@ -36,7 +36,7 @@ Template.dashboardSummaryStatistic.onCreated(function () {
     const sortParameter = FlowRouter.getQueryParam('sort');
 
     const analyticsData = Template.currentData().analyticsData;
-
+    console.log('analyticsData=', analyticsData);
     if (analyticsData) {
       switch (sortParameter) {
         case 'calls': {
