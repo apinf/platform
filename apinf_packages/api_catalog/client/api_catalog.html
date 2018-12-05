@@ -15,7 +15,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if currentUser }}
           {{# if userCanAddApi }}
             <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
-              Add new API
+              {{_ "apiCatalog_button_addApi" }}
             </a>
           {{/ if }}
         {{/ if }}
@@ -26,24 +26,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="row">
       <div class="col-md-9 slide-up-animation">
         {{# if Template.subscriptionsReady }}
-        <!-- if viewMode is table, show table -->
-        {{# if tableViewMode }}
-          <div class="block-wrapper" style="min-height: 200px;">
-            {{> search_form }}
-            {{> apiCatalogTable apis=apis }}
-          </div>
-        {{/ if }}
+          <!-- if viewMode is table, show table -->
+          {{# if tableViewMode }}
+            <div class="block-wrapper" style="min-height: 200px;">
+              {{> search_form }}
+              {{> apiCatalogTable apis=apis }}
+            </div>
+          {{/ if }}
 
-        <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 10px;">
-          RSS Feed
-        </a>
+          <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 10px;">
+            RSS Feed
+          </a>
 
-        <!-- show pagination button only if APIs are available -->
-        {{# if apis }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
-        {{/ if }}
+          <!-- show pagination button only if APIs are available -->
+          {{# if apis }}
+            {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
+          {{/ if }}
         {{ else }}
-        {{> spinner }}
+          {{> spinner }}
         {{/ if }}
       </div>
       {{> apiCatalogToolbar apis=apis }}

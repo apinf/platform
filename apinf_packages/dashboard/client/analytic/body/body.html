@@ -8,13 +8,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <div class="api-settings">
       <!-- Nav tabs -->
       <ul class="nav nav-tabs">
-        <li class="active"><a href="#requests-number" data-toggle="tab">Requests number</a></li>
-        <li><a href="#response-time-chart" data-toggle="tab">Response time</a></li>
-        <li><a href="#unique-users-chart" data-toggle="tab">Developers</a></li>
-        <li><a href="#request-timeline" data-toggle="tab">Request timeline</a></li>
-        <li><a href="#response-time-timeline" data-toggle="tab">Response time timeline</a></li>
-        <li><a href="#list-of-errors" data-toggle="tab">List of errors</a></li>
-        <li><a href="#most-frequent-users" data-toggle="tab">Most frequent developers</a></li>
+        <li class="active"><a href="#requests-number" data-toggle="tab">{{_ "apiAnalyticPageBody_title_requestNumber" }}</a></li>
+        <li><a href="#response-time-chart" data-toggle="tab">{{_ "apiAnalyticPageBody_title_responseTime" }}</a></li>
+        <li><a href="#unique-users-chart" data-toggle="tab">{{_ "apiAnalyticPageBody_title_developers" }}</a></li>
+        <li><a href="#request-timeline" data-toggle="tab">{{_ "apiAnalyticPageBody_title_requestTimeLine" }}</a></li>
+        <li><a href="#response-time-timeline" data-toggle="tab">{{_ "apiAnalyticPageBody_title_responseTimeLine" }}</a></li>
+        <li><a href="#list-of-errors" data-toggle="tab">{{_ "apiAnalyticPageBody_title_errorList" }}</a></li>
+        <li><a href="#most-frequent-users" data-toggle="tab">{{_ "apiAnalyticPageBody_title_mostUsers" }}</a></li>
       </ul>
 
       <div class="tab-content">
@@ -23,7 +23,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_chartTitle_apiRequests' }}
                 </h2>
                 <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
@@ -31,13 +31,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </p>
                 <div class="form-group">
                   {{# if overviewChartResponse }}
-                  {{> requestsOverTime
-                    chartData=(getChartData 'requests')
-                    proxyBackendId=proxyBackendId
-                    dateFormat=dateFormat
-                  }}
+                    {{> requestsOverTime
+                      chartData=(getChartData 'requests')
+                      proxyBackendId=proxyBackendId
+                      dateFormat=dateFormat
+                    }}
                   {{ else }}
-                  {{> spinner}}
+                    {{> spinner}}
                   {{/ if }}
                 </div>
               </div>
@@ -50,7 +50,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
+                <h2 class="api-view-card-title">  
                   {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
                 </h2>
                 <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
@@ -58,9 +58,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </p>
                 <div class="form-group">
                   {{# if overviewChartResponse }}
-                  {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackendId }}
+                    {{> medianResponseTime chartData=(getChartData 'time') proxyBackendId=proxyBackendId }}
                   {{ else }}
-                  {{> spinner}}
+                    {{> spinner}}
                   {{/ if }}
                 </div>
               </div>
@@ -73,7 +73,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- unique users chart -->
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1em;margin-top:0;text-transform: none;margin-bottom: 5px;font-weight: 400;color:#6d859e;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_helpText_averageUniqueUsers' }}
                 </h2>
                 <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
@@ -81,13 +81,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </p>
                 <div class="form-group">
                   {{# if overviewChartResponse }}
-                  {{> uniqueUsersOverTime
-                    chartData=(getChartData 'users')
-                    proxyBackendId=proxyBackendId
-                    dateFormat=dateFormat
-                  }}
+                    {{> uniqueUsersOverTime
+                      chartData=(getChartData 'users')
+                      proxyBackendId=proxyBackendId
+                      dateFormat=dateFormat
+                    }}
                   {{ else }}
-                  {{> spinner}}
+                    {{> spinner}}
                   {{/ if }}
                 </div>
               </div>
@@ -100,17 +100,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- request timeline chart -->
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_timelineChartTitle_requests' }}
                 </h2>
                 {{# if timelineChartData }}
-                {{> requestTimeline
-                  chartData=timelineChartData
-                  listPaths=listPaths
-                  dateFormat=dateFormat
-                }}
+                  {{> requestTimeline
+                    chartData=timelineChartData
+                    listPaths=listPaths
+                    dateFormat=dateFormat
+                  }}
                 {{ else }}
-                {{> spinner }}
+                  {{> spinner }}
                 {{/ if }}
               </div>
             </div>
@@ -122,17 +122,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- response time timeline chart -->
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_timelineChartTitle_time' }}
                 </h2>
                 {{# if timelineChartData }}
-                {{> responseTimeTimeline
-                  chartData=timelineChartData
-                  listPaths=listPaths
-                  dateFormat=dateFormat
-                }}
+                  {{> responseTimeTimeline
+                    chartData=timelineChartData
+                    listPaths=listPaths
+                    dateFormat=dateFormat
+                  }}
                 {{ else }}
-                {{> spinner }}
+                  {{> spinner }}
                 {{/ if }}
               </div>
             </div>
@@ -144,13 +144,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- table with list of errors -->
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card table-view form-group">
-                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_title_errorsStatistic' }}
                 </h2>
                 {{# if errorsStatisticsResponse }}
-                {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
+                  {{> errorsStatisticTable errorsStatistic=errorsStatisticsData }}
                 {{ else }}
-                {{> spinner }}
+                  {{> spinner }}
                 {{/ if }}
               </div>
             </div>
@@ -162,13 +162,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- table with most frequent users -->
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card table-view form-group">
-                <h2 style="font-size:1.6em;margin-top:0;text-transform: none;margin-bottom: 1em;">
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_title_mostUsers' }}
                 </h2>
                 {{# if frequentUsersResponse }}
-                {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
+                  {{> mostFrequentUsersTable frequentUsers=frequentUsersData }}
                 {{ else }}
-                {{> spinner }}
+                  {{> spinner }}
                 {{/ if }}
               </div>
             </div>

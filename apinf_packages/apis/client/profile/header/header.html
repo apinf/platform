@@ -36,7 +36,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{# if currentUser }}
             <li id ="api-auth-tab">
               <a href="#api-auth" data-toggle="tab">
-                Authentication
+                {{_ "viewApiNavigationMenu_authentication" }}
               </a>
             </li>
           {{/ if }}
@@ -60,7 +60,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </li>
               <li id="api-monitoring-tab">
                 <a href="#monitoring" data-toggle="tab">
-                  Monitoring
+                  {{_ "viewApiNavigationMenu_monitoring" }}
                 </a>
               </li>
             {{/ if }}
@@ -69,7 +69,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if api.currentUserCanManage }}
           <li id="api-collaborators-tab">
             <a href="#collaborators" data-toggle="tab">
-              Collaborators
+              {{_ "viewApiNavigationMenu_collaborators" }}
             </a>
           </li>
           <li id="api-settings-tab">

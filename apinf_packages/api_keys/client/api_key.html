@@ -5,7 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="apiKey">
   {{# if showButton }}
-    <h2 style="font-size: 16px;margin-top: 0;">Your X-Api-Key</h2>
+    <h2 style="font-size: 16px;margin-top: 0;">{{_ "apiAuth_x_api_key" }}</h2>
     {{# if apiKey }}
       <!-- Regenerate API key button -->
       <span class="api-profile_details-text-wrapper">
@@ -13,14 +13,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <i id="api-key-copy" class="mdi mdi-content-copy pull-right" data-clipboard-target="#api-key" style="padding-left:5px;"></i>
       </span>
       <p style="color: #6d859e;margin-top:10px;">
-        X-Api-Key uniquely identifies you. It gives you access to all public APIs listed in apinf.io service, should be kept private and should not be shared.
+        {{_ "apiAuth_x_api_key_description" }}
       </p>
       <button class="btn btn-danger" id="regenerate-api-key">
         {{_ "apiKeys_regenerateButton" }}
       </button>
     {{ else }}
       <p style="color: #6d859e;margin-top:10px;">
-        X-Api-Key uniquely identifies you. It gives you access to all public APIs listed in apinf.io service, should be kept private and should not be shared.
+        {{_ "apiAuth_x_api_key_description" }}
       </p>
       <!-- Get API key button -->
       <button id="get-api-key" class="btn btn-success btn-success-special">

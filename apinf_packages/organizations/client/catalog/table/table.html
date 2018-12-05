@@ -8,31 +8,31 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <table class="table table-striped table-bordered organization-catalog-table">
       <tbody>
       {{# each organization in organizations }}
-          <tr>
-            <td class="col-sm-1">
-              <div class="organization-catalog-table-logo center-block">
-                {{> viewOrganizationLogo organization=organization }}
-              </div>
-            </td>
-            <td class="col-sm-9">
-              <h4 class="organization-catalog-table-title">
-                <a href="{{ pathFor 'organizationProfile' orgSlug=organization.slug }}">
-                  {{ organization.name }}
-                </a>
-              </h4>
-              <div>
-                <i>
-                  {{_ "organizationCatalogTable_added" }}
-                  {{ organization.relativeCreatedAt }}
-                </i>
-                {{# if organization.description }}
-                  <p class="organization-catalog-table-description">
-                    {{ organization.description }}
-                  </p>
-                {{/ if }}
-              </div>
-            </td>
-          </tr>
+        <tr>
+          <td class="col-sm-1">
+            <div class="organization-catalog-table-logo center-block">
+              {{> viewOrganizationLogo organization=organization }}
+            </div>
+          </td>
+          <td class="col-sm-9">
+            <h4 class="organization-catalog-table-title">
+              <a href="{{ pathFor 'organizationProfile' orgSlug=organization.slug }}">
+                {{ organization.name }}
+              </a>
+            </h4>
+            <div>
+              <i>
+                {{_ "organizationCatalogTable_added" }}
+                {{ organization.relativeCreatedAt }}
+              </i>
+              {{# if organization.description }}
+                <p class="organization-catalog-table-description">
+                  {{ organization.description }}
+                </p>
+              {{/ if }}
+            </div>
+          </td>
+        </tr>
       {{/ each }}
       </tbody>
     </table>

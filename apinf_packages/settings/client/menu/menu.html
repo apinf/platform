@@ -7,36 +7,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <div class="container-fluid secondary-menu-block" style="height: 60px;">
   <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
     <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
-      Platform preferences
+      {{_ "settingsMenu_title" }}
     </h1>
     <ul class="links">
       {{# if isInRole 'admin' }}
       <li class="{{ isActiveRoute 'branding' }}">
-        <a
-          href="{{ pathFor route='branding' }}"
-          id="button-branding">
-            {{_ "settingsMenu_branding" }}
+        <a href="{{ pathFor route='branding' }}"
+           id="button-branding">
+          {{_ "settingsMenu_branding" }}
         </a>
         </li>
         <li class="{{ isActiveRoute 'settings' }}">
-        <a
-          href="{{ pathFor route='settings' }}"
-          id="button-settings">
-            {{_ "settingsMenu_settings" }}
+        <a href="{{ pathFor route='settings' }}"
+           id="button-settings">
+          {{_ "settingsMenu_settings" }}
         </a>
         </li>
         <li class="{{ isActiveRoute 'proxies' }}">
-        <a
-          href="{{ pathFor route='proxies' }}"
-          id="button-proxies">
-            {{_ "settingsMenu_proxies" }}
+        <a href="{{ pathFor route='proxies' }}"
+           id="button-proxies">
+          {{_ "settingsMenu_proxies" }}
         </a>
         </li>
         <li class="{{ isActiveRoute 'login-platforms' }}">
-        <a
-          href="{{ pathFor route='login-platforms' }}"
-          id="button-loginPlatforms">
-            {{_ "settingsMenu_loginPlatforms" }}
+        <a href="{{ pathFor route='login-platforms' }}"
+           id="button-loginPlatforms">
+          {{_ "settingsMenu_loginPlatforms" }}
         </a>
       </li>
       {{/ if }}

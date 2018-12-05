@@ -6,14 +6,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiAnalyticPage">
   <div class="api-view">
     {{# if Template.subscriptionsReady }}
-    <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
-      {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
-    </div>
-    <div class="container">
-      {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
-    </div>
+      <div class="container-fluid secondary-menu-block" style="padding-left: 45px; padding-right: 45px;height:60px;">
+        {{> apiAnalyticPageHeader proxyBackendId=proxyBackendId }}
+      </div>
+      <div class="container">
+        {{> apiAnalyticPageBody proxyBackendId=proxyBackendId }}
+      </div>
     {{ else }}
-    {{> spinner }}
+      {{> spinner }}
     {{/ if }} <!-- /subscriptionReady -->
   </div>
 </template>

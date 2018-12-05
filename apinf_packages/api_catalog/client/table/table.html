@@ -20,15 +20,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     {{/ if }}
                     {{> viewApiLogo api=api }}
                   <h4 class="api-catalog-table-title special-headings">
-                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" style="font-weight: 500;">
-                    <span style="font-weight: 400;">
-                      {{# if api.organization }}
-                        {{ api.organization.name }}
-                      {{ else }}
-                        {{ api.getApiManagersByName }}
-                      {{/ if }}
-                    </span>
-                    /&nbsp;{{ api.name }}
+                    <a href="{{ pathFor 'viewApi' slug=api.slug }}" 
+                       style="font-weight: 500;">
+                      &nbsp;<span title="Name of the API">{{ api.name }}</span> &nbsp;/&nbsp;
+                      <span style="font-weight: 400;" title="Name of Organization/Manager">
+                        {{# if api.organization }}
+                          {{ api.organization.name }}
+                        {{ else }}
+                          {{ api.getApiManagersByName }}
+                        {{/ if }}
+                      </span>
                     </a>
                   </h4>
                   {{# unless api.isPublic }}
@@ -37,11 +38,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </span>
                   {{/ unless }}
                   <div>
-                      <p class="api-catalog-table-description">
-                        {{# if api.description }}
-                          {{ api.description }}
-                        {{/ if }}
-                      </p>
+                    <p class="api-catalog-table-description">
+                      {{# if api.description }}
+                        {{ api.description }}
+                      {{/ if }}
+                    </p>
                     <span class="created-at">
                       {{_ "catalogTable_added" }}
                       {{ api.relativeCreatedAt }}

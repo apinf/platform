@@ -9,12 +9,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <tr>
         <th>{{_ 'errorsStatisticTable_columnTitle_date' }}</th>
         <th>{{_ 'errorsStatisticTable_columnTitle_status' }}</th>
-        <th>
-          {{_ 'errorsStatisticTable_columnTitle_calls' }}
-        </th>
-        <th>
-          {{_ 'errorsStatisticTable_columnTitle_path' }}
-        </th>
+        <th style="text-align: right;">{{_ 'errorsStatisticTable_columnTitle_calls' }}</th>
+        <th>{{_ 'errorsStatisticTable_columnTitle_path' }}</th>
       </tr>
     </thead>
     <tbody>
@@ -22,7 +18,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <tr>
         <td>{{ localeFormatDate error.date }}</td>
         <td>{{ error.status }}</td>
-        <td>{{ error.calls }}</td>
+        <td style="text-align: right;">{{ error.calls }}</td>
         <td>{{ error.requestPath }}</td>
       </tr>
       {{/ each }}
