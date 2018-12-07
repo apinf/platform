@@ -4,7 +4,7 @@ group: deprecated-2017Q4
 
 language: node_js
 node_js:
-  - '4'
+  - '6'
 
 addons:
   apt:
