@@ -310,10 +310,9 @@ Meteor.methods({
           calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime);
         dataset.compareUsers =
           calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers);
-  
+
         response.push(dataset);
       }
-
     });
     return response;
   },
