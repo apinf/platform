@@ -301,20 +301,19 @@ Meteor.methods({
         dataset.apiName = proxyBackend.apiName();
         dataset.apiSlug = proxyBackend.apiSlug();
         dataset.apiId = proxyBackend.apiId;
+
+        // Create a comparison data
+        const previousPeriodData = previousPeriodResponse[path] || {};
+        dataset.compareRequests =
+          calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber);
+        dataset.compareResponse =
+          calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime);
+        dataset.compareUsers =
+          calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers);
+
+        response.push(dataset);
       }
-
-      // Create a comparison data
-      const previousPeriodData = previousPeriodResponse[path] || {};
-      dataset.compareRequests =
-        calculateTrend(previousPeriodData.requestNumber, dataset.requestNumber);
-      dataset.compareResponse =
-        calculateTrend(previousPeriodData.medianResponseTime, dataset.medianResponseTime);
-      dataset.compareUsers =
-        calculateTrend(previousPeriodData.avgUniqueUsers, dataset.avgUniqueUsers);
-
-      response.push(dataset);
     });
-
     return response;
   },
 });
