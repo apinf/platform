@@ -12,5 +12,4 @@ export const proxyBasePathRegEx = new RegExp(/^\/[\w\-\.\?\$\*\+\'\)\(/:#@!&,;=]
 // eslint-disable-next-line no-useless-escape
 export const apiBasePathRegEx = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$/);
 // eslint-disable-next-line no-useless-escape
-export const subSettingRequestHeaderRegEx = new RegExp(/^huu:to $/m);
-
+export const subSettingRequestHeaderRegEx = new RegExp(/^[^:]+:[^:]+$/);
