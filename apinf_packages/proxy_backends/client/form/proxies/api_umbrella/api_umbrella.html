@@ -162,6 +162,11 @@
             {{> afQuickField name="apiUmbrella.settings.rate_limits" }}
           </div>
         {{/ if }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_rateLimit_helpText" }}
+        </p>
       </div>
 
       <!-- IDP App Id -->
@@ -170,13 +175,22 @@
           name="apiUmbrella.settings.idp_app_id"
           placeholder="externalid1234"
         }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_IDPappID_helpText" }}
+        </p>
       </div>
-  
-      <!-- RH Setting App Id -->
+      
+      <!-- Sub-URL Settings -->
       <div class="col-md-12 sub-settings">
-          {{> afQuickField
-            name="apiUmbrella.sub_settings"
-          }}
+        {{> afQuickField
+          name="apiUmbrella.sub_settings"
+        }}
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_subsettings_helpText" }}
+        </p>
       </div>
   
         <!-- Query String Parameters -->
@@ -185,11 +199,21 @@
         placeholder="param1=value& param2=value"
       }}
 
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_append_query_string_helpText" }}
+      </p>
+
       <!-- Request Headers -->
       {{> afQuickField
         name="apiUmbrella.settings.headers_string"
         placeholder="X-Example-Header: value"
       }}
+
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_request_header_helpText" }}
+      </p>
     </div>
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;margin-top: 0.5em;">
   </div>
