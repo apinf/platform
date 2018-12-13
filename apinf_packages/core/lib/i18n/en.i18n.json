@@ -587,6 +587,8 @@
   "organizationApis_title_connectApi": "Connect API",
   "organizationApis_title_edit": "Edit",
   "organizationApis_connectButton": "Connect",
+  "organizationApis_contact_email": "Contact email",
+  "organizationApis_contact_phone": "Contact phone",
   "organizationApisForm_successText": "The API and Organization are now connected.",
   "organizationCatalog_Title": "Organizations",
   "organizationCatalog_organizationCount": "(__count__ organization)",
