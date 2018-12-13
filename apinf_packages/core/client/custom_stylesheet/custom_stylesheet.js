@@ -1,20 +1,24 @@
-/* Copyright 2018 Apinf Oy
+/* Copyright 2017 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
-https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
 import { Template } from 'meteor/templating';
-import { Branding } from '/branding/collection';
+
+// Collection imports
+import Branding from '/apinf_packages/branding/collection';
+
 const tinycolor = require('tinycolor2');
 
 Template.customStylesheet.helpers({
-  mostReadableBackgound () {
+  mostReadableBackground () {
     // Get branding
     const branding = Branding.findOne();
 
     // Placeholder variables
     let backgroundColor;
-    let textColor;
+    let textColor = '#ffffff';
     let lighterBackgroundReadability;
     let darkerBackgroundReadability;
     let mostReadableBackground;
@@ -46,15 +50,15 @@ Template.customStylesheet.helpers({
         // darker background is most readable
         mostReadableBackground = darkerBackground;
       }
-
-      return mostReadableBackground;
     }
+    return mostReadableBackground;
   },
   primaryColor () {
     // Get branding
     const branding = Branding.findOne();
 
-    let primaryColor;
+    // Set default color as blue
+    let primaryColor = '#2fa4e7';
 
     if (branding && branding.colors && branding.colors.primary) {
       primaryColor = branding.colors.primary;
@@ -66,7 +70,8 @@ Template.customStylesheet.helpers({
     // Get branding
     const branding = Branding.findOne();
 
-    let primaryColorText;
+    // Set default color of text as white
+    let primaryColorText = '#ffffff';
 
     if (branding && branding.colors && branding.colors.primaryText) {
       primaryColorText = branding.colors.primaryText;
@@ -74,4 +79,25 @@ Template.customStylesheet.helpers({
 
     return primaryColorText;
   },
-}); */
+  coverPhotoOverlay () {
+    // Get branding
+    const branding = Branding.findOne();
+
+    let coverPhotoOverlay;
+
+    if (branding && branding.colors && branding.colors.coverPhotoOverlay) {
+      coverPhotoOverlay = branding.colors.coverPhotoOverlay;
+    }
+
+    let overlayTransparency = 0;
+
+    if (branding && branding.colors && branding.colors.overlayTransparency) {
+      overlayTransparency = branding.colors.overlayTransparency / 100;
+    }
+
+    const color = tinycolor(coverPhotoOverlay);
+    color.setAlpha(overlayTransparency);
+
+    return color.toRgbString();
+  },
+});
