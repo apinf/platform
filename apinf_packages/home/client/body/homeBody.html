@@ -4,25 +4,30 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="homeBody">
+  <!-- Outer div is for displaying cover photo -->
   <div class="coverphoto" style="background-image: url({{ coverPhotoUrl }})">
-    <div class="container" id="headerwrap">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <h1 id="site-title">
-            {{ branding.siteTitle }}
-            <small id="site-slogan" >
-              {{ branding.siteSlogan }}
-            </small>
-          </h1>
-          {{# if currentUser }}
-            <a class="btn btn-success btn-success-special" href="{{ pathFor 'addApi' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
-              Add new API
-            </a>
-          {{ else }}
-            <a class="btn btn-success btn-success-special" href="{{ pathFor 'signUp' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
-              Get started
-            </a>
-          {{/ if }}
+    <!-- Next div is for cover photo overlay -->
+    <div id="coverphoto">
+      <!-- Next is for site title etc. -->
+      <div class="container" id="headerwrap">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <h1 id="site-title">
+              {{ branding.siteTitle }}
+              <small id="site-slogan" >
+                {{ branding.siteSlogan }}
+              </small>
+            </h1>
+            {{# if currentUser }}
+              <a class="btn btn-success btn-success-special" href="{{ pathFor 'addApi' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
+                Add new API
+              </a>
+            {{ else }}
+              <a class="btn btn-success btn-success-special" href="{{ pathFor 'signUp' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
+                Get started
+              </a>
+            {{/ if }}
+          </div>
         </div>
       </div>
     </div>
