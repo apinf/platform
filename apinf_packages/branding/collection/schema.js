@@ -25,7 +25,7 @@ Branding.schema = new SimpleSchema({
   'colors.primary': {
     type: String,
     optional: true,
-    defaultValue: '#2fa4e7',
+    defaultValue: '#2655C9',
     autoform: {
       type: 'bootstrap-colorpicker',
     },
