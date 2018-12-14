@@ -83,7 +83,7 @@ Meteor.methods({
           const index = timerange.indexOf(currentDateValue);
           // Replace "0" to the value
           requestNumber[index].value = data.doc_count;
-          medianTime[index].value = data.percentiles_response_time.values['50.0'];
+          medianTime[index].value = data.percentiles_response_time.values['50.0'] | 0;
           uniqueUsers[index].value = data.unique_users.value;
         });
         response[prefix] = {
@@ -120,7 +120,6 @@ Meteor.methods({
       // Process data
       const aggregatedData = result.aggregations.group_by_request_path.buckets;
       const allRequestPaths = [];
-
       const dates = generateDate({
         startAt: moment(params.fromDate),
         endAt: moment(params.toDate),
@@ -170,11 +169,11 @@ Meteor.methods({
             redirect[index] = backendData.response_status.buckets.redirect.doc_count;
             fail[index] = backendData.response_status.buckets.fail.doc_count;
             error[index] = backendData.response_status.buckets.error.doc_count;
-            median[index] = backendData.percentiles_response_time.values['50.0'];
-            shortest[index] = backendData.percentiles_response_time.values['0.0'];
-            short[index] = backendData.percentiles_response_time.values['25.0'];
-            long[index] = backendData.percentiles_response_time.values['75.0'];
-            longest[index] = backendData.percentiles_response_time.values['100.0'];
+            median[index] = backendData.percentiles_response_time.values['50.0'] | 0;
+            shortest[index] = backendData.percentiles_response_time.values['0.0'] | 0;
+            short[index] = backendData.percentiles_response_time.values['25.0'] | 0;
+            long[index] = backendData.percentiles_response_time.values['75.0'] | 0;
+            longest[index] = backendData.percentiles_response_time.values['100.0'] | 0;
           });
 
 //          index += 1;
@@ -193,6 +192,7 @@ Meteor.methods({
           };
         });
       }
+
       return {
         requestPathsData,
         allRequestPaths,
