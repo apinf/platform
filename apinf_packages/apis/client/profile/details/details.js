@@ -76,14 +76,14 @@ Template.apiDetails.onRendered(() => {
   // Tell the user when copying Proxy URL is successful
   copyExampleOne.on('success', () => {
     $('#copyExampleOne').tooltip('hide')
-      .attr('data-original-title', '')
+      .attr('data-original-title', 'Copied!')
       .tooltip('show');
   });
 
   // Tell the user when copying Proxy URL is successful
   copyExampleTwo.on('success', () => {
     $('#copyExampleTwo').tooltip('hide')
-      .attr('data-original-title', '')
+      .attr('data-original-title', 'Copied!')
       .tooltip('show');
   });
 });
