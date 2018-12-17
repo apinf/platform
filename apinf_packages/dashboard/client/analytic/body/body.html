@@ -6,6 +6,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="apiAnalyticPageBody">
   <div data-overview-id="{{ proxyBackendId }}" class="block-wrapper">
     <div class="api-settings">
+      <!-- Date picker -->
+      <div style='text-align: right;'>
+        {{> dateRangePicker }}
+      </div>
       <!-- Nav tabs -->
       <ul class="nav nav-tabs">
         <li class="active"><a href="#requests-number" data-toggle="tab">{{_ "apiAnalyticPageBody_title_requestNumber" }}</a></li>
