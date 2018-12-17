@@ -180,11 +180,12 @@
         <p class="help-block">
           {{_ "proxyBackendForm_IDPappID_helpText" }}&nbsp;
 
-          <button class="btn btn-info" type="button" 
-                  data-toggle="collapse" data-target="#idp-app-id-details" 
-                  aria-expanded="false" aria-controls="idp-app-id-details">
-            {{_ "general_more_details" }}
-          </button>
+          <span data-toggle="collapse" data-target="#idp-app-id-details" 
+                aria-expanded="false" aria-controls="idp-app-id-details"
+                style="cursor: pointer;">
+            <i class="mdi mdi-chevron-down mdi-18px"></i>
+          </span>
+
           <div id="idp-app-id-details" class="collapse" style="margin-top: 0.5em;">
             {{_ "proxyBackendForm_IDPappID_additional_helpText" }}
           </div>
@@ -200,17 +201,19 @@
         <p class="help-block">
           {{_ "proxyBackendForm_subsettings_helpText" }}
 
-          <button class="btn btn-info" type="button" 
-                  data-toggle="collapse" data-target="#sub-url-details" 
-                  aria-expanded="false" aria-controls="sub-url-details">
-            {{_ "general_more_details" }}
-          </button>
+          <span data-toggle="collapse" data-target="#sub-url-details" 
+                aria-expanded="false" aria-controls="sub-url-details"
+                style="cursor: pointer;">
+            <i class="mdi mdi-chevron-down mdi-18px"></i>
+          </span>
+
           <div id="sub-url-details" class="collapse" style="margin-top: 0.5em;">
-            {{_ "proxyBackendForm_subsettings_additional_helpText_1" }}<br />
+            {{_ "proxyBackendForm_subsettings_additional_helpText_1" }}<br /><br />
             {{_ "proxyBackendForm_subsettings_additional_helpText_2" }}<br />
             {{_ "proxyBackendForm_subsettings_additional_helpText_3" }}<br />
             {{_ "proxyBackendForm_subsettings_additional_helpText_4" }}<br />
-            {{_ "proxyBackendForm_subsettings_additional_helpText_5" }}
+            {{_ "proxyBackendForm_subsettings_additional_helpText_5" }}<br />
+            {{_ "proxyBackendForm_subsettings_additional_helpText_6" }}
           </div>
         </p>
       </div>
