@@ -170,12 +170,26 @@
       </div>
 
       <!-- IDP App Id -->
-      <div class="col-md-12" id="advanced-settings">
-        {{> afQuickField
+      <div class="form-group" data-required="true">
+        <!-- Proxy base path (frontend prefix) -->
+        <label for="idp-app-id-field">
+          {{ afFieldLabelText name='apiUmbrella.settings.idp_app_id' }}
+        </label>
+  
+        {{> afFieldInput
           name="apiUmbrella.settings.idp_app_id"
+          class="form-control"
+          id="idp-app-id-field"
           placeholder="externalid1234"
         }}
-
+  
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name='apiUmbrella.settings.idp_app_id' }}
+          <p class="text-danger">
+            {{{ afFieldMessage name='apiUmbrella.settings.idp_app_id' }}}
+          </p>
+        {{/ if }}
+  
         <!-- help text -->
         <p class="help-block">
           {{_ "proxyBackendForm_IDPappID_helpText" }}&nbsp;
@@ -191,6 +205,7 @@
           </div>
         </p>
       </div>
+
 
       <!-- Sub-URL Settings -->
       <div class="col-md-12 sub-settings">
@@ -219,26 +234,44 @@
       </div>
 
       <!-- Query String Parameters -->
-      {{> afQuickField
-        name="apiUmbrella.settings.append_query_string"
-        placeholder="param1=value& param2=value"
-      }}
+      <div class="form-group" data-required="true">
+        <!-- Proxy base path (frontend prefix) -->
+        <label for="query-string-param">
+          {{ afFieldLabelText name='apiUmbrella.settings.append_query_string' }}
+        </label>
+  
+        {{> afFieldInput
+          name="apiUmbrella.settings.append_query_string"
+          class="form-control"
+          id="query-string-param"
+          placeholder="param1=value&param2=value"
+        }}
 
-      <!-- help text -->
-      <p class="help-block">
-        {{_ "proxyBackendForm_append_query_string_helpText" }}
-      </p>
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_append_query_string_helpText" }}
+        </p>
+      </div>
 
       <!-- Request Headers -->
-      {{> afQuickField
-        name="apiUmbrella.settings.headers_string"
-        placeholder="X-Example-Header: value"
-      }}
+      <div class="form-group" data-required="true">
+        <!-- Proxy base path (frontend prefix) -->
+        <label for="headers-string">
+          {{ afFieldLabelText name='apiUmbrella.settings.headers_string' }}
+        </label>
 
-      <!-- help text -->
-      <p class="help-block">
-        {{_ "proxyBackendForm_request_header_helpText" }}
-      </p>
+        {{> afFieldInput
+          name="apiUmbrella.settings.headers_string"
+          placeholder="X-Example-Header: value"
+          id="headers-string"
+        }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_request_header_helpText" }}
+        </p>
+      </div>
+
     </div>
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;margin-top: 0.5em;">
   </div>
