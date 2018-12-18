@@ -247,6 +247,13 @@
           placeholder="param1=value&param2=value"
         }}
 
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name='apiUmbrella.settings.append_query_string' }}
+          <p class="text-danger">
+            {{{ afFieldMessage name='apiUmbrella.settings.append_query_string' }}}
+          </p>
+        {{/ if }}
+
         <!-- help text -->
         <p class="help-block">
           {{_ "proxyBackendForm_append_query_string_helpText" }}

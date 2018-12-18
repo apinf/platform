@@ -11,7 +11,11 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
-import { proxyBasePathRegEx, apiBasePathRegEx, subSettingRequestHeaderRegEx } from '../regex';
+import { 
+  proxyBasePathRegEx, 
+  apiBasePathRegEx, 
+  subSettingRequestHeaderRegEx, 
+  appendQueryStringRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
@@ -178,6 +182,7 @@ const SettingsSchema = new SimpleSchema({
   append_query_string: {
     type: String,
     optional: true,
+    regEx: appendQueryStringRegEx,
   },
   headers_string: {
     type: String,

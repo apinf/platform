@@ -529,6 +529,7 @@
   "invalidApiBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiMonitoringEndpointMessage": "Must begin with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
   "invalidApiRequiredMessage": "Invalid input not allowed",
+  "invalidAppendQueryStringMessage": "Allowed only param=value pairs as Append Query String",
   "invalidDomainMessage": "Must be a valid domain",
   "invalidEmailMessage": "Must be a valid e-mail address",
   "invalidIdMessage": "Must be a valid alphanumeric ID",
