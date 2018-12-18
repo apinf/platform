@@ -35,7 +35,7 @@ Template.settingsMenu.onRendered(() => {
       numOfVisibleItems = $vlinks.children().length;
       requiredSpace = breakWidths[numOfVisibleItems - 1];
 
-      // There is not enought space
+      // There is not enough space
       if (requiredSpace > availableSpace) {
         $vlinks.children().last().prependTo($hlinks);
         numOfVisibleItems -= 1;
