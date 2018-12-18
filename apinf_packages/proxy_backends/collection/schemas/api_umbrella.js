@@ -181,6 +181,30 @@ const SettingsSchema = new SimpleSchema({
   },
   headers_string: {
     type: String,
+    custom () {
+      /* Because it is possible to have multiline content, the checking needs to be done
+         line by line */
+
+      let validation = null;
+      // get regex condition
+      const re = subSettingRequestHeaderRegEx;
+      // make an array of input data, each line will be own item
+      const headers = this.value.split('\n');
+      // check each item against regex, return the failing ones
+      const list = headers.filter(header => {
+        if (!re.test(header)) {
+          return header;
+        }
+        return false;
+      });
+      // List the problematic headers, if there are any
+      if (list.length > 0) {
+        validation = list.join(', ');
+      }
+      // If not null is returned, an error message is triggered
+      return validation;
+    },
+
     autoform: {
       rows: 3,
     },
@@ -275,8 +299,10 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
-SimpleSchema.messages({ invalidProxyBackendForm_forbiddenPrefixMessage:
-  TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage') });
+SimpleSchema.messages({ 
+  invalidProxyBackendForm_forbiddenPrefixMessage:
+    TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage'),
+});
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 

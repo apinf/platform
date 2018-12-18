@@ -266,6 +266,13 @@
           id="headers-string"
         }}
 
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name='apiUmbrella.settings.headers_string' }}
+          <p class="text-danger">
+            {{{ afFieldMessage name='apiUmbrella.settings.headers_string' }}}
+          </p>
+        {{/ if }}
+
         <!-- help text -->
         <p class="help-block">
           {{_ "proxyBackendForm_request_header_helpText" }}
