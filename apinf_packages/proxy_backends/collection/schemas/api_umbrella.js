@@ -11,10 +11,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
-import { 
-  proxyBasePathRegEx, 
-  apiBasePathRegEx, 
-  subSettingRequestHeaderRegEx, 
+import {
+  proxyBasePathRegEx,
+  apiBasePathRegEx,
+  subSettingRequestHeaderRegEx,
   appendQueryStringRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
@@ -304,7 +304,7 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
-SimpleSchema.messages({ 
+SimpleSchema.messages({
   invalidProxyBackendForm_forbiddenPrefixMessage:
     TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage'),
 });
