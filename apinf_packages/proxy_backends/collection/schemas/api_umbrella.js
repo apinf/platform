@@ -14,8 +14,7 @@ import Settings from '/apinf_packages/settings/collection';
 import {
   proxyBasePathRegEx,
   apiBasePathRegEx,
-  subSettingRequestHeaderRegEx,
-  appendQueryStringRegEx } from '../regex';
+  subSettingRequestHeaderRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
