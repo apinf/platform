@@ -182,7 +182,30 @@ const SettingsSchema = new SimpleSchema({
   append_query_string: {
     type: String,
     optional: true,
-    regEx: appendQueryStringRegEx,
+  //  regEx: appendQueryStringRegEx,
+    custom () {
+      /* Because it is possible to have recurring content, the checking needs to be done
+         block by block */
+
+      let validation = null;
+      // get regex condition
+      const re = appendQueryStringRegEx;
+      // make an array of input data, each line will be own item
+      const params = this.value.split('&');
+      // check each item against regex, return the failing ones
+      const list = params.filter(param => {
+        if (!re.test(param)) {
+          return param;
+        }
+        return false;
+      });
+      // List the problematic headers, if there are any
+      if (list.length > 0) {
+        validation = list.join(', ');
+      }
+      // If not null is returned, an error message is triggered
+      return validation;
+    },    
   },
   headers_string: {
     type: String,

@@ -14,4 +14,4 @@ export const apiBasePathRegEx = new RegExp(/^\/[\w\-\?\.\$\*\+\)\'\(/:#@!&,;=]*$
 // eslint-disable-next-line no-useless-escape
 export const subSettingRequestHeaderRegEx = new RegExp(/^[^:]+:[^:]+$/);
 // eslint-disable-next-line no-useless-escape
-export const appendQueryStringRegEx = new RegExp(/^[[^=]+=[^=]+]*$/g);
+export const appendQueryStringRegEx = new RegExp(/^[(^=|\S)]+=[(^=|\S)]+$/);
