@@ -533,7 +533,6 @@
   "invalidDomainMessage": "Must be a valid domain",
   "invalidEmailMessage": "Must be a valid e-mail address",
   "invalidIdMessage": "Must be a valid alphanumeric ID",
-  "invalidProxyBackendForm_appendQueryStringMessage": "The Appended Query String must only consist of following pair(s) ~  param=value",
   "invalidProxyBackendForm_headerStringMessage": "The Requested Header String must only consist of following pair(s) ~  param: value",
   "invalidProxyBackendForm_forbiddenPrefixMessage": "You cannot use the following proxy base paths: /, /signup/, /signin/, /admin/ and /admin/...",
   "invalidProxyBasePathMessage": "Must begin and end with /. Allowed alphanumeric characters and -.?$*+'()/:#@!&,;=",
