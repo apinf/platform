@@ -115,6 +115,9 @@ const SubSettings = new SimpleSchema({
         validation = list.join(', ');
       }
       // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_headerStringMessage';
+      }
       return validation;
     },
     autoform: {
@@ -204,6 +207,9 @@ const SettingsSchema = new SimpleSchema({
         validation = list.join(', ');
       }
       // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_appendQueryStringMessage';
+      }
       return validation;
     },    
   },
@@ -230,6 +236,9 @@ const SettingsSchema = new SimpleSchema({
         validation = list.join(', ');
       }
       // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_headerStringMessage';
+      }
       return validation;
     },
 
@@ -330,6 +339,10 @@ const ApiUmbrellaSchema = new SimpleSchema({
 SimpleSchema.messages({
   invalidProxyBackendForm_forbiddenPrefixMessage:
     TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage'),
+  invalidProxyBackendForm_headerStringMessage:
+    TAPi18n.__('invalidProxyBackendForm_headerStringMessage'),
+    invalidProxyBackendForm_appendQueryStringMessage:
+    TAPi18n.__('invalidProxyBackendForm_appendQueryStringMessage'),
 });
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
