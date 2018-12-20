@@ -37,6 +37,20 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{> viewCoverPhoto branding=branding }}
             {{> uploadCoverPhoto branding=branding }}
           </div>
+
+          {{# autoForm
+            id="brandingEdit"
+            type="update"
+            collection=brandingCollection
+            doc=branding }}
+            {{> afQuickField name='colors' id="branding-ui-color" }}
+            <div id="form-buttons">
+              <button id="branding-update-button" type="submit" class="btn btn-primary">
+                {{_ "branding_update" }}
+              </button>
+            </div>
+          {{/ autoForm }}
+
         </div>
 
         <div class="tab-pane fade" id="about">
@@ -47,7 +61,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             doc=branding }}
             {{> afQuickField name='siteTitle' id="branding-site-title" }}
             {{> afQuickField name='siteSlogan' id="branding-site-slogan" }}
-            {{> afQuickField name='colors' id="branding-ui-color" }}
             {{> afQuickField name='siteFooter' id="site-footer" }}
             <div id="form-buttons">
               <button id="branding-update-button" type="submit" class="btn btn-primary">

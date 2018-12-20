@@ -22,6 +22,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <h1>
             {{_ "apiDetails_getStarted_headerText" }} <span style="font-weight:400;">{{_ "apiDetails_getStarted_with" }} <span style="font-weight:500;">{{ api.name }}</span>.</span>
           </h1>
+          <!-- Show Endpoint URL -->
           <h2 id="api-url-title">
             {{# unless disableApiKey }}
               {{# if hasApiKey }}
@@ -31,24 +32,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
           <span class="api-profile_details-text-wrapper">
+            <!-- Display value (which can also be copied) -->
             <a href="{{ proxyUrl }}" target="_blank" id="proxy-url">{{ proxyUrl }}</a>
-            <i id="copyProxyUrl" class="mdi mdi-content-copy pull-right" data-clipboard-target="#proxy-url" style="padding-left:5px;"></i>
+            <!-- Clipboard copy button -->
+            <i id="copyProxyUrl" 
+               class="mdi mdi-content-copy pull-right" 
+               data-clipboard-target="#proxy-url" 
+               style="padding-left:5px;"></i>
           </span>
           <p style="color:#6d859e;margin-top:10px;">
             {{_ "apiDetails_baseUrl_message" }}
           </p>
+
           {{# if currentUser }}
             {{# if proxyUrl }}
               {{# unless disableApiKey }}
                 {{# if hasApiKey }}
+                  <!-- Show API key -->
                   <div style="margin-top:2em;">
                     <h2 id="api-url-title" style="font-size:16px;margin-top:0;margin-bottom:1em;">
                       <span class="num">2</span>
                       {{_ "apiDetails_xApiKey_header" }}
                     </h2>
-                    <span id="api-url" class="api-profile_details-text-wrapper">
-                      {{ apiKey }}
-                      <i id="copyApiUrl" class="mdi mdi-content-copy pull-right" data-clipboard-target="#api-url" style="padding-left:5px;"></i>
+                    <span class="api-profile_details-text-wrapper">
+                      <!-- Display value (which can also be copied) -->
+                      <span id="api-url">
+                        {{ apiKey }}
+                      </span>
+                      <!-- Clipboard copy button -->
+                      <i id="copyApiUrl" 
+                         class="mdi mdi-content-copy pull-right" 
+                         data-clipboard-target="#api-url" 
+                         style="padding-left:5px;"></i>
                     </span>
                     <p style="color:#6d859e;margin-top:10px;">
                       {{_ "apiDetails_xApiKey_message1" }}
@@ -59,6 +74,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                       </span>
                     </p>
                   </div>
+                  <!-- Show examples of using API key -->
                   <div style="margin-top:2em;">
                     <h2 style="font-size:16px;margin-top:0;margin-bottom:1em;">
                       <span class="num">3</span>
@@ -66,17 +82,31 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     </h2>
                     {{# if proxyUrl }}
                       <h3 style="font-size:14px;">{{_ "apiDetails_apiKeyExample_getQueryParam" }}</h3>
-                      <span id="example-one" class="api-profile_details-text-wrapper">
-                        curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
-                        <i id="copyExampleOne" class="mdi mdi-content-copy pull-right" data-clipboard-target="#example-one" style="padding-left:5px;"></i>
+                      <span class="api-profile_details-text-wrapper">
+                        <!-- Display value (which can also be copied) -->
+                        <span id="example-one">
+                          curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
+                        </span>
+                        <!-- Clipboard copy button -->
+                        <i id="copyExampleOne" 
+                           class="mdi mdi-content-copy pull-right" 
+                           data-clipboard-target="#example-one" 
+                           style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">
                         {{_ "apiDetails_apiKeyExample_getQueryParam_message" }}
                       </p>
                       <h3 style="font-size:14px;">{{_ "apiDetails_apiKeyExample_httpHeader" }}</h3>
-                      <span id="example-two" class="api-profile_details-text-wrapper">
-                        curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
-                        <i id="copyExampleTwo" class="mdi mdi-content-copy pull-right" data-clipboard-target="#example-two" style="padding-left:5px;"></i>
+                      <span class="api-profile_details-text-wrapper">
+                        <!-- Display value (which can also be copied) -->
+                        <span id="example-two">
+                          curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
+                        </span>
+                        <!-- Clipboard copy button -->
+                        <i id="copyExampleTwo" 
+                           class="mdi mdi-content-copy pull-right" 
+                           data-clipboard-target="#example-two" 
+                           style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">
                         {{_ "apiDetails_apiKeyExample_httpHeader_message" }}

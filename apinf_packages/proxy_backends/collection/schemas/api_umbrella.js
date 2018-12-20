@@ -11,7 +11,10 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
-import { proxyBasePathRegEx, apiBasePathRegEx, subSettingRequestHeaderRegEx } from '../regex';
+import {
+  proxyBasePathRegEx,
+  apiBasePathRegEx,
+  subSettingRequestHeaderRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
@@ -111,6 +114,9 @@ const SubSettings = new SimpleSchema({
         validation = list.join(', ');
       }
       // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_headerStringMessage';
+      }
       return validation;
     },
     autoform: {
@@ -181,6 +187,33 @@ const SettingsSchema = new SimpleSchema({
   },
   headers_string: {
     type: String,
+    custom () {
+      /* Because it is possible to have multiline content, the checking needs to be done
+         line by line */
+
+      let validation = null;
+      // get regex condition
+      const re = subSettingRequestHeaderRegEx;
+      // make an array of input data, each line will be own item
+      const headers = this.value.split('\n');
+      // check each item against regex, return the failing ones
+      const list = headers.filter(header => {
+        if (!re.test(header)) {
+          return header;
+        }
+        return false;
+      });
+      // List the problematic headers, if there are any
+      if (list.length > 0) {
+        validation = list.join(', ');
+      }
+      // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_headerStringMessage';
+      }
+      return validation;
+    },
+
     autoform: {
       rows: 3,
     },
@@ -275,8 +308,12 @@ const ApiUmbrellaSchema = new SimpleSchema({
   },
 });
 
-SimpleSchema.messages({ invalidProxyBackendForm_forbiddenPrefixMessage:
-  TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage') });
+SimpleSchema.messages({
+  invalidProxyBackendForm_forbiddenPrefixMessage:
+    TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage'),
+  invalidProxyBackendForm_headerStringMessage:
+    TAPi18n.__('invalidProxyBackendForm_headerStringMessage'),
+});
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 
