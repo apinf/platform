@@ -118,8 +118,9 @@ Meteor.methods({
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
       response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
     } catch (error) {
+     // const errorMessagePretext = {{_ createApiBackendOnApiUmbrella_errorMessagePretext }};
       // Set the errors object
-      response.errors = { default: [error.message] };
+      response.errors = { default: [TAPi18n.__('createApiBackendOnApiUmbrella_errorMessagePretext') + error.message] };
       response.http_status = 422;
     }
     return response;
