@@ -120,7 +120,9 @@ Meteor.methods({
     } catch (error) {
      // const errorMessagePretext = {{_ createApiBackendOnApiUmbrella_errorMessagePretext }};
       // Set the errors object
-      response.errors = { default: [TAPi18n.__('createApiBackendOnApiUmbrella_errorMessagePretext') + error.message] };
+      response.errors = { 
+        default: [TAPi18n.__('createApiBackendOnApiUmbrella_errorMessagePretext') + error.message]
+      };
       response.http_status = 422;
     }
     return response;
