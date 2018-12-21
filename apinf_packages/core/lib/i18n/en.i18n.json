@@ -342,6 +342,7 @@
   "contactForm_reset": "Reset",
   "contactForm_successMessage": "Thank you! Your message has been successfully sent.",
   "contactForm_submit": "Submit",
+  "createApiBackendOnApiUmbrella_errorMessagePretext": "Check settings of selected Proxy, because apiUmbrella responses: ",
   "dashboard_analyticsSummary_developers": "Developers",
   "dashboard_analyticsSummary_requests": "Requests",
   "dashboard_analyticsSummary_responseTime": "Response Time",
