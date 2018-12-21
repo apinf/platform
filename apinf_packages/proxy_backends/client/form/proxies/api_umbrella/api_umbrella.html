@@ -13,14 +13,15 @@
   <div class="api-settings">
     <div class="form-group" data-required="true">
       <!-- Proxy base path (frontend prefix) -->
-      <label for="proxy-base-path-field">
-        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
-      </label>
-
+      
       <div class="input-group">
-        <span class="input-group-addon" id="proxy-url">
+        <span class="input-group-addon" id="proxy-url" style="border-right: 1px solid rgb(204, 204, 204)">
           {{ proxy.apiUmbrella.url }}
         </span>
+        
+        <label for="proxy-base-path-field" style="padding-left: 3px">
+          {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
+        </label>
 
         {{> afFieldInput
           name="apiUmbrella.url_matches.0.frontend_prefix"
@@ -47,15 +48,16 @@
     <!-- API base path (backend prefix) -->
     <div class="row">
       <div class="form-group col-md-12" data-required="true" style="margin-bottom: 0;">
-        <label for="api-base-path-field">
-          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
-        </label>
-
+          
         <div class="input-group">
           <!-- API url addon -->
-          <span class="input-group-addon" id="api-url">
+          <span class="input-group-addon" id="api-url" style="border-right: 1px solid rgb(204, 204, 204)">
             {{ api.url }}
           </span>
+          
+          <label for="api-base-path-field" style="padding-left: 3px">
+            {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
+          </label>
 
           {{> afFieldInput
             name="apiUmbrella.url_matches.0.backend_prefix"
