@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { ReactiveVar } from 'meteor/reactive-var';
 import { Template } from 'meteor/templating';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -40,7 +41,21 @@ Template.connectApiToOrganizationModal.helpers({
   },
   unlinkedApis () {
     const instance = Template.instance();
-    // Return list of apis without organization
-    return instance.unlinkedApis.get();
+    // Get list of APIs without organization
+    const unlinkedApisList = instance.unlinkedApis.get();
+    // Initiate the title for dropdown
+    const text = TAPi18n.__('connectApiToOrganizationModal_placeholderTitle');
+    const selectionTitle = {
+      label: text,
+      value: '',
+      disabled: true,
+    };
+    // Add title to list if not yet exists
+    if (unlinkedApisList) {
+      if (unlinkedApisList[0].label !== text) {
+        unlinkedApisList.unshift(selectionTitle);
+      }
+    }
+    return unlinkedApisList;
   },
 });
