@@ -19,6 +19,28 @@ Template.atOauth.onRendered(() => {
           document.getElementById('at-fiware').style.display = 'none';
         }
       }
+      if (document.getElementById('at-pwd-form')) {
+        console.log('pwd form');
+        // Hide the button, it needed
+        if (result.loginMethods.fiware) {
+          document.getElementById('at-pwd-form').style.display = 'none';
+        }
+      }
+      if (document.getElementsByClassName('at-signup-link')) {
+        console.log('sign up link');
+        // Hide the button, it needed
+        if (result.loginMethods.fiware) {
+          document.getElementsByClassName('at-signup-link')[0].style.display = 'none';
+        }
+      }
+      if (document.getElementsByClassName('at-resend-verification-email-link')) {
+        console.log('resend');
+        // Hide the button, it needed
+        if (result.loginMethods.fiware) {
+          document.getElementsByClassName('at-resend-verification-email-link')[0].style.display = 'none';
+        }
+      }
+
       // If Github is installed
       if (document.getElementById('at-github')) {
         // Hide the button, it needed
