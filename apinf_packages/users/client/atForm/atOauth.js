@@ -28,10 +28,11 @@ Template.atOauth.onRendered(() => {
       if (document.getElementsByClassName('at-resend-verification-email-link')) {
         // Hide the resend verification email link, if needed
         if (result.loginMethods.username_psw) {
+          /* eslint-disable max-len */
           document.getElementsByClassName('at-resend-verification-email-link')[0].style.display = 'none';
         }
       }
-      
+
       // If Fiware is installed
       if (document.getElementById('at-fiware')) {
         // Hide the button, if needed
