@@ -12,45 +12,43 @@ Template.atOauth.onRendered(() => {
   Meteor.call('getSettings', (error, result) => {
     if (error) throw new Meteor.Error(error);
     if (result) {
-      // If Fiware is installed
-      if (document.getElementById('at-fiware')) {
-        // Hide the button, it needed
-        if (result.loginMethods.fiware) {
-          document.getElementById('at-fiware').style.display = 'none';
-        }
-      }
+      // If standard login is installed
       if (document.getElementById('at-pwd-form')) {
-        console.log('pwd form');
-        // Hide the button, it needed
-        if (result.loginMethods.fiware) {
+        // Hide the username field, psw field and button, if needed
+        if (result.loginMethods.username_psw) {
           document.getElementById('at-pwd-form').style.display = 'none';
         }
       }
       if (document.getElementsByClassName('at-signup-link')) {
-        console.log('sign up link');
-        // Hide the button, it needed
-        if (result.loginMethods.fiware) {
+        // Hide the sig-up link, if needed
+        if (result.loginMethods.username_psw) {
           document.getElementsByClassName('at-signup-link')[0].style.display = 'none';
         }
       }
       if (document.getElementsByClassName('at-resend-verification-email-link')) {
-        console.log('resend');
-        // Hide the button, it needed
-        if (result.loginMethods.fiware) {
+        // Hide the resend verification email link, if needed
+        if (result.loginMethods.username_psw) {
           document.getElementsByClassName('at-resend-verification-email-link')[0].style.display = 'none';
         }
       }
-
+      
+      // If Fiware is installed
+      if (document.getElementById('at-fiware')) {
+        // Hide the button, if needed
+        if (result.loginMethods.fiware) {
+          document.getElementById('at-fiware').style.display = 'none';
+        }
+      }
       // If Github is installed
       if (document.getElementById('at-github')) {
-        // Hide the button, it needed
+        // Hide the button, if needed
         if (result.loginMethods.github) {
           document.getElementById('at-github').style.display = 'none';
         }
       }
       // If HSL is installed
       if (document.getElementById('at-hsl')) {
-        // Hide the button, it needed
+        // Hide the button, if needed
         if (result.loginMethods.hsl_id) {
           document.getElementById('at-hsl').style.display = 'none';
         }

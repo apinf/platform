@@ -166,6 +166,10 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+  'loginMethods.username_psw': {
+    type: Boolean,
+    optional: true,
+  },
 });
 
 // Enable translations (i18n)
