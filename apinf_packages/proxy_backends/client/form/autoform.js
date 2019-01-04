@@ -290,11 +290,11 @@ AutoForm.hooks({
                 Meteor.call(
                   'publishApiBackendOnApiUmbrella',
                   apiUmbrellaBackend.id, proxyBackend.proxyId,
-                  (publishError, response) => {
+                  (publishError, resp) => {
                     // There are two ways the error response can come
-                    if (response && response.errors && response.errors.default) {
+                    if (resp && resp.errors && resp.errors.default) {
                       const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
-                      sAlert.error(errorPublish + response.errors.default[0], { timeout: 'none' });
+                      sAlert.error(errorPublish + resp.errors.default[0], { timeout: 'none' });
                     } else if (publishError) {
                       const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
                       sAlert.error(errorPublish + publishError.message, { timeout: 'none' });
