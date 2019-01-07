@@ -16,27 +16,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{> afQuickField name="apiId" value=api._id type="hidden" }}
 
     <!-- visible fields -->
-    <!-- Selector for proxy list if proxies are more one otherwise hidden field-->
-    {{# if oneProxy }}
-      {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
-    {{ else }}
-      {{> afQuickField name="proxyId" firstOption=false id="proxy-selector" }}
-    {{/ if }}
+    <!-- Selector for proxy list if proxies are more one otherwise hidden field -->
+    <div class="row">
+      <div class="col-md-4" >
+        {{# if oneProxy }}
+          {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+        {{ else }}
+          {{> afQuickField name="proxyId" firstOption=false id="proxy-selector" }}
+        {{/ if }}
+      </div>
+    </div>
 
     <!-- Check which proxy is selected and render related fields -->
 
     <!-- API Umbrella -->
     {{# if equals proxy.type "apiUmbrella" }}
-
       {{> apiUmbrellaProxyForm proxy=proxy proxyHost=proxyHost api=api }}
-
     {{/ if }}
 
     <!-- EMQ -->
     {{# if equals proxy.type "emq" }}
-
       {{> emqProxyForm }}
-
     {{/ if }}
 
     <div id="proxy-form-buttons">
