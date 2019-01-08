@@ -4,17 +4,33 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiProxy">
-    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+  <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
 
+
+  <!-- help text -->
+  <p class="help-block">
     <p style="color: #6d859e;margin-bottom: 1em;">
-    {{_ "apiProxy_network_setting_guidance_1" }}<br />
-    {{_ "apiProxy_network_setting_guidance_2" }}<br />
-    {{_ "apiProxy_network_setting_guidance_3" }}<br />
-    {{_ "apiProxy_network_setting_guidance_4" }}<br />
-
-    <span class="text-danger">{{_ "apiProxy_network_message_attention" }}&nbsp;</span>
-      {{_ "apiProxy_network_message" }}
+      {{_ "apiProxy_network_setting_guidance_1" }}
+        
+      <span data-toggle="collapse" data-target="#proxy-backend-general-details" 
+            aria-expanded="false" aria-controls="proxy-backend-general-details"
+            style="cursor: help;">
+        <i class="mdi mdi-chevron-down mdi-18px"></i>
+      </span>
+      
+      <div id="proxy-backend-general-details" class="collapse" style="margin-top: 0.5em;">
+          {{_ "apiProxy_network_setting_guidance_2" }}<br />
+          {{_ "apiProxy_network_setting_guidance_3_a" }}<br />
+          {{_ "apiProxy_network_setting_guidance_3_b" }}<br />
+          {{_ "apiProxy_network_setting_guidance_3_c" }}<br />
+          {{_ "apiProxy_network_setting_guidance_4" }}<br />
+          <span class="text-danger">{{_ "apiProxy_network_message_attention" }}&nbsp;</span>
+          {{_ "apiProxy_network_message" }}
+      </div>
+        
+    </p>
   </p>
+
   <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
 
   {{> proxyBackend }}

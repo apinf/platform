@@ -13,7 +13,7 @@
   <div class="api-settings">
     <div class="form-group col-md-4" data-required="true" style="padding-left: 0 !important;">
       <!-- Proxy base path (frontend prefix) -->
-      Proxy host URL, with 
+      {{_ "proxyBackendForm_proxyBasePath_title" }} 
       <label for="proxy-base-path-field" style="padding-left: 3px">
         {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
       </label>
@@ -59,7 +59,7 @@
     <div class="row">
       <div class="form-group col-md-4" data-required="true" style="margin-bottom: 0;">
 
-        API host URL, with 
+        {{_ "proxyBackendForm_apiBasePath_title" }}
         <label for="api-base-path-field" style="padding-left: 3px">
           {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
         </label>
@@ -138,7 +138,9 @@
     
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
     
-    <div data-toggle="collapse" data-target="#advance-proxy-settings">
+    <div data-toggle="collapse" 
+         data-target="#advance-proxy-settings"
+         style="cursor: pointer">
       <label style="color: #4c6072;
                     font-weight: 500;
                     font-size:1.6rem;
@@ -209,7 +211,7 @@
 
           <span data-toggle="collapse" data-target="#idp-app-id-details" 
                 aria-expanded="false" aria-controls="idp-app-id-details"
-                style="cursor: pointer;">
+                style="cursor: help;">
             <i class="mdi mdi-chevron-down mdi-18px"></i>
           </span>
 
@@ -218,7 +220,6 @@
           </div>
         </p>
       </div>
-
 
       <!-- Sub-URL Settings -->
       <div class="col-md-12 sub-settings">
@@ -231,7 +232,7 @@
 
           <span data-toggle="collapse" data-target="#sub-url-details" 
                 aria-expanded="false" aria-controls="sub-url-details"
-                style="cursor: pointer;">
+                style="cursor: help;">
             <i class="mdi mdi-chevron-down mdi-18px"></i>
           </span>
 
