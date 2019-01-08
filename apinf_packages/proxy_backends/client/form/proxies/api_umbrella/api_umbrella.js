@@ -70,8 +70,8 @@ Template.apiUmbrellaProxyForm.helpers({
     // Get proxyBackend information
     const apiId = this.api._id;
     const proxyBackend = ProxyBackends.findOne({ apiId });
-    if (proxyBackend && 
-        proxyBackend.apiUmbrella && 
+    if (proxyBackend &&
+        proxyBackend.apiUmbrella &&
         proxyBackend.apiUmbrella.url_matches[0].frontend_prefix &&
         proxyBackend.apiUmbrella.url_matches[0].backend_prefix) {
       return '#19B934';
