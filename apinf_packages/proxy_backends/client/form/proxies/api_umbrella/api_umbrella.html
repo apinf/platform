@@ -11,7 +11,7 @@
   {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper type="hidden" }}
 
   <div class="api-settings">
-    <div class="form-group col-md-4" data-required="true">
+    <div class="form-group col-md-4" data-required="true" style="padding-left: 0 !important;">
       <!-- Proxy base path (frontend prefix) -->
       Proxy host URL, with 
       <label for="proxy-base-path-field" style="padding-left: 3px">
@@ -47,9 +47,9 @@
 
     <!-- symbol for redirection -->
     <div class="col-md-2" style="text-align: center; color: {{ basePathsGiven }}">
-      {{_ "proxyBackendForm_redirect_helpText" }} <br /> 
+      <!--  {{_ "proxyBackendForm_redirect_helpText" }} <br /> -->
       <span style="font-weight: bold;">{{_ "proxyBackendForm_request_helpText" }}</span>
-      <span class="glyphicon glyphicon-arrow-right"></span><br />
+      <span class="glyphicon glyphicon-arrow-right"></span><br /><br />
       <span class="glyphicon glyphicon-arrow-left"></span>
       <span style="font-weight: bold;">{{_ "proxyBackendForm_response_helpText" }}</span>
     </div>
