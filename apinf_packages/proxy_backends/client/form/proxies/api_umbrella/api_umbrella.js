@@ -14,6 +14,13 @@ import URI from 'urijs';
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
 
+Template.apiUmbrellaProxyForm.events({
+  "keyup #proxy-base-path-field": function(event) {
+    var radiusValue = event.target.value;
+    Session.set('userInput', radiusValue);
+  }
+});
+
 Template.apiUmbrellaProxyForm.helpers({
   apiHost () {
     // Get API information
