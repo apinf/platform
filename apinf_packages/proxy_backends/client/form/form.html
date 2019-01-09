@@ -17,15 +17,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     <!-- visible fields -->
     <!-- Selector for proxy list if proxies are more one otherwise hidden field -->
-    <!--div class="row">
-      <div class="col-md-4" -->
-        {{# if oneProxy }}
-          {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
-        {{ else }}
-          {{> afQuickField name="proxyId" firstOption=false id="proxy-selector" }}
-        {{/ if }}
-      <!--/div>
-    </div-->
+
+    {{# if oneProxy }}
+      {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
+    {{ else }}
+      {{> afQuickField name="proxyId" firstOption=false id="proxy-selector" }}
+    {{/ if }}
 
     <!-- Check which proxy is selected and render related fields -->
 
