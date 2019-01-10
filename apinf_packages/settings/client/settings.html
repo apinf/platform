@@ -51,6 +51,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         {{/ if }}
       </div>
+
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -87,20 +88,40 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         {{/ if }}
       </div>
-      <!-- This is taken in use after the Next is merged -->
-      <div class="panel panel-default">
+
+      <!-- Possibility to hide login methods -->
+      <div class="panel panel-default" style="border-color: red; border-width: 2px;">
         <div class="panel-heading">
           <span class="panel-title">
             {{_ "settings_disabled_login_methods" }}
           </span>
         </div>
         <div class="panel-body">
-          {{> afQuickField name='loginMethods.fiware' id="fiware-login" }}
-          {{> afQuickField name='loginMethods.github' id="github-login" }}
-          {{> afQuickField name='loginMethods.hsl_id' id="hsl-login" }}
-          {{> afQuickField name='loginMethods.username_psw' id="username-psw-login" }}
+          <div class="row">
+            <div class="col-sm-4">
+              {{> afQuickField name='loginMethods.fiware' id="fiware-login" }}
+              {{> afQuickField name='loginMethods.github' id="github-login" }}
+              {{> afQuickField name='loginMethods.hsl_id' id="hsl-login" }}
+              {{> afQuickField name='loginMethods.username_psw' id="username-psw-login" }}
+            </div>
+
+            <div class="col-sm-8">
+                <span style="color: red;">{{_ "settings_disabled_login_methods_caution" }}</span>
+                {{_ "settings_disabled_login_methods_caution_text" }}
+                <ul>
+                  <li>
+                    {{_ "settings_disabled_login_methods_caution_warning_1"}}
+                  </li>
+                  <li>
+                    {{_ "settings_disabled_login_methods_caution_warning_2" }}
+                  </li>
+                </ul>
+            </div>
+          </div>
         </div>
-      </div>        
+      </div>
+
+      <!-- Save settings -->
       <button
         type="submit"
         class="btn btn-success btn-success-special"
