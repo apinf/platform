@@ -145,7 +145,7 @@ Template.manageApiDocumentationModal.events({
     }
   },
   'click #save-documentation-link': function () {
-    AutoForm.resetForm('apiDocumentationForm')
+    AutoForm.resetForm('apiDocumentationForm');
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },
