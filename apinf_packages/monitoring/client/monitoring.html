@@ -46,7 +46,33 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <h3 style="font-size:16px; margin-top:0;">
     {{_ "apiMonitoring_panelTitle_Monitoring" }}
   </h3>
-  <p style="color:#6d859e;">{{_ "apiMonitoring_helpIcon_text_1" }}<br>{{_ "apiMonitoring_helpIcon_text_2" }}<br>{{_ "apiMonitoring_helpIcon_text_3" }}<br>{{_ "apiMonitoring_helpIcon_text_4" }} </p>
+
+  <!-- help text -->
+  <p class="help-block">
+    {{_ "apiMonitoring_helpIcon_text_1" }} &nbsp;
+
+    <span data-toggle="collapse" data-target="#monitoring-details" 
+          aria-expanded="false" aria-controls="monitoring-details">
+      <i class="mdi mdi-chevron-down mdi-18px more-info ">More...</i>
+    </span>
+
+    <div id="monitoring-details" class="collapse" style="margin-top: 0.5em; color:#6d859e;">
+      <ol>
+        <li>
+          {{_ "apiMonitoring_helpIcon_text_2" }}
+        </li>
+        <li>
+          {{_ "apiMonitoring_helpIcon_text_3" }}<br />
+          <span class="glyphicon glyphicon-ok-sign success"></span>{{_ "apiMonitoring_helpIcon_text_3_green" }}
+          <span class="glyphicon glyphicon-exclamation-sign failed"></span>{{_ "apiMonitoring_helpIcon_text_3_red" }}<br />
+        </li>
+        <li>
+          {{_ "apiMonitoring_helpIcon_text_4" }}
+        </li>
+      </ol>
+    </div>
+  </p>
+
   <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
 
@@ -55,19 +81,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{> afQuickField name='enabled' }}
     {{# if afFieldValueIs name='enabled' value=true }}
       {{> afQuickField name='url' value=api.url type="hidden" }}
-      <label for="endpoint-monitor-field">
+
+      {{_ "apiMonitoring_hostTitle_Monitoring" }}
+      <label for="endpoint-monitor-field" style="padding-left: 3px">
         {{ afFieldLabelText name='endPoint' }}
       </label>
+
       <div class="input-group">
         <!-- API url addon -->
-          <span class="input-group-addon" id="api-url">
-            {{ api.url }}
-          </span>
-          
-          {{> afFieldInput 
-            name='endPoint' 
-            value=endPoint
-          }}
+        <span class="input-group-addon" id="api-url" style="border-right: 1px solid rgb(204, 204, 204)">
+          {{ api.url }}
+        </span>
+
+        {{> afFieldInput 
+          name='endPoint' 
+          value=endPoint
+        }}
       </div>
       {{# if afFieldIsInvalid name='endPoint' }}
         <p class="text-danger">
