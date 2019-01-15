@@ -18,6 +18,7 @@ ApiBookmarks.schema = new SimpleSchema({
     type: [String],
     optional: true,
     defaultValue: [],
+  },
 });
 
 ApiBookmarks.attachSchema(ApiBookmarks.schema);
