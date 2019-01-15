@@ -278,20 +278,26 @@ AutoForm.hooks({
           Meteor.call(
             'updateApiBackendOnApiUmbrella',
             apiUmbrellaBackend, proxyBackend.proxyId,
-            (error) => {
+            (error, response) => {
               // Check for error
-              if (error) {
+              if (response.errors && response.errors.default && response.errors.default[0]) {
                 // Throw error for debugging
                 // TODO: indicate that API Umbrella may be out of sync with local collection
-                Meteor.throw(500, error);
+                const errorMessage = TAPi18n.__('proxyBackendForm_update_failureMessage');
+                sAlert.error(errorMessage + response.errors.default[0], { timeout: 'none' });
               } else {
                 // Publish the API Backend on API Umbrella
                 Meteor.call(
                   'publishApiBackendOnApiUmbrella',
                   apiUmbrellaBackend.id, proxyBackend.proxyId,
-                  (publishError) => {
-                    if (publishError) {
-                      Meteor.throw(500, publishError);
+                  (publishError, resp) => {
+                    // There are two ways the error response can come
+                    if (resp && resp.errors && resp.errors.default) {
+                      const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
+                      sAlert.error(errorPublish + resp.errors.default[0], { timeout: 'none' });
+                    } else if (publishError) {
+                      const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
+                      sAlert.error(errorPublish + publishError.message, { timeout: 'none' });
                     } else {
                       // Get update success message translation
                       const message = TAPi18n.__('proxyBackendForm_update_successMessage');
