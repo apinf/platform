@@ -37,6 +37,9 @@ The APInf platform offers a comprehensive tool for API management. Building on [
 For API consumers APInf provides simple key management, key usage analytics and API discovery along with API documentation. Managers have simplified workflow for common tasks, such as key management, rate limiting and viewing API usage analytics.
 
 
+|  :page_facing_up: [Site](https://apinf.io/)  | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/data-publication/apinf) | :whale: [Docker Hub](https://hub.docker.com/u/apinf/platform) |
+|---|---|---|
+
 # Development status
 [![Community dashboard badge](https://img.shields.io/badge/Community-Dashboard-blue.svg)](https://dashboard.cauldron.io/goto/afe91edf4f1c66a3bcfd3717f12e43c5)
 [![Stories in Ready](https://badge.waffle.io/apinf/platform.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
