@@ -641,6 +641,7 @@
   "organizationManagersList_table_title_actions": "Actions",
   "organizationManagersList_table_title_email": "Email",
   "organizationManagersList_table_title_role": "Role",
+  "organizationManagersList_table_title_username": "Username",
   "organizationManagersList_table_title_row_manager": "Manager",
   "organizationManagerForm_successMessage": "New manager added.",
   "organizationManagerForm_userNotRegistered_errorText": "User not currently registered.",
