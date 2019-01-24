@@ -31,15 +31,19 @@
 
 [![](https://images.microbadger.com/badges/image/apinf/platform.svg)](http://microbadger.com/images/apinf/platform) [![](https://images.microbadger.com/badges/version/apinf/platform.svg)](http://microbadger.com/images/apinf/platform)
 
-# APInf  Dashboard
+Docker images are hosted in Dockerhub: https://hub.docker.com/r/apinf/platform/tags
+
+# APInf  API management
 The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
 
 For API consumers APInf provides simple key management, key usage analytics and API discovery along with API documentation. Managers have simplified workflow for common tasks, such as key management, rate limiting and viewing API usage analytics.
 
+Why to use? If you have APIs and you are looking for additional control on API access, API documentation and analytics in one package, this is for you.  
+
 
 # Development status
 [![Community dashboard badge](https://img.shields.io/badge/Community-Dashboard-blue.svg)](https://dashboard.cauldron.io/goto/afe91edf4f1c66a3bcfd3717f12e43c5)
-[![Stories in Ready](https://badge.waffle.io/apinf/platform.png?label=ready&title=Ready)](https://waffle.io/apinf/api-umbrella-dashboard)
+[![Stories in Ready](https://badge.waffle.io/apinf/platform.png?label=ready&title=Ready)](https://waffle.io/apinf/platform)
 
 [![Throughput Graph](https://graphs.waffle.io/apinf/platform/throughput.svg)](https://waffle.io/apinf/platform/metrics)
 
@@ -97,5 +101,5 @@ If you have any questions about roadmap or other things here, do give us a ping 
 
 APInf is licensed under the [EUPL-1.1](LICENSE) License.
 
-© 2018 APInf Oy
+© 2019 APInf Oy
 
