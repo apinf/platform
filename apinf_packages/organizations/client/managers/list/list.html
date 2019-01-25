@@ -8,14 +8,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <thead>
       <tr>
         <th>{{_ "organizationManagersList_table_title_role" }}</th>
+        <th>{{_ "organizationManagersList_table_title_username" }}</th>
         <th>{{_ "organizationManagersList_table_title_email" }}</th>
         <th>{{_ "organizationManagersList_table_title_actions" }}</th>
       </tr>
     </thead>
     <tbody>
+      {{# each organizationManagers }}
       <tr>
         <td>{{_ "organizationManagersList_table_title_row_manager" }}</td>
-        {{# each organizationManagers }}
+        <td>
+          {{ username }}
+        </td>
         <td>
           {{ email }}
           {{# unless emailVerified }}
@@ -31,8 +35,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </button>
           {{/ if }}
         </td>
-        {{/ each }}
       </tr>
+      {{/ each }}
     </tbody>
   </table>
 </template>
