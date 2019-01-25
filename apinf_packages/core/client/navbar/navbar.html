@@ -50,11 +50,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "navbar_organizations" }}
             </a>
           </li>
-          <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
-            <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
-              {{_ "navbar_organizations" }}
+
+          <!-- TBD: Show only in case user has logged on via Keyrock -->
+          <li class="{{ isActiveRoute 'tenantCatalog' }} main-links">
+            <a href="{{ pathFor 'tenantCatalog' }}" id="tenants-button">
+              Tenants
             </a>
           </li>
+
         {{# if currentUser }}
           {{# if userCanAddApi }}
             <li class="{{ isActiveRoute 'addApi' }} main-links">
