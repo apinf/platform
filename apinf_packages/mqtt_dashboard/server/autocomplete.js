@@ -11,10 +11,10 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // APInf imports
+import Settings from '/apinf_packages/settings/collection';
 import promisifyCall from '../../core/helper_functions/promisify_call';
 import { autoCompleteRequest } from '../lib/topics_requests';
 import { indexesSet } from '../lib/helpers';
-import Settings from '/apinf_packages/settings/collection';
 
 Meteor.methods({
   buildRequestAutocomplete (topic) {

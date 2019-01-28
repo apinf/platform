@@ -11,6 +11,7 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // Collection imports
+import Settings from '/apinf_packages/settings/collection';
 import StoredTopics from '../collection';
 
 // APInf imports
@@ -19,7 +20,6 @@ import promisifyCall from '../../core/helper_functions/promisify_call';
 import { topicsTableDeliveredType, topicsTablePublishedType, topicsTableSubscribedType }
 from '../lib/topics_requests';
 import { indexesSet, calculateSecondsCount, calculateBandwidthKbs } from '../lib/helpers';
-import Settings from '/apinf_packages/settings/collection';
 
 Meteor.methods({
   buildRequestTopicsTableData (topicsList, timeframe, period, dateRange) {

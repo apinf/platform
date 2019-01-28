@@ -8,8 +8,8 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // Collection imports
-import StoredTopics from '../collection';// Collection imports
 import Settings from '/apinf_packages/settings/collection';
+import StoredTopics from '../collection';// Collection imports
 
 // APInf imports
 import {
