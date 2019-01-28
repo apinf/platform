@@ -8,7 +8,8 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // Collection imports
-import StoredTopics from '../collection';
+import StoredTopics from '../collection';// Collection imports
+import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
 import {
@@ -35,7 +36,15 @@ Meteor.methods({
 
     const { timeframe, dataType, eventType, topic } = params;
 
-    const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
+    let url;
+
+    const settings = Settings.findOne();
+
+    // If the access permission 'only admins can add APIs' is defined, use it
+    if (settings && settings.esDashboardData && settings.esDashboardData.enabled) {
+      // Make sure current user is admin
+      url = settings.esDashboardData.request;
+    }
 
     if (dataType === 'histogram') {
       let indexEventType = eventType;

@@ -3,8 +3,12 @@
   You may obtain a copy of the licence at
   https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
+// Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
 
 import _ from 'lodash';
 
@@ -26,7 +30,15 @@ Meteor.methods({
     check(type, String);
     check(dateRange, Object);
 
-    const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
+    let url;
+
+    const settings = Settings.findOne();
+
+    // If the access permission 'only admins can add APIs' is defined, use it
+    if (settings && settings.esDashboardData && settings.esDashboardData.enabled) {
+      // Make sure current user is admin
+      url = settings.esDashboardData.request;
+    }
 
     if (type === 'histogram') {
       // Build index for each event type (Histogram charts)
