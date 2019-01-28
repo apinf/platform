@@ -130,7 +130,7 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
-  'sdkCodeGenerator.host': {
+  'sdkCodeGenerator.request': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     optional: true,
@@ -169,6 +169,22 @@ Settings.schema = new SimpleSchema({
   'loginMethods.username_psw': {
     type: Boolean,
     optional: true,
+  },
+  esDashboardData: {
+    type: Object,
+    optional: true,
+  },
+  'esDashboardData.enabled': {
+    type: Boolean,
+    optional: true,
+  },
+  'esDashboardData.request': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true,
+    autoform: {
+      placeholder: 'http://address.example.fi:9200/_msearch?pretty=true',
+    },
   },
 });
 

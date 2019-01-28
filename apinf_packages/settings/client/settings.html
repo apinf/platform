@@ -52,6 +52,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
 
+      <!-- Show or hide mail settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -88,6 +89,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         {{/ if }}
       </div>
+
+      <!-- Show or hide EMQ dashboard data source settings -->
+      {{# if userCanViewMqttDashboard }}
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_es_request" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='esDashboardData.enabled' id="esDashboardData" }}
+          </span>
+        </div>
+        {{# if afFieldValueIs name='esDashboardData.enabled' value=true }}
+          <div class="panel-body">
+            {{> afQuickField name='esDashboardData.request' id="esDashboardData-request" }}
+          </div>
+        {{/ if }}
+      </div>
+      {{/ if }}
 
       <!-- Possibility to hide login methods -->
       <div class="panel panel-default" style="border-color: red; border-width: 2px;">
