@@ -82,7 +82,6 @@ tap:i18n-ui
 tmeasday:publish-counts
 todda00:friendly-slugs
 tracker@1.2.0
-u2622:persistent-session
 useraccounts:bootstrap
 useraccounts:core
 useraccounts:flow-routing
