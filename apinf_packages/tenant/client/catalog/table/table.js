@@ -12,14 +12,13 @@ Template.organizationCatalogTable.onCreated(function () {
     // Get organizations
    // const organizations = Template.currentData().organizations;
     const organizations = [
-      { name: 'testinimi 1',},
-      { name: 'testinimi 2',},
-      { name: 'testinimi 3',},
-      { name: 'testinimi 4',},
-      { name: 'testinimi 5',},
-      { name: 'testinimi 6',},
+      { name: 'testinimi 1' },
+      { name: 'testinimi 2' },
+      { name: 'testinimi 3' },
+      { name: 'testinimi 4' },
+      { name: 'testinimi 5' },
+      { name: 'testinimi 6' },
     ];
-
 
     const organizationLogoIds = [];
 

@@ -1422,6 +1422,8 @@
   "passwordsMismatch": "Passwords do not match",
   "tenantCatalog_buttonText_addOrganization": "Add Tenant",
   "tenantCatalog_Title": "Tenants",
+  "tenantCatalog_toolbar_filterOptions_myOrganizations": "My tenants",
+  "tenantCatalog_toolbar_filterOptions_showAll": "Show all",
   "tenantForm_title": "Add new Tenant",
   "tenantForm_saveButton_text": "Add Tenant",
   "uploadApiLogoButton": "Upload logo",
