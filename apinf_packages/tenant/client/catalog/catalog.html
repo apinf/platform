@@ -30,25 +30,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
   <div class="container" style="margin-top:20px;">
     {{# if Template.subscriptionsReady }}
-      {{# if paginationReady }}
-        {{# if organizations }}
+     <!-- {{# if paginationReady }}
+        {{# if organizations }} -->
           <!-- if viewMode is grid, show grid -->
           {{# if gridViewMode }}
-            {{> organizationCatalogGrid organizations=organizations }}
+            {{> tenantCatalogTable organizations=organizations }}
           {{/ if }}
           <!-- if viewMode is table, show table -->
           {{# if tableViewMode }}
-            {{> organizationCatalogGrid organizations=organizations }}
+            {{> tenantCatalogTable organizations=organizations }}
           {{/ if }}
           {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
         {{ else }}
           <!-- Show no organizations message -->
           {{> noOrganizationsMessage }}
         {{/ if }}
-      {{/ if }}
-    {{ else }}
+    <!--  {{/ if }} -->
+   <!-- {{ else }} -->
       <!-- If no data yet available show spinner -->
-      {{> spinner }}
-    {{/ if }}
+    <!--  {{> spinner }}
+    {{/ if }} -->
   </div>
 </template>
