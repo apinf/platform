@@ -43,7 +43,6 @@ juliancwirko:s-alert-stackslide
 kadira:blaze-layout
 kadira:dochead
 kadira:flow-router
-kurounin:pagination-blaze
 less@2.8.0
 logging@1.1.20
 matb33:collection-hooks
@@ -99,4 +98,5 @@ yasaricli:textcounter
 oauth@1.2.6
 
 underscore
-kurounin:pagination@=1.0.18
+kurounin:pagination
+kurounin:pagination-blaze@=1.0.6
