@@ -24,9 +24,6 @@ Template.languageSelect.onCreated(function () {
     // Update site language with selected language
     TAPi18n.setLanguage(selectedLanguage);
     T9n.setLanguage(selectedLanguage);
-  } else {
-    // Set English by default value
-    Session.setDefaultPersistent('lang', 'en');
   }
 });
 
