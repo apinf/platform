@@ -1,0 +1,36 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantUsersList">
+  <h2 style="font-size:1.4em;margin-top:0;">
+    Tenant users
+  </h2>
+
+  {{# if tenantUsers }}
+    <table class="rtable">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Provider</th>
+          <th>Consumer</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{# each tenantUsers }}
+        <tr>
+          <td>{{ username }}</td>
+          <td>{{ provider }}</td>
+          <td>{{ consumer }}</td>
+          <td>
+            <button class="remove-tenant-user btn btn-danger btn-xs" style="height:auto;">
+              <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+            </button>
+          </td>
+        </tr>
+        {{/ each }}
+      </tbody>
+    </table>
+  {{/ if }}
+</template>

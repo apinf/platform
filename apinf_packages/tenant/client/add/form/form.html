@@ -1,0 +1,45 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantUserForm">
+  <h3 style="font-size:16px; margin-top:0;">
+    Add new user for tenant
+  </h3>
+  <p style="color:#6d859e;">
+    Select user and give roles
+  </p>
+
+  <fieldset>
+    <div class="row">
+      <!-- Usernames into a drop-down list -->
+      <div class="col-md-6">
+        <select id="completeUserList" style="width: 100%;">
+          <option disabled="disabled" >Select a user</option>
+          {{#each completeUserList}}
+            <option value="{{this}}">{{this}}</option>
+          {{/each}}          
+        </select>        
+      </div>
+      <!-- Roles -->
+      <div class="col-md-6">
+        <input type="checkbox" 
+               name="userRoleProvider"
+               id="userRoleProvider"
+               value="Provider"> Provider <br />
+        <input type="checkbox"
+               id="userRoleConsumer"
+               name="userRoleConsumer"
+               value="Consumer"> Consumer
+      </div>
+
+    </div>
+    <span class="help-block"></span>
+  </fieldset>
+
+  <button type="button" class="btn btn-primary" id="addTenantUser">
+    {{_ "tenantUserForm_addButton_text" }}
+  </button>
+  
+</template>

@@ -39,129 +39,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   </div>
                 </span>                
 
-                <span itemprop="tenantDescription">
-                  <div class="form-group" data-required="true">
-                    <label for="add-tenant-description" class="control-label">Description</label>
-                    <textarea rows="3"
-                              name="description"
-                              id="add-tenant-description"
-                              data-schema-key="description"
-                              maxlength="1000"
-                              class="form-control">
-                    </textarea>
-                    <span class="help-block"></span>
-                  </div>
-                </span>  
-
-                <div class="col-md-12 sub-settings">
-                  <div class="panel panel-default">
-                    <div class="panel-heading">Users</div>
-                    <div>
-                      <datalist id="users">
-                        <option value="Håkan"></option>
-                        <option value="Luis"></option>
-                        <option value="Pär"></option>
-                        <option value="Ivan"></option>
-                        <option value="Hans"></option>
-                        <option value="Pierre"></option>
-                        <option value="Väinämöinen"></option>
-                        <option value="Jack"></option>
-                        <option value="Umberto"></option>
-                      </datalist>
-
-                    </div>
-
-                    <ul class="list-group">
-                      <li class="list-group-item autoform-array-item">
-                        <div>
-                          <div class="autoform-remove-item-wrap">
-                            <button type="button" 
-                                    class="btn btn-primary autoform-remove-item">
-                              <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                          </div>
-
-                          <div class="autoform-array-item-body">
-                            <div class="panel panel-default">
-                            <div class="panel-body row">
-                              <div class="form-group col-md-6" data-required="true">
-                                  <label for="add-tenant-username" 
-                                          class="control-label">
-                                    Username
-                                  </label>
-
-                                  <input type="text"
-                                          name="name"
-                                          id="add-tenant-username"
-                                          required=""
-                                          data-schema-key="name"
-                                          class="form-control"
-                                          list="users"
-                                          autocomplete="off">
-                                  <span class="help-block"></span>
-                              </div>
-
-                              <div class="form-group col-md-6" data-required="true">
-                                <input type="checkbox" name="userRole" value="Provider"> Provider<br>
-                                <input type="checkbox" name="userRole" value="Purchaser"> Purchaser<br>
-                                <span class="help-block"></span>
-                              </div>
-
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-
-                      <li class="list-group-item autoform-array-item">
-                        <div>
-                          <div class="autoform-remove-item-wrap">
-                            <button type="button" 
-                                    class="btn btn-primary autoform-remove-item">
-                              <span class="glyphicon glyphicon-minus"></span>
-                            </button>
-                          </div>
-
-                          <div class="autoform-array-item-body">
-                            <div class="panel panel-default">
-                            <div class="panel-body row">
-                              <div class="form-group col-md-6" data-required="true">
-                                  <label for="add-tenant-username" 
-                                          class="control-label">
-                                    Username
-                                  </label>
-
-                                  <input type="text"
-                                          name="name"
-                                          id="add-tenant-username"
-                                          required=""
-                                          data-schema-key="name"
-                                          class="form-control"
-                                          list="users"
-                                          autocomplete="off">
-                                  <span class="help-block"></span>
-                              </div>
-
-                              <div class="form-group col-md-6" data-required="true">
-                                <input type="checkbox" name="userRole" value="Provider"> Provider<br>
-                                <input type="checkbox" name="userRole" value="Purchaser"> Purchaser<br>
-                                <!--span class="help-block"></span-->
-                              </div>
-
-                            </div>
-                            </div>
-                          </div>
-                        </div>
-                      </li>
-
-                      <li class="list-group-item">
-                        <button type="button" class="btn btn-primary autoform-add-item" data-autoform-field="apiUmbrella.sub_settings"><span class="glyphicon glyphicon-plus"></span></button>
-                      </li>
-                      
-                    </ul>
-                  </div>
-
-                      </div>
+                <div style="padding-bottom: 10px;">
+                  {{> tenantUserForm }}                  
+                </div>
+                <hr>
+                <div>
+                  {{> tenantUsersList }}
+                </div>
               </fieldset>
             </div>
           </div>

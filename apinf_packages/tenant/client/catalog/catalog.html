@@ -29,20 +29,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
 
   <div class="container" style="margin-top:20px;">
+    sivu
     {{# if Template.subscriptionsReady }}
      <!-- {{# if paginationReady }}
         {{# if organizations }} -->
           <!-- if viewMode is grid, show grid -->
           {{# if gridViewMode }}
+          grid
             {{> tenantCatalogTable organizations=organizations }}
           {{/ if }}
           <!-- if viewMode is table, show table -->
           {{# if tableViewMode }}
+          table
             {{> tenantCatalogTable organizations=organizations }}
           {{/ if }}
           {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
         {{ else }}
           <!-- Show no organizations message -->
+          empty
           {{> noOrganizationsMessage }}
         {{/ if }}
     <!--  {{/ if }} -->
@@ -50,5 +54,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <!-- If no data yet available show spinner -->
     <!--  {{> spinner }}
     {{/ if }} -->
+
+
   </div>
 </template>

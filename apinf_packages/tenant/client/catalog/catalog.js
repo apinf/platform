@@ -32,10 +32,24 @@ Template.tenantCatalog.onCreated(function () {
     // Check if Branding collection and siteTitle are available
     if (branding && branding.siteTitle) {
       // Set the page title
-      const pageTitle = TAPi18n.__('organizationsCatalogPage_title_organizationsCatalog');
+      const pageTitle = TAPi18n.__('tenantCatalogPage_title_organizationsCatalog');
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
   });
+  // Here the complete user list will be fetched from Keyrock
+  const completeUserList = [
+    'Håkan',
+    'Luis',
+    'Pär',
+    'Ivan',
+    'Hans',
+    'Pierre',
+    'Väinämöinen',
+    'Jack',
+    'Umberto'];
+
+  // Save to localStorage to be used while adding users to tenant
+  localStorage.setItem('completeUserList', JSON.stringify(completeUserList));    
 
   // Get user id
   const userId = Meteor.userId();
