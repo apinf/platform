@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
@@ -37,7 +38,7 @@ Template.tenantUsersList.helpers({
       },
     ];
     */
-    const tenantUsers = JSON.parse(localStorage.getItem('tenantUsers'));   
+    const tenantUsers = JSON.parse(Session.get('tenantUsers'));   
     return tenantUsers;
   },
 });
@@ -48,8 +49,8 @@ Template.tenantUsersList.events({
     const selected = this;
     let tenantUsers = [];
     // Get possible previous users of tenant
-    if (localStorage.getItem('tenantUsers')) {
-      tenantUsers = JSON.parse(localStorage.getItem('tenantUsers'));  
+    if (Session.get('tenantUsers')) {
+      tenantUsers = JSON.parse(Session.get('tenantUsers'));  
     }
 
     // find object to be removed
@@ -62,6 +63,6 @@ Template.tenantUsersList.events({
     tenantUsers.splice(result, 1);
 
     // Save to localStorage to be used while listing users of tenant
-    localStorage.setItem('tenantUsers', JSON.stringify(tenantUsers));       
+    Session.set('tenantUsers', JSON.stringify(tenantUsers));       
   },
 });
