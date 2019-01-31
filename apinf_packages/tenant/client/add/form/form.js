@@ -6,43 +6,38 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.tenantUserForm.events({
-  'click #addTenantUser': function (event, templateInstance) {
-
-    console.log('index=', $('#completeUserList')[0].selectedIndex);
-
+  'click #addTenantUser': function (event) {
+    console.log('event=', event);
     if ($('#completeUserList')[0].selectedIndex < 0) {
-      sAlert.error("You must select a user!", { timeout: 'none' });
+      sAlert.error('You must select a user!', { timeout: 'none' });
     } else {
-      console.log('con=', $('#userRoleConsumer:checked').val());
-      console.log('pro=', $('#userRoleProvider:checked').val());
-      console.log('name=', $('#completeUserList option:selected').text());
- 
+
       const newUser = {
         username: $('#completeUserList option:selected').text(),
         provider: $('#userRoleProvider:checked').val() || false,
         consumer: $('#userRoleConsumer:checked').val() || false,
       };
- 
+
       // uncheck fields
-      $('#completeUserList option:selected').prop('selected', false)
+      $('#completeUserList option:selected').prop('selected', false);
       $('#userRoleProvider').prop('checked', false);
       $('#userRoleConsumer').prop('checked', false);
 
       let tenantUsers = [];
       // Get possible previous users of tenant
       if (Session.get('tenantUsers')) {
-        tenantUsers = JSON.parse(Session.get('tenantUsers'));  
+        tenantUsers = JSON.parse(Session.get('tenantUsers'));
       }
- 
+
       // Add new user object to array
       tenantUsers.unshift(newUser);
- 
-      // Save to localStorage to be used while listing users of tenant
-      Session.set('tenantUsers', JSON.stringify(tenantUsers));   
-    }
 
+      // Save to localStorage to be used while listing users of tenant
+      Session.set('tenantUsers', JSON.stringify(tenantUsers));
+    }
   },
 });
 
