@@ -68,11 +68,6 @@ More about APInf: [apinf.com](https://apinf.com).
 
 APInf saas service: [apinf.io](https://apinf.io).
 
-# Roadmap
-This section elaborates on proposed new features or tasks to which are expected to be added to the product in the  foreseeable future.  There should be  no assumption of a commitment to deliver these features on specific dates or in the order given. The development team will be doing their best to follow the proposed dates and priorities, but please bear in mind that plans to work on a given feature or task may be revised.  All information is provided for as a general guidelines only,  and this section may be revised to provide newer information at any time.
-
-This product is an Incubated FIWARE Generic Enabler.  If you would like to learn about the overall Roadmap of FIWARE, please check section "Roadmap" on the FIWARE Catalogue.
-
 **Short term (next release of the product)**
 The following list of features are planned to be addressed in the short term, and incorporated in the next release of the product planned for February 2019:
 - Meteor update to 1.6 or let's see how high we get
