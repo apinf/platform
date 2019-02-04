@@ -41,8 +41,8 @@ For API consumers APInf provides simple key management, key usage analytics and 
 Why to use? If you have APIs and you are looking for additional control on API access, API documentation and analytics in one package, this is for you.  
 
 
-|  :page_facing_up: [Site](https://apinf.io/)  | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/data-publication/apinf) | :whale: [Docker Hub](https://hub.docker.com/u/apinf/platform) |
-|---|---|---|
+|  :page_facing_up: [Site](https://apinf.io/)  | :mortar_board: [Academy](https://fiware-academy.readthedocs.io/en/latest/data-publication/apinf) | :whale: [Docker Hub](https://hub.docker.com/u/apinf/platform) |  :dart: [Roadmap](roadmap.md) |
+|---|---|---|---|
 
 # Development status
 [![Community dashboard badge](https://img.shields.io/badge/Community-Dashboard-blue.svg)](https://dashboard.cauldron.io/goto/afe91edf4f1c66a3bcfd3717f12e43c5)
