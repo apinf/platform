@@ -6,35 +6,60 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="tenantCatalogTable">
   <div class="table-responsive">
     <table class="table table-striped table-bordered organization-catalog-table">
-      <tbody>
-      {{# each organization in organizations }}
+      <thead>
         <tr>
-          <td class="col-sm-1">
-            <div class="organization-catalog-table-logo center-block">
-              {{> viewOrganizationLogo organization=organization }}
-            </div>
+          <th>
+            Tenant
+          </th>
+          <th>
+            Username & Roles
+          </th>
+          <th>
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tenant in tenantList}}
+        <tr style="border: 1px dashed black;">
+          <td style="padding-left: 5px; font-weight: bold;">
+            {{ tenant.name }}
           </td>
-          <td class="col-sm-9">
-            <h4 class="organization-catalog-table-title">
-              <a href="{{ pathFor 'organizationProfile' orgSlug=organization.slug }}">
-                {{ organization.name }}
-              </a>
-            </h4>
-            <div>
-              <i>
-                {{_ "organizationCatalogTable_added" }}
-                {{ organization.relativeCreatedAt }}
-              </i>
-              {{# if organization.description }}
-                <p class="organization-catalog-table-description">
-                  {{ organization.description }}
-                </p>
-              {{/ if }}
-            </div>
+            
+          <td style="padding-bottom: 10px;">
+            <tr>
+              <th style="padding-left: 10px;">Username</th>
+              <th style="padding-left: 10px;">Consumer</th>
+              <th style="padding-left: 10px;">Producer</th>
+            </tr>
+            {{#each users in tenant.users}}
+            <tr>
+              {{#each detail in users}}
+              <td style="padding-left: 10px;">
+                {{detail}}
+              </td>
+              {{/each}}
+            </tr>
+            {{/each}}
+          </td>
+          <td style="padding-left: 30px; padding-right:10px;">
+            <button id="edit-tenant" 
+                    type="button" 
+                    class="btn btn-success btn-success-special" 
+                    style="margin-top: 1rem;">
+              Edit Tenant
+            </button> &nbsp; 
+            <button id="remove-tenant" 
+                    type="button" 
+                    class="btn btn-danger btn-danger-special pull-right" 
+                    style="margin-top: 1rem;">
+              Remove Tenant
+            </button>
           </td>
         </tr>
-      {{/ each }}
+        {{/each}}       
       </tbody>
-    </table>
+    </table>  
   </div>
 </template>
+        

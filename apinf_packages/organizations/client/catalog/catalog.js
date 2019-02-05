@@ -131,13 +131,13 @@ Template.organizationCatalog.helpers({
   gridViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
-
+    console.log('viewMode=', viewMode);
     return (viewMode === 'grid');
   },
   tableViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
-
+    console.log('viewMode=', viewMode);
     return (viewMode === 'table');
   },
   userCanAddOrganization () {

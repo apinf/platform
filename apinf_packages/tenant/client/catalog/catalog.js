@@ -36,7 +36,45 @@ Template.tenantCatalog.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
   });
-  // Here the complete user list will be fetched from Keyrock
+
+  // Here the complete tenant list will be fetched from Tenant manager
+  const tenantList = [
+    {
+      name: 'First tenant',
+      users: [
+        ['Spede', 'consumer', false],
+        ['Simo', false, 'producer'],
+        ['Vesku', 'consumer', 'producer'],
+      ],
+    },
+    {
+      name: 'Second tenant',
+      users: [
+        ['Tupu', false, 'producer'],
+        ['Hupu', 'consumer', 'producer'],
+        ['Lupu', 'consumer', false],
+        ['Skrupu', 'consumer', false],
+      ],
+    },
+    {
+      name: 'Third tenant',
+      users: [
+        ['Ismo', false, 'producer'],
+        ['Asmo', 'consumer', 'producer'],
+        ['Osmo', 'consumer', false],
+        ['Atso', 'consumer', 'producer'],
+        ['Matso', 'consumer', false],
+      ],
+    },
+  ];
+
+  console.log('tenant-list alustettu=', tenantList);
+
+  // Save to localStorage to be used while adding users to tenant
+  localStorage.setItem('tenantList', JSON.stringify(tenantList));    
+
+
+  // Here the complete user list will be fetched from Tenant manager
   const completeUserList = [
     'Håkan',
     'Luis',
@@ -91,6 +129,7 @@ Template.tenantCatalog.onCreated(function () {
 
   // Watch for changes in the filter settings
   instance.autorun(() => {
+    console.log('Flowr=', FlowRouter);
     // Check URL parameter for filtering
     const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
@@ -130,6 +169,11 @@ Template.tenantCatalog.onRendered(function () {
 });
 
 Template.tenantCatalog.helpers({
+  tenantList () {
+    const tenantList = JSON.parse(localStorage.getItem('tenantList'));
+    console.log('tenant-listaa luetaan helperillä', tenantList);
+    return tenantList;
+  },  
   organizations () {
     // Return items of organization collection via Pagination
     return Template.instance().pagination.getPage();
@@ -145,13 +189,14 @@ Template.tenantCatalog.helpers({
   gridViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
+    console.log('viewMode=', viewMode);
 
     return (viewMode === 'grid');
   },
   tableViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
-
+    console.log('viewMode=', viewMode);
     return (viewMode === 'table');
   },
   userCanAddTenant () {
