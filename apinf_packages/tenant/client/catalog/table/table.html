@@ -21,20 +21,23 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </thead>
       <tbody>
         {{#each tenant in tenantList}}
+        <!--{{#each tenantList}}-->
         <tr style="border: 1px dashed black;">
           <td style="padding-left: 5px; font-weight: bold;">
             {{ tenant.name }}
+            <!--{{ name }}-->
           </td>
             
           <td style="padding-bottom: 10px;">
             <tr>
               <th style="padding-left: 10px;">Username</th>
+              <th style="padding-left: 10px;">Provider</th>
               <th style="padding-left: 10px;">Consumer</th>
-              <th style="padding-left: 10px;">Producer</th>
             </tr>
-            {{#each users in tenant.users}}
+            {{#each user in tenant.users}}
+            <!--{{#each user in users}}-->
             <tr>
-              {{#each detail in users}}
+              {{#each detail in user}}
               <td style="padding-left: 10px;">
                 {{detail}}
               </td>
@@ -48,9 +51,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     class="btn btn-success btn-success-special" 
                     style="margin-top: 1rem;">
               Edit Tenant
-            </button> &nbsp; 
+            </button> 
             <button id="remove-tenant" 
                     type="button" 
+                    data-value={{ @index }}
                     class="btn btn-danger btn-danger-special pull-right" 
                     style="margin-top: 1rem;">
               Remove Tenant

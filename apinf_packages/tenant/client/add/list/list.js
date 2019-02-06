@@ -18,26 +18,6 @@ Template.tenantUsersList.helpers({
   tenantUsers () {
 
     // Form list of tenant users
-    /*
-    let tenantUsers = [
-      { username: 'Jorse',
-        provider: true,
-        consumer: false,
-      },
-      { username: 'Sepeteus',
-        provider: true,
-        consumer: false,
-      },
-      { username: 'Timoteus',
-        provider: true,
-        consumer: true,
-      },
-      { username: 'Ephraim',
-        provider: false,
-        consumer: true,
-      },
-    ];
-    */
     const tenantUsers = JSON.parse(Session.get('tenantUsers'));   
     return tenantUsers;
   },

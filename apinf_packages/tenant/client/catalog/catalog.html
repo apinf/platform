@@ -34,20 +34,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
      <!-- {{# if paginationReady }}
         {{# if organizations }} -->
           <!-- if viewMode is grid, show grid -->
-          Jos subscription on ready
           {{# if gridViewMode }}
-          grid
             {{> tenantCatalogTable organizations=organizations }}
           {{/ if }}
           <!-- if viewMode is table, show table -->
           {{# if tableViewMode }}
-          table
             {{> tenantCatalogTable tenantList=tenantList }}
           {{/ if }}
           {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
         {{ else }}
           <!-- Show no organizations message -->
-          empty
           {{> noOrganizationsMessage }}
         {{/ if }}
     <!--  {{/ if }} -->

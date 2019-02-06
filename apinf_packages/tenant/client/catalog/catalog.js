@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
+import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
@@ -35,59 +36,65 @@ Template.tenantCatalog.onCreated(function () {
       const pageTitle = TAPi18n.__('tenantCatalogPage_title_organizationsCatalog');
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
+
+    if (!Session.get('tenantList')) {
+      // Here the complete tenant list will be fetched from Tenant manager
+
+      // For mock purposes just filling the list
+      const tenantList = [
+        {
+          name: 'First tenant',
+          users: [
+            ['Spede', false, 'consumer'],
+            ['Simo', 'provider', false],
+            ['Vesku', 'provider', 'consumer'],
+          ],
+        },
+        {
+          name: 'Second tenant',
+          users: [
+            ['Tupu', 'provider', false],
+            ['Hupu', 'provider', 'consumer'],
+            ['Lupu', false, 'consumer'],
+            ['Skrupu', false, 'consumer'],
+          ],
+        },
+        {
+          name: 'Third tenant',
+          users: [
+            ['Ismo', 'provider', false],
+            ['Asmo', 'provider', 'consumer'],
+            ['Osmo', false, 'consumer'],
+            ['Atso', 'provider', 'consumer'],
+            ['Matso', false, 'consumer'],
+          ],
+        },
+      ];
+      console.log('tenant-list alustettu=', tenantList);
+
+      // Save to localStorage to be used while adding users to tenant
+      Session.set('tenantList', JSON.stringify(tenantList));    
+    }
+
+    // Here the complete user list will be fetched from Tenant manager
+
+    // For mock purposes we fill the list here ourself
+    const completeUserList = [
+      'Håkan',
+      'Luis',
+      'Pär',
+      'Ivan',
+      'Hans',
+      'Pierre',
+      'Väinämöinen',
+      'Jack',
+      'Umberto'
+    ];
+
+    // Save to sessionStorage to be used while adding users to tenant
+    Session.set('completeUserList', JSON.stringify(completeUserList));    
   });
 
-  // Here the complete tenant list will be fetched from Tenant manager
-  const tenantList = [
-    {
-      name: 'First tenant',
-      users: [
-        ['Spede', 'consumer', false],
-        ['Simo', false, 'producer'],
-        ['Vesku', 'consumer', 'producer'],
-      ],
-    },
-    {
-      name: 'Second tenant',
-      users: [
-        ['Tupu', false, 'producer'],
-        ['Hupu', 'consumer', 'producer'],
-        ['Lupu', 'consumer', false],
-        ['Skrupu', 'consumer', false],
-      ],
-    },
-    {
-      name: 'Third tenant',
-      users: [
-        ['Ismo', false, 'producer'],
-        ['Asmo', 'consumer', 'producer'],
-        ['Osmo', 'consumer', false],
-        ['Atso', 'consumer', 'producer'],
-        ['Matso', 'consumer', false],
-      ],
-    },
-  ];
-
-  console.log('tenant-list alustettu=', tenantList);
-
-  // Save to localStorage to be used while adding users to tenant
-  localStorage.setItem('tenantList', JSON.stringify(tenantList));    
-
-
-  // Here the complete user list will be fetched from Tenant manager
-  const completeUserList = [
-    'Håkan',
-    'Luis',
-    'Pär',
-    'Ivan',
-    'Hans',
-    'Pierre',
-    'Väinämöinen',
-    'Jack',
-    'Umberto'];
-
-  // Save to localStorage to be used while adding users to tenant
-  localStorage.setItem('completeUserList', JSON.stringify(completeUserList));    
 
   // Get user id
   const userId = Meteor.userId();
@@ -129,7 +136,6 @@ Template.tenantCatalog.onCreated(function () {
 
   // Watch for changes in the filter settings
   instance.autorun(() => {
-    console.log('Flowr=', FlowRouter);
     // Check URL parameter for filtering
     const filterByParameter = FlowRouter.getQueryParam('filterBy');
 
@@ -170,8 +176,7 @@ Template.tenantCatalog.onRendered(function () {
 
 Template.tenantCatalog.helpers({
   tenantList () {
-    const tenantList = JSON.parse(localStorage.getItem('tenantList'));
-    console.log('tenant-listaa luetaan helperillä', tenantList);
+    const tenantList = JSON.parse(Session.get('tenantList'));
     return tenantList;
   },  
   organizations () {
@@ -189,14 +194,13 @@ Template.tenantCatalog.helpers({
   gridViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
-    console.log('viewMode=', viewMode);
 
     return (viewMode === 'grid');
   },
   tableViewMode () {
     // Get view mode from template
     const viewMode = FlowRouter.getQueryParam('viewMode');
-    console.log('viewMode=', viewMode);
+
     return (viewMode === 'table');
   },
   userCanAddTenant () {
@@ -238,4 +242,25 @@ Template.tenantCatalog.events({
     // Show tenant form modal
     Modal.show('tenantForm', { formType: 'insert' });
   },
+  'click #remove-tenant': function (event, templateInstance) {
+    // Show tenant form modal
+    console.log('tenantille kyytiä, event=', event);
+    console.log('templateInstance=', templateInstance);
+    console.log('this=', this);
+
+    const selectValue = $(event.target).data('value');
+    console.log('valittu=', selectValue);
+
+    // Read tenant list
+    const tenantList = JSON.parse(Session.get('tenantList'));
+    console.log('tenantti ennen=', tenantList);
+
+    // Remove user object from array
+    tenantList.splice(selectValue, 1);
+    console.log('tenantti jälkeen=', tenantList);
+
+    // Save to localStorage to be used while adding users to tenant
+    Session.set('tenantList', JSON.stringify(tenantList));  
+  },
+
 });

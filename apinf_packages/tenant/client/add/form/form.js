@@ -10,7 +10,6 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.tenantUserForm.events({
   'click #addTenantUser': function (event) {
-    console.log('event=', event);
     if ($('#completeUserList')[0].selectedIndex < 0) {
       sAlert.error('You must select a user!', { timeout: 'none' });
     } else {
@@ -43,7 +42,7 @@ Template.tenantUserForm.events({
 
 Template.tenantUserForm.helpers({
   completeUserList () {
-    const completeUserList = JSON.parse(localStorage.getItem('completeUserList'));
+    const completeUserList = JSON.parse(Session.get('completeUserList'));
     return completeUserList;
   },
 });
