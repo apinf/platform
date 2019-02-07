@@ -45,28 +45,28 @@ Template.tenantCatalog.onCreated(function () {
         {
           name: 'First tenant',
           users: [
-            ['Spede', false, 'consumer'],
-            ['Simo', 'provider', false],
-            ['Vesku', 'provider', 'consumer'],
+            ['Spede', '-', 'Consumer'],
+            ['Simo', 'Provider', '-'],
+            ['Vesku', 'Provider', 'Consumer'],
           ],
         },
         {
           name: 'Second tenant',
           users: [
-            ['Tupu', 'provider', false],
-            ['Hupu', 'provider', 'consumer'],
-            ['Lupu', false, 'consumer'],
-            ['Skrupu', false, 'consumer'],
+            ['Tupu', 'Provider', '-'],
+            ['Hupu', 'Provider', 'Consumer'],
+            ['Lupu', '-', 'Consumer'],
+            ['Skrupu', '-', 'Consumer'],
           ],
         },
         {
           name: 'Third tenant',
           users: [
-            ['Ismo', 'provider', false],
-            ['Asmo', 'provider', 'consumer'],
-            ['Osmo', false, 'consumer'],
-            ['Atso', 'provider', 'consumer'],
-            ['Matso', false, 'consumer'],
+            ['Ismo', 'Provider', '-'],
+            ['Asmo', 'Provider', 'Consumer'],
+            ['Osmo', '-', 'Consumer'],
+            ['Atso', 'Provider', 'Consumer'],
+            ['Matso', '-', 'Consumer'],
           ],
         },
       ];
