@@ -4,37 +4,28 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 
-// Meteor contributed packages imports
-import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-
-// Npm packages imports
-import _ from 'lodash';
-
 Template.tenantUsersList.helpers({
   tenantUsers () {
-
     // Form list of tenant users
-    const tenantUsers = JSON.parse(Session.get('tenantUsers'));   
+    const tenantUsers = JSON.parse(Session.get('tenantUsers'));
     return tenantUsers;
   },
 });
 
 Template.tenantUsersList.events({
   'click .remove-tenant-user': function (event, templateInstance) {
-
     const selected = this;
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
-      tenantUsers = JSON.parse(Session.get('tenantUsers'));  
+      tenantUsers = JSON.parse(Session.get('tenantUsers'));
     }
 
     // find object to be removed
-    const result = tenantUsers.findIndex( user => {
+    const result = tenantUsers.findIndex(user => {
       return user.username === selected.username &&
              user.consumer === selected.consumer &&
              user.provider === selected.provider;
@@ -43,6 +34,6 @@ Template.tenantUsersList.events({
     tenantUsers.splice(result, 1);
 
     // Save to localStorage to be used while listing users of tenant
-    Session.set('tenantUsers', JSON.stringify(tenantUsers));       
+    Session.set('tenantUsers', JSON.stringify(tenantUsers));
   },
 });

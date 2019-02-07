@@ -7,14 +7,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.tenantForm.events({
-  'click #save-tenant': function (event) {
+  'click #save-tenant': function () {
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else {
-
-      let tenant = {};
+      const tenant = {};
       let users = [];
 
       tenant.name = $('#add-tenant-name').val();
@@ -32,7 +32,6 @@ Template.tenantForm.events({
           usersRow[1] = userdata.provider || '-';
           usersRow[2] = userdata.consumer || '-';
           return usersRow;
-
         });
         // Empty the tenant user list
         tenantUsers.splice(0, tenantUsers.length);
@@ -42,7 +41,7 @@ Template.tenantForm.events({
 
       // Add possible users to tenant object
       tenant.users = users;
- 
+
       // Read tenant list
       const tenantList = JSON.parse(Session.get('tenantList'));
 
@@ -51,7 +50,7 @@ Template.tenantForm.events({
       console.log('tenant-lista kirjoittumassa=', tenantList);
 
       // Save to localStorage to be used while adding users to tenant
-      Session.set('tenantList', JSON.stringify(tenantList));    
+      Session.set('tenantList', JSON.stringify(tenantList));
 
       // Close modal
       Modal.hide('tenantForm');
@@ -61,7 +60,7 @@ Template.tenantForm.events({
 
 Template.tenantUserForm.helpers({
   completeUserList () {
-    console.log('sessio=(', Session.get('completeUserList'),')');
+    console.log('sessio=(', Session.get('completeUserList'), ')');
     const completeUserList = JSON.parse(Session.get('completeUserList'));
 
     console.log('parsittuna=(', completeUserList, ')');

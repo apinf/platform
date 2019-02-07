@@ -9,11 +9,10 @@ import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.tenantUserForm.events({
-  'click #addTenantUser': function (event) {
+  'click #addTenantUser': function () {
     if ($('#completeUserList')[0].selectedIndex < 0) {
       sAlert.error('You must select a user!', { timeout: 'none' });
     } else {
-
       const newUser = {
         username: $('#completeUserList option:selected').text(),
         provider: $('#userRoleProvider:checked').val() || false,

@@ -73,7 +73,7 @@ Template.tenantCatalog.onCreated(function () {
       console.log('tenant-list alustettu=', tenantList);
 
       // Save to localStorage to be used while adding users to tenant
-      Session.set('tenantList', JSON.stringify(tenantList));    
+      Session.set('tenantList', JSON.stringify(tenantList));
     }
 
     // Here the complete user list will be fetched from Tenant manager
@@ -88,11 +88,11 @@ Template.tenantCatalog.onCreated(function () {
       'Pierre',
       'Väinämöinen',
       'Jack',
-      'Umberto'
+      'Umberto',
     ];
 
     // Save to sessionStorage to be used while adding users to tenant
-    Session.set('completeUserList', JSON.stringify(completeUserList));    
+    Session.set('completeUserList', JSON.stringify(completeUserList));
   });
 
 
@@ -178,7 +178,7 @@ Template.tenantCatalog.helpers({
   tenantList () {
     const tenantList = JSON.parse(Session.get('tenantList'));
     return tenantList;
-  },  
+  },
   organizations () {
     // Return items of organization collection via Pagination
     return Template.instance().pagination.getPage();
@@ -260,7 +260,7 @@ Template.tenantCatalog.events({
     console.log('tenantti jälkeen=', tenantList);
 
     // Save to localStorage to be used while adding users to tenant
-    Session.set('tenantList', JSON.stringify(tenantList));  
+    Session.set('tenantList', JSON.stringify(tenantList));
   },
 
 });
