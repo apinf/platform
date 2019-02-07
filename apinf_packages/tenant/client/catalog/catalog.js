@@ -37,6 +37,11 @@ Template.tenantCatalog.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
 
+    console.log('tenant-listan alustukseen');
+    // TODO tenant
+    // fetch list of tenants from tenant manager
+    // GET /tenants
+
     if (!Session.get('tenantList')) {
       // Here the complete tenant list will be fetched from Tenant manager
 
@@ -74,6 +79,8 @@ Template.tenantCatalog.onCreated(function () {
 
       // Save to localStorage to be used while adding users to tenant
       Session.set('tenantList', JSON.stringify(tenantList));
+    } else {
+      console.log('tenant list existed already');
     }
 
     // Here the complete user list will be fetched from Tenant manager
@@ -179,9 +186,16 @@ Template.tenantCatalog.helpers({
     const tenantList = JSON.parse(Session.get('tenantList'));
     return tenantList;
   },
-  organizations () {
-    // Return items of organization collection via Pagination
-    return Template.instance().pagination.getPage();
+  tenants () {
+    const existingTenants = JSON.parse(Session.get('tenantList'));
+
+    if (existingTenants.length > 0) {
+      console.log('löytyi');
+      return true;
+    }
+    console.log('ei löytynyt');
+    // No tenants
+    return false;
   },
   paginationReady () {
     // Check if pagination subscription is ready
@@ -242,22 +256,22 @@ Template.tenantCatalog.events({
     // Show tenant form modal
     Modal.show('tenantForm', { formType: 'insert' });
   },
-  'click #remove-tenant': function (event, templateInstance) {
-    // Show tenant form modal
-    console.log('tenantille kyytiä, event=', event);
-    console.log('templateInstance=', templateInstance);
-    console.log('this=', this);
-
-    const selectValue = $(event.target).data('value');
-    console.log('valittu=', selectValue);
+  'click #remove-tenant': function (event) {
+    // The button sends the index of tenant to be removed
+    const tenantRemoveIndex = $(event.target).data('value');
 
     // Read tenant list
     const tenantList = JSON.parse(Session.get('tenantList'));
-    console.log('tenantti ennen=', tenantList);
 
-    // Remove user object from array
-    tenantList.splice(selectValue, 1);
-    console.log('tenantti jälkeen=', tenantList);
+    // TODO tenant
+    // get selected tenant data
+    console.log('poistettava tenantti=', tenantList[tenantRemoveIndex]);
+    // call tenant manager 
+    // DELETE /tenants/<tenant-nimi>
+
+    // Most probably the tenant needs to be removed from Session data in order to make list gotten from tenant manager again
+    // Remove tenant object from array
+    tenantList.splice(tenantRemoveIndex, 1);
 
     // Save to localStorage to be used while adding users to tenant
     Session.set('tenantList', JSON.stringify(tenantList));

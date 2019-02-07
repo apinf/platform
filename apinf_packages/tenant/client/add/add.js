@@ -42,12 +42,17 @@ Template.tenantForm.events({
       // Add possible users to tenant object
       tenant.users = users;
 
+      // TODO tenant
+      // Here a new tenant is sent to tenant manager
+      // POST /tenant
+
+      // Most probably Tenant list needs to be emptied, so new GET is generated
+
       // Read tenant list
       const tenantList = JSON.parse(Session.get('tenantList'));
 
       // Add new tenant object to array
       tenantList.unshift(tenant);
-      console.log('tenant-lista kirjoittumassa=', tenantList);
 
       // Save to localStorage to be used while adding users to tenant
       Session.set('tenantList', JSON.stringify(tenantList));

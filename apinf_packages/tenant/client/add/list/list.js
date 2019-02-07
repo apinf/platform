@@ -16,7 +16,7 @@ Template.tenantUsersList.helpers({
 });
 
 Template.tenantUsersList.events({
-  'click .remove-tenant-user': function (event, templateInstance) {
+  'click .remove-tenant-user': function () {
     const selected = this;
     let tenantUsers = [];
     // Get possible previous users of tenant
@@ -25,13 +25,13 @@ Template.tenantUsersList.events({
     }
 
     // find object to be removed
-    const result = tenantUsers.findIndex(user => {
+    const tenantRemoveIndex = tenantUsers.findIndex(user => {
       return user.username === selected.username &&
              user.consumer === selected.consumer &&
              user.provider === selected.provider;
     });
-    // Remove user object from array
-    tenantUsers.splice(result, 1);
+    // Remove user object from array of tenants
+    tenantUsers.splice(tenantRemoveIndex, 1);
 
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', JSON.stringify(tenantUsers));
