@@ -135,6 +135,11 @@ Template.navbar.helpers({
   currentUser () {
     return Meteor.user();
   },
+  canManageTenants () {
+    // TODO tenant: return true if User has login with Fiware
+
+    return Meteor.user();
+  },
   userCanViewMqttDashboard () {
     // Get current user Id
     const userId = Meteor.userId();

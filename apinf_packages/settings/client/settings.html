@@ -16,6 +16,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
       {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
       {{> afQuickField name='developmentFeatures' id="development-features" }}
+
+      <!-- GraphQL settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -26,6 +28,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </span>
         </div>
       </div>
+
+      <!-- SDK Code Generator settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -52,6 +56,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
 
+      <!-- Mail settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -120,6 +125,24 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         </div>
       </div>
+
+      <!-- Tenant settings -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_tenant" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='tenantIdm.enabled' id="tenantIdm" }}
+          </span>
+        </div>
+        {{# if afFieldValueIs name='tenantIdm.enabled' value=true }}
+          <div class="panel-body">
+            {{> afQuickField name='tenantIdm.endpoint' id="tenantIdm-endpoint" }}
+            {{> afQuickField name='tenantIdm.accessToken' id="tenantIdm-token" }}
+          </div>
+        {{/ if }}
+      </div>      
 
       <!-- Save settings -->
       <button

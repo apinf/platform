@@ -41,10 +41,13 @@ Template.tenantCatalog.onCreated(function () {
     // TODO tenant
     // fetch list of tenants from tenant manager
     // GET /tenants
+    console.log('haetaan tenantteja');
+    const tenants = Meteor.call('getTenantList');
+    console.log('hakuvastaus=', tenants);
 
+    console.log('oma alustus');
     if (!Session.get('tenantList')) {
       // Here the complete tenant list will be fetched from Tenant manager
-
       // For mock purposes just filling the list
       const tenantList = [
         {
