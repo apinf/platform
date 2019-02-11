@@ -21,11 +21,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </thead>
       <tbody>
         {{#each tenant in tenantList}}
-        <!--{{#each tenantList}}-->
         <tr style="border: 1px dashed black;">
           <td style="padding-left: 5px; font-weight: bold;">
             {{ tenant.name }}
-            <!--{{ name }}-->
           </td>
             
           <td style="padding-bottom: 10px;">
@@ -34,14 +32,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <th style="padding-left: 10px;">Provider</th>
               <th style="padding-left: 10px;">Consumer</th>
             </tr>
+
             {{#each user in tenant.users}}
-            <!--{{#each user in users}}-->
             <tr>
-              {{#each detail in user}}
               <td style="padding-left: 10px;">
-                {{detail}}
+                {{user.name}}
               </td>
-              {{/each}}
+              <td style="padding-left: 10px;">
+                {{user.provider}}
+              </td>
+              <td style="padding-left: 10px;">
+                {{user.consumer}}
+              </td>
             </tr>
             {{/each}}
           </td>

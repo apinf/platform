@@ -14,6 +14,7 @@ Template.tenantUserForm.events({
       sAlert.error('You must select a user!', { timeout: 'none' });
     } else {
       const newUser = {
+        id: $('#completeUserList option:selected').val(),
         username: $('#completeUserList option:selected').text(),
         provider: $('#userRoleProvider:checked').val() || false,
         consumer: $('#userRoleConsumer:checked').val() || false,

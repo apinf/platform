@@ -31,14 +31,13 @@ Template.tenantForm.events({
         const tenantUsers = JSON.parse(Session.get('tenantUsers'));
         console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list
-        // use timestamp as id in mock
-        let id = + new Date();
         users = tenantUsers.map((userdata) => {
-          const usersRow = [];
-          usersRow[0] = id++;
-          usersRow[1] = userdata.username;
-          usersRow[2] = userdata.provider || '-';
-          usersRow[3] = userdata.consumer || '-';
+          const usersRow = {
+            id: userdata.id,
+            name: userdata.username,
+            provider: userdata.provider || '-',
+            consumer: userdata.consumer || '-',
+          };
           return usersRow;
         });
         // Empty the tenant user list
@@ -59,12 +58,12 @@ Template.tenantForm.events({
 
       // Most probably Tenant list needs to be emptied, which causes new GET to be generated
 
+
+      // Mock: save new tenant in tenant list
       // Read tenant list
       const tenantList = JSON.parse(Session.get('tenantList'));
-
       // Add new tenant object to array
       tenantList.unshift(tenant);
-
       // Save to localStorage to be used while adding users to tenant
       Session.set('tenantList', JSON.stringify(tenantList));
 

@@ -55,40 +55,100 @@ Template.tenantCatalog.onCreated(function () {
         {
           id: 1123456789,
           owner_id: 1987654321,
-          tenant_organization: "1111",
+          tenant_organization: '1111',
           name: 'First tenant',
           description: 'This is a first class tenant',
           users: [
-            ['123qwe', 'Spede', '-', 'Consumer'],
-            ['223qwe', 'Simo', 'Provider', '-'],
-            ['323qwe', 'Vesku', 'Provider', 'Consumer'],
+            {
+              id: '123qwe', 
+              name: 'Spede',
+              provider: '-',
+              consumer: 'Consumer',
+            },
+            {
+              id: '223qwe',
+              name: 'Simo',
+              provider: 'Provider',
+              consumer: '-',
+            },
+            {
+              id: '323qwe',
+              name: 'Vesku',
+              provider: 'Provider',
+              consumer: 'Consumer',
+            },
           ],
         },
         {
           id: 2123456789,
           owner_id: 2987654321,
-          tenant_organization: "1111",
+          tenant_organization: '1111',
           name: 'Second tenant',
           description: 'This is a second class tenant',
           users: [
-            ['423qwe', 'Tupu', 'Provider', '-'],
-            ['523qwe', 'Hupu', 'Provider', 'Consumer'],
-            ['623qwe', 'Lupu', '-', 'Consumer'],
-            ['723qwe', 'Skrupu', '-', 'Consumer'],
+            {
+              id: '423qwe',
+              name: 'Tupu',
+              provider: 'Provider',
+              consumer: '-',
+            },
+            {
+              id: '523qwe',
+              name: 'Hupu',
+              provider: 'Provider',
+              consumer: 'Consumer',
+            },
+            {
+              id: '623qwe',
+              name: 'Lupu',
+              provider: '-',
+              consumer: 'Consumer',
+            },
+            {
+              id: '723qwe',
+              name: 'Skrupu',
+              provider: '-',
+              consumer: 'Consumer',
+            },
           ],
         },
         {
           id: 3123456789,
           owner_id: 31987654321,
-          tenant_organization: "1111",
+          tenant_organization: '1111',
           description: 'This is a third class tenant',
           name: 'Third tenant',
           users: [
-            ['a123qwe', 'Ismo', 'Provider', '-'],
-            ['b123qwe', 'Asmo', 'Provider', 'Consumer'],
-            ['c123qwe', 'Osmo', '-', 'Consumer'],
-            ['d123qwe', 'Atso', 'Provider', 'Consumer'],
-            ['e123qwe', 'Matso', '-', 'Consumer'],
+            {
+              id: 'a123qwe',
+              name: 'Ismo',
+              provider: 'Provider',
+              consumer: '-',
+            },
+            {
+              id: 'b123qwe',
+              name: 'Asmo',
+              provider: 'Provider',
+              consumer: 'Consumer',
+            },
+            {
+              id: 'c123qwe',
+              name: 'Osmo',
+              provider: '-',
+              consumer: 'Consumer',
+            },
+            {
+              id: 'd123qwe',
+              name: 'Atso',
+              provider: 'Provider',
+              consumer: 'Consumer',
+            },
+            {
+              id: 'e123qwe',
+              name: 'Matso',
+              provider: '-',
+              consumer: 'Consumer',
+            },
           ],
         },
       ];
@@ -99,22 +159,17 @@ Template.tenantCatalog.onCreated(function () {
     }
 
     // Here the complete user list will be fetched from Tenant manager
-
-    // For mock purposes we fill the list here ourself
-    const completeUserList = [
-      ['Håkan', '123456789'],
-      ['Luis', '223456789'],
-      ['Pär', '323456789'],
-      ['Ivan', '423456789'],
-      ['Hans', '523456789'],
-      ['Pierre', '62345689'],
-      ['Väinämöinen', '723456789'],
-      ['Jack', '82356789'],
-      ['Umberto', '92356789'],
-    ];
+    // GET /tenants
+    console.log('haetaan userlist');
+    // const response = Meteor.call('getUserList');
+    Meteor.call('getSettings', (error, result) => {
+      console.log('result=', result);
+      console.log('error=', error);
+    });
+    // console.log('hakuvastaus=', response);
 
     // Save to sessionStorage to be used while adding users to tenant
-    Session.set('completeUserList', JSON.stringify(completeUserList));
+    Session.set('completeUserList', JSON.stringify(response.completeUserList));
   });
 
 
