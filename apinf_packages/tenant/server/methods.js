@@ -44,12 +44,12 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     const tenantEndpoint = getTenantEndpoint();
 
-    console.log('1 tenant endpoint=', tenantEndpoint);
+    console.log('1 GET tenant endpoint=', tenantEndpoint);
     if (tenantEndpoint) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantEndpoint.endpoint, Match.Maybe(String));
-      console.log('2 send reqyúest');
+      console.log('2 send GET tenant request');
 
       try {
         const result = HTTP.get(
@@ -64,21 +64,106 @@ Meteor.methods({
         // Create a monitoring data
         response.tenantList = result.response;
         response.status = result.statusCode;
-        console.log('3 a ok, result=', result);
+        console.log('3 GET a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log('3 b err=', err);
+        console.log('3 GET b err=', err);
         response.status = 400;
         console.log('3 b nok, response=', response);
       }
     }
 
-    console.log('4 response=', response);
+    console.log('4 GET tenant response=', response);
     return response;
   },
 
+  getUserList () {
+    const response = {};
+    // In case of failure
+    response.status = 400;
+
+    // Fetch tenant endpoint and token
+    const tenantEndpoint = getTenantEndpoint();
+
+    // NOTE! Now used tenant endpoint, perhaps needs to be configured later
+    console.log('1 GET userlist endpoint=', tenantEndpoint);
+    if (tenantEndpoint) {
+      // Make sure endPoint is a String
+      // eslint-disable-next-line new-cap
+      check(tenantEndpoint.endpoint, Match.Maybe(String));
+      console.log('2 send GET userlist request');
+
+      try {
+        const result = HTTP.get(
+          tenantEndpoint.endpoint,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${tenantEndpoint.tenantToken}`,
+            },
+          }
+        );
+        // Create a monitoring data
+        response.completeUserList = result.response;
+        response.status = result.statusCode;
+        console.log('3 GET a ok, result=', result);
+        console.log('3 a ok, response=', response);
+      } catch (err) {
+        console.log('3 GET b err=', err);
+
+        // For mock purposes we fill the list here ourself
+        response.completeUserList = [
+          {
+            id: '123456789',
+            name: 'Håkan',
+          },
+          {
+            id: '223456789',
+            name: 'Luis',
+          },
+          {
+            id: '323456789',
+            name: 'Pär',
+          },
+          {
+            id: '423456789',
+            name: 'Ivan',
+          },
+          {
+            id: '523456789',
+            name: 'Hans',
+          },
+          {
+            id: '62345689',
+            name: 'Pierre',
+          },
+          {
+            id: '723456789',
+            name: 'Väinämöinen',
+          },
+          {
+            id: '82356789',
+            name: 'Jack',
+          },
+          {
+            id: '92356789',
+            name: 'Umberto',
+          },
+        ];
+
+        response.status = 400;
+
+        console.log('3 b nok, response=', response);
+      }
+    }
+
+    console.log('4 GET userlist response=', response);
+    return response;
+  },
+
+
   addTenant (tenant) {
-    console.log('\ntenant=', tenant);
+    console.log('\nPOST tenant =\n', tenant, '\n');
     check(tenant, Object);
 
     const response = {};
@@ -118,16 +203,16 @@ Meteor.methods({
         );
         // Create a monitoring data
         response.status = result.statusCode;
-        console.log('3 a ok, result=', result);
+        console.log('3 POST a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log('3 b err=', err);
+        console.log('3 POST b err=', err);
         response.status = 400;
         console.log('3 b nok, response=', response);
       }
     }
 
-    console.log('4 response=', response);
+    console.log('4 POST response=', response);
     return response;
   },
 });
