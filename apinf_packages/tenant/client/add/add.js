@@ -4,6 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
@@ -21,16 +22,23 @@ Template.tenantForm.events({
       // Empty tenant name field
       $('#add-tenant-name').val('');
 
+      tenant.description = $('#add-tenant-description').val();
+      // Empty tenant name field
+      $('#add-tenant-description').val('');
+
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
         const tenantUsers = JSON.parse(Session.get('tenantUsers'));
         console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list
+        // use timestamp as id in mock
+        let id = + new Date();
         users = tenantUsers.map((userdata) => {
           const usersRow = [];
-          usersRow[0] = userdata.username;
-          usersRow[1] = userdata.provider || '-';
-          usersRow[2] = userdata.consumer || '-';
+          usersRow[0] = id++;
+          usersRow[1] = userdata.username;
+          usersRow[2] = userdata.provider || '-';
+          usersRow[3] = userdata.consumer || '-';
           return usersRow;
         });
         // Empty the tenant user list
@@ -45,8 +53,11 @@ Template.tenantForm.events({
       // TODO tenant
       // Here a new tenant is sent to tenant manager
       // POST /tenant
+      // Send new tenant to tenant manager
+      console.log('call addTenant');
+      const response = Meteor.call('addTenant', tenant);
 
-      // Most probably Tenant list needs to be emptied, so new GET is generated
+      // Most probably Tenant list needs to be emptied, which causes new GET to be generated
 
       // Read tenant list
       const tenantList = JSON.parse(Session.get('tenantList'));

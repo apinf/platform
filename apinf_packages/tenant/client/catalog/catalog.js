@@ -46,35 +46,49 @@ Template.tenantCatalog.onCreated(function () {
     console.log('hakuvastaus=', tenants);
 
     console.log('oma alustus');
-    if (!Session.get('tenantList')) {
+    if (Session.get('tenantList')) {
+      console.log('tenant list existed already');
+    } else {
       // Here the complete tenant list will be fetched from Tenant manager
       // For mock purposes just filling the list
       const tenantList = [
         {
+          id: 1123456789,
+          owner_id: 1987654321,
+          tenant_organization: "1111",
           name: 'First tenant',
+          description: 'This is a first class tenant',
           users: [
-            ['Spede', '-', 'Consumer'],
-            ['Simo', 'Provider', '-'],
-            ['Vesku', 'Provider', 'Consumer'],
+            ['123qwe', 'Spede', '-', 'Consumer'],
+            ['223qwe', 'Simo', 'Provider', '-'],
+            ['323qwe', 'Vesku', 'Provider', 'Consumer'],
           ],
         },
         {
+          id: 2123456789,
+          owner_id: 2987654321,
+          tenant_organization: "1111",
           name: 'Second tenant',
+          description: 'This is a second class tenant',
           users: [
-            ['Tupu', 'Provider', '-'],
-            ['Hupu', 'Provider', 'Consumer'],
-            ['Lupu', '-', 'Consumer'],
-            ['Skrupu', '-', 'Consumer'],
+            ['423qwe', 'Tupu', 'Provider', '-'],
+            ['523qwe', 'Hupu', 'Provider', 'Consumer'],
+            ['623qwe', 'Lupu', '-', 'Consumer'],
+            ['723qwe', 'Skrupu', '-', 'Consumer'],
           ],
         },
         {
+          id: 3123456789,
+          owner_id: 31987654321,
+          tenant_organization: "1111",
+          description: 'This is a third class tenant',
           name: 'Third tenant',
           users: [
-            ['Ismo', 'Provider', '-'],
-            ['Asmo', 'Provider', 'Consumer'],
-            ['Osmo', '-', 'Consumer'],
-            ['Atso', 'Provider', 'Consumer'],
-            ['Matso', '-', 'Consumer'],
+            ['a123qwe', 'Ismo', 'Provider', '-'],
+            ['b123qwe', 'Asmo', 'Provider', 'Consumer'],
+            ['c123qwe', 'Osmo', '-', 'Consumer'],
+            ['d123qwe', 'Atso', 'Provider', 'Consumer'],
+            ['e123qwe', 'Matso', '-', 'Consumer'],
           ],
         },
       ];
@@ -82,23 +96,21 @@ Template.tenantCatalog.onCreated(function () {
 
       // Save to localStorage to be used while adding users to tenant
       Session.set('tenantList', JSON.stringify(tenantList));
-    } else {
-      console.log('tenant list existed already');
     }
 
     // Here the complete user list will be fetched from Tenant manager
 
     // For mock purposes we fill the list here ourself
     const completeUserList = [
-      'Håkan',
-      'Luis',
-      'Pär',
-      'Ivan',
-      'Hans',
-      'Pierre',
-      'Väinämöinen',
-      'Jack',
-      'Umberto',
+      ['Håkan', '123456789'],
+      ['Luis', '223456789'],
+      ['Pär', '323456789'],
+      ['Ivan', '423456789'],
+      ['Hans', '523456789'],
+      ['Pierre', '62345689'],
+      ['Väinämöinen', '723456789'],
+      ['Jack', '82356789'],
+      ['Umberto', '92356789'],
     ];
 
     // Save to sessionStorage to be used while adding users to tenant
@@ -269,10 +281,12 @@ Template.tenantCatalog.events({
     // TODO tenant
     // get selected tenant data
     console.log('poistettava tenantti=', tenantList[tenantRemoveIndex]);
+
     // call tenant manager 
     // DELETE /tenants/<tenant-nimi>
 
-    // Most probably the tenant needs to be removed from Session data in order to make list gotten from tenant manager again
+    // Most probably the tenant needs to be removed from Session data in order 
+    // to make list gotten from tenant manager again
     // Remove tenant object from array
     tenantList.splice(tenantRemoveIndex, 1);
 

@@ -12,7 +12,6 @@ import { HTTP } from 'meteor/http';
 import _ from 'lodash';
 
 // Collection imports
-import Apis from '/apinf_packages/apis/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 const getTenantEndpoint = function () {
@@ -25,7 +24,7 @@ const getTenantEndpoint = function () {
 
   // Return URL and token, if they are set
   if (tenantUrl && tenantToken) {
-    // return 
+    // return
     const tenant = {
       endpoint: tenantUrl,
       token: tenantToken,
@@ -51,7 +50,7 @@ Meteor.methods({
       // eslint-disable-next-line new-cap
       check(tenantEndpoint.endpoint, Match.Maybe(String));
       console.log('2 send reqyúest');
-      
+
       try {
         const result = HTTP.get(
           tenantEndpoint.endpoint,
@@ -65,8 +64,64 @@ Meteor.methods({
         // Create a monitoring data
         response.tenantList = result.response;
         response.status = result.statusCode;
+        console.log('3 a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
+        console.log('3 b err=', err);
+        response.status = 400;
+        console.log('3 b nok, response=', response);
+      }
+    }
+
+    console.log('4 response=', response);
+    return response;
+  },
+
+  addTenant (tenant) {
+    console.log('\ntenant=', tenant);
+    check(tenant, Object);
+
+    const response = {};
+    // In case of failure
+    response.status = 400;
+
+    // Fetch tenant endpoint and token
+    const tenantEndpoint = getTenantEndpoint();
+
+    console.log('1 tenant endpoint=', tenantEndpoint);
+    if (tenantEndpoint) {
+      // Make sure endPoint is a String
+      // eslint-disable-next-line new-cap
+      check(tenantEndpoint.endpoint, Match.Maybe(String));
+      console.log('2 send post request');
+
+      // TODO tenant: correct parameters needed
+      const userlist = [{
+        'name': 'Joakim',
+        'roles': ['data-provider', 'data-consumer'],
+      }];
+      
+      try {
+        const result = HTTP.post(
+          tenantEndpoint.endpoint,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${tenantEndpoint.tenantToken}`,
+            },
+            params: {
+              name: tenant.name,
+              description: tenant.description,
+              users: userlist,
+            },
+          }
+        );
+        // Create a monitoring data
+        response.status = result.statusCode;
+        console.log('3 a ok, result=', result);
+        console.log('3 a ok, response=', response);
+      } catch (err) {
+        console.log('3 b err=', err);
         response.status = 400;
         console.log('3 b nok, response=', response);
       }
