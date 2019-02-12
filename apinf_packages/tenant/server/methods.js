@@ -206,13 +206,13 @@ Meteor.methods({
         console.log('3 POST a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log('3 POST b err=', err);
+        console.log(+ new Date(), ' 3 POST b err=', err);
         response.status = 400;
         console.log('3 b nok, response=', response);
       }
     }
 
-    console.log('4 POST response=', response);
+    console.log(+ new Date(), ' 4 POST response=', response);
     return response;
   },
 });

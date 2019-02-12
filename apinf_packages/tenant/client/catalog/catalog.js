@@ -160,20 +160,21 @@ Template.tenantCatalog.onCreated(function () {
 
     // Here the complete user list will be fetched from Tenant manager
     // GET /tenants
-    console.log('haetaan userlist');
+    console.log(+ new Date(), ' haetaan userlist');
     let completeUserList = [];
     // const response = Meteor.call('getUserList');
+    
     try {
       Meteor.call('getUserList', (error, result) => {
         if (result) {
           completeUserList = result.completeUserList;
         }
-        console.log('result=', result);
-        console.log('error=', error);
+        console.log(+ new Date(), 'result=', result);
       });
     } catch (err) {
-    }
-    // console.log('hakuvastaus=', response);
+      console.log('error=', error);
+    } 
+    console.log(+ new Date(), ' hakuvastaus=', completeUserList);
 
     // Save to sessionStorage to be used while adding users to tenant
     Session.set('completeUserList', JSON.stringify(completeUserList));
