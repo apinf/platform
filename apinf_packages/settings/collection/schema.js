@@ -178,7 +178,7 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
-  'tenantIdm.endpoint': {
+  'tenantIdm.basepath': {
     type: String,
     regEx: SimpleSchema.RegEx.Url,
     optional: true,
