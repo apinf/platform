@@ -36,152 +36,38 @@ Template.tenantCatalog.onCreated(function () {
       const pageTitle = TAPi18n.__('tenantCatalogPage_title_organizationsCatalog');
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
+  });
 
+  // Here are tenants fetched from tenant manager
+  instance.autorun(() => {
     console.log('1 tenant-listan alustukseen');
-    // TODO tenant
     // fetch list of tenants from tenant manager
     // GET /tenants
-    console.log('2 haetaan tenantteja');
-    const tenants = Meteor.call('getTenantList');
-    console.log('3 tenant hakuvastaus=', tenants);
+    console.log(+new Date(), '2 haetaan tenantteja');
 
-    console.log('4 oma alustus');
-    if (Session.get('tenantList')) {
-      console.log('5 tenant list existed already');
-    } else {
-      // Here the complete tenant list will be fetched from Tenant manager
-      // For mock purposes just filling the list
-      const tenantList = [
-        {
-          id: 1123456789,
-          owner_id: 1987654321,
-          tenant_organization: '1111',
-          name: 'First tenant',
-          description: 'This is a first class tenant',
-          users: [
-            {
-              id: '123qwe', 
-              name: 'Spede',
-              provider: '-',
-              consumer: 'Consumer',
-            },
-            {
-              id: '223qwe',
-              name: 'Simo',
-              provider: 'Provider',
-              consumer: '-',
-            },
-            {
-              id: '323qwe',
-              name: 'Vesku',
-              provider: 'Provider',
-              consumer: 'Consumer',
-            },
-          ],
-        },
-        {
-          id: 2123456789,
-          owner_id: 2987654321,
-          tenant_organization: '1111',
-          name: 'Second tenant',
-          description: 'This is a second class tenant',
-          users: [
-            {
-              id: '423qwe',
-              name: 'Tupu',
-              provider: 'Provider',
-              consumer: '-',
-            },
-            {
-              id: '523qwe',
-              name: 'Hupu',
-              provider: 'Provider',
-              consumer: 'Consumer',
-            },
-            {
-              id: '623qwe',
-              name: 'Lupu',
-              provider: '-',
-              consumer: 'Consumer',
-            },
-            {
-              id: '723qwe',
-              name: 'Skrupu',
-              provider: '-',
-              consumer: 'Consumer',
-            },
-          ],
-        },
-        {
-          id: 3123456789,
-          owner_id: 31987654321,
-          tenant_organization: '1111',
-          description: 'This is a third class tenant',
-          name: 'Third tenant',
-          users: [
-            {
-              id: 'a123qwe',
-              name: 'Ismo',
-              provider: 'Provider',
-              consumer: '-',
-            },
-            {
-              id: 'b123qwe',
-              name: 'Asmo',
-              provider: 'Provider',
-              consumer: 'Consumer',
-            },
-            {
-              id: 'c123qwe',
-              name: 'Osmo',
-              provider: '-',
-              consumer: 'Consumer',
-            },
-            {
-              id: 'd123qwe',
-              name: 'Atso',
-              provider: 'Provider',
-              consumer: 'Consumer',
-            },
-            {
-              id: 'e123qwe',
-              name: 'Matso',
-              provider: '-',
-              consumer: 'Consumer',
-            },
-          ],
-        },
-      ];
-      console.log('6 tenant-list alustettu=', tenantList);
-
-      // Save to localStorage to be used while adding users to tenant
-      Session.set('7 tenantList', tenantList);
-    }
-
-    // Here the complete user list will be fetched from Tenant manager
     // GET /tenants
-    console.log(+new Date(), ' 1 haetaan userlist');
-    // let completeUserList = [];
-   // const completeUserList = Meteor.call('getUserList');
+    Meteor.call('getTenantList', (error, result) => {
+      if (result) {
+        console.log(+new Date(), ' 3 tenant result=', result);
+        Session.set('tenantList', result.tenantList);
+      }
+      console.log(+new Date(), ' 3 b error=', error);
+    });
+  });
 
-    const completeUserList = Meteor.call('getUserList', (error, result) => {
+  // Here the complete user list will be fetched from Tenant manager
+  instance.autorun(() => {
+    console.log(+new Date(), ' 1 haetaan userlist');
+    
+    // GET /tenant/user
+    Meteor.call('getUserList', (error, result) => {
       if (result) {
         console.log(+new Date(), ' 2 a result=', result);
         
-     //   Session.set('completeUserList', JSON.stringify(result.completeUserList));
         Session.set('completeUserList', result.completeUserList);
-        // return result.completeUserList;
-
       }
       console.log(+new Date(), ' 2 b error=', error);
-
     });
-
- 
-    console.log(+new Date(), ' 3 user list = ', completeUserList);
-
-    // Save to sessionStorage to be used while adding users to tenant
-    // Session.set('completeUserList', JSON.stringify(completeUserList));
   });
 
 
@@ -268,16 +154,16 @@ Template.tenantCatalog.helpers({
     const tenantList = Session.get('tenantList');
     return tenantList;
   },
-  tenants () {
+  tenantsCount () {
     const existingTenants = Session.get('tenantList');
-
+    
     if (existingTenants && existingTenants.length > 0) {
       console.log('löytyi');
-      return true;
+      return existingTenants.length;
     }
     console.log('ei löytynyt');
     // No tenants
-    return false;
+    return 0;
   },
   paginationReady () {
     // Check if pagination subscription is ready
@@ -326,10 +212,6 @@ Template.tenantCatalog.helpers({
 
     // If user isn't loggin then don't allow
     return false;
-  },
-  tenantCount () {
-    // Return organizations count
-    return Template.instance().pagination.totalItems();
   },
 });
 
