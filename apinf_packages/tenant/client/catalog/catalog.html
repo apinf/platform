@@ -32,10 +32,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     {{# if Template.subscriptionsReady }}
      <!-- {{# if paginationReady }} -->
-      {{# if tenants }} 
+      {{# if tenantsCount }} 
         <!-- if viewMode is table, show table -->
         {{# if tableViewMode }}
-          {{> tenantCatalogTable tenantList=tenantList }}
+          {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
         {{/ if }}
         {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
       {{ else }}
