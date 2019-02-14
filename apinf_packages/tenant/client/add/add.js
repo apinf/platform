@@ -14,6 +14,8 @@ Template.tenantForm.events({
   'click #save-tenant': function () {
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
+    } else if ($('#add-tenant-description').val() === '') {
+      sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
       const tenant = {};
       let users = [];
@@ -36,7 +38,7 @@ Template.tenantForm.events({
             id: userdata.id,
             name: userdata.username,
             provider: userdata.provider || '-',
-            consumer: userdata.consumer || '-',
+            customer: userdata.customer || '-',
           };
           return usersRow;
         });
@@ -52,19 +54,24 @@ Template.tenantForm.events({
       // TODO tenant
       // Here a new tenant is sent to tenant manager
       // POST /tenant
-      // Send new tenant to tenant manager
+
       console.log('call addTenant');
-      const response = Meteor.call('addTenant', tenant);
+      // GET /tenant/user
+      Meteor.call('addTenant', tenant, (error, result) => {
+        if (result) {
+          console.log(+new Date(), ' 2 a result=', result);
+        }
+        console.log(+new Date(), ' 2 b error=', error);
+      });      
 
       // Most probably Tenant list needs to be emptied, which causes new GET to be generated
-
 
       // Mock: save new tenant in tenant list
       // Read tenant list
       const tenantList = Session.get('tenantList');
       // Add new tenant object to array
       tenantList.unshift(tenant);
-      // Save to localStorage to be used while adding users to tenant
+      // Save to sessionStorage to be used while adding users to tenant
       Session.set('tenantList', tenantList);
 
       // Close modal
