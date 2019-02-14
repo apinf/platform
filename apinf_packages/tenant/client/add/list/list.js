@@ -27,7 +27,7 @@ Template.tenantUsersList.events({
     // find object to be removed
     const tenantRemoveIndex = tenantUsers.findIndex(user => {
       return user.username === selected.username &&
-             user.consumer === selected.consumer &&
+             user.customer === selected.customer &&
              user.provider === selected.provider;
     });
     // Remove user object from array of tenants

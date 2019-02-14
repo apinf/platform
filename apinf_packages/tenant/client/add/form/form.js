@@ -17,13 +17,13 @@ Template.tenantUserForm.events({
         id: $('#completeUserList option:selected').val(),
         username: $('#completeUserList option:selected').text(),
         provider: $('#userRoleProvider:checked').val() || false,
-        consumer: $('#userRoleConsumer:checked').val() || false,
+        customer: $('#userRoleCustomer:checked').val() || false,
       };
 
       // uncheck fields
       $('#completeUserList option:selected').prop('selected', false);
       $('#userRoleProvider').prop('checked', false);
-      $('#userRoleConsumer').prop('checked', false);
+      $('#userRoleCustomer').prop('checked', false);
 
       let tenantUsers = [];
       // Get possible previous users of tenant

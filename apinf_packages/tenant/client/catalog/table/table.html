@@ -9,13 +9,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <thead>
         <tr>
           <th>
-            Tenants ({{ tenantsCount }})
+            {{_ "tenantCatalogTable_header_tenants" }} ({{ tenantsCount }})
           </th>
           <th>
-            Username & Roles
+            {{_ "tenantCatalogTable_header_username" }}
           </th>
           <th>
-            Action
+            {{_ "tenantCatalogTable_header_action" }}
           </th>
         </tr>
       </thead>
@@ -28,9 +28,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             
           <td style="padding-bottom: 10px;">
             <tr>
-              <th style="padding-left: 10px;">Username</th>
-              <th style="padding-left: 10px;">Provider</th>
-              <th style="padding-left: 10px;">Consumer</th>
+              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_username" }}</th>
+              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_provider" }}</th>
+              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_customer" }}</th>
             </tr>
 
             {{#each user in tenant.users}}
@@ -42,7 +42,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{user.provider}}
               </td>
               <td style="padding-left: 10px;">
-                {{user.consumer}}
+                {{user.customer}}
               </td>
             </tr>
             {{/each}}
@@ -52,14 +52,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     type="button" 
                     class="btn btn-success btn-success-special" 
                     style="margin-top: 1rem;">
-              Edit Tenant
+              {{_ "tenantCatalogTable_button_edit" }}
             </button> 
             <button id="remove-tenant" 
                     type="button" 
                     data-value={{ @index }}
                     class="btn btn-danger btn-danger-special pull-right" 
                     style="margin-top: 1rem;">
-              Remove Tenant
+              {{_ "tenantCatalogTable_button_remove" }}
             </button>
           </td>
         </tr>
