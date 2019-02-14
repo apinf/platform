@@ -29,6 +29,31 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
 
   <div class="container" style="margin-top:20px;">
+    <!-- Show user's tokens -->
+    <p class="help-block">
+      {{_ "tenantCatalogPage_token_title" }} &nbsp;
+
+      <span data-toggle="collapse" data-target="#tenant-token-details" 
+            aria-expanded="false" aria-controls="tenant-token-details">
+        <i class="mdi mdi-chevron-down mdi-18px more-info ">More...</i>
+      </span>
+
+      <div id="tenant-token-details" class="collapse" style="margin-top: 0.5em; color:#6d859e;">
+        <ol>
+          <li>
+            {{_ "tenantCatalogPage_token_details_1" }}
+          </li>
+          <li>
+            {{_ "tenantCatalogPage_token_details_2" }}
+             <span style="font-weight: bold; color: black;">{{ tenantToken }}</span>
+          </li>
+          <li>
+            {{_ "tenantCatalogPage_token_details_3" }}
+            <span style="font-weight: bold; color: black;">{{ tenantRefreshToken }}</span>
+          </li>
+        </ol>
+      </div>
+    </p>
 
     {{# if Template.subscriptionsReady }}
      <!-- {{# if paginationReady }} -->

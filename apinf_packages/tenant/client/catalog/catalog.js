@@ -60,7 +60,7 @@ Template.tenantCatalog.onCreated(function () {
     console.log(+new Date(), ' 1 haetaan userlist');
     
     // GET /tenant/user
-    Meteor.call('getUserList', (error, result) => {
+    Meteor.call('getTenantUserList', (error, result) => {
       if (result) {
         console.log(+new Date(), ' 2 a result=', result);
         
@@ -165,6 +165,26 @@ Template.tenantCatalog.helpers({
     // No tenants
     return 0;
   },
+  tenantToken () {
+    // Get user id
+    const userId = Meteor.userId();
+    const user = Meteor.users.findOne(userId);
+
+    if (user && user.services && user.services.fiware) {
+      return user.services.fiware.accessToken;
+    }
+    return false;
+  },
+  tenantRefreshToken () {
+    // Get user id
+    const userId = Meteor.userId();
+    const user = Meteor.users.findOne(userId);
+
+    if (user && user.services && user.services.fiware) {
+      return user.services.fiware.refreshToken;
+    }
+    return false;
+  },
   paginationReady () {
     // Check if pagination subscription is ready
     return Template.instance().pagination.ready();
@@ -242,5 +262,4 @@ Template.tenantCatalog.events({
     // Save to localStorage to be used while adding users to tenant
     Session.set('tenantList', tenantList);
   },
-
 });
