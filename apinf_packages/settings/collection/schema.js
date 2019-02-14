@@ -186,10 +186,6 @@ Settings.schema = new SimpleSchema({
       placeholder: 'https://tenantservice/tenant',
     },
   },
-  'tenantIdm.accessToken': {
-    type: String,
-    optional: true,
-  },
 });
 
 // Enable translations (i18n)
