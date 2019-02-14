@@ -36,7 +36,7 @@ const getTenantInfo = function () {
 };
 
 Meteor.methods({
-  async getTenantList () {
+  getTenantList () {
     const response = {};
     // In case of failure
     response.status = 400;
@@ -44,39 +44,148 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     const tenantInfo = getTenantInfo();
 
+    console.log('\n ------------ Fetch Tenant list -------------- \n');
     console.log('1 GET tenant info=', tenantInfo);
     if (tenantInfo) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantInfo.basepath, Match.Maybe(String));
-      console.log('2 send GET tenant request');
+      let url = tenantInfo.basepath;
+      url = url.concat('user');
+      console.log(+new Date(), ' 2 send GET tenant request to = ', url);
 
-      const result = HTTP.get(
-        tenantInfo.basepath,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${tenantInfo.tenantToken}`,
+      try {
+        const result = HTTP.get(
+          url,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${tenantInfo.tenantToken}`,
+            },
+          }
+        );
+        // Create a monitoring data
+        response.tenantList = result.response;
+        response.status = result.statusCode;
+        console.log('3 GET a ok, result=', result);
+        console.log('3 a ok, response=', response);
+      } catch (err) {
+        
+        response.tenantList = [
+          {
+            id: 1123456789,
+            owner_id: 1987654321,
+            tenant_organization: '1111',
+            name: 'First tenant',
+            description: 'This is a first class tenant',
+            users: [
+              {
+                id: '123qwe', 
+                name: 'Spede',
+                provider: '-',
+                consumer: 'Consumer',
+              },
+              {
+                id: '223qwe',
+                name: 'Simo',
+                provider: 'Provider',
+                consumer: '-',
+              },
+              {
+                id: '323qwe',
+                name: 'Vesku',
+                provider: 'Provider',
+                consumer: 'Consumer',
+              },
+            ],
           },
-        }
-      );
-      // Create a monitoring data
-      response.tenantList = result.response;
-      response.status = result.statusCode;
-      console.log('3 GET a ok, result=', result);
-      console.log('3 a ok, response=', response);
-
+          {
+            id: 2123456789,
+            owner_id: 2987654321,
+            tenant_organization: '1111',
+            name: 'Second tenant',
+            description: 'This is a second class tenant',
+            users: [
+              {
+                id: '423qwe',
+                name: 'Tupu',
+                provider: 'Provider',
+                consumer: '-',
+              },
+              {
+                id: '523qwe',
+                name: 'Hupu',
+                provider: 'Provider',
+                consumer: 'Consumer',
+              },
+              {
+                id: '623qwe',
+                name: 'Lupu',
+                provider: '-',
+                consumer: 'Consumer',
+              },
+              {
+                id: '723qwe',
+                name: 'Skrupu',
+                provider: '-',
+                consumer: 'Consumer',
+              },
+            ],
+          },
+          {
+            id: 3123456789,
+            owner_id: 31987654321,
+            tenant_organization: '1111',
+            description: 'This is a third class tenant',
+            name: 'Third tenant',
+            users: [
+              {
+                id: 'a123qwe',
+                name: 'Ismo',
+                provider: 'Provider',
+                consumer: '-',
+              },
+              {
+                id: 'b123qwe',
+                name: 'Asmo',
+                provider: 'Provider',
+                consumer: 'Consumer',
+              },
+              {
+                id: 'c123qwe',
+                name: 'Osmo',
+                provider: '-',
+                consumer: 'Consumer',
+              },
+              {
+                id: 'd123qwe',
+                name: 'Atso',
+                provider: 'Provider',
+                consumer: 'Consumer',
+              },
+              {
+                id: 'e123qwe',
+                name: 'Matso',
+                provider: '-',
+                consumer: 'Consumer',
+              },
+            ],
+          },
+        ];
+        
+        console.log('3 b nok, artificial response=', response);
+      }
     }
-
+    
     console.log('4 GET tenant response=', response);
-    return await response;
+    return response;
   },
-
+  
   getUserList () {
     const response = {};
     // In case of failure
     response.status = 400;
-
+    
     // Fetch tenant endpoint and token
     const tenantInfo = getTenantInfo();
 
