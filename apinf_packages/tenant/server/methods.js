@@ -14,19 +14,19 @@ import _ from 'lodash';
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
 
-const getTenantEndpoint = function () {
+const getTenantInfo = function () {
   // Get settings document
   const settings = Settings.findOne();
 
   // Get url and token from settings
-  const tenantUrl = _.get(settings, 'tenantIdm.endpoint');
+  const tenantUrl = _.get(settings, 'tenantIdm.basepath');
   const tenantToken = _.get(settings, 'tenantIdm.accessToken');
 
   // Return URL and token, if they are set
   if (tenantUrl && tenantToken) {
     // return
     const tenant = {
-      endpoint: tenantUrl,
+      basepath: tenantUrl,
       token: tenantToken,
     };
     return tenant;
@@ -36,45 +36,40 @@ const getTenantEndpoint = function () {
 };
 
 Meteor.methods({
-  getTenantList () {
+  async getTenantList () {
     const response = {};
     // In case of failure
     response.status = 400;
 
     // Fetch tenant endpoint and token
-    const tenantEndpoint = getTenantEndpoint();
+    const tenantInfo = getTenantInfo();
 
-    console.log('1 GET tenant endpoint=', tenantEndpoint);
-    if (tenantEndpoint) {
+    console.log('1 GET tenant info=', tenantInfo);
+    if (tenantInfo) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
-      check(tenantEndpoint.endpoint, Match.Maybe(String));
+      check(tenantInfo.basepath, Match.Maybe(String));
       console.log('2 send GET tenant request');
 
-      try {
-        const result = HTTP.get(
-          tenantEndpoint.endpoint,
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${tenantEndpoint.tenantToken}`,
-            },
-          }
-        );
-        // Create a monitoring data
-        response.tenantList = result.response;
-        response.status = result.statusCode;
-        console.log('3 GET a ok, result=', result);
-        console.log('3 a ok, response=', response);
-      } catch (err) {
-        console.log('3 GET b err=', err);
-        response.status = 400;
-        console.log('3 b nok, response=', response);
-      }
+      const result = HTTP.get(
+        tenantInfo.basepath,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${tenantInfo.tenantToken}`,
+          },
+        }
+      );
+      // Create a monitoring data
+      response.tenantList = result.response;
+      response.status = result.statusCode;
+      console.log('3 GET a ok, result=', result);
+      console.log('3 a ok, response=', response);
+
     }
 
     console.log('4 GET tenant response=', response);
-    return response;
+    return await response;
   },
 
   getUserList () {
@@ -83,23 +78,26 @@ Meteor.methods({
     response.status = 400;
 
     // Fetch tenant endpoint and token
-    const tenantEndpoint = getTenantEndpoint();
+    const tenantInfo = getTenantInfo();
 
     // NOTE! Now used tenant endpoint, perhaps needs to be configured later
-    console.log('1 GET userlist endpoint=', tenantEndpoint);
-    if (tenantEndpoint) {
+    console.log('\n ------------ Fetch User list -------------- \n');
+    console.log('1 GET userlist basepath=', tenantInfo);
+    if (tenantInfo) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
-      check(tenantEndpoint.endpoint, Match.Maybe(String));
-      console.log('2 send GET userlist request');
+      check(tenantInfo.basepath, Match.Maybe(String));
+      let url = tenantInfo.basepath;
+      url = url.concat('user');
+      console.log(+new Date(), ' 2 send GET userlist request to = ', url);
 
       try {
         const result = HTTP.get(
-          tenantEndpoint.endpoint,
+          url,
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${tenantEndpoint.tenantToken}`,
+              Authorization: `Bearer ${tenantInfo.tenantToken}`,
             },
           }
         );
@@ -108,6 +106,8 @@ Meteor.methods({
         response.status = result.statusCode;
         console.log('3 GET a ok, result=', result);
         console.log('3 a ok, response=', response);
+
+        // here is needed to deserialize
       } catch (err) {
         console.log('3 GET b err=', err);
 
@@ -115,39 +115,39 @@ Meteor.methods({
         response.completeUserList = [
           {
             id: '123456789',
-            name: 'Håkan',
+            username: 'Håkan',
           },
           {
             id: '223456789',
-            name: 'Luis',
+            username: 'Luis',
           },
           {
             id: '323456789',
-            name: 'Pär',
+            username: 'Pär',
           },
           {
             id: '423456789',
-            name: 'Ivan',
+            username: 'Ivan',
           },
           {
             id: '523456789',
-            name: 'Hans',
+            username: 'Hans',
           },
           {
             id: '62345689',
-            name: 'Pierre',
+            username: 'Pierre',
           },
           {
             id: '723456789',
-            name: 'Väinämöinen',
+            username: 'Väinämöinen',
           },
           {
             id: '82356789',
-            name: 'Jack',
+            username: 'Jack',
           },
           {
             id: '92356789',
-            name: 'Umberto',
+            username: 'Umberto',
           },
         ];
 
@@ -159,6 +159,7 @@ Meteor.methods({
 
     console.log('4 GET userlist response=', response);
     return response;
+
   },
 
 
@@ -171,13 +172,13 @@ Meteor.methods({
     response.status = 400;
 
     // Fetch tenant endpoint and token
-    const tenantEndpoint = getTenantEndpoint();
+    const tenantInfo = getTenantInfo();
 
-    console.log('1 tenant endpoint=', tenantEndpoint);
-    if (tenantEndpoint) {
+    console.log('1 tenant endpoint=', tenantInfo);
+    if (tenantInfo) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
-      check(tenantEndpoint.endpoint, Match.Maybe(String));
+      check(tenantInfo.basepath, Match.Maybe(String));
       console.log('2 send post request');
 
       // TODO tenant: correct parameters needed
@@ -188,11 +189,11 @@ Meteor.methods({
       
       try {
         const result = HTTP.post(
-          tenantEndpoint.endpoint,
+          tenantInfo.basepath,
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: `Bearer ${tenantEndpoint.tenantToken}`,
+              Authorization: `Bearer ${tenantInfo.tenantToken}`,
             },
             params: {
               name: tenant.name,

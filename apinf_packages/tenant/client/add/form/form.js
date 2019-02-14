@@ -28,21 +28,22 @@ Template.tenantUserForm.events({
       let tenantUsers = [];
       // Get possible previous users of tenant
       if (Session.get('tenantUsers')) {
-        tenantUsers = JSON.parse(Session.get('tenantUsers'));
+        tenantUsers = Session.get('tenantUsers');
       }
 
       // Add new user object to array
       tenantUsers.unshift(newUser);
 
       // Save to localStorage to be used while listing users of tenant
-      Session.set('tenantUsers', JSON.stringify(tenantUsers));
+      Session.set('tenantUsers', tenantUsers);
     }
   },
 });
 
 Template.tenantUserForm.helpers({
   completeUserList () {
-    const completeUserList = JSON.parse(Session.get('completeUserList'));
+ //   const completeUserList = JSON.parse(Session.get('completeUserList'));
+    const completeUserList = Session.get('completeUserList');
     return completeUserList;
   },
 });

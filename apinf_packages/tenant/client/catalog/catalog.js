@@ -37,17 +37,17 @@ Template.tenantCatalog.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
 
-    console.log('tenant-listan alustukseen');
+    console.log('1 tenant-listan alustukseen');
     // TODO tenant
     // fetch list of tenants from tenant manager
     // GET /tenants
-    console.log('haetaan tenantteja');
+    console.log('2 haetaan tenantteja');
     const tenants = Meteor.call('getTenantList');
-    console.log('hakuvastaus=', tenants);
+    console.log('3 tenant hakuvastaus=', tenants);
 
-    console.log('oma alustus');
+    console.log('4 oma alustus');
     if (Session.get('tenantList')) {
-      console.log('tenant list existed already');
+      console.log('5 tenant list existed already');
     } else {
       // Here the complete tenant list will be fetched from Tenant manager
       // For mock purposes just filling the list
@@ -152,32 +152,36 @@ Template.tenantCatalog.onCreated(function () {
           ],
         },
       ];
-      console.log('tenant-list alustettu=', tenantList);
+      console.log('6 tenant-list alustettu=', tenantList);
 
       // Save to localStorage to be used while adding users to tenant
-      Session.set('tenantList', JSON.stringify(tenantList));
+      Session.set('7 tenantList', tenantList);
     }
 
     // Here the complete user list will be fetched from Tenant manager
     // GET /tenants
-    console.log(+ new Date(), ' haetaan userlist');
-    let completeUserList = [];
-    // const response = Meteor.call('getUserList');
-    
-    try {
-      Meteor.call('getUserList', (error, result) => {
-        if (result) {
-          completeUserList = result.completeUserList;
-        }
-        console.log(+ new Date(), 'result=', result);
-      });
-    } catch (err) {
-      console.log('error=', error);
-    } 
-    console.log(+ new Date(), ' hakuvastaus=', completeUserList);
+    console.log(+new Date(), ' 1 haetaan userlist');
+    // let completeUserList = [];
+   // const completeUserList = Meteor.call('getUserList');
+
+    const completeUserList = Meteor.call('getUserList', (error, result) => {
+      if (result) {
+        console.log(+new Date(), ' 2 a result=', result);
+        
+     //   Session.set('completeUserList', JSON.stringify(result.completeUserList));
+        Session.set('completeUserList', result.completeUserList);
+        // return result.completeUserList;
+
+      }
+      console.log(+new Date(), ' 2 b error=', error);
+
+    });
+
+ 
+    console.log(+new Date(), ' 3 user list = ', completeUserList);
 
     // Save to sessionStorage to be used while adding users to tenant
-    Session.set('completeUserList', JSON.stringify(completeUserList));
+    // Session.set('completeUserList', JSON.stringify(completeUserList));
   });
 
 
@@ -261,13 +265,13 @@ Template.tenantCatalog.onRendered(function () {
 
 Template.tenantCatalog.helpers({
   tenantList () {
-    const tenantList = JSON.parse(Session.get('tenantList'));
+    const tenantList = Session.get('tenantList');
     return tenantList;
   },
   tenants () {
-    const existingTenants = JSON.parse(Session.get('tenantList'));
+    const existingTenants = Session.get('tenantList');
 
-    if (existingTenants.length > 0) {
+    if (existingTenants && existingTenants.length > 0) {
       console.log('löytyi');
       return true;
     }
@@ -339,7 +343,7 @@ Template.tenantCatalog.events({
     const tenantRemoveIndex = $(event.target).data('value');
 
     // Read tenant list
-    const tenantList = JSON.parse(Session.get('tenantList'));
+    const tenantList = Session.get('tenantList');
 
     // TODO tenant
     // get selected tenant data
@@ -354,7 +358,7 @@ Template.tenantCatalog.events({
     tenantList.splice(tenantRemoveIndex, 1);
 
     // Save to localStorage to be used while adding users to tenant
-    Session.set('tenantList', JSON.stringify(tenantList));
+    Session.set('tenantList', tenantList);
   },
 
 });

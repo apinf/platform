@@ -10,7 +10,7 @@ import { Session } from 'meteor/session';
 Template.tenantUsersList.helpers({
   tenantUsers () {
     // Form list of tenant users
-    const tenantUsers = JSON.parse(Session.get('tenantUsers'));
+    const tenantUsers = Session.get('tenantUsers');
     return tenantUsers;
   },
 });
@@ -21,7 +21,7 @@ Template.tenantUsersList.events({
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
-      tenantUsers = JSON.parse(Session.get('tenantUsers'));
+      tenantUsers = Session.get('tenantUsers');
     }
 
     // find object to be removed
@@ -34,6 +34,6 @@ Template.tenantUsersList.events({
     tenantUsers.splice(tenantRemoveIndex, 1);
 
     // Save to localStorage to be used while listing users of tenant
-    Session.set('tenantUsers', JSON.stringify(tenantUsers));
+    Session.set('tenantUsers', tenantUsers);
   },
 });

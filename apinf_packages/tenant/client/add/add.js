@@ -28,7 +28,7 @@ Template.tenantForm.events({
 
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
-        const tenantUsers = JSON.parse(Session.get('tenantUsers'));
+        const tenantUsers = Session.get('tenantUsers');
         console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list
         users = tenantUsers.map((userdata) => {
@@ -43,7 +43,7 @@ Template.tenantForm.events({
         // Empty the tenant user list
         tenantUsers.splice(0, tenantUsers.length);
         // Remove users from session
-        Session.set('tenantUsers', JSON.stringify(tenantUsers));
+        Session.set('tenantUsers', tenantUsers);
       }
 
       // Add possible users to tenant object
@@ -61,11 +61,11 @@ Template.tenantForm.events({
 
       // Mock: save new tenant in tenant list
       // Read tenant list
-      const tenantList = JSON.parse(Session.get('tenantList'));
+      const tenantList = Session.get('tenantList');
       // Add new tenant object to array
       tenantList.unshift(tenant);
       // Save to localStorage to be used while adding users to tenant
-      Session.set('tenantList', JSON.stringify(tenantList));
+      Session.set('tenantList', tenantList);
 
       // Close modal
       Modal.hide('tenantForm');
@@ -76,7 +76,7 @@ Template.tenantForm.events({
 Template.tenantUserForm.helpers({
   completeUserList () {
     console.log('sessio=(', Session.get('completeUserList'), ')');
-    const completeUserList = JSON.parse(Session.get('completeUserList'));
+    const completeUserList = Session.get('completeUserList');
 
     console.log('parsittuna=(', completeUserList, ')');
     return completeUserList;
