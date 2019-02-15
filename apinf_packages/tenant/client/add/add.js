@@ -37,8 +37,8 @@ Template.tenantForm.events({
           const usersRow = {
             id: userdata.id,
             name: userdata.username,
-            provider: userdata.provider || '-',
-            customer: userdata.customer || '-',
+            provider: userdata.provider || false,
+            customer: userdata.customer || false,
           };
           return usersRow;
         });
@@ -82,10 +82,8 @@ Template.tenantForm.events({
 
 Template.tenantUserForm.helpers({
   completeUserList () {
-    console.log('sessio=(', Session.get('completeUserList'), ')');
-    const completeUserList = Session.get('completeUserList');
-
-    console.log('parsittuna=(', completeUserList, ')');
-    return completeUserList;
+  //  const completeUserList = Session.get('completeUserList');
+  //  return completeUserList;
+    return Session.get('completeUserList');;
   },
 });
