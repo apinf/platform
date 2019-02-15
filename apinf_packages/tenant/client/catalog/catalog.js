@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
@@ -17,7 +18,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
-import Organizations from '/apinf_packages/organizations/collection';
 import Settings from '/apinf_packages/settings/collection';
 
 // Npm packages imports
@@ -37,116 +37,40 @@ Template.tenantCatalog.onCreated(function () {
       DocHead.setTitle(`${branding.siteTitle} - ${pageTitle}`);
     }
   });
-
-  // Here are tenants fetched from tenant manager
-  instance.autorun(() => {
-    console.log('1 tenant-listan alustukseen');
-    // fetch list of tenants from tenant manager
-    // GET /tenants
-    console.log(+new Date(), '2 haetaan tenantteja');
-
-    // GET /tenants
-    Meteor.call('getTenantList', (error, result) => {
-      if (result) {
-        console.log(+new Date(), ' 3 tenant result=', result);
-        Session.set('tenantList', result.tenantList);
-      }
-      console.log(+new Date(), ' 3 b error=', error);
-    });
-  });
-
-  // Here the complete user list will be fetched from Tenant manager
-  instance.autorun(() => {
-    console.log(+new Date(), ' 1 haetaan userlist');
-    
-    // GET /tenant/user
-    Meteor.call('getTenantUserList', (error, result) => {
-      if (result) {
-        console.log(+new Date(), ' 2 a result=', result);
-        
-        Session.set('completeUserList', result.completeUserList);
-      }
-      console.log(+new Date(), ' 2 b error=', error);
-    });
-  });
-
-
-  // Get user id
-  const userId = Meteor.userId();
-
-  // Default sort
-  const defaultSort = { name: 1 };
-
-  // Set initial settings of pagination
-  instance.pagination = new Meteor.Pagination(Organizations, {
-    // Count of cards in catalog
-    perPage: 24,
-    // Set sort by name on default
-    sort: defaultSort,
-  });
-
-  // Watch for changes in the sort settings
-  instance.autorun(() => {
-    // Check URL parameter for sorting
-    const sortByParameter = FlowRouter.getQueryParam('sortBy');
-
-    // Check URL parameter for sort direction
-    const sortDirectionParameter =
-      FlowRouter.getQueryParam('sortDirection') === 'ascending' ? 1 : -1;
-
-    // Create a object for storage sorting parameters
-    let sort = {};
-
-    // Check of existing parameters
-    if (sortByParameter && sortDirectionParameter) {
-      // Get field and direction of sorting
-      sort[sortByParameter] = sortDirectionParameter;
-    } else {
-      // Otherwise get it like default value
-      sort = defaultSort;
-    }
-    // Change sorting
-    instance.pagination.sort(sort);
-  });
-
-  // Watch for changes in the filter settings
-  instance.autorun(() => {
-    // Check URL parameter for filtering
-    const filterByParameter = FlowRouter.getQueryParam('filterBy');
-
-    // Set filter as empty
-    let currentFilters = {};
-
-    // Filtering available for registered users
-    if (userId) {
-      switch (filterByParameter) {
-        case 'all': {
-          // Delete filter for managed organizations
-          delete currentFilters.managerIds;
-          break;
-        }
-        case 'my-organizations': {
-          // Set filter for managed apis
-          currentFilters.managerIds = userId;
-          break;
-        }
-        default: {
-          // Otherwise get it like default value
-          currentFilters = {};
-          break;
-        }
-      }
-    }
-
-    // Filter data
-    instance.pagination.filters(currentFilters);
-  });
 });
 
 // eslint-disable-next-line prefer-arrow-callback
 Template.tenantCatalog.onRendered(function () {
   // Activate tooltips on all relevant items
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
+
+  // Get reference to template instance
+  const instance = this;  
+
+  // Here are tenants fetched from tenant manager
+  instance.autorun(() => {
+    // fetch list of tenants from tenant manager
+    Meteor.call('getTenantList', (error, result) => {
+      if (result) {
+        Session.set('tenantList', result.tenantList);
+      }
+    });
+  });
+
+  // Here the complete user list will be fetched from Tenant manager
+  instance.autorun(() => {
+    // fetch list of users from tenant manager
+    Meteor.call('getTenantUserList', (error, result) => {
+      if (result) {
+        console.log('userlist haku, result=', result);
+        Session.set('completeUserList', result.completeUserList);
+      } else {
+        console.log(' userlist haku, error=', error);
+        sAlert.error(error, { timeout: 'none' });
+      }
+    });
+  });
+
 });
 
 Template.tenantCatalog.helpers({
@@ -158,10 +82,8 @@ Template.tenantCatalog.helpers({
     const existingTenants = Session.get('tenantList');
     
     if (existingTenants && existingTenants.length > 0) {
-      console.log('löytyi');
       return existingTenants.length;
     }
-    console.log('ei löytynyt');
     // No tenants
     return 0;
   },
@@ -184,14 +106,6 @@ Template.tenantCatalog.helpers({
       return user.services.fiware.refreshToken;
     }
     return false;
-  },
-  paginationReady () {
-    // Check if pagination subscription is ready
-    return Template.instance().pagination.ready();
-  },
-  templatePagination () {
-    // Get reference of pagination
-    return Template.instance().pagination;
   },
   gridViewMode () {
     // Get view mode from template
@@ -237,7 +151,12 @@ Template.tenantCatalog.helpers({
 
 Template.tenantCatalog.events({
   'click #add-tenant': function () {
-    // Show tenant form modal
+    // Open modal form for adding tenant
+    Modal.show('tenantForm', { formType: 'insert' });
+  },
+  'click #edit-tenant': function () {
+    console.log('this='. this);
+    // Open modal form for modifying tenant
     Modal.show('tenantForm', { formType: 'insert' });
   },
   'click #remove-tenant': function (event) {

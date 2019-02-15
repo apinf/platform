@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Match, check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
+import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -57,7 +58,7 @@ Meteor.methods({
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
-      tenantUrl = tenantUrl.concat('user');
+      tenantUrl = tenantUrl.concat('tenant');
       console.log(+new Date(), ' 2 send GET tenant request to = ', tenantUrl);
 
       // Get user's tenant access token
@@ -74,12 +75,18 @@ Meteor.methods({
           }
         );
         // Create a monitoring data
-        response.tenantList = result.response;
+
+        console.log('3 tenant GET a ok, result=', result);
+
+        // deserialize JSON
+        const tenantList = JSON.parse(result.content);
+
+        response.tenantList = tenantList;
         response.status = result.statusCode;
-        console.log('3 GET a ok, result=', result);
-        console.log('3 a ok, response=', response);
+        console.log('3 tenant a ok, response=', response);
       } catch (err) {
-        console.log('3 b nok, err=\n', err);
+        console.log('3 tenant b nok, err=\n', err);
+        console.log('err result=', result);
         
         response.tenantList = [
           {
@@ -92,14 +99,14 @@ Meteor.methods({
               {
                 id: '123qwe', 
                 name: 'Spede',
-                provider: '-',
+                provider: false,
                 customer: 'data-customer',
               },
               {
                 id: '223qwe',
                 name: 'Simo',
                 provider: 'data-provider',
-                customer: '-',
+                customer: false,
               },
               {
                 id: '323qwe',
@@ -120,7 +127,7 @@ Meteor.methods({
                 id: '423qwe',
                 name: 'Tupu',
                 provider: 'data-provider',
-                customer: '-',
+                customer: false,
               },
               {
                 id: '523qwe',
@@ -131,13 +138,13 @@ Meteor.methods({
               {
                 id: '623qwe',
                 name: 'Lupu',
-                provider: '-',
+                provider: false,
                 customer: 'data-customer',
               },
               {
                 id: '723qwe',
                 name: 'Skrupu',
-                provider: '-',
+                provider: false,
                 customer: 'data-customer',
               },
             ],
@@ -153,7 +160,7 @@ Meteor.methods({
                 id: 'a123qwe',
                 name: 'Ismo',
                 provider: 'data-provider',
-                customer: '-',
+                customer: false,
               },
               {
                 id: 'b123qwe',
@@ -164,7 +171,7 @@ Meteor.methods({
               {
                 id: 'c123qwe',
                 name: 'Osmo',
-                provider: '-',
+                provider: false,
                 customer: 'data-customer',
               },
               {
@@ -176,14 +183,14 @@ Meteor.methods({
               {
                 id: 'e123qwe',
                 name: 'Matso',
-                provider: '-',
+                provider: false,
                 customer: 'data-customer',
               },
             ],
           },
         ];
         
-        console.log('3 b nok, artificial response=', response);
+        console.log('3 b tenant nok, artificial response=', response);
       }
     }
     
@@ -205,7 +212,7 @@ Meteor.methods({
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
       tenantUrl = tenantUrl.concat('user');
-      console.log(+new Date(), ' 1 send GET userlist request to = \n', tenantUrl);
+      console.log(+new Date(), ' 1 send GET userlist request to=\n', tenantUrl);
 
       // Get user's tenant access token
       const accessToken = getTenantToken(); 
@@ -220,15 +227,29 @@ Meteor.methods({
             },
           }
         );
-        // Create a monitoring data
-        response.completeUserList = result.response;
-        response.status = result.statusCode;
-        console.log('3 GET a ok, result=', result);
-        console.log('3 a ok, response=', response);
 
-        // here is needed to deserialize
+        // console.log('2 user GET a ok, result=\n', result);
+
+        // deserialize JSON from manager
+        const resultFromTenantManager = JSON.parse(result.content);
+        // We need only id and username, so pick them
+        const completeUserList = resultFromTenantManager.users.map(user => {
+          return {
+            id: user.id,
+            username: user.username,
+          };
+        });
+
+        // prepare response
+        response.completeUserList = completeUserList;
+        response.status = result.statusCode;
+
       } catch (err) {
-        console.log('3 GET b err=\n', err);
+        console.log('3 user GET b err=\n', err);
+        console.log('err resp=', err.response.statusCode);
+
+        response.status = err.response.statusCode;
+        response.content = err.response.content;
 
         // For mock purposes we fill the list here ourself
         response.completeUserList = [
@@ -269,10 +290,6 @@ Meteor.methods({
             username: 'Umberto',
           },
         ];
-
-        response.status = 400;
-
-        console.log('3 b nok, response=', response);
       }
     }
 
@@ -283,12 +300,9 @@ Meteor.methods({
 
 
   addTenant (tenant) {
-    console.log('\nPOST tenant =\n', tenant, '\n');
     check(tenant, Object);
 
     const response = {};
-    // In case of failure
-    response.status = 400;
 
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
@@ -298,17 +312,38 @@ Meteor.methods({
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
       tenantUrl = tenantUrl.concat('tenant');
-      console.log('1 send post request', tenantUrl);
 
       // Get user's tenant access token
       const accessToken = getTenantToken(); 
 
-      // TODO tenant: correct parameters needed
-      const userlist = [{
-        name: 'Joakim',
-        roles: ['data-provider', 'data-customer'],
-      }];
-      
+      // Modify parameters according to tenant manager API from object to array
+      const userlist = tenant.users.map(user => {
+        const tenantRoles = [];
+        if (user.provider) {
+          tenantRoles.push('data-provider');
+        }
+        if (user.customer) {
+          tenantRoles.push('data-customer');
+        }
+        return {
+          id: user.id,
+          name: user.name,
+          roles: tenantRoles,
+        };
+      });
+
+      // New tenant object to be sent
+      const tenantToSend = {
+        name: tenant.name,
+        description: tenant.description,
+        users: userlist,
+      };
+
+      // Serialize to JSON
+      const tenantJSON = JSON.stringify(tenantToSend);
+
+      console.log('add tenant userlist=\n', tenantJSON);
+
       try {
         const result = HTTP.post(
           tenantUrl,
@@ -317,11 +352,7 @@ Meteor.methods({
               'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
-            params: {
-              name: tenant.name,
-              description: tenant.description,
-              users: userlist,
-            },
+            content: tenantJSON,
           }
         );
         // Create a monitoring data
@@ -330,7 +361,7 @@ Meteor.methods({
         console.log('3 a ok, response=', response);
       } catch (err) {
         console.log(+ new Date(), ' 3 POST b err=', err);
-        response.status = 400;
+        response.status = result.statusCode;
         console.log('3 b nok, response=', response);
       }
     }
