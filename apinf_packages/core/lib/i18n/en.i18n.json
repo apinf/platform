@@ -1421,7 +1421,7 @@
   "updatePassword_submitButton_text": "Change Password",
   "updatePasswordForm_successMessage": "Password updated.",
   "passwordsMismatch": "Passwords do not match",
-  "tenantCatalog_buttonText_addOrganization": "Add Tenant",
+  "tenantCatalog_buttonText_addTenant": "Add Tenant",
   "tenantCatalog_Title": "Tenants",
   "tenantCatalog_toolbar_filterOptions_myOrganizations": "My tenants",
   "tenantCatalog_toolbar_filterOptions_showAll": "Show all",
