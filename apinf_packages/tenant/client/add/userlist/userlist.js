@@ -17,7 +17,6 @@ Template.tenantUsersList.helpers({
 
 Template.tenantUsersList.events({
   'click .remove-tenant-user': function () {
-    const selected = this;
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {

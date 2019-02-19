@@ -159,6 +159,16 @@ Template.tenantCatalog.helpers({
 
 Template.tenantCatalog.events({
   'click #add-tenant': function () {
+    // Empty possible tenant user list 
+    if (Session.get('tenantUsers')) {
+      const tenantUsers = Session.get('tenantUsers');
+      console.log('tenantUsers=', tenantUsers);
+
+      // Empty the tenant user list
+      tenantUsers.splice(0, tenantUsers.length);
+      // Remove users from session
+      Session.set('tenantUsers', tenantUsers);
+    }    
     // Open modal form for adding tenant
     Modal.show('tenantForm');
   },
@@ -174,6 +184,12 @@ Template.tenantCatalog.events({
     const tenantToModify = tenantList[tenantUpdateIndex];
 
     console.log('editoitava tenantti=', tenantToModify);
+
+    // Get tenant user list from tenant object
+    console.log('tenant usrs=', tenantToModify.users);
+
+    // Save users of tenant in question into tenant users
+    Session.set('tenantUsers', tenantToModify.users);
 
     // Open modal form for modifying tenant
     Modal.show('tenantForm', { tenantToModify });

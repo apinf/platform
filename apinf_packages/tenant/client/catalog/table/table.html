@@ -39,10 +39,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{user.name}}
               </td>
               <td style="padding-left: 10px;">
-                {{user.provider}}
+                {{#if user.provider}}
+                  data-provider
+                {{/if}}
               </td>
               <td style="padding-left: 10px;">
-                {{user.customer}}
+                {{#if user.customer}}
+                  data-customer
+                {{/if}}
               </td>
             </tr>
             {{/each}}
