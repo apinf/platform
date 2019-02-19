@@ -44,6 +44,14 @@ const getTenantInfo = function () {
   return false;
 };
 
+function compare(a,b) {
+  if (a.username < b.username)
+    return -1;
+  if (a.username > b.username)
+    return 1;
+  return 0;
+}
+
 Meteor.methods({
   getTenantList () {
     const response = {};
@@ -239,6 +247,7 @@ Meteor.methods({
           };
         });
 
+        completeUserList.sort(compare);
         // prepare response
         response.completeUserList = completeUserList;
         response.status = result.statusCode;
