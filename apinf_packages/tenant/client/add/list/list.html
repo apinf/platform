@@ -23,15 +23,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <td>{{ username }}</td>
           <td>
             <input type="checkbox" 
+                   checked={{ provider }}
                    id="tenantUserRoleProvider"
-                   name={{ id }}
+                   name=tenantUserRoleProvider
                    value="data-provider"
                    class="tenantUserRoleProvider">
           </td>
           <td>
             <input type="checkbox"
+                   checked={{ customer }}
                    id="tenantUserRoleCustomer"
-                   name={{  id }}
+                   name=tenantUserRoleCustomer
                    value="data-customer"
                    class="tenantUserRoleCustomer">
           </td>

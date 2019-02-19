@@ -26,9 +26,7 @@ Template.tenantUsersList.events({
 
     // find object to be removed
     const tenantRemoveIndex = tenantUsers.findIndex(user => {
-      return user.username === selected.username &&
-             user.customer === selected.customer &&
-             user.provider === selected.provider;
+      return user.id === this.id;
     });
     // Remove user object from array of tenants
     tenantUsers.splice(tenantRemoveIndex, 1);
@@ -36,22 +34,7 @@ Template.tenantUsersList.events({
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
   },
-  'change .tenantUserRoleCustomer': function (event, templateInstance) {
-    const selected = this;
-    console.log('click this=', selected);
-    console.log('event=', event);
-    console.log('templateInstance=', templateInstance);
-
-    let customerStatus = false;
-    if ($('#tenantUserRoleCustomer').is(':checked')) {
-      console.log('customeri päälle');
-      customerStatus = 'data-customer';
-      // Checkbox is checked.
-    } else {
-      console.log('customeri pois päältä');
-        // Checkbox is not checked.
-    }
-
+  'change .tenantUserRoleCustomer': function (event) {
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
@@ -61,48 +44,31 @@ Template.tenantUsersList.events({
     // update user's role, customer
     tenantUsers = tenantUsers.map(user => {
       if (user.id === this.id) {
-        user.customer = customerStatus;
+        user.customer = event.currentTarget.checked ? 'checked' : false;
       }
       return user;
     });
 
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
-
-    console.log('tenantusers=', tenantUsers);
   },
-  'change .tenantUserRoleProvider': function () {
-    const selected = this;
-    console.log('click this=', selected);
-
-    let providerStatus = false;
-    if ($('#tenantUserRoleProvider').is(':checked')) {
-      console.log('provideri päälle');
-      providerStatus = 'data-customer';
-      // Checkbox is checked.
-    } else {
-      console.log('provideri pois päältä');
-        // Checkbox is not checked.
-    }
+  'change .tenantUserRoleProvider': function (event) {
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
       tenantUsers = Session.get('tenantUsers');
     }
 
-    // update user's role, customer
+    // update user's role, provider
     tenantUsers = tenantUsers.map(user => {
       if (user.id === this.id) {
-        user.provider = providerStatus;
+        user.provider = event.currentTarget.checked ? 'checked' : false;
       }
       return user;
     });
 
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
-
-    console.log('tenantusers=', tenantUsers);
-
   },
   
     

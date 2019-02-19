@@ -39,8 +39,8 @@ Template.tenantForm.events({
           const usersRow = {
             id: userdata.id,
             name: userdata.username,
-            provider: userdata.provider || false,
-            customer: userdata.customer || false,
+            provider: userdata.provider === 'checked' ? 'data-provider' : false,
+            customer: userdata.customer === 'checked' ? 'data-customer' : false,
           };
           return usersRow;
         });
