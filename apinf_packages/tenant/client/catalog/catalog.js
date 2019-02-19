@@ -49,16 +49,24 @@ Template.tenantCatalog.onRendered(function () {
 
   // Here are tenants fetched from tenant manager
   instance.autorun(() => {
+    // get possible local tenant list
+
+    // Problem, falls into perpetuum loop here!!!
+
+    let tenantList = Session.get('tenantList');
+
     // fetch list of tenants from tenant manager
     Meteor.call('getTenantList', (error, result) => {
       if (result) {
-        Session.set('tenantList', result.tenantList);
+  //      if (tenantList && tenantList.length > 0) {
+  //        tenantList = tenantList.concat(result.tenantList);
+  //      } else {
+          tenantList = result.tenantList;
+  //      }
+        Session.set('tenantList', tenantList);
       }
     });
-  });
 
-  // Here the complete user list will be fetched from Tenant manager
-  instance.autorun(() => {
     // fetch list of users from tenant manager
     Meteor.call('getTenantUserList', (error, result) => {
       if (result) {
@@ -152,12 +160,23 @@ Template.tenantCatalog.helpers({
 Template.tenantCatalog.events({
   'click #add-tenant': function () {
     // Open modal form for adding tenant
-    Modal.show('tenantForm', { formType: 'insert' });
+    Modal.show('tenantForm');
   },
-  'click #edit-tenant': function () {
-    console.log('this='. this);
+  'click #edit-tenant': function (event) {
+    console.log('event=', event);
+
+    // The button sends the index of tenant to be updated
+    const tenantUpdateIndex = $(event.target).data('value');
+
+    console.log('edit index= ', tenantUpdateIndex);
+    // Read tenant list
+    const tenantList = Session.get('tenantList');
+    const tenantToModify = tenantList[tenantUpdateIndex];
+
+    console.log('editoitava tenantti=', tenantToModify);
+
     // Open modal form for modifying tenant
-    Modal.show('tenantForm', { formType: 'insert' });
+    Modal.show('tenantForm', { tenantToModify });
   },
   'click #remove-tenant': function (event) {
     // The button sends the index of tenant to be removed
@@ -166,6 +185,7 @@ Template.tenantCatalog.events({
     // Read tenant list
     const tenantList = Session.get('tenantList');
 
+    console.log('tenant list=', tenantList);
     // TODO tenant
     // get selected tenant data
     console.log('poistettava tenantti=', tenantList[tenantRemoveIndex]);

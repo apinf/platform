@@ -86,8 +86,7 @@ Meteor.methods({
         console.log('3 tenant a ok, response=', response);
       } catch (err) {
         console.log('3 tenant b nok, err=\n', err);
-        console.log('err result=', result);
-        
+
         response.tenantList = [
           {
             id: 1123456789,
@@ -318,6 +317,7 @@ Meteor.methods({
 
       // Modify parameters according to tenant manager API from object to array
       const userlist = tenant.users.map(user => {
+        console.log('user=', user);
         const tenantRoles = [];
         if (user.provider) {
           tenantRoles.push('data-provider');
@@ -342,7 +342,8 @@ Meteor.methods({
       // Serialize to JSON
       const tenantJSON = JSON.stringify(tenantToSend);
 
-      console.log('add tenant userlist=\n', tenantJSON);
+      console.log('\n ----------------- Add tenant ---------------------\n');
+      console.log('add tenant userlist=\n', JSON.stringify(tenantToSend, null, 2));
 
       try {
         const result = HTTP.post(

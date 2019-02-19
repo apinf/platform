@@ -9,9 +9,11 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
+    console.log('save tenant this=', this)
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -51,31 +53,34 @@ Template.tenantForm.events({
       // Add possible users to tenant object
       tenant.users = users;
 
-      // TODO tenant
-      // Here a new tenant is sent to tenant manager
-      // POST /tenant
+      // Set local tenant list empty
+      let tenantList = [];
 
       console.log('call addTenant');
-      // GET /tenant/user
+      // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
           console.log(+new Date(), ' 2 a result=', result);
+          if (Response.statusCode === 201) {
+            // New tenant successfully added on manager side, empty local list
+            tenantList = [];
+          } else {
+            // Tenant addition failure on manager side, save new tenant object to local array
+            tenantList.unshift(tenant);
+          }
+        } else {
+          console.log(+new Date(), ' 2 b error=', error);
+          // Tenant addition failure on manager side, save new tenant object to local array
+          tenantList.unshift(tenant);
         }
-        console.log(+new Date(), ' 2 b error=', error);
       });      
 
-      // Most probably Tenant list needs to be emptied, which causes new GET to be generated
-
-      // Mock: save new tenant in tenant list
-      // Read tenant list
-      const tenantList = Session.get('tenantList');
-      // Add new tenant object to array
-      tenantList.unshift(tenant);
       // Save to sessionStorage to be used while adding users to tenant
       Session.set('tenantList', tenantList);
 
       // Close modal
       Modal.hide('tenantForm');
+
     }
   },
 });

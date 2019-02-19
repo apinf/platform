@@ -36,4 +36,74 @@ Template.tenantUsersList.events({
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
   },
+  'change .tenantUserRoleCustomer': function (event, templateInstance) {
+    const selected = this;
+    console.log('click this=', selected);
+    console.log('event=', event);
+    console.log('templateInstance=', templateInstance);
+
+    let customerStatus = false;
+    if ($('#tenantUserRoleCustomer').is(':checked')) {
+      console.log('customeri päälle');
+      customerStatus = 'data-customer';
+      // Checkbox is checked.
+    } else {
+      console.log('customeri pois päältä');
+        // Checkbox is not checked.
+    }
+
+    let tenantUsers = [];
+    // Get possible previous users of tenant
+    if (Session.get('tenantUsers')) {
+      tenantUsers = Session.get('tenantUsers');
+    }
+
+    // update user's role, customer
+    tenantUsers = tenantUsers.map(user => {
+      if (user.id === this.id) {
+        user.customer = customerStatus;
+      }
+      return user;
+    });
+
+    // Save to localStorage to be used while listing users of tenant
+    Session.set('tenantUsers', tenantUsers);
+
+    console.log('tenantusers=', tenantUsers);
+  },
+  'change .tenantUserRoleProvider': function () {
+    const selected = this;
+    console.log('click this=', selected);
+
+    let providerStatus = false;
+    if ($('#tenantUserRoleProvider').is(':checked')) {
+      console.log('provideri päälle');
+      providerStatus = 'data-customer';
+      // Checkbox is checked.
+    } else {
+      console.log('provideri pois päältä');
+        // Checkbox is not checked.
+    }
+    let tenantUsers = [];
+    // Get possible previous users of tenant
+    if (Session.get('tenantUsers')) {
+      tenantUsers = Session.get('tenantUsers');
+    }
+
+    // update user's role, customer
+    tenantUsers = tenantUsers.map(user => {
+      if (user.id === this.id) {
+        user.provider = providerStatus;
+      }
+      return user;
+    });
+
+    // Save to localStorage to be used while listing users of tenant
+    Session.set('tenantUsers', tenantUsers);
+
+    console.log('tenantusers=', tenantUsers);
+
+  },
+  
+    
 });

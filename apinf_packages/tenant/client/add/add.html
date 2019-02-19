@@ -21,7 +21,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "tenantForm_title" }}
             </h2>
           </div>
-
+{{ tenantToModify }}
           <div itemscope itemtype="http://schema.org/Organization">
             <!-- body -->
             <div class="modal-body">
@@ -34,7 +34,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                              id="add-tenant-name"
                              required=""
                              data-schema-key="name"
-                             class="form-control">
+                             class="form-control"
+                             value={{ tenantToModify.name }}>
                       <span class="help-block"></span>
                   </div>
                 </span> 
@@ -47,7 +48,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                                 id="add-tenant-description"
                                 required=""
                                 data-schema-key="description"
-                                class="form-control"></textarea>
+                                class="form-control">{{ tenantToModify.description }}</textarea>
                       <span class="help-block"></span>
                   </div>
                 </span>                
@@ -57,7 +58,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
                 <hr>
                 <div>
-                  {{> tenantUsersList }}
+                  {{> tenantUsersList tenantUsers=tenantToModify.users }}
                 </div>
               </fieldset>
             </div>
