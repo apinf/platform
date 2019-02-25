@@ -5,10 +5,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="tenantUserForm">
   <h3 style="font-size:16px; margin-top:0;">
-    Add new user for tenant
+    {{_ "tenantUserForm_title_addUser" }}
   </h3>
   <p style="color:#6d859e;">
-    Select user and give roles
+    {{_ "tenantUserForm_help_addUser" }}
   </p>
 
   <fieldset>
@@ -25,7 +25,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <span class="help-block"></span>
   </fieldset>
 
-  <button type="button" class="btn btn-primary" id="addTenantUser">
+  <button type="button" class="btn btn-primary" id="addUserToTenant">
     {{_ "tenantUserForm_addButton_text" }}
   </button>
   
