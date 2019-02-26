@@ -33,7 +33,7 @@
 1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/platform)
-4. Run `npm install`
+4. Run `meteor npm install` - using meteor instead npm makes sure the same npm is used that comes with meteor distribution
 5. Type `meteor` in the project directory
 
 ## With Docker
