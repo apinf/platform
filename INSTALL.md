@@ -28,6 +28,11 @@
 
 # Installation
 
+## Note on migration
+We are in the process of updating meteor version from 1.5.2 to 1.8. If you need to update the installation which is based on Meteor 1.5.2 to version which uses Meteor 1.8, you need to run Mongo migration. More information here: https://docs.mongodb.com/manual/release-notes/3.6-upgrade-standalone/
+
+The issue is that new version of Mongo which comes with Meteor version 1.8 has new database engine; Procedure is to 1) mongo dump 2) upgrade to version with meteor 1.8 3)meteor reset 4) mongo restore 
+
 ## From Source Code
 
 1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
