@@ -33,6 +33,9 @@ We are in the process of updating meteor version from 1.5.2 to 1.8. If you need 
 
 The issue is that new version of Mongo which comes with Meteor version 1.8 has new database engine; Procedure is to 1) mongo dump 2) upgrade to version with meteor 1.8 3)meteor reset 4) mongo restore 
 
+## Note on different Umbrella versions
+We have branched the NREL/api-umbrella: https://github.com/apinf/api-umbrella APInf fork; We have removed mongodb from the umbrella image. You should deploy mongo in another container/machine and configure umbrella to use that external instance of mongo.
+
 ## From Source Code
 
 1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
