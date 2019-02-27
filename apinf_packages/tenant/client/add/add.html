@@ -18,30 +18,40 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               <span aria-hidden="true">&times;</span>
             </button>
             <h2 class="modal-title" id="tenantFormModalLabel">
-              {{_ "tenantForm_title" }}
+              {{# if tenantToModify }}
+                {{_ "tenantForm_title_modify" }}
+              {{ else }}
+                {{_ "tenantForm_title_add" }}
+              {{/ if }}
             </h2>
           </div>
           <div itemscope itemtype="http://schema.org/Organization">
             <!-- body -->
             <div class="modal-body">
               <fieldset>
+
+              {{# if tenantToModify }}
+                <span style="font-weight: bold;">{{_ "tenantForm_tenantName" }}</span><br />
+                <span style="padding-left: 12px;">{{ tenantToModify.name }}</span><br />
+              {{ else }}
                 <span itemprop="tenantName">
                   <div class="form-group" data-required="true">
-                    <label for="add-tenant-name" class="control-label">Tenant name</label>
-                      <input type="text"
-                             name="name"
-                             id="add-tenant-name"
-                             required=""
-                             data-schema-key="name"
-                             class="form-control"
-                             value={{ tenantToModify.name }}>
-                      <span class="help-block"></span>
+                    <label for="add-tenant-name" class="control-label">{{_ "tenantForm_tenantName" }}</label>
+                    <input type="text"
+                           name="name"
+                           id="add-tenant-name"
+                           required=""
+                           data-schema-key="name"
+                           class="form-control"
+                           value={{ tenantToModify.name }}>
+                    <span class="help-block"></span>
                   </div>
                 </span> 
+              {{/ if }}
 
                 <span itemprop="tenantDescription">
                   <div class="form-group" data-required="true">
-                    <label for="add-tenant-description" class="control-label">Tenant description</label>
+                    <label for="add-tenant-description" class="control-label">{{_ "tenantForm_tenantDescription" }}</label>
                       <textarea name="description"
                                 placeholder="Tell about your tenant"
                                 id="add-tenant-description"
@@ -65,7 +75,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- footer -->
           <div class="modal-footer">
             <button type="submit" class="btn btn-success" id="save-tenant">
-              {{_ "tenantForm_title" }}
+              {{# if tenantToModify }}
+                {{_ "tenantForm_title_modify" }}
+              {{ else }}
+                {{_ "tenantForm_title_add" }}
+              {{/ if }}
             </button>
           </div>
 

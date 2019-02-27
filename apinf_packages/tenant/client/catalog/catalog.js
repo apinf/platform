@@ -199,22 +199,35 @@ Template.tenantCatalog.events({
     const tenantRemoveIndex = $(event.target).data('value');
 
     // Read tenant list
-    const tenantList = Session.get('tenantList');
+    let tenantList = Session.get('tenantList');
 
-    console.log('tenant list=', tenantList);
-    // TODO tenant
     // get selected tenant data
-    console.log('poistettava tenantti=', tenantList[tenantRemoveIndex]);
+    const tenantToRemove = tenantList[tenantRemoveIndex];
+    console.log('poistettava tenantti=', tenantToRemove);
 
-    // call tenant manager 
-    // DELETE /tenants/<tenant-nimi>
+    // TODO when Fiware implements the DELETE method, this might need revision
+    
+    // DELETE /tenant
+    Meteor.call('deleteTenant', tenantToRemove, (error, result) => {
+      if (result) {
+        console.log(+new Date(), ' 2 a result=', result);
+        if (result.status === 204) {
 
-    // Most probably the tenant needs to be removed from Session data in order 
-    // to make list gotten from tenant manager again
-    // Remove tenant object from array
-    tenantList.splice(tenantRemoveIndex, 1);
-
-    // Save to localStorage to be used while adding users to tenant
-    Session.set('tenantList', tenantList);
+          // New tenant successfully added on manager side, empty local list
+          tenantList = [];
+          // Save to sessionStorage to be used while adding users to tenant
+          Session.set('tenantList', tenantList);
+        } else {
+          // Tenant addition failure on manager side, save new tenant object to local array
+          const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
+          sAlert.error(errorMessage, { timeout: 'none' });
+        }
+      } else {
+        console.log(+new Date(), ' 2 b error=', error);
+        // Tenant addition failure on manager side, save new tenant object to local array
+        const errorMessage = `Tenant removal failed!  (${error}).`;
+        sAlert.error(errorMessage, { timeout: 'none' });
+      }
+    });  
   },
 });

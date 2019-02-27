@@ -9,7 +9,6 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
-import { FlowRouter } from 'meteor/kadira:flow-router';
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
@@ -20,67 +19,69 @@ Template.tenantForm.events({
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
       const tenant = {};
-      let users = [];
+      tenant.users = [];
 
       tenant.name = $('#add-tenant-name').val();
-      // Empty tenant name field
-      $('#add-tenant-name').val('');
-
       tenant.description = $('#add-tenant-description').val();
-      // Empty tenant name field
-      $('#add-tenant-description').val('');
 
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
         const tenantUsers = Session.get('tenantUsers');
         console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list
-        users = tenantUsers.map((userdata) => {
+        tenant.users = tenantUsers.map((userdata) => {
           const usersRow = {
             id: userdata.id,
-            name: userdata.username,
+            name: userdata.name,
             provider: userdata.provider === 'checked' ? 'data-provider' : false,
             customer: userdata.customer === 'checked' ? 'data-customer' : false,
           };
           return usersRow;
         });
-        // Empty the tenant user list
-        tenantUsers.splice(0, tenantUsers.length);
-        // Remove users from session
-        Session.set('tenantUsers', tenantUsers);
       }
-
-      // Add possible users to tenant object
-      tenant.users = users;
-
+      
       // Set local tenant list empty
       let tenantList = [];
-
+      
       console.log('call addTenant');
       // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
           console.log(+new Date(), ' 2 a result=', result);
-          if (Response.statusCode === 201) {
+          if (result.status === 201) {
+            // In successful case we can empty the input fields
+            
+            // Empty the tenant user list
+            tenantUsers.splice(0, tenantUsers.length);
+            // Remove users from session
+            Session.set('tenantUsers', tenantUsers);
+
+            // Empty tenant name field
+            $('#add-tenant-name').val('');
+            // Empty tenant description field
+            $('#add-tenant-description').val('');
+
             // New tenant successfully added on manager side, empty local list
             tenantList = [];
+            // Save to sessionStorage to be used while adding users to tenant
+            Session.set('tenantList', tenantList);
+
+            // Close modal
+            Modal.hide('tenantForm');
           } else {
             // Tenant addition failure on manager side, save new tenant object to local array
-            tenantList.unshift(tenant);
+            const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
+            sAlert.error(errorMessage, { timeout: 'none' });
+            // tenantList.unshift(tenant);
           }
         } else {
           console.log(+new Date(), ' 2 b error=', error);
           // Tenant addition failure on manager side, save new tenant object to local array
-          tenantList.unshift(tenant);
+          const errorMessage = `Tenant operation failed!  (${error}).`;
+          sAlert.error(errorMessage, { timeout: 'none' });
+          // tenantList.unshift(tenant);
         }
-      });      
-
-      // Save to sessionStorage to be used while adding users to tenant
-      Session.set('tenantList', tenantList);
-
-      // Close modal
-      Modal.hide('tenantForm');
-
+      });  
     }
   },
 });

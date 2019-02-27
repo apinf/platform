@@ -90,6 +90,33 @@ Meteor.methods({
         const tenantList = JSON.parse(result.content);
 
         response.tenantList = tenantList;
+
+      // Modify parameters according to tenant manager API from object to array
+      response.tenantList = tenantList.map(tenant => {
+        console.log('tenant=', tenant);
+
+        const convertedUserList = tenant.users.map(user => {
+          // Return converted user list
+          return {
+            id: user.id,
+            name: user.name,
+            provider: user.roles.includes('data-provider') ? 'checked' : false,
+            customer: user.roles.includes('data-customer') ? 'checked' : false,
+          };
+        });
+
+
+        // Return tenant
+        return {
+          id: tenant.id,
+          name: tenant.name,
+          description: tenant.description,
+          users: convertedUserList,
+        };
+      });
+
+
+
         response.status = result.statusCode;
         console.log('3 tenant a ok, response=', response);
       } catch (err) {
@@ -235,8 +262,6 @@ Meteor.methods({
           }
         );
 
-        // console.log('2 user GET a ok, result=\n', result);
-
         // deserialize JSON from manager
         const resultFromTenantManager = JSON.parse(result.content);
         // We need only id and username, so pick them
@@ -306,7 +331,6 @@ Meteor.methods({
 
   },
 
-
   addTenant (tenant) {
     check(tenant, Object);
 
@@ -324,9 +348,8 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken(); 
 
-      // Modify parameters according to tenant manager API from object to array
+      // Convert parameters to array in tenant manager API from internal object
       const userlist = tenant.users.map(user => {
-        console.log('user=', user);
         const tenantRoles = [];
         if (user.provider) {
           tenantRoles.push('data-provider');
@@ -370,13 +393,78 @@ Meteor.methods({
         console.log('3 POST a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
+
         console.log(+ new Date(), ' 3 POST b err=', err);
-        response.status = result.statusCode;
+        response.status = err.response.statusCode || 500;
+        response.content = err.response.content || err.error;
         console.log('3 b nok, response=', response);
+
+        // Return error object
+        throw new Meteor.Error(err.message);
       }
     }
 
     console.log(+ new Date(), ' 4 POST response=', response);
     return response;
   },
+
+  deleteTenant (tenant) {
+    check(tenant, Object);
+
+    const response = {};
+
+    // Fetch tenant endpoint and token
+    let tenantUrl = getTenantInfo();
+
+    if (tenantUrl) {
+      // Make sure endPoint is a String
+      // eslint-disable-next-line new-cap
+      check(tenantUrl, Match.Maybe(String));
+      tenantUrl = tenantUrl.concat('tenant');
+
+      // Get user's tenant access token
+      const accessToken = getTenantToken(); 
+
+      // New tenant object to be sent
+      const payLoad = {
+        id: tenant.id,
+      };
+
+      // Serialize to JSON
+      const payLoadToSend = JSON.stringify(payLoad);
+
+      console.log('\n ----------------- Delete tenant ---------------------\n');
+      console.log('delete tenant id=\n', JSON.stringify(payLoad, null, 2));
+
+      try {
+        const result = HTTP.del(
+          tenantUrl,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+            content: payLoadToSend,
+          }
+        );
+        // Create a monitoring data
+        response.status = result.statusCode;
+        console.log('3 DELETE a ok, result=', result);
+        console.log('3 a ok, response=', response);
+      } catch (err) {
+
+        console.log(+ new Date(), ' 3 DELETE b err=', err);
+        response.status = err.response.statusCode;
+        response.content = err.response.content;
+        console.log('3 b nok, response=', response);
+
+        // Return error object
+        throw new Meteor.Error(err.message);
+      }
+    }
+
+    console.log(+ new Date(), ' 4 DELETE response=', response);
+    return response;
+  },
+
 });

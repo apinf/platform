@@ -9,21 +9,19 @@ import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.tenantUserForm.events({
-  'click #addTenantUser': function () {
+  'click #addUserToTenant': function () {
     if ($('#completeUserList')[0].selectedIndex < 0) {
       sAlert.error('You must select a user!', { timeout: 'none' });
     } else {
       const newUser = {
         id: $('#completeUserList option:selected').val(),
-        username: $('#completeUserList option:selected').text(),
-        provider: $('#userRoleProvider:checked').val() || false,
-        customer: $('#userRoleCustomer:checked').val() || false,
+        name: $('#completeUserList option:selected').text(),
+        provider: false,
+        customer: false,
       };
 
-      // uncheck fields
+      // unselect username
       $('#completeUserList option:selected').prop('selected', false);
-      $('#userRoleProvider').prop('checked', false);
-      $('#userRoleCustomer').prop('checked', false);
 
       let tenantUsers = [];
       // Get possible previous users of tenant
@@ -32,7 +30,7 @@ Template.tenantUserForm.events({
       }
 
       // Add new user object to array
-      tenantUsers.unshift(newUser);
+      tenantUsers.push(newUser);
 
       // Save to localStorage to be used while listing users of tenant
       Session.set('tenantUsers', tenantUsers);
