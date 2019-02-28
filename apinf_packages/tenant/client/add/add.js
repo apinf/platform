@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
@@ -19,14 +20,14 @@ Template.tenantForm.events({
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
       const tenant = {};
-      tenant.users = [];
+      let tenantUsers = [];
 
       tenant.name = $('#add-tenant-name').val();
       tenant.description = $('#add-tenant-description').val();
 
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
-        const tenantUsers = Session.get('tenantUsers');
+        tenantUsers = Session.get('tenantUsers');
         console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list
         tenant.users = tenantUsers.map((userdata) => {
@@ -68,6 +69,13 @@ Template.tenantForm.events({
 
             // Close modal
             Modal.hide('tenantForm');
+
+            // Get success message translation
+            let message = TAPi18n.__('tenantForm_addTenant_Success_Message');
+            message = message.concat(tenant.name);
+
+            // Alert user of success
+            sAlert.success(message);
           } else {
             // Tenant addition failure on manager side, save new tenant object to local array
             const errorMessage = `Tenant manager error! Returns code (${result.status}).`;

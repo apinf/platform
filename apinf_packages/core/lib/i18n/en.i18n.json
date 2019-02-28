@@ -1444,6 +1444,7 @@
   "tenantForm_title_modify": "Modify Tenant",
   "tenantForm_tenantDescription": "Tenant description",
   "tenantForm_tenantName": "Tenant name",
+  "tenantForm_addTenant_Success_Message": "Tenant added successfully: ",
   "tenantUserForm_addButton_text": "Add user for Tenant",
   "tenantUserForm_help_addUser": "Select user and give roles",
   "tenantUserForm_title_addUser": "Add a new user for tenant",
