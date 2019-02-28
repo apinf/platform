@@ -15,7 +15,6 @@ import _ from 'lodash';
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
 
-
 const getTenantToken = function () {
   // Get user
   const userId = Meteor.userId();
@@ -27,7 +26,6 @@ const getTenantToken = function () {
   }
   return tenantToken;
 };
-
 
 const getTenantInfo = function () {
   // Get settings document
@@ -44,11 +42,9 @@ const getTenantInfo = function () {
   return false;
 };
 
-function compare(a,b) {
-  if (a.username < b.username)
-    return -1;
-  if (a.username > b.username)
-    return 1;
+function compare (a,b) {
+  if (a.username < b.username) return -1;
+  if (a.username > b.username) return 1;
   return 0;
 }
 
@@ -91,8 +87,8 @@ Meteor.methods({
 
         response.tenantList = tenantList;
 
-      // Modify parameters according to tenant manager API from object to array
-      response.tenantList = tenantList.map(tenant => {
+        // Modify parameters according to tenant manager API from object to array
+        response.tenantList = tenantList.map(tenant => {
         console.log('tenant=', tenant);
 
         const convertedUserList = tenant.users.map(user => {
@@ -105,7 +101,6 @@ Meteor.methods({
           };
         });
 
-
         // Return tenant
         return {
           id: tenant.id,
@@ -114,8 +109,6 @@ Meteor.methods({
           users: convertedUserList,
         };
       });
-
-
 
         response.status = result.statusCode;
         console.log('3 tenant a ok, response=', response);
@@ -131,7 +124,7 @@ Meteor.methods({
             description: 'This is a first class tenant',
             users: [
               {
-                id: '123qwe', 
+                id: '123qwe',
                 name: 'Spede',
                 provider: false,
                 customer: 'checked',
@@ -223,15 +216,15 @@ Meteor.methods({
             ],
           },
         ];
-        
+
         console.log('3 b tenant nok, artificial response=', response);
       }
     }
-    
+
     console.log('4 GET tenant response=', response);
     return response;
   },
- 
+
   getTenantUserList () {
     const response = {};
     // In case of failure
@@ -249,7 +242,7 @@ Meteor.methods({
       console.log(+new Date(), ' 1 send GET userlist request to=\n', tenantUrl);
 
       // Get user's tenant access token
-      const accessToken = getTenantToken(); 
+      const accessToken = getTenantToken();
 
       try {
         const result = HTTP.get(
@@ -276,7 +269,6 @@ Meteor.methods({
         // prepare response
         response.completeUserList = completeUserList;
         response.status = result.statusCode;
-
       } catch (err) {
         console.log('3 user GET b err=\n', err);
         console.log('err resp=', err.response.statusCode);
@@ -328,7 +320,6 @@ Meteor.methods({
 
     console.log('4 GET userlist response=', response);
     return response;
-
   },
 
   addTenant (tenant) {
@@ -346,7 +337,7 @@ Meteor.methods({
       tenantUrl = tenantUrl.concat('tenant');
 
       // Get user's tenant access token
-      const accessToken = getTenantToken(); 
+      const accessToken = getTenantToken();
 
       // Convert parameters to array in tenant manager API from internal object
       const userlist = tenant.users.map(user => {
@@ -393,8 +384,7 @@ Meteor.methods({
         console.log('3 POST a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-
-        console.log(+ new Date(), ' 3 POST b err=', err);
+        console.log(+new Date(), ' 3 POST b err=', err);
         response.status = err.response.statusCode || 500;
         response.content = err.response.content || err.error;
         console.log('3 b nok, response=', response);
@@ -404,7 +394,7 @@ Meteor.methods({
       }
     }
 
-    console.log(+ new Date(), ' 4 POST response=', response);
+    console.log(+new Date(), ' 4 POST response=', response);
     return response;
   },
 
@@ -423,7 +413,7 @@ Meteor.methods({
       tenantUrl = tenantUrl.concat('tenant');
 
       // Get user's tenant access token
-      const accessToken = getTenantToken(); 
+      const accessToken = getTenantToken();
 
       // New tenant object to be sent
       const payLoad = {
@@ -452,8 +442,7 @@ Meteor.methods({
         console.log('3 DELETE a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-
-        console.log(+ new Date(), ' 3 DELETE b err=', err);
+        console.log(+new Date(), ' 3 DELETE b err=', err);
         response.status = err.response.statusCode;
         response.content = err.response.content;
         console.log('3 b nok, response=', response);
@@ -463,7 +452,7 @@ Meteor.methods({
       }
     }
 
-    console.log(+ new Date(), ' 4 DELETE response=', response);
+    console.log(+new Date(), ' 4 DELETE response=', response);
     return response;
   },
 

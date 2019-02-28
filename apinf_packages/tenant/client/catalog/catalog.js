@@ -46,7 +46,7 @@ Template.tenantCatalog.onRendered(function () {
   $('.toolbar-tooltip').tooltip({ placement: 'bottom' });
 
   // Get reference to template instance
-  const instance = this;  
+  const instance = this;
 
   // Here are tenants fetched from tenant manager
   instance.autorun(() => {
@@ -62,7 +62,7 @@ Template.tenantCatalog.onRendered(function () {
   //      if (tenantList && tenantList.length > 0) {
   //        tenantList = tenantList.concat(result.tenantList);
   //      } else {
-          tenantList = result.tenantList;
+        tenantList = result.tenantList;
   //      }
         Session.set('tenantList', tenantList);
       }
@@ -79,7 +79,6 @@ Template.tenantCatalog.onRendered(function () {
       }
     });
   });
-
 });
 
 Template.tenantCatalog.helpers({
@@ -89,7 +88,7 @@ Template.tenantCatalog.helpers({
   },
   tenantsCount () {
     const existingTenants = Session.get('tenantList');
-    
+
     if (existingTenants && existingTenants.length > 0) {
       return existingTenants.length;
     }
@@ -112,7 +111,6 @@ Template.tenantCatalog.helpers({
     const user = Meteor.users.findOne(userId);
 
     if (user && user.services && user.services.fiware) {
-
       // Get current language
       const language = TAPi18n.getLanguage();
       // Return timestamp
@@ -176,7 +174,7 @@ Template.tenantCatalog.helpers({
 
 Template.tenantCatalog.events({
   'click #add-tenant': function () {
-    // Empty possible tenant user list 
+    // Empty possible tenant user list
     if (Session.get('tenantUsers')) {
       const tenantUsers = Session.get('tenantUsers');
       console.log('tenantUsers=', tenantUsers);
@@ -185,7 +183,7 @@ Template.tenantCatalog.events({
       tenantUsers.splice(0, tenantUsers.length);
       // Remove users from session
       Session.set('tenantUsers', tenantUsers);
-    }    
+    }
     // Open modal form for adding tenant
     Modal.show('tenantForm');
   },
@@ -223,13 +221,12 @@ Template.tenantCatalog.events({
     console.log('poistettava tenantti=', tenantToRemove);
 
     // TODO when Fiware implements the DELETE method, this might need revision
-    
+
     // DELETE /tenant
     Meteor.call('deleteTenant', tenantToRemove, (error, result) => {
       if (result) {
         console.log(+new Date(), ' 2 a result=', result);
         if (result.status === 204) {
-
           // New tenant successfully added on manager side, empty local list
           tenantList = [];
           // Save to sessionStorage to be used while adding users to tenant
@@ -245,10 +242,10 @@ Template.tenantCatalog.events({
         const errorMessage = `Tenant removal failed!  (${error}).`;
         sAlert.error(errorMessage, { timeout: 'none' });
       }
-    });  
+    });
   },
   'click #show-authorization': function () {
     // Open modal form for adding tenant
     Modal.show('authorizationForm');
-  },  
+  },
 });

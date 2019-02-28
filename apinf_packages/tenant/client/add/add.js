@@ -13,7 +13,7 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
-    console.log('save tenant this=', this)
+    console.log('save tenant this=', this);
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -40,10 +40,10 @@ Template.tenantForm.events({
           return usersRow;
         });
       }
-      
+
       // Set local tenant list empty
       let tenantList = [];
-      
+
       console.log('call addTenant');
       // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
@@ -51,7 +51,7 @@ Template.tenantForm.events({
           console.log(+new Date(), ' 2 a result=', result);
           if (result.status === 201) {
             // In successful case we can empty the input fields
-            
+
             // Empty the tenant user list
             tenantUsers.splice(0, tenantUsers.length);
             // Remove users from session
@@ -89,7 +89,7 @@ Template.tenantForm.events({
           sAlert.error(errorMessage, { timeout: 'none' });
           // tenantList.unshift(tenant);
         }
-      });  
+      });
     }
   },
 });
@@ -98,6 +98,6 @@ Template.tenantUserForm.helpers({
   completeUserList () {
   //  const completeUserList = Session.get('completeUserList');
   //  return completeUserList;
-    return Session.get('completeUserList');;
+    return Session.get('completeUserList');
   },
 });

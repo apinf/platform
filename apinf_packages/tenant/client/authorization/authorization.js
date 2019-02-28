@@ -41,7 +41,7 @@ Template.authorizationForm.helpers({
       return {
         expirationTime: moment(user.services.fiware.expiresAt).locale(language),
         expirationEffect: effect,
-      } 
+      };
     }
     return false;
   },
@@ -59,7 +59,7 @@ Template.authorizationForm.helpers({
 
 Template.authorizationForm.events({
   'click #refreshTenantAuthorization': function () {
-    console.log('Here will be auth refresh!')
+    console.log('Here will be auth refresh!');
   },
 
 });
