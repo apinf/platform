@@ -92,12 +92,44 @@ Template.tenantForm.events({
       });
     }
   },
-});
+  'click #update-tenant-description': function () {
+    const thisTenant = this;
+    console.log('update tenant this=', thisTenant);
+    if ($('#add-tenant-description').val() === '') {
+      sAlert.error('Tenant must have a description!', { timeout: 'none' });
+    } else {
+      const tenant = {
+        id: thisTenant.tenantToModify.id,
+        op: 'replace',
+        value: $('#add-tenant-description').val(),
+        path: '/description',
+      };
 
-Template.tenantUserForm.helpers({
-  completeUserList () {
-  //  const completeUserList = Session.get('completeUserList');
-  //  return completeUserList;
-    return Session.get('completeUserList');
+      console.log('update Tenant=', tenant);
+      // PATCH /tenant
+      Meteor.call('updateTenant', tenant, (error, result) => {
+        if (result) {
+          console.log(+new Date(), ' 2 a result=', result);
+          if (result.status === 200) {
+            // Get success message translation
+            const message = TAPi18n.__('tenantForm_description_Success_Message');
+            // Alert user of success
+            sAlert.success(message);
+          } else {
+            // Tenant update failure on manager side
+            let errorMessage = TAPi18n.__('tenantForm_description_Failure_Message');
+            errorMessage = errorMessage.concat(result);
+            sAlert.error(errorMessage, { timeout: 'none' });
+          }
+        } else {
+          console.log(+new Date(), ' 2 b error=', error);
+          // Tenant addition failure on manager side, save new tenant object to local array
+          let errorMessage = TAPi18n.__('tenantForm_description_Failure_Message');
+          errorMessage = errorMessage.concat(error);
+          sAlert.error(errorMessage, { timeout: 'none' });
+        }
+      });
+    }
   },
+
 });

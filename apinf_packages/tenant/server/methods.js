@@ -456,4 +456,69 @@ Meteor.methods({
     return response;
   },
 
+  updateTenant (tenant) {
+    check(tenant, Object);
+
+    const response = {};
+
+    // Fetch tenant endpoint and token
+    let tenantUrl = getTenantInfo();
+
+    if (tenantUrl) {
+      // Make sure endPoint is a String
+      // eslint-disable-next-line new-cap
+      check(tenantUrl, Match.Maybe(String));
+      tenantUrl = tenantUrl.concat('tenant/');
+      tenantUrl = tenantUrl.concat(tenant.id);
+
+      // Get user's tenant access token
+      const accessToken = getTenantToken();
+
+      // New tenant object to be sent
+      let payload = [];
+      const payLoadElement = {
+        op: tenant.op,
+        path: tenant.path,
+        value: tenant.value,
+      };
+
+      payload = payload.push(payLoadElement);
+
+      // Serialize to JSON
+      const payLoadToSend = JSON.stringify(payLoad);
+
+      console.log('\n ----------------- Update tenant ---------------------\n');
+      console.log('tenant tuli =', tenant);
+      console.log('tenant url=', tenantUrl);
+      console.log('update tenant payload=\n', JSON.stringify(payLoad, null, 2));
+
+      try {
+        const result = HTTP.patch(
+          tenantUrl,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+            content: payLoadToSend,
+          }
+        );
+        // Create a monitoring data
+        response.status = result.statusCode;
+        console.log('3 PATCH a ok, result=', result);
+        console.log('3 a ok, response=', response);
+      } catch (err) {
+        console.log(+new Date(), ' 3 PATCH b err=', err);
+        response.status = err.response.statusCode;
+        response.content = err.response.content;
+        console.log('3 b nok, response=', response);
+
+        // Return error object
+        throw new Meteor.Error(err.message);
+      }
+    }
+
+    console.log(+new Date(), ' 4 PATCH response=', response);
+    return response;
+  },
 });
