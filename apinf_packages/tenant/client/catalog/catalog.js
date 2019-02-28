@@ -15,6 +15,7 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { Roles } from 'meteor/alanning:roles';
 import { TAPi18n } from 'meteor/tap:i18n';
+import moment from 'moment';
 
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
@@ -102,6 +103,22 @@ Template.tenantCatalog.helpers({
 
     if (user && user.services && user.services.fiware) {
       return user.services.fiware.accessToken;
+    }
+    return false;
+  },
+  tenantTokenExpiration () {
+    // Get user id
+    const userId = Meteor.userId();
+    const user = Meteor.users.findOne(userId);
+
+    if (user && user.services && user.services.fiware) {
+
+      // Get current language
+      const language = TAPi18n.getLanguage();
+      // Return timestamp
+      return moment(user.services.fiware.expiresAt).locale(language);
+
+      // return user.services.fiware.expiresAt;
     }
     return false;
   },
@@ -230,4 +247,8 @@ Template.tenantCatalog.events({
       }
     });  
   },
+  'click #show-authorization': function () {
+    // Open modal form for adding tenant
+    Modal.show('authorizationForm');
+  },  
 });
