@@ -12,8 +12,9 @@ import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.tenantForm.events({
-  'click #save-tenant': function () {
+  'click #save-tenant': function (event) {
     console.log('save tenant this=', this);
+    console.log('save tenant event=', event);
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -44,7 +45,7 @@ Template.tenantForm.events({
       // Set local tenant list empty
       let tenantList = [];
 
-      console.log('call addTenant');
+      console.log('call addTenant with =', tenant);
       // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
@@ -131,5 +132,79 @@ Template.tenantForm.events({
       });
     }
   },
+  'click #modify-tenant': function () {
+    const originalTenant = this.tenantToModify;
+    console.log('original tenant=', originalTenant);
+    if ($('#add-tenant-description').val() === '') {
+      sAlert.error('Tenant must have a description!', { timeout: 'none' });
+    } else {
+      // initiate the array for changes
+      let modifyTenantPayload = [];
 
+      console.log('orig tenant=', originalTenant);
+
+      // The changed tenant
+      const modifiedTenant = {
+        name: originalTenant.name,
+        id: originalTenant.id,
+        description: $('#add-tenant-description').val(),
+      };
+
+      // Get possible users in changed tenant
+      if (Session.get('tenantUsers')) {
+        tenantUsers = Session.get('tenantUsers');
+        console.log('tenantUsers=', tenantUsers);
+        // convert user objects to a list
+        modifiedTenant.users = tenantUsers.map((userdata) => {
+          const usersRow = {
+            id: userdata.id,
+            name: userdata.name,
+            provider: userdata.provider,
+            customer: userdata.customer,
+          };
+          return usersRow;
+        });
+      }
+
+      console.log('modified tenant=', modifiedTenant);
+
+      // Any changes in description
+      if (originalTenant.description !== modifiedTenant.description) {
+        const changedDescription = {
+          id: originalTenant.tenantToModify.id,
+          op: 'replace',
+          value: $('#add-tenant-description').val(),
+          path: '/description',
+        };
+        modifyTenantPayload.push(changedDescription);
+      }
+
+
+
+      console.log('update Tenant payload=', tenant);
+      // PATCH /tenant
+      Meteor.call('updateTenantPayload', tenant, (error, result) => {
+        if (result) {
+          console.log(+new Date(), ' 2 a result=', result);
+          if (result.status === 200) {
+            // Get success message translation
+            const message = TAPi18n.__('tenantForm_description_Success_Message');
+            // Alert user of success
+            sAlert.success(message);
+          } else {
+            // Tenant update failure on manager side
+            let errorMessage = TAPi18n.__('tenantForm_description_Failure_Message');
+            errorMessage = errorMessage.concat(result);
+            sAlert.error(errorMessage, { timeout: 'none' });
+          }
+        } else {
+          console.log(+new Date(), ' 2 b error=', error);
+          // Tenant addition failure on manager side, save new tenant object to local array
+          let errorMessage = TAPi18n.__('tenantForm_description_Failure_Message');
+          errorMessage = errorMessage.concat(error);
+          sAlert.error(errorMessage, { timeout: 'none' });
+        }
+      });
+    }
+  },
 });

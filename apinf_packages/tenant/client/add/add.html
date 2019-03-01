@@ -83,13 +83,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
           <!-- footer -->
           <div class="modal-footer">
-            <button type="submit" class="btn btn-success" id="save-tenant">
-              {{# if tenantToModify }}
+            {{# if tenantToModify }}
+              <button type="submit" class="btn btn-success" id="modify-tenant">
                 {{_ "tenantForm_title_modify" }}
-              {{ else }}
+              </button>
+            {{ else }}
+              <button type="submit" class="btn btn-success" id="save-tenant">
                 {{_ "tenantForm_title_add" }}
-              {{/ if }}
-            </button>
+              </button>
+            {{/ if }}
           </div>
 
         </div>

@@ -59,11 +59,8 @@ Template.tenantCatalog.onRendered(function () {
     // fetch list of tenants from tenant manager
     Meteor.call('getTenantList', (error, result) => {
       if (result) {
-  //      if (tenantList && tenantList.length > 0) {
-  //        tenantList = tenantList.concat(result.tenantList);
-  //      } else {
+        console.log('tenant list haku, result=', result);
         tenantList = result.tenantList;
-  //      }
         Session.set('tenantList', tenantList);
       }
     });

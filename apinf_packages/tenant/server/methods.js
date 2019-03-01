@@ -410,7 +410,8 @@ Meteor.methods({
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
-      tenantUrl = tenantUrl.concat('tenant');
+      tenantUrl = tenantUrl.concat('tenant/');
+      tenantUrl = tenantUrl.concat(tenant.id);
 
       // Get user's tenant access token
       const accessToken = getTenantToken();
@@ -424,6 +425,7 @@ Meteor.methods({
       const payLoadToSend = JSON.stringify(payLoad);
 
       console.log('\n ----------------- Delete tenant ---------------------\n');
+      console.log('url=', tenantUrl);
       console.log('delete tenant id=\n', JSON.stringify(payLoad, null, 2));
 
       try {
@@ -431,10 +433,10 @@ Meteor.methods({
           tenantUrl,
           {
             headers: {
-              'Content-Type': 'application/json',
+            //  'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
-            content: payLoadToSend,
+           // content: payLoadToSend,
           }
         );
         // Create a monitoring data
@@ -456,7 +458,7 @@ Meteor.methods({
     return response;
   },
 
-  updateTenant (tenant) {
+  updateTenant (tenantPayload) {
     check(tenant, Object);
 
     const response = {};
@@ -474,18 +476,8 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-      // New tenant object to be sent
-      let payload = [];
-      const payLoadElement = {
-        op: tenant.op,
-        path: tenant.path,
-        value: tenant.value,
-      };
-
-      payload = payload.push(payLoadElement);
-
-      // Serialize to JSON
-      const payLoadToSend = JSON.stringify(payLoad);
+       // Serialize to JSON
+      const payLoadToSend = JSON.stringify(tenantPayload);
 
       console.log('\n ----------------- Update tenant ---------------------\n');
       console.log('tenant tuli =', tenant);
