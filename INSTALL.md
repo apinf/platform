@@ -38,7 +38,7 @@ We have branched the NREL/api-umbrella: https://github.com/apinf/api-umbrella AP
  
 ## From Source Code -UNDER REVIEW
 
-1. Clone APInf fork of umbrella: https://github.com/apinf/api-umbrella and follow the instructions.
+1. Clone APInf fork of umbrella: https://github.com/apinf/api-umbrella and follow the instructions in that repo. Easiest way to get started is to follow "With Docker Compose" section below and when you got that working, start exploring options. 
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/platform)
 4. Run `meteor npm install` - using meteor instead npm makes sure the same npm is used that comes with meteor distribution
