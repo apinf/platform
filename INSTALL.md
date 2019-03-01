@@ -35,16 +35,16 @@ The issue is that new version of Mongo which comes with Meteor version 1.8 has n
 
 ## Note on different Umbrella versions
 We have branched the NREL/api-umbrella: https://github.com/apinf/api-umbrella APInf fork; We have removed mongodb from the umbrella image. You should deploy mongo in another container/machine and configure umbrella to use that external instance of mongo.
+ 
+## From Source Code -UNDER REVIEW
 
-## From Source Code
-
-1. Install [API Umbrella](http://apiumbrella.io/download/) (or follow the [Developer Setup](http://apiumbrella.io/docs/development-setup/))
+1. Clone APInf fork of umbrella: https://github.com/apinf/api-umbrella and follow the instructions.
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/platform)
 4. Run `meteor npm install` - using meteor instead npm makes sure the same npm is used that comes with meteor distribution
 5. Type `meteor` in the project directory
 
-## With Docker
+## With Docker -OBSOLETED
 
 1. Run API-umbrella container http://api-umbrella.readthedocs.io/en/latest/getting-started.html#running-with-docker
 2. Obtaining API Key and Authentication token. You can obtain the *Authentication Token* and *API Key* from the API Umbrella platform by following instructions in the [Getting Started](http://apiumbrella.io/docs/getting-started/) and [API Umbrella Admin API](http://apiumbrella.io/docs/admin-api/) documentation.
@@ -59,7 +59,9 @@ Register a new admin account. The first user will become Admin.
  2. Login to the APInf web admin http://YOUR_SITE_DOMAIN/sign-in
  3. Fill APInf settings http://YOUR_SITE_DOMAIN/settings
 
-## With Docker Compose
+## With Docker Compose -WORKING
+Have a server with ~2g ram and 20 gb disk. One core should be ok. Get a dns name for server - dont use aws as we are using let's encrypt and they have blacklisted aws.
+
 1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
 3. Create file "docker/env.apinf" based on example "docker/env.apinf.example".
