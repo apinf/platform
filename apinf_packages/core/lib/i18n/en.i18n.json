@@ -1451,6 +1451,7 @@
   "tenantForm_description_Failure_Message": "Tenant description update failed! ",
   "tenantForm_description_Success_Message": "Tenant description updated successfully",
   "tenantForm_addTenant_Success_Message": "Tenant added successfully: ",
+  "tenantRequest_missingBasepath": "Tenant Manager basepath is missing from Settings",
   "tenantUserForm_addButton_text": "Add user for Tenant",
   "tenantUserForm_help_addUser": "Select user and give roles",
   "tenantUserForm_title_addUser": "Add a new user for tenant",

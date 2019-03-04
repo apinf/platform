@@ -63,6 +63,9 @@ Template.tenantCatalog.onRendered(function () {
         tenantList = result.tenantList;
         Session.set('tenantList', tenantList);
       }
+      if (error) {
+        sAlert.error(error, { timeout: 'none' });
+      }
     });
 
     // fetch list of users from tenant manager
@@ -70,7 +73,8 @@ Template.tenantCatalog.onRendered(function () {
       if (result) {
         console.log('userlist haku, result=', result);
         Session.set('completeUserList', result.completeUserList);
-      } else {
+      } 
+      if (error) {
         console.log(' userlist haku, error=', error);
         sAlert.error(error, { timeout: 'none' });
       }
