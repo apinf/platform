@@ -83,7 +83,8 @@ Template.tenantForm.events({
             sAlert.error(errorMessage, { timeout: 'none' });
             // tenantList.unshift(tenant);
           }
-        } else {
+        } 
+        if (error) {
           console.log(+new Date(), ' 2 b error=', error);
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant operation failed!  (${error}).`;
@@ -139,7 +140,8 @@ Template.tenantForm.events({
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
       // initiate the array for changes
-      let modifyTenantPayload = [];
+      let modifyTenantPayload = {};
+      modifyTenantPayload.body = [];
 
       console.log('orig tenant=', originalTenant);
 
@@ -170,20 +172,79 @@ Template.tenantForm.events({
 
       // Any changes in description
       if (originalTenant.description !== modifiedTenant.description) {
+        modifyTenantPayload.id = originalTenant.id;
         const changedDescription = {
-          id: originalTenant.tenantToModify.id,
           op: 'replace',
           value: $('#add-tenant-description').val(),
           path: '/description',
         };
-        modifyTenantPayload.push(changedDescription);
+        modifyTenantPayload.body.push(changedDescription);
       }
 
+      // Any changes in users
+      let userChanges = originalTenant.users.map((origUser, index) => {
+        console.log('origUser=', origUser);
+        // Check if same user present in modified data
+        const sameUserInModified = modifiedTenant.users.filter(user => {
+          console.log('mod user=', user);
+          // Return modified user if found
+          if (user.id === origUser.id) {
+            console.log('found match=', user.id);
+            return true;
+          }
+        });
 
+        console.log('sameusers=', sameUserInModified);
+        console.log('origUser.prov=', origUser.provider);
+        console.log('mod.prov=', sameUserInModified.provider);
+        console.log('origUser.cust=', origUser.customer);
+        console.log('mod.cust=', sameUserInModified.customer);
+        // Not found, so user is removed
+        if (sameUserInModified.length === 0 ||
+            origUser.customer !== sameUserInModified.customer ||
+            origUser.provider !== sameUserInModified.provider) {
+          modifyTenantPayload.id = originalTenant.id;
+          let path = '/users/';
+          path = path.concat(index);
+          const removedUser = {
+            op: 'remove',
+            path: path,
+          };
+          console.log('removeduser=', removedUser);
+          return removedUser;
+        } else {
 
-      console.log('update Tenant payload=', tenant);
+        }
+        return false;
+      });
+
+      console.log('userChanges=', userChanges);
+      if (userChanges) {
+        modifyTenantPayload.body.push(userChanges);
+      }
+/*
+      // Convert parameters to array in tenant manager API from internal object
+      const userlist = modifyTenantPayload.users.map(user => {
+        const tenantRoles = [];
+        if (user.provider) {
+          tenantRoles.push('data-provider');
+        }
+        if (user.customer) {
+          tenantRoles.push('data-customer');
+        }
+        return {
+          id: user.id,
+          name: user.name,
+          roles: tenantRoles,
+        };
+      });      
+
+      modifyTenantPayload.users = userlist;
+*/
+
+      console.log('update Tenant payload=', modifyTenantPayload);
       // PATCH /tenant
-      Meteor.call('updateTenantPayload', tenant, (error, result) => {
+      Meteor.call('updateTenantX', modifyTenantPayload, (error, result) => {
         if (result) {
           console.log(+new Date(), ' 2 a result=', result);
           if (result.status === 200) {
@@ -197,7 +258,8 @@ Template.tenantForm.events({
             errorMessage = errorMessage.concat(result);
             sAlert.error(errorMessage, { timeout: 'none' });
           }
-        } else {
+        } 
+        if (error) {
           console.log(+new Date(), ' 2 b error=', error);
           // Tenant addition failure on manager side, save new tenant object to local array
           let errorMessage = TAPi18n.__('tenantForm_description_Failure_Message');

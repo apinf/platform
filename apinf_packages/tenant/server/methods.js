@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Meteor } from 'meteor/meteor';
 import { Match, check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Npm packages imports
@@ -56,9 +57,14 @@ Meteor.methods({
 
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
+    console.log('tenant url=', tenantUrl);
 
     console.log('\n ------------ Fetch Tenant list -------------- \n');
-    if (tenantUrl) {
+    if (!tenantUrl) {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    } else {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -80,7 +86,7 @@ Meteor.methods({
         );
         // Create a monitoring data
 
-        console.log('3 tenant GET a ok, result=', result);
+        console.log('3 tenant GET a ok, result=', result.content);
 
         // deserialize JSON
         const tenantList = JSON.parse(result.content);
@@ -89,7 +95,7 @@ Meteor.methods({
 
         // Modify parameters according to tenant manager API from object to array
         response.tenantList = tenantList.map(tenant => {
-        console.log('tenant=', tenant);
+        // console.log('tenant=', tenant);
 
         const convertedUserList = tenant.users.map(user => {
           // Return converted user list
@@ -111,7 +117,7 @@ Meteor.methods({
       });
 
         response.status = result.statusCode;
-        console.log('3 tenant a ok, response=', response);
+        // console.log('3 tenant a ok, response=', response);
       } catch (err) {
         console.log('3 tenant b nok, err=\n', err);
 
@@ -221,7 +227,7 @@ Meteor.methods({
       }
     }
 
-    console.log('4 GET tenant response=', response);
+    // console.log('4 GET tenant response=', response);
     return response;
   },
 
@@ -234,10 +240,15 @@ Meteor.methods({
     let tenantUrl = getTenantInfo();
 
     console.log('\n ------------ Fetch User list -------------- \n');
-    if (tenantUrl) {
+    if (!tenantUrl) {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    } else {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
+      // Add endpoint to base path
       tenantUrl = tenantUrl.concat('user');
       console.log(+new Date(), ' 1 send GET userlist request to=\n', tenantUrl);
 
@@ -330,10 +341,15 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (tenantUrl) {
+    if (!tenantUrl) {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    } else {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
+      // Add endpoint to base path
       tenantUrl = tenantUrl.concat('tenant');
 
       // Get user's tenant access token
@@ -406,27 +422,24 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (tenantUrl) {
+    if (!tenantUrl) {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    } else {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
+      // Add endpoint to base path
       tenantUrl = tenantUrl.concat('tenant/');
       tenantUrl = tenantUrl.concat(tenant.id);
+      tenantUrl = tenantUrl.concat('/');
 
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-      // New tenant object to be sent
-      const payLoad = {
-        id: tenant.id,
-      };
-
-      // Serialize to JSON
-      const payLoadToSend = JSON.stringify(payLoad);
-
       console.log('\n ----------------- Delete tenant ---------------------\n');
       console.log('url=', tenantUrl);
-      console.log('delete tenant id=\n', JSON.stringify(payLoad, null, 2));
 
       try {
         const result = HTTP.del(
@@ -436,7 +449,6 @@ Meteor.methods({
             //  'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
-           // content: payLoadToSend,
           }
         );
         // Create a monitoring data
@@ -466,10 +478,15 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (tenantUrl) {
+    if (!tenantUrl) {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    } else {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
+      // Add endpoint to base path      
       tenantUrl = tenantUrl.concat('tenant/');
       tenantUrl = tenantUrl.concat(tenant.id);
 
