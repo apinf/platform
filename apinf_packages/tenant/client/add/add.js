@@ -185,7 +185,7 @@ Template.tenantForm.events({
       let userChanges = originalTenant.users.map((origUser, index) => {
         console.log('origUser=', origUser);
         // Check if same user present in modified data
-        const sameUserInModified = modifiedTenant.users.filter(user => {
+        const sameUserInModified = modifiedTenant.users.filter((user, modifiedIndex) => {
           console.log('mod user=', user);
           // Return modified user if found
           if (user.id === origUser.id) {
@@ -196,15 +196,17 @@ Template.tenantForm.events({
 
         console.log('sameusers=', sameUserInModified);
         console.log('origUser.prov=', origUser.provider);
-        console.log('mod.prov=', sameUserInModified.provider);
+        console.log('mod.prov=', sameUserInModified[0].provider);
         console.log('origUser.cust=', origUser.customer);
-        console.log('mod.cust=', sameUserInModified.customer);
-        // Not found, so user is removed
+        console.log('mod.cust=', sameUserInModified[0].customer);
+        // If not found in modified user list, so user is removed
+        // Or if user data is modified, at first remove
         if (sameUserInModified.length === 0 ||
-            origUser.customer !== sameUserInModified.customer ||
-            origUser.provider !== sameUserInModified.provider) {
+            origUser.customer !== sameUserInModified[0].customer ||
+            origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
           let path = '/users/';
+          // indicate user with original user data index
           path = path.concat(index);
           const removedUser = {
             op: 'remove',
@@ -212,9 +214,44 @@ Template.tenantForm.events({
           };
           console.log('removeduser=', removedUser);
           return removedUser;
-        } else {
+        } 
 
-        }
+        // If user data is modified, add user with new data
+        if (origUser.customer !== sameUserInModified[0].customer ||
+            origUser.provider !== sameUserInModified[0].provider) {
+          modifyTenantPayload.id = originalTenant.id;
+
+          // collect roles
+          const tenantRoles = [];
+          if (sameUserInModified[0].provider) {
+            tenantRoles.push('data-provider');
+          }
+          if (sameUserInModified[0].customer) {
+            tenantRoles.push('data-customer');
+          }
+  
+          // collect user data
+          const value = {
+            id: sameUserInModified[0].id,
+            name: sameUserInModified[0].name,
+            roles: tenantRoles
+          };
+
+          const addedUser = {
+            op: 'add',
+            path: '/users/-',
+            value: value,
+          };
+
+          // remove handled user from modified list
+          modifiedTenant.users = modifiedTenant.users.splice(modifiedIndex, 1);
+          console.log('mod.users=', modifiedTenant.users);
+
+          console.log('addedUser=', addedUser);
+          return addedUser;
+        } 
+
+
         return false;
       });
 
