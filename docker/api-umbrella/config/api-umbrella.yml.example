@@ -9,9 +9,7 @@ web:
       - admin@apinf.dev
     auth_strategies:
       enabled:
-        - github
-        - google
-        - persona
+        - github        
       github:
         client_id:
         client_secret:
