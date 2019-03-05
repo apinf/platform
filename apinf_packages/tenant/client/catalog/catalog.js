@@ -73,7 +73,7 @@ Template.tenantCatalog.onRendered(function () {
       if (result) {
         console.log('userlist haku, result=', result);
         Session.set('completeUserList', result.completeUserList);
-      } 
+      }
       if (error) {
         console.log(' userlist haku, error=', error);
         sAlert.error(error, { timeout: 'none' });

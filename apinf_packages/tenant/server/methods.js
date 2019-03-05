@@ -8,7 +8,6 @@ import { Meteor } from 'meteor/meteor';
 import { Match, check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
 import { TAPi18n } from 'meteor/tap:i18n';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Npm packages imports
 import _ from 'lodash';
@@ -43,7 +42,7 @@ const getTenantInfo = function () {
   return false;
 };
 
-function compare (a,b) {
+function compare (a, b) {
   if (a.username < b.username) return -1;
   if (a.username > b.username) return 1;
   return 0;
@@ -95,26 +94,25 @@ Meteor.methods({
 
         // Modify parameters according to tenant manager API from object to array
         response.tenantList = tenantList.map(tenant => {
-        // console.log('tenant=', tenant);
+          // console.log('tenant=', tenant);
+          const convertedUserList = tenant.users.map(user => {
+            // Return converted user list
+            return {
+              id: user.id,
+              name: user.name,
+              provider: user.roles.includes('data-provider') ? 'checked' : false,
+              customer: user.roles.includes('data-customer') ? 'checked' : false,
+            };
+          });
 
-        const convertedUserList = tenant.users.map(user => {
-          // Return converted user list
+          // Return tenant
           return {
-            id: user.id,
-            name: user.name,
-            provider: user.roles.includes('data-provider') ? 'checked' : false,
-            customer: user.roles.includes('data-customer') ? 'checked' : false,
+            id: tenant.id,
+            name: tenant.name,
+            description: tenant.description,
+            users: convertedUserList,
           };
         });
-
-        // Return tenant
-        return {
-          id: tenant.id,
-          name: tenant.name,
-          description: tenant.description,
-          users: convertedUserList,
-        };
-      });
 
         response.status = result.statusCode;
         // console.log('3 tenant a ok, response=', response);
@@ -240,11 +238,7 @@ Meteor.methods({
     let tenantUrl = getTenantInfo();
 
     console.log('\n ------------ Fetch User list -------------- \n');
-    if (!tenantUrl) {
-      // Return error object
-      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
-      throw new Meteor.Error(errorMessage);
-    } else {
+    if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -327,6 +321,10 @@ Meteor.methods({
           },
         ];
       }
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
     }
 
     console.log('4 GET userlist response=', response);
@@ -341,11 +339,7 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (!tenantUrl) {
-      // Return error object
-      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
-      throw new Meteor.Error(errorMessage);
-    } else {
+    if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -408,6 +402,10 @@ Meteor.methods({
         // Return error object
         throw new Meteor.Error(err.message);
       }
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
     }
 
     console.log(+new Date(), ' 4 POST response=', response);
@@ -422,11 +420,7 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (!tenantUrl) {
-      // Return error object
-      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
-      throw new Meteor.Error(errorMessage);
-    } else {
+    if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -464,6 +458,10 @@ Meteor.methods({
         // Return error object
         throw new Meteor.Error(err.message);
       }
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
     }
 
     console.log(+new Date(), ' 4 DELETE response=', response);

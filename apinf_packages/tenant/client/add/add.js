@@ -153,7 +153,7 @@ Template.tenantForm.events({
         - no users left
           -> all is done
        */
-      let userChanges = originalTenant.users.reduce((changeList, origUser, index) => {
+      const userChanges = originalTenant.users.reduce((changeList, origUser, index) => {
         console.log('origUser=', origUser);
         let modifiedUserIndex = false;
         // Check if same user is present in modified tenant data
@@ -182,16 +182,13 @@ Template.tenantForm.events({
           changeList.push(removedUser);
           // If user data is modified, add user with new data
         } else if (origUser.customer !== sameUserInModified[0].customer ||
-          origUser.provider !== sameUserInModified[0].provider) {
-            modifyTenantPayload.id = originalTenant.id;
+                   origUser.provider !== sameUserInModified[0].provider) {
+          modifyTenantPayload.id = originalTenant.id;
 
-
-            console.log('origUser.prov=', origUser.provider);
-            console.log('mod.prov=', sameUserInModified[0].provider);
-            console.log('origUser.cust=', origUser.customer);
-            console.log('mod.cust=', sameUserInModified[0].customer);
-
-
+          console.log('origUser.prov=', origUser.provider);
+          console.log('mod.prov=', sameUserInModified[0].provider);
+          console.log('origUser.cust=', origUser.customer);
+          console.log('mod.cust=', sameUserInModified[0].customer);
 
           // collect roles
           const tenantRoles = [];
@@ -229,7 +226,7 @@ Template.tenantForm.events({
         }
 
         return changeList;
-      },[]);
+      }, []);
 
       // Included removed and modified users to request
       console.log('userChanges=', userChanges);

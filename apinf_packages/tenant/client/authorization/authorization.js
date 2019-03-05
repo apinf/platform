@@ -6,7 +6,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
