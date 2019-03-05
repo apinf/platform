@@ -83,9 +83,11 @@ following fields are revelead as you pick the type:
 * AUTH TOKEN: - from umbrella, step 9
 * ElasticSearch: "http://elasticsearch.docker:9200"
 -> hit save. Now you are reasy to add your 1st API.
-11. Add API backend https://YOUR_SITE_DOMAIN/api/new you can use for example http://restcountries.eu/#api-endpoints-name as a test API:
-NOTE, sometimes adding the API does not go dreamly, so you might need to try a second time and add another API before it starts to work proper. Sorry.
+11. Add API backend https://YOUR_SITE_DOMAIN/api/new 
 
+You can use for example http://restcountries.eu/#api-endpoints-name as a test API. It's better to pass the x-api-key as a header than in the URL! That's it. Now you can go to and check the Quick start, watch the video and enjoy!
+
+Few random notes: API Key and Auth token need to be from the same user. If you get into trouble, five us an email: info@apinf.io or raise and issue.
 
 ## mail
 The mail object contains a username and password for the Mailgun service. You will need to register with Mailgun. Once registered, you can use your 'sandbox' domain credentials in a development environment or a custom domain in production:
