@@ -13,9 +13,6 @@ web:
       github:
         client_id:
         client_secret:
-      google:
-        client_id:
-        client_secret:
 elasticsearch:
   api_version: 2
   hosts:
