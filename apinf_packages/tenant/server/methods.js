@@ -471,7 +471,7 @@ Meteor.methods({
   },
 
   updateTenant (tenantPayload) {
-    check(tenant, Object);
+    check(tenantPayload, Object);
 
     const response = {};
 
@@ -486,9 +486,9 @@ Meteor.methods({
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
-      // Add endpoint to base path      
+      // Add endpoint to base path
       tenantUrl = tenantUrl.concat('tenant/');
-      tenantUrl = tenantUrl.concat(tenant.id);
+      tenantUrl = tenantUrl.concat(tenantPayload.id);
 
       // Get user's tenant access token
       const accessToken = getTenantToken();
@@ -497,9 +497,9 @@ Meteor.methods({
       const payLoadToSend = JSON.stringify(tenantPayload);
 
       console.log('\n ----------------- Update tenant ---------------------\n');
-      console.log('tenant tuli =', tenant);
+      console.log('tenant tuli =', tenantPayload);
       console.log('tenant url=', tenantUrl);
-      console.log('update tenant payload=\n', JSON.stringify(payLoad, null, 2));
+      console.log('update tenant payload=\n', JSON.stringify(tenantPayload, null, 2));
 
       try {
         const result = HTTP.patch(
@@ -509,7 +509,7 @@ Meteor.methods({
               'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
-            content: payLoadToSend,
+            content: payLoadToSend.body,
           }
         );
         // Create a monitoring data
