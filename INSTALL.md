@@ -78,12 +78,13 @@ Make sure that you have github application created for this domain. You need thi
 * description: whatever you like
 * type: apiUmbrella
 following fields are revelead as you pick the type:
-* url: https://YOUR_SITE_DOMAIN
+* url: https://YOUR_SITE_DOMAIN:3002
 * API KEY: - from umbrella, step 9
 * AUTH TOKEN: - from umbrella, step 9
 * ElasticSearch: "http://elasticsearch.docker:9200"
--> hit save.
-11. Add API backend https://YOUR_SITE_DOMAIN/api/new
+-> hit save. Now you are reasy to add your 1st API.
+11. Add API backend https://YOUR_SITE_DOMAIN/api/new you can use for example http://restcountries.eu/#api-endpoints-name as a test API:
+NOTE, sometimes adding the API does not go dreamly, so you might need to try a second time and add another API before it starts to work proper. Sorry.
 
 
 ## mail
