@@ -62,7 +62,7 @@ Register a new admin account. The first user will become Admin.
 ## With Docker Compose -WORKING
 Have a server with minimum of 2gb ram and 20 gb disk. One core should be ok. Get a dns name for server - dont use aws as we are using let's encrypt and they have blacklisted aws.
 
-Make sure that you have github application created for this domain. You need this in step 7. Here is a good read on how-to: https://auth0.com/docs/connections/social/github
+Make sure that you have github application created for this domain. You need this in step 7. Here is a good read on how-to: https://auth0.com/docs/connections/social/github authorization callback url needs to be like https://YOUR_SITE_DOMAIN:3002 including the port
 
 1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
