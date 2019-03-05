@@ -60,18 +60,19 @@ Register a new admin account. The first user will become Admin.
  3. Fill APInf settings http://YOUR_SITE_DOMAIN/settings
 
 ## With Docker Compose -WORKING
-Have a server with ~2g ram and 20 gb disk. One core should be ok. Get a dns name for server - dont use aws as we are using let's encrypt and they have blacklisted aws.
+Have a server with minimum of 2gb ram and 20 gb disk. One core should be ok. Get a dns name for server - dont use aws as we are using let's encrypt and they have blacklisted aws.
+
+Make sure that you have github application created for this domain. You need this in step 7. Here is a good read on how-to: https://auth0.com/docs/connections/social/github
 
 1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
 3. Create file "docker/env.apinf" based on example "docker/env.apinf.example".
 4. Create file "docker/env.ssl" based on example "docker/env.ssl.example".
-5. Run ```docker-compose up -d```. The first launch of will be slow because (take couple of minutes) of the DH parameter computation and configure Let's Encrypt certificate.
-6. Visit https://YOUR_SITE_DOMAIN:3002/signup/ and fill form for get API Key.
-7. Visit https://YOUR_SITE_DOMAIN:3002/admin/ and click on 'My Account' link for find Admin API Token.
-8. Visit https://YOUR_SITE_DOMAIN/sign-up and create new account.
-9. Fill data in "Project Branding: APInf Configuration Wizard".
-10. Fill data in "Settings for API Umbrella: APInf Configuration Wizard".
+5. Modify api-umbrella.yml to have github credentials (client_id and client_secret). Github only login is enabled at this time. If you have the skills, by modifying the api-umbrella.yml you can enable other login methods. 
+6. Run ```docker-compose up -d```. The first launch of will be slow because (take couple of minutes) of the DH parameter computation and configure Let's Encrypt certificate.
+6. Visit https://YOUR_SITE_DOMAIN:3002 to verify that proxy is running
+8. Visit https://YOUR_SITE_DOMAIN/admin/login and login.
+10. Login to apinf platfrom https://YOUR_SITE_DOMAIN. as sign-up, as 1st user you get admin rights. To connect to the proxy, under your account pulldown menu, go to proxy and fill in the following details. API key and Auth token you can get from umbrella. 
 * Host: "https://YOUR_SITE_DOMAIN:3002"
 * API Key: from step #6
 * Auth Token: from step #7
