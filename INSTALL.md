@@ -62,13 +62,13 @@ Register a new admin account. The first user will become Admin.
 ## With Docker Compose -WORKING
 Have a server with minimum of 2gb ram and 20 gb disk. One core should be ok. Get a dns name for server - dont use aws as we are using let's encrypt and they have blacklisted aws.
 
-Make sure that you have github application created for this domain. You need this in step 7. Here is a good read on how-to: https://auth0.com/docs/connections/social/github authorization callback url needs to be like https://YOUR_SITE_DOMAIN:3002 including the port
+Make sure that you have github application created for this domain. You need this in step 7. Here is a good read on how-to: https://auth0.com/docs/connections/social/github authorization callback url needs to be like https://YOUR_SITE_DOMAIN:3002 make sure to include the port.
 
 1. Create "docker-compose.yml" file on your server and copy content from [docker-compose.yml](https://github.com/apinf/platform/blob/develop/docker-compose.yml).
 2. In the same folder create file "docker/api-umbrella/config/api-umbrella.yml" based on example "docker/api-umbrella/config/api-umbrella.yml.example". ATTENTION: replace "example.com" on YOUR_SITE_DOMAIN for keys "ssl_cert" and "ssl_cert_key".
 3. Create file "docker/env.apinf" based on example "docker/env.apinf.example".
 4. Create file "docker/env.ssl" based on example "docker/env.ssl.example".
-5. Modify api-umbrella.yml to have github credentials (client_id and client_secret). Github only login is enabled at this time. If you have the skills, by modifying the api-umbrella.yml you can enable other login methods. 
+5. Modify api-umbrella.yml to have github credentials (client_id and client_secret). Github only login is enabled at this time. If you have the skills, by modifying the api-umbrella.yml you can enable other login methods. Make sure also to modify the "initial_superusers" as you need to be able to login as super user.
 6. Run ```docker-compose up -d```. The first launch of will be slow because (take couple of minutes) of the DH parameter computation and configure Let's Encrypt certificate.
 6. Visit https://YOUR_SITE_DOMAIN:3002 to verify that proxy is running
 8. Visit https://YOUR_SITE_DOMAIN/admin/login and login.
@@ -82,7 +82,7 @@ following fields are revelead as you pick the type:
 * API KEY: - from umbrella, step 9
 * AUTH TOKEN: - from umbrella, step 9
 * ElasticSearch: "http://elasticsearch.docker:9200"
--> hit save. Now you are reasy to add your 1st API.
+-> hit save. Now you are ready to add your 1st API.
 11. Add API backend https://YOUR_SITE_DOMAIN/api/new 
 
 You can use for example http://restcountries.eu/#api-endpoints-name as a test API. It's better to pass the x-api-key as a header than in the URL! That's it. Now you can go to and check the Quick start, watch the video and enjoy!
