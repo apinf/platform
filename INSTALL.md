@@ -72,12 +72,17 @@ Make sure that you have github application created for this domain. You need thi
 6. Run ```docker-compose up -d```. The first launch of will be slow because (take couple of minutes) of the DH parameter computation and configure Let's Encrypt certificate.
 6. Visit https://YOUR_SITE_DOMAIN:3002 to verify that proxy is running
 8. Visit https://YOUR_SITE_DOMAIN/admin/login and login.
-10. Login to apinf platfrom https://YOUR_SITE_DOMAIN. as sign-up, as 1st user you get admin rights. To connect to the proxy, under your account pulldown menu, go to proxy and fill in the following details. API key and Auth token you can get from umbrella. 
-* Host: "https://YOUR_SITE_DOMAIN:3002"
-* API Key: from step #6
-* Auth Token: from step #7
-* Base URL: "https://YOUR_SITE_DOMAIN:3002/api-umbrella/"
-* Elasticsearch: "http://elasticsearch.docker:9200"
+9. API key and Auth token you can get from umbrella, so login if you have not done so. The "Auth Token" need to come from admin, so on the right hand side pulldown menu (looks like a gear) pick "account or my account", there you can get the "Admin API token" (referred as Auth token later on). To get the API key, you need to go to https://YOUR_SITRE_DOMAIN:3002/signup/ and fill the form. Copy the Auth token and API key. You need those in the next step.
+10. Login to apinf platfrom https://YOUR_SITE_DOMAIN. As sign-up, as 1st user you get admin rights. To connect the proxy, under your account pulldown menu, choose "proxy", click "add proxy" and fill in the following details:
+* name: whatever you like
+* description: whatever you like
+* type: apiUmbrella
+following fields are revelead as you pick the type:
+* url: https://YOUR_SITE_DOMAIN
+* API KEY: - from umbrella, step 9
+* AUTH TOKEN: - from umbrella, step 9
+* ElasticSearch: "http://elasticsearch.docker:9200"
+-> hit save.
 11. Add API backend https://YOUR_SITE_DOMAIN/api/new
 
 
