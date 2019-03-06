@@ -37,11 +37,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                     <span style="font-weight: bold; color: black;">{{ tenantToken }}</span><br />
                     {{_ "tenantCatalogPage_token_details_2b" }}
                     <span style="{{ tenantTokenExpiration.expirationEffect }}">{{ tenantTokenExpiration.expirationTime }}</span>
+                    {{# if tenantTokenExpiration.expirationEffect }}
+                    <br /><span style="{{ tenantTokenExpiration.expirationEffect }}">{{_ "tenantCatalogPage_token_details_2c" }}</span>
+                    {{/ if }}
                   </li>
-                  <li>
+                  <!--li>
                     {{_ "tenantCatalogPage_token_details_3" }}<br />
                     <span style="font-weight: bold; color: black;">{{ tenantRefreshToken }}</span>
-                  </li>
+                  </li-->
                 </ol>
               </p>
             </fieldset>
@@ -49,9 +52,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <!-- footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-success" id="refreshTenantAuthorization">
+          <!-- Perhaps later we can refresh programmatically -->
+          <!--button type="submit" class="btn btn-success" id="refreshTenantAuthorization">
             {{_ "tenantAuthorization_button_refresh" }}
-          </button>
+          </button-->
         </div>
       </div>
     </div>
