@@ -33,17 +33,17 @@ Template.tenantUsersList.events({
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
   },
-  'change .tenantUserRoleCustomer': function (event) {
+  'change .tenantUserRoleConsumer': function (event) {
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
       tenantUsers = Session.get('tenantUsers');
     }
 
-    // update user's role, customer
+    // update user's role, consumer
     tenantUsers = tenantUsers.map(user => {
       if (user.id === this.id) {
-        user.customer = event.currentTarget.checked ? 'checked' : false;
+        user.consumer = event.currentTarget.checked ? 'checked' : false;
       }
       return user;
     });

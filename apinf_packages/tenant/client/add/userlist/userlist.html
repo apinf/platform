@@ -14,7 +14,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <tr>
           <th>Username    {{_ "tenantUsersList_thead_username" }}</th>
           <th>Roles    {{_ "tenantUsersList_thead_roles" }}</th>
-          <!--th>Customer</th-->
+          <!--th>Consumer</th-->
         </tr>
       </thead>
       <tbody>
@@ -22,7 +22,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <tr>
           <td>{{ name }}</td>
           <td>
-            <input type="checkbox" 
+            <input type="checkbox"
                    checked={{ provider }}
                    id="tenantUserRoleProvider"
                    name=tenantUserRoleProvider
@@ -31,11 +31,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!--/td>
           <td-->
             <input type="checkbox"
-                   checked={{ customer }}
-                   id="tenantUserRoleCustomer"
-                   name=tenantUserRoleCustomer
-                   value="data-customer"
-                   class="tenantUserRoleCustomer"> Data-customer
+                   checked={{ consumer }}
+                   id="tenantUserRoleConsumer"
+                   name=tenantUserRoleConsumer
+                   value="data-consumer"
+                   class="tenantUserRoleConsumer"> Data-consumer
           </td>
           <td>
             <button class="remove-tenant-user btn btn-danger btn-xs" style="height:auto;">

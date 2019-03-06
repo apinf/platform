@@ -1439,7 +1439,7 @@
   "tenantCatalogTable_header_username": "Username & Roles",
   "tenantCatalogTable_row_title_username": "Username",
   "tenantCatalogTable_row_title_roles": "Roles",
-  "tenantCatalogTable_row_title_customer": "Customer",
+  "tenantCatalogTable_row_title_consumer": "Consumer",
   "tenantCatalogTable_row_title_provider": "Provider",
   "tenantCatalogTable_header_action": "Action",
   "tenantForm_button_modify_description": "Update description",

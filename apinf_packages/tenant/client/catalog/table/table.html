@@ -26,12 +26,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span style="font-weight: bold;">{{ tenant.name }}</span><br />
             {{ tenant.description }}
           </td>
-            
+
           <td style="padding-bottom: 10px;">
             <tr>
               <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_username" }}</th>
               <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_provider" }}</th>
-              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_customer" }}</th>
+              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_consumer" }}</th>
             </tr>
 
             {{#each user in tenant.users}}
@@ -45,33 +45,32 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 {{/if}}
               </td>
               <td style="padding-left: 10px;">
-                {{#if user.customer}}
-                  data-customer
+                {{#if user.consumer}}
+                  data-consumer
                 {{/if}}
               </td>
             </tr>
             {{/each}}
           </td>
           <td style="padding-left: 30px; padding-right:10px;">
-            <button id="edit-tenant" 
-                    type="button" 
+            <button id="edit-tenant"
+                    type="button"
                     data-value={{ @index }}
-                    class="btn btn-success btn-success-special" 
+                    class="btn btn-success btn-success-special"
                     style="margin-top: 1rem;">
               {{_ "tenantCatalogTable_button_edit" }}
-            </button> 
-            <button id="remove-tenant" 
-                    type="button" 
+            </button>
+            <button id="remove-tenant"
+                    type="button"
                     data-value={{ @index }}
-                    class="btn btn-danger btn-danger-special pull-right" 
+                    class="btn btn-danger btn-danger-special pull-right"
                     style="margin-top: 1rem;">
               {{_ "tenantCatalogTable_button_remove" }}
             </button>
           </td>
         </tr>
-        {{/each}}       
+        {{/each}}
       </tbody>
-    </table>  
+    </table>
   </div>
 </template>
-        

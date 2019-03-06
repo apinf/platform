@@ -17,7 +17,7 @@ Template.tenantUserForm.events({
         id: $('#completeUserList option:selected').val(),
         name: $('#completeUserList option:selected').text(),
         provider: false,
-        customer: false,
+        consumer: false,
       };
 
       // unselect username

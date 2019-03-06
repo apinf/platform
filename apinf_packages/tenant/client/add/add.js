@@ -36,7 +36,7 @@ Template.tenantForm.events({
             id: userdata.id,
             name: userdata.name,
             provider: userdata.provider === 'checked' ? 'data-provider' : false,
-            customer: userdata.customer === 'checked' ? 'data-customer' : false,
+            consumer: userdata.consumer === 'checked' ? 'data-consumer' : false,
           };
           return usersRow;
         });
@@ -181,22 +181,22 @@ Template.tenantForm.events({
           console.log('removeduser=', removedUser);
           changeList.push(removedUser);
           // If user data is modified, add user with new data
-        } else if (origUser.customer !== sameUserInModified[0].customer ||
+        } else if (origUser.consumer !== sameUserInModified[0].consumer ||
                    origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
 
           console.log('origUser.prov=', origUser.provider);
           console.log('mod.prov=', sameUserInModified[0].provider);
-          console.log('origUser.cust=', origUser.customer);
-          console.log('mod.cust=', sameUserInModified[0].customer);
+          console.log('origUser.cust=', origUser.consumer);
+          console.log('mod.cust=', sameUserInModified[0].consumer);
 
           // collect roles
           const tenantRoles = [];
           if (sameUserInModified[0].provider) {
             tenantRoles.push('data-provider');
           }
-          if (sameUserInModified[0].customer) {
-            tenantRoles.push('data-customer');
+          if (sameUserInModified[0].consumer) {
+            tenantRoles.push('data-consumer');
           }
 
           // collect user data
@@ -242,8 +242,8 @@ Template.tenantForm.events({
         if (user.provider) {
           tenantRoles.push('data-provider');
         }
-        if (user.customer) {
-          tenantRoles.push('data-customer');
+        if (user.consumer) {
+          tenantRoles.push('data-consumer');
         }
 
         // collect user data

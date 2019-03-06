@@ -101,7 +101,7 @@ Meteor.methods({
               id: user.id,
               name: user.name,
               provider: user.roles.includes('data-provider') ? 'checked' : false,
-              customer: user.roles.includes('data-customer') ? 'checked' : false,
+              consumer: user.roles.includes('data-consumer') ? 'checked' : false,
             };
           });
 
@@ -131,19 +131,19 @@ Meteor.methods({
                 id: '123qwe',
                 name: 'Spede',
                 provider: false,
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: '223qwe',
                 name: 'Simo',
                 provider: 'checked',
-                customer: false,
+                consumer: false,
               },
               {
                 id: '323qwe',
                 name: 'Vesku',
                 provider: 'checked',
-                customer: 'checked',
+                consumer: 'checked',
               },
             ],
           },
@@ -158,25 +158,25 @@ Meteor.methods({
                 id: '423qwe',
                 name: 'Tupu',
                 provider: 'checked',
-                customer: false,
+                consumer: false,
               },
               {
                 id: '523qwe',
                 name: 'Hupu',
                 provider: 'checked',
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: '623qwe',
                 name: 'Lupu',
                 provider: false,
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: '723qwe',
                 name: 'Skrupu',
                 provider: false,
-                customer: 'checked',
+                consumer: 'checked',
               },
             ],
           },
@@ -191,31 +191,31 @@ Meteor.methods({
                 id: 'a123qwe',
                 name: 'Ismo',
                 provider: 'checked',
-                customer: false,
+                consumer: false,
               },
               {
                 id: 'b123qwe',
                 name: 'Asmo',
                 provider: 'checked',
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: 'c123qwe',
                 name: 'Osmo',
                 provider: false,
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: 'd123qwe',
                 name: 'Atso',
                 provider: 'checked',
-                customer: 'checked',
+                consumer: 'checked',
               },
               {
                 id: 'e123qwe',
                 name: 'Matso',
                 provider: false,
-                customer: 'checked',
+                consumer: 'checked',
               },
             ],
           },
@@ -355,8 +355,8 @@ Meteor.methods({
         if (user.provider) {
           tenantRoles.push('data-provider');
         }
-        if (user.customer) {
-          tenantRoles.push('data-customer');
+        if (user.consumer) {
+          tenantRoles.push('data-consumer');
         }
         return {
           id: user.id,
