@@ -492,12 +492,12 @@ Meteor.methods({
       const accessToken = getTenantToken();
 
        // Serialize to JSON
-      const payLoadToSend = JSON.stringify(tenantPayload);
+      const payLoadToSend = JSON.stringify(tenantPayload.body);
 
       console.log('\n ----------------- Update tenant ---------------------\n');
       console.log('tenant tuli =', tenantPayload);
       console.log('tenant url=', tenantUrl);
-      console.log('update tenant payload=\n', JSON.stringify(tenantPayload, null, 2));
+      console.log('update tenant payload=\n', JSON.stringify(tenantPayload.body, null, 2));
 
       try {
         const result = HTTP.patch(
@@ -507,7 +507,7 @@ Meteor.methods({
               'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
-            content: payLoadToSend.body,
+            content: payLoadToSend,
           }
         );
         // Create a monitoring data
