@@ -144,8 +144,7 @@ Template.tenantForm.events({
          - if user is present in both, but no changes, skip (remove user from new tenant user list)
          - if user is present in both, and there are changes
            -> fill remove op for user
-           -> fill add op with new data
-           + remove user from new tenant user list
+           + DO NOT remove user from new tenant user list
 
         Secondly check remaining list of users in new tenant
         - user(s) left
@@ -180,7 +179,7 @@ Template.tenantForm.events({
           };
           console.log('removeduser=', removedUser);
           changeList.push(removedUser);
-          // If user data is modified, add user with new data
+          // If user data is modified, set user to be removed
         } else if (origUser.consumer !== sameUserInModified[0].consumer ||
                    origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
@@ -190,51 +189,31 @@ Template.tenantForm.events({
           console.log('origUser.cust=', origUser.consumer);
           console.log('mod.cust=', sameUserInModified[0].consumer);
 
-          // collect roles
-          const tenantRoles = [];
-          if (sameUserInModified[0].provider) {
-            tenantRoles.push('data-provider');
-          }
-          if (sameUserInModified[0].consumer) {
-            tenantRoles.push('data-consumer');
-          }
-
-          // collect user data
-          const value = {
-            id: sameUserInModified[0].id,
-            name: sameUserInModified[0].name,
-            roles: tenantRoles,
-          };
-
           let path = '/users/';
           // indicate user with original user data index
           path = path.concat(index);
-
-          const replacedUser = {
-            op: 'replace',
+          const removedUser = {
+            op: 'remove',
             path,
-            value,
           };
-
-          console.log('mod.users=', modifiedTenant.users);
-
-          modifiedTenant.users.splice(modifiedUserIndex, 1);
-          console.log('replacedUser=', replacedUser);
-          changeList.push(replacedUser);
+          console.log('removeduser=', removedUser);
+          changeList.push(removedUser);
         } else {
+          // User data not changed, remove from modified list only
           modifiedTenant.users.splice(modifiedUserIndex, 1);
         }
 
         return changeList;
       }, []);
 
-      // Included removed and modified users to request
+      // Include removed users to request
       console.log('userChanges=', userChanges);
       if (userChanges.length > 0) {
         modifyTenantPayload.id = originalTenant.id;
         modifyTenantPayload.body = modifyTenantPayload.body.concat(userChanges);
       }
 
+      // If there are any modified users left, they are to be added into request
       console.log('muutetut vaiheen 1 jälkeen=', modifiedTenant.users);
       const newUsers = modifiedTenant.users.map((user) => {
         // collect roles
@@ -253,7 +232,7 @@ Template.tenantForm.events({
           roles: tenantRoles,
         };
 
-        // Finalize reuest element
+        // Finalize request element
         const addedUser = {
           op: 'add',
           path: '/users/-',
@@ -277,6 +256,14 @@ Template.tenantForm.events({
           if (result) {
             console.log(+new Date(), ' 2 a result=', result);
             if (result.status === 200) {
+              // New tenant successfully added on manager side, empty local list
+              tenantList = [];
+              // Save to sessionStorage to be used while adding users to tenant
+              Session.set('tenantList', tenantList);
+
+              // Close modal
+              Modal.hide('tenantForm');
+
               // Get success message translation
               const message = TAPi18n.__('tenantForm_update_Success_Message');
               // Alert user of success
