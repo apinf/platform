@@ -215,6 +215,20 @@ Template.tenantCatalog.events({
     const tenantRemoveIndex = $(event.target).data('value');
 
     // Read tenant list
+    const tenantList = Session.get('tenantList');
+
+    // get selected tenant data
+    const tenantToRemove = tenantList[tenantRemoveIndex];
+    console.log('poistettava tenantti=', tenantToRemove);
+
+    // Open modal form for ensuring tenant removal
+    Modal.show('ensureTenantRemovalForm', { tenantRemoveIndex, tenantToRemove });
+  },
+  'click #remove-tenant-confirmed': function (event) {
+    // The button sends the index of tenant to be removed
+    const tenantRemoveIndex = $(event.target).data('value');
+
+    // Read tenant list
     let tenantList = Session.get('tenantList');
 
     // get selected tenant data

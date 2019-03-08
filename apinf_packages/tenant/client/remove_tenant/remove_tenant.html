@@ -1,0 +1,98 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="ensureTenantRemovalForm">
+  <div
+    class="modal fade"
+    id="tenantFormModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="tenantFormModalLabel" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title" id="tenantFormModalLabel">
+            Tenant removal
+          </h2>
+        </div>
+
+        <!-- body -->
+        <div class="modal-body">
+          <fieldset>
+          <!-- Tenant name -->
+
+          Tähän indeksi <br />
+          {{ tenantRemoveIndex}}
+
+          <br />Tenantti itse
+          {{ tenantToRemove.name }}
+          <br />
+          Taas muuta
+          {{# if tenantToModify }}
+            <span class="control-label">{{_ "tenantForm_tenantName" }}</span><br />
+            <span style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToModify.name }}</span><br />
+          {{ else }}
+            <span itemprop="tenantName">
+              <div class="form-group" data-required="true">
+                <label for="add-tenant-name" class="control-label">{{_ "tenantForm_tenantName" }}</label>
+                <input type="text"
+                        name="name"
+                        id="add-tenant-name"
+                        required=""
+                        data-schema-key="name"
+                        class="form-control"
+                        value={{ tenantToModify.name }}>
+                <span class="help-block"></span>
+              </div>
+            </span>
+          {{/ if }}
+
+            <!-- Tenant description -->
+            <span itemprop="tenantDescription">
+              <div class="form-group" data-required="true">
+                <label for="add-tenant-description" class="control-label">{{_ "tenantForm_tenantDescription" }}</label>
+                  <textarea name="description"
+                            placeholder="Tell about your tenant"
+                            id="add-tenant-description"
+                            required=""
+                            data-schema-key="description"
+                            class="form-control">{{ tenantToModify.description }}</textarea>
+                  <span class="help-block"></span>
+              </div>
+            </span>
+
+            <div style="padding-bottom: 10px;">
+              {{> tenantUserForm }}
+            </div>
+            <hr>
+            <div>
+              {{> tenantUsersList tenantUsers=tenantToModify.users }}
+            </div>
+          </fieldset>
+        </div>
+
+
+
+        <!-- footer -->
+        <div class="modal-footer">
+
+            <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
+              No, do not remove
+            </button>
+
+            <button type="submit" class="btn btn-success" id="xxxsave-tenant">
+              Yes, remove
+            </button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
