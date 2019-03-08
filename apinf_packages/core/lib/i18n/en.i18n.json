@@ -761,6 +761,7 @@
   "proxyBackendForm_request_header_helpText": "Headers to be added by Proxy into requests.",
   "proxyBackendForm_request_helpText": "Request",
   "proxyBackendForm_response_helpText": "Response",
+  "proxyBackendForm_redirect_helpText": "Redirect",
   "proxyBackendForm_requiredErrorMessage": "Please fill in the required fields",
   "proxyBackendForm_subsettings_additional_helpText_1": "'Sub settings' refer to sub URL settings. These are related to FIWARE integration, but they can be useful in some scenarios. If you want to restrict traffic based on HTTP verbs, require that some headers are present, these settings are your friends.",
   "proxyBackendForm_subsettings_additional_helpText_2": "HTTP Methods: Here you can select the sub-URL, i.e. method, which settings altered are altered.",
