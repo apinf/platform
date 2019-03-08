@@ -13,7 +13,6 @@
 **Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
 
 - [Docker image](#docker-image)
-- [API Umbrella Dashboard](#api-umbrella-dashboard)
 - [Development status](#development-status)
 - [Automated testing](#testing)
 - [Nightly build](#nightly-build)
@@ -34,7 +33,7 @@
 Docker images are hosted in Dockerhub: https://hub.docker.com/r/apinf/platform/tags
 
 # APInf  API management
-The APInf platform offers a comprehensive tool for API management. Building on [API Umbrella](http://nrel.github.io/api-umbrella/), it provides enhanced user interface features for API managers and consumers alike.
+The APInf platform offers a comprehensive tool for API management. Building on [APInf Umbrella](https://github.com/apinf/api-umbrella), it provides enhanced user interface features for API managers and consumers alike.
 
 For API consumers APInf provides simple key management, key usage analytics and API discovery along with API documentation. Managers have simplified workflow for common tasks, such as key management, rate limiting and viewing API usage analytics.
 
