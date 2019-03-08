@@ -59,11 +59,7 @@ Meteor.methods({
     console.log('tenant url=', tenantUrl);
 
     console.log('\n ------------ Fetch Tenant list -------------- \n');
-    if (!tenantUrl) {
-      // Return error object
-      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
-      throw new Meteor.Error(errorMessage);
-    } else {
+    if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -220,9 +216,12 @@ Meteor.methods({
             ],
           },
         ];
-
         console.log('3 b tenant nok, artificial response=', response);
       }
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
     }
 
     // console.log('4 GET tenant response=', response);
@@ -476,11 +475,7 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    if (!tenantUrl) {
-      // Return error object
-      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
-      throw new Meteor.Error(errorMessage);
-    } else {
+    if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
@@ -523,9 +518,13 @@ Meteor.methods({
         // Return error object
         throw new Meteor.Error(err.message);
       }
-    }
+      console.log(+new Date(), ' 4 PATCH response=', response);
+      return response;
 
-    console.log(+new Date(), ' 4 PATCH response=', response);
-    return response;
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    }
   },
 });

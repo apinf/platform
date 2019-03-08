@@ -163,6 +163,7 @@ Template.tenantForm.events({
             modifiedUserIndex = modifiedIndex;
             return true;
           }
+          return false;
         });
 
         console.log('sameusers=', sameUserInModified);
@@ -257,7 +258,7 @@ Template.tenantForm.events({
             console.log(+new Date(), ' 2 a result=', result);
             if (result.status === 200) {
               // New tenant successfully added on manager side, empty local list
-              tenantList = [];
+              const tenantList = [];
               // Save to sessionStorage to be used while adding users to tenant
               Session.set('tenantList', tenantList);
 
