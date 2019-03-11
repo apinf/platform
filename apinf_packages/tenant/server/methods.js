@@ -518,13 +518,12 @@ Meteor.methods({
         // Return error object
         throw new Meteor.Error(err.message);
       }
-      console.log(+new Date(), ' 4 PATCH response=', response);
-      return response;
-
     } else {
       // Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
+    console.log(+new Date(), ' 4 PATCH response=', response);
+    return response;
   },
 });

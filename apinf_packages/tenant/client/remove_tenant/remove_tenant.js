@@ -8,9 +8,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
-
-// Npm packages imports
-import _ from 'lodash';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 Template.ensureTenantRemovalForm.events({
   'click #remove-tenant-confirmed': function (event) {

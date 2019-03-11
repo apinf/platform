@@ -31,8 +31,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <fieldset>
             <!-- Tenant name -->
             {{# if tenantToModify }}
-              <span class="control-label">{{_ "tenantForm_tenantName" }}</span><br />
-              <span style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToModify.name }}</span><br />
+              <div class="control-label">{{_ "tenantForm_tenantName" }}</div>
+              <div style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToModify.name }}</div>
             {{ else }}
               <span itemprop="tenantName">
                 <div class="form-group" data-required="true">
