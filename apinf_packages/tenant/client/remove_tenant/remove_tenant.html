@@ -18,80 +18,39 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <span aria-hidden="true">&times;</span>
           </button>
           <h2 class="modal-title" id="tenantFormModalLabel">
-            Tenant removal
+            {{_ "tenantRemoveForm_title" }}
           </h2>
         </div>
 
         <!-- body -->
         <div class="modal-body">
           <fieldset>
-          <!-- Tenant name -->
-
-          Tähän indeksi <br />
-          {{ tenantRemoveIndex}}
-
-          <br />Tenantti itse
-          {{ tenantToRemove.name }}
-          <br />
-          Taas muuta
-          {{# if tenantToModify }}
-            <span class="control-label">{{_ "tenantForm_tenantName" }}</span><br />
-            <span style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToModify.name }}</span><br />
-          {{ else }}
-            <span itemprop="tenantName">
-              <div class="form-group" data-required="true">
-                <label for="add-tenant-name" class="control-label">{{_ "tenantForm_tenantName" }}</label>
-                <input type="text"
-                        name="name"
-                        id="add-tenant-name"
-                        required=""
-                        data-schema-key="name"
-                        class="form-control"
-                        value={{ tenantToModify.name }}>
-                <span class="help-block"></span>
-              </div>
-            </span>
-          {{/ if }}
+            <div style="padding-bottom: 12px;">
+              {{_ "tenantRemoveForm_question" }}
+            </div>
+            <!-- Tenant name -->
+            <div class="control-label">{{_ "tenantForm_tenantName" }}</div>
+            <div style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToRemove.name }}</div>
 
             <!-- Tenant description -->
-            <span itemprop="tenantDescription">
-              <div class="form-group" data-required="true">
-                <label for="add-tenant-description" class="control-label">{{_ "tenantForm_tenantDescription" }}</label>
-                  <textarea name="description"
-                            placeholder="Tell about your tenant"
-                            id="add-tenant-description"
-                            required=""
-                            data-schema-key="description"
-                            class="form-control">{{ tenantToModify.description }}</textarea>
-                  <span class="help-block"></span>
-              </div>
-            </span>
 
-            <div style="padding-bottom: 10px;">
-              {{> tenantUserForm }}
-            </div>
-            <hr>
-            <div>
-              {{> tenantUsersList tenantUsers=tenantToModify.users }}
-            </div>
+            <div class="control-label">{{_ "tenantForm_tenantDescription" }}</div>
+            <div style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToRemove.description }}</div>
+
           </fieldset>
         </div>
 
-
-
         <!-- footer -->
         <div class="modal-footer">
-
-            <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
-              No, do not remove
-            </button>
-
-            <button type="submit" class="btn btn-success" id="xxxsave-tenant">
-              Yes, remove
-            </button>
-
+          <!-- Cancel operation with button -->
+          <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
+            {{_ "tenantForm_button_cancel" }}
+          </button>
+          <!-- Confirm operation with this button -->
+          <button type="submit" class="btn btn-success" id="remove-tenant-confirmed" data-value={{ tenantRemoveIndex }}>
+            {{_ "tenantRemoveForm_button_remove" }}
+          </button>
         </div>
-
       </div>
     </div>
   </div>

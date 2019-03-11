@@ -75,13 +75,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <!-- footer -->
         <div class="modal-footer">
+          <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
+            {{_ "tenantForm_button_cancel" }}
+          </button>
           {{# if tenantToModify }}
             <button type="submit" class="btn btn-success" id="modify-tenant">
-              {{_ "tenantForm_title_modify" }}
+              {{_ "tenantForm_modifyButton_text" }}
             </button>
           {{ else }}
             <button type="submit" class="btn btn-success" id="save-tenant">
-              {{_ "tenantForm_title_add" }}
+              {{_ "tenantForm_saveButton_text" }}
             </button>
           {{/ if }}
         </div>

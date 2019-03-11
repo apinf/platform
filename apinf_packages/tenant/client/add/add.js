@@ -286,7 +286,7 @@ Template.tenantForm.events({
         });
       } else {
         // Get success message translation
-        const message = TAPi18n.__('tenantForm_NoChanges_Message');
+        const message = TAPi18n.__('tenantForm_noChanges_Message');
         // Alert user of success
         sAlert.success(message);
       }
