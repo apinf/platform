@@ -11,10 +11,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <th>
             {{_ "tenantCatalogTable_header_tenants" }} ({{ tenantsCount }})
           </th>
-          <th>
+          <th style="width: 45%">
             {{_ "tenantCatalogTable_header_username" }}
           </th>
-          <th>
+          <th style="width: 25%">
             {{_ "tenantCatalogTable_header_action" }}
           </th>
         </tr>
@@ -22,29 +22,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <tbody>
         {{#each tenant in tenantList}}
         <tr style="border: 1px dashed black;">
-          <td style="padding-left: 5px;">
+          <td style="padding-left: 10px;">
             <span style="font-weight: bold;">{{ tenant.name }}</span><br />
             {{ tenant.description }}
           </td>
 
           <td style="padding-bottom: 10px;">
             <tr>
-              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_username" }}</th>
-              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_provider" }}</th>
-              <th style="padding-left: 10px;">{{_ "tenantCatalogTable_row_title_consumer" }}</th>
+              <th style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_username" }}
+              </th>
+              <th style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_provider" }}
+              </th>
+              <th style="padding-left: 10px; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_consumer" }}
+              </th>
             </tr>
 
             {{#each user in tenant.users}}
             <tr>
-              <td style="padding-left: 10px;">
+              <td style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
                 {{user.name}}
               </td>
-              <td style="padding-left: 10px;">
+              <td style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
                 {{#if user.provider}}
                   data-provider
                 {{/if}}
               </td>
-              <td style="padding-left: 10px;">
+              <td style="padding-left: 10px; border-bottom: 1px solid #ddd;">
                 {{#if user.consumer}}
                   data-consumer
                 {{/if}}
@@ -52,7 +58,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </tr>
             {{/each}}
           </td>
-          <td style="padding-left: 30px; padding-right:10px;">
+          <td style="padding-left: 10px; padding-right:10px;">
             <button id="edit-tenant"
                     type="button"
                     data-value={{ @index }}
@@ -63,7 +69,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <button id="remove-tenant"
                     type="button"
                     data-value={{ @index }}
-                    class="btn btn-danger btn-danger-special pull-right"
+                    class="btn btn-danger"
                     style="margin-top: 1rem;">
               {{_ "tenantCatalogTable_button_remove" }}
             </button>
