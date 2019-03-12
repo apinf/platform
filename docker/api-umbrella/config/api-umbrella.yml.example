@@ -9,13 +9,8 @@ web:
       - admin@apinf.dev
     auth_strategies:
       enabled:
-        - github
-        - google
-        - persona
+        - github        
       github:
-        client_id:
-        client_secret:
-      google:
         client_id:
         client_secret:
 elasticsearch:
@@ -23,7 +18,7 @@ elasticsearch:
   hosts:
     - http://elasticsearch.docker:9200
 mongodb:
-  url: mongodb://mongo:27017/api_umbrella_db
+  url: mongodb://mongo/api_umbrella_db
 nginx:
   workers: 4
 gatekeeper:
