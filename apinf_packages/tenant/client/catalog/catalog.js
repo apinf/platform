@@ -174,6 +174,16 @@ Template.tenantCatalog.helpers({
 });
 
 Template.tenantCatalog.events({
+  'mouseover #add-tenant': function () {
+    // eslint-disable-next-line
+    const expired = Template.authorizationForm.__helpers.get('tenantTokenExpiration').call();
+    if (expired.expirationEffect) {
+      // Get warning message translation
+      const message = TAPi18n.__('tenantForm_tokenExpiredWarning_message');
+      // Alert user of success
+      sAlert.warning(message);
+    }
+  },
   'click #add-tenant': function () {
     // Empty possible tenant user list
     if (Session.get('tenantUsers')) {
@@ -187,6 +197,16 @@ Template.tenantCatalog.events({
     }
     // Open modal form for adding tenant
     Modal.show('tenantForm');
+  },
+  'mouseover #edit-tenant': function () {
+    // eslint-disable-next-line
+    const expired = Template.authorizationForm.__helpers.get('tenantTokenExpiration').call();
+    if (expired.expirationEffect) {
+      // Get warning message translation
+      const message = TAPi18n.__('tenantForm_tokenExpiredWarning_message');
+      // Alert user of success
+      sAlert.warning(message);
+    }
   },
   'click #edit-tenant': function (event) {
     console.log('event=', event);
@@ -209,6 +229,16 @@ Template.tenantCatalog.events({
 
     // Open modal form for modifying tenant
     Modal.show('tenantForm', { tenantToModify });
+  },
+  'mouseover #remove-tenant': function () {
+    // eslint-disable-next-line
+    const expired = Template.authorizationForm.__helpers.get('tenantTokenExpiration').call();
+    if (expired.expirationEffect) {
+      // Get warning message translation
+      const message = TAPi18n.__('tenantForm_tokenExpiredWarning_message');
+      // Alert user of success
+      sAlert.warning(message);
+    }
   },
   'click #remove-tenant': function (event) {
     // The button sends the index of tenant to be removed

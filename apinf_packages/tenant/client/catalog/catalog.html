@@ -4,8 +4,8 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="tenantCatalog">
-  <div class="container-fluid secondary-menu-block" 
-       style="padding-left: 45px; padding-right: 45px;height: 60px;">
+  <div class="container-fluid secondary-menu-block"
+       style="padding-left: 45px; padding-right: 45px;height: 60px; ">
     <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
       <li class="col-md-4">
         <h1 style="margin-top:0; margin-bottom:0; line-height: 60px;">
@@ -17,9 +17,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       </li>
       <li class="col-md-4 text-right pull-right add-organization">
         {{# if userCanAddTenant }}
-          <button id="add-tenant" 
-                  type="button" 
-                  class="btn btn-success btn-success-special" 
+          <button id="add-tenant"
+                  type="button"
+                  class="btn btn-success btn-success-special"
                   style="margin-top: 1rem;">
             {{_ "tenantCatalog_buttonText_addTenant" }}
           </button>
@@ -31,7 +31,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="container" style="margin-top:20px;">
     {{# if Template.subscriptionsReady }}
      <!-- {{# if paginationReady }} -->
-      {{# if tenantsCount }} 
+      {{# if tenantsCount }}
         <!-- if viewMode is table, show table -->
         {{# if tableViewMode }}
           {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
