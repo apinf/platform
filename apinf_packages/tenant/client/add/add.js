@@ -100,7 +100,9 @@ Template.tenantForm.events({
     const originalTenant = this.tenantToModify;
     console.log('original tenant=', originalTenant);
 
-    if ($('#add-tenant-description').val() === '') {
+    if ($('#add-tenant-name').val() === '') {
+      sAlert.error('Tenant must have a name!', { timeout: 'none' });
+    } else if ($('#add-tenant-description').val() === '') {
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
       // initiate the object for changes
@@ -111,7 +113,7 @@ Template.tenantForm.events({
       // Collect the data for the changed tenant
       // At first general fields
       const modifiedTenant = {
-        name: originalTenant.name,
+        name: $('#add-tenant-name').val(),
         id: originalTenant.id,
         description: $('#add-tenant-description').val(),
       };
@@ -123,6 +125,19 @@ Template.tenantForm.events({
       }
 
       console.log('modified tenant=', modifiedTenant);
+
+      // Any changes in name
+      if (originalTenant.name !== modifiedTenant.name) {
+        // Fill in tenant id
+        modifyTenantPayload.id = originalTenant.id;
+        // Fill in change
+        const changedDescription = {
+          op: 'replace',
+          value: $('#add-tenant-name').val(),
+          path: '/name',
+        };
+        modifyTenantPayload.body.push(changedDescription);
+      }
 
       // Any changes in description
       if (originalTenant.description !== modifiedTenant.description) {
@@ -266,8 +281,9 @@ Template.tenantForm.events({
               Modal.hide('tenantForm');
 
               // Get success message translation
-              const message = TAPi18n.__('tenantForm_update_Success_Message');
+              let message = TAPi18n.__('tenantForm_update_Success_Message');
               // Alert user of success
+              message = message.concat(modifiedTenant.name);
               sAlert.success(message);
             } else {
               // Tenant update failure on manager side

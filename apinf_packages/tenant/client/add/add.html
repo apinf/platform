@@ -29,11 +29,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- body -->
           <div class="modal-body">
             <fieldset>
-            <!-- Tenant name -->
-            {{# if tenantToModify }}
-              <div class="control-label">{{_ "tenantForm_tenantName" }}</div>
-              <div style="padding-left: 12px; padding-bottom: 15px;">{{ tenantToModify.name }}</div>
-            {{ else }}
+              <!-- Tenant name -->
               <span itemprop="tenantName">
                 <div class="form-group" data-required="true">
                   <label for="add-tenant-name" class="control-label">{{_ "tenantForm_tenantName" }}</label>
@@ -47,7 +43,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                   <span class="help-block"></span>
                 </div>
               </span>
-            {{/ if }}
 
               <!-- Tenant description -->
               <span itemprop="tenantDescription">

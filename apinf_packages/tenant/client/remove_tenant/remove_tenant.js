@@ -34,6 +34,13 @@ Template.ensureTenantRemovalForm.events({
 
           // Close confirmation modal
           Modal.hide('ensureTenantRemovalForm');
+
+          // Get success message translation
+          let message = TAPi18n.__('tenantForm_removal_Success_Message');
+          // Alert user of success
+          message = message.concat(tenantToRemove.name);
+          sAlert.success(message);
+
         } else {
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
