@@ -4,44 +4,48 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="tenantUsersList">
-  <h2 style="font-size:1.4em;margin-top:0;">
-    {{_ "tenantUsersList_title" }}
-  </h2>
 
-  {{# if tenantUsers }}
-    <table class="rtable">
-      <thead>
-        <tr>
-          <th>{{_ "tenantUsersList_thead_username" }}</th>
-          <th>{{_ "tenantUsersList_thead_roles" }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{# each tenantUsers }}
-        <tr>
-          <td>{{ name }}</td>
-          <td>
-            <input type="checkbox"
-                   checked={{ provider }}
-                   id="tenantUserRoleProvider"
-                   name=tenantUserRoleProvider
-                   value="data-provider"
-                   class="tenantUserRoleProvider"> Data-provider <br />
-            <input type="checkbox"
-                   checked={{ consumer }}
-                   id="tenantUserRoleConsumer"
-                   name=tenantUserRoleConsumer
-                   value="data-consumer"
-                   class="tenantUserRoleConsumer"> Data-consumer
-          </td>
-          <td>
-            <button class="remove-tenant-user btn btn-danger btn-xs" style="height:auto;">
-              <i class="fa mdi mdi-delete" aria-hidden="true"></i>
-            </button>
-          </td>
-        </tr>
-        {{/ each }}
-      </tbody>
-    </table>
-  {{/ if }}
+  <span itemprop="tenantUsers">
+    <div class="form-group" data-required="false">
+      <label for="tenant-user-list" class="control-label">{{_ "tenantUsersList_title" }}</label>
+      <table class="rtable" id="tenant-user-list">
+        <thead>
+          <tr>
+            <th>{{_ "tenantUsersList_thead_username" }}</th>
+            <th>{{_ "tenantUsersList_thead_roles" }}</th>
+          </tr>
+        </thead>
+        {{# if tenantUsers }}
+          <tbody>
+            {{# each tenantUsers }}
+            <tr>
+              <td>{{ name }}</td>
+              <td>
+                <input type="checkbox"
+                        checked={{ provider }}
+                        id="tenantUserRoleProvider"
+                        name=tenantUserRoleProvider
+                        value="data-provider"
+                        class="tenantUserRoleProvider"> Data-provider <br />
+                <input type="checkbox"
+                        checked={{ consumer }}
+                        id="tenantUserRoleConsumer"
+                        name=tenantUserRoleConsumer
+                        value="data-consumer"
+                        class="tenantUserRoleConsumer"> Data-consumer
+              </td>
+              <td>
+                <button class="remove-tenant-user btn btn-danger btn-xs" style="height:auto;">
+                  <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            {{/ each }}
+          </tbody>
+          {{/ if }}
+        </table>
+
+        <span class="help-block"></span>
+    </div>
+  </span>
 </template>

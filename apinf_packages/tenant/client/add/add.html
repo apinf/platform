@@ -58,12 +58,14 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
               </span>
 
-              <div style="padding-bottom: 10px;">
-                {{> tenantUserForm }}
-              </div>
-              <hr>
+              <!-- Tenant users -->
               <div>
                 {{> tenantUsersList tenantUsers=tenantToModify.users }}
+              </div>
+              <hr>
+              <!-- Tenant user addition -->
+              <div style="padding-bottom: 10px;">
+                {{> tenantUserForm }}
               </div>
             </fieldset>
           </div>
