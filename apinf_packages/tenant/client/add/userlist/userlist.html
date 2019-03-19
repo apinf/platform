@@ -12,9 +12,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <table class="rtable">
       <thead>
         <tr>
-          <th>Username    {{_ "tenantUsersList_thead_username" }}</th>
-          <th>Roles    {{_ "tenantUsersList_thead_roles" }}</th>
-          <!--th>Consumer</th-->
+          <th>{{_ "tenantUsersList_thead_username" }}</th>
+          <th>{{_ "tenantUsersList_thead_roles" }}</th>
         </tr>
       </thead>
       <tbody>
@@ -28,8 +27,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                    name=tenantUserRoleProvider
                    value="data-provider"
                    class="tenantUserRoleProvider"> Data-provider <br />
-          <!--/td>
-          <td-->
             <input type="checkbox"
                    checked={{ consumer }}
                    id="tenantUserRoleConsumer"

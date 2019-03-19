@@ -6,12 +6,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
+import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.tenantUserForm.events({
   'click #addUserToTenant': function () {
     if ($('#completeUserList')[0].selectedIndex < 0) {
-      sAlert.error('You must select a user!', { timeout: 'none' });
+      // User not selected, get error message translation
+      const errorMmessage = TAPi18n.__('tenantUserForm_errorTextUserNotSelected');
+      // Alert user of error
+      sAlert.error(errorMmessage, { timeout: 'none' });
     } else {
       const newUser = {
         id: $('#completeUserList option:selected').val(),
@@ -20,20 +24,34 @@ Template.tenantUserForm.events({
         consumer: false,
       };
 
-      // unselect username
-      $('#completeUserList option:selected').prop('selected', false);
-
       let tenantUsers = [];
       // Get possible previous users of tenant
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
       }
 
-      // Add new user object to array
-      tenantUsers.push(newUser);
+      // Check if the new user already is a user of Tenant
+      const userAlreadyInArray = tenantUsers.find((user) => {
+        return user.name === newUser.name;
+      });
 
-      // Save to localStorage to be used while listing users of tenant
-      Session.set('tenantUsers', tenantUsers);
+      // Add to user list unless already included in
+      if (userAlreadyInArray) {
+        // Duplicate user, get error message translation
+        let errorMmessage = TAPi18n.__('tenantUserForm_errorTextDuplicateUser');
+        errorMmessage = errorMmessage.concat(newUser.name);
+        // Alert user of error
+        sAlert.error(errorMmessage, { timeout: 'none' });
+      } else {
+        // Add new user object to array
+        tenantUsers.push(newUser);
+
+        // Save to localStorage to be used while listing users of tenant
+        Session.set('tenantUsers', tenantUsers);
+
+        // unselect username
+        $('#completeUserList option:selected').prop('selected', false);
+      }
     }
   },
 });

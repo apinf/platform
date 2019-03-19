@@ -1463,6 +1463,8 @@
   "tenantRemoveForm_title": "Tenant removal",
   "tenantRequest_missingBasepath": "Tenant Manager basepath is missing from Settings",
   "tenantUserForm_addButton_text": "Add user for Tenant",
+  "tenantUserForm_errorTextUserNotSelected": "No User is selected for addition!",
+  "tenantUserForm_errorTextDuplicateUser": "This user already exists on Tenants user list: ",
   "tenantUserForm_help_addUser": "Select user and give roles",
   "tenantUserForm_title_addUser": "Add a new user for tenant",
   "tenantUsersList_title": "Users of this tenant",
