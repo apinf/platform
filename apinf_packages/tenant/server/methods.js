@@ -259,6 +259,7 @@ Meteor.methods({
           }
         );
 
+        console.log('users=', result.content);
         // deserialize JSON from manager
         const resultFromTenantManager = JSON.parse(result.content);
         // We need only id and username, so pick them
@@ -266,6 +267,8 @@ Meteor.methods({
           return {
             id: user.id,
             username: user.username,
+            enabled: user.enabled,
+            email: user.email,
           };
         });
 

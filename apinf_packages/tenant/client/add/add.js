@@ -22,6 +22,7 @@ Template.tenantForm.events({
     } else {
       const tenant = {};
       let tenantUsers = [];
+      let notifyUserList = [];
 
       tenant.name = $('#add-tenant-name').val();
       tenant.description = $('#add-tenant-description').val();
@@ -30,8 +31,9 @@ Template.tenantForm.events({
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
         console.log('tenantUsers=', tenantUsers);
-        // convert user objects to a list
+        // convert user objects to a list for POST operation
         tenant.users = tenantUsers.map((userdata) => {
+          console.log('userdata=', userdata);
           const usersRow = {
             id: userdata.id,
             name: userdata.name,
@@ -40,7 +42,15 @@ Template.tenantForm.events({
           };
           return usersRow;
         });
+        // gather list of notified users email addresses
+        notifyUserList = tenantUsers.filter((userdata) => {
+          if (userdata.notification === 'checked') {
+            return userdata.email;
+          }
+        });
       }
+
+      console.log('notifyUserList=', notifyUserList);
 
       // Set local tenant list empty
       let tenantList = [];

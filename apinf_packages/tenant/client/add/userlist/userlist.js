@@ -69,5 +69,24 @@ Template.tenantUsersList.events({
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
   },
+  'change .notificationToUser': function (event) {
+    console.log('notif=', event);
+    let tenantUsers = [];
+    // Get possible previous users of tenant
+    if (Session.get('tenantUsers')) {
+      tenantUsers = Session.get('tenantUsers');
+    }
+
+    // update user's role, provider
+    tenantUsers = tenantUsers.map(user => {
+      if (user.id === this.id) {
+        user.notification = event.currentTarget.checked ? 'checked' : false;
+      }
+      return user;
+    });
+
+    // Save to localStorage to be used while listing users of tenant
+    Session.set('tenantUsers', tenantUsers);
+  },
 
 });
