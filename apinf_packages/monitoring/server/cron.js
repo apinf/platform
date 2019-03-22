@@ -18,14 +18,12 @@ import Apis from '/apinf_packages/apis/collection';
 import { MonitoringSettings } from '/apinf_packages/monitoring/collection';
 
 Meteor.methods({
-  startCron (apiId, url, endPoint) {
+  startCron (apiId, url) {
     // Make sure apiId is a String
     check(apiId, String);
     // Make sure url is a String
     check(url, String);
-    // Make sure endPoint is a String
-    // eslint-disable-next-line new-cap
-    check(endPoint, Match.Maybe(String));
+
     // Create unique name for Cron job
     const uniqueName = `Monitoring: ${apiId}`;
 
@@ -44,7 +42,7 @@ Meteor.methods({
       },
       job () {
         // Get API status using http request
-        Meteor.call('getApiStatus', apiId, url, endPoint);
+        Meteor.call('getApiStatus', apiId, url);
       },
     });
   },
@@ -68,8 +66,8 @@ Meteor.methods({
     _.forEach(monitoringEnabled, (data) => {
       // If enabled is true then switch the monitoring
       if (data.enabled) {
-        Meteor.call('getApiStatus', data.apiId, data.url, data.endPoint);
-        Meteor.call('startCron', data.apiId, data.url, data.endPoint);
+        Meteor.call('getApiStatus', data.apiId, data.url);
+        Meteor.call('startCron', data.apiId, data.url);
       }
     });
   },

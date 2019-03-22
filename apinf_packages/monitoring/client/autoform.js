@@ -80,7 +80,7 @@ AutoForm.hooks({
           Apis.update(apiId, { $set: { monitoringId: result } });
 
           // Start Cron
-          Meteor.call('startCron', apiId, monitoring.url, monitoring.endPoint);
+          Meteor.call('startCron', apiId, monitoring.url);
         }
       },
     },
