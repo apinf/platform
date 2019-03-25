@@ -20,12 +20,10 @@ Template.ensureTenantRemovalForm.events({
 
     // get selected tenant data
     const tenantToRemove = tenantList[tenantRemoveIndex];
-    console.log('poistettava tenantti=', tenantToRemove);
 
     // DELETE /tenant
     Meteor.call('deleteTenant', tenantToRemove, (error, result) => {
       if (result) {
-        console.log(+new Date(), ' 2 a result=', result);
         if (result.status === 204) {
           // New tenant successfully added on manager side, empty local list
           tenantList = [];
@@ -47,7 +45,6 @@ Template.ensureTenantRemovalForm.events({
           sAlert.error(errorMessage, { timeout: 'none' });
         }
       } else {
-        console.log(+new Date(), ' 2 b error=', error);
         // Tenant addition failure on manager side, save new tenant object to local array
         const errorMessage = `Tenant removal failed!  (${error}).`;
         sAlert.error(errorMessage, { timeout: 'none' });

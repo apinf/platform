@@ -244,7 +244,6 @@ Meteor.methods({
       check(tenantUrl, Match.Maybe(String));
       // Add endpoint to base path
       tenantUrl = tenantUrl.concat('user');
-      console.log(+new Date(), ' 1 send GET userlist request to=\n', tenantUrl);
 
       // Get user's tenant access token
       const accessToken = getTenantToken();
@@ -278,8 +277,6 @@ Meteor.methods({
         response.completeUserList = completeUserList;
         response.status = result.statusCode;
       } catch (err) {
-        console.log('3 user GET b err=\n', err);
-        console.log('err resp=', err.response.statusCode);
 
         response.status = err.response.statusCode;
         response.content = err.response.content;
@@ -398,9 +395,8 @@ Meteor.methods({
         console.log('3 a ok, response=', response);
       } catch (err) {
         console.log(+new Date(), ' 3 POST b err=', err);
-        response.status = err.response.statusCode || 500;
-        response.content = err.response.content || err.error;
-        console.log('3 b nok, response=', response);
+      //  response.status = err.response.statusCode || 500;
+      //  response.content = err.response.content || err.error;
 
         // Return error object
         throw new Meteor.Error(err.message);

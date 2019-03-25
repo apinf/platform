@@ -22,8 +22,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       <tbody>
         {{#each tenant in tenantList}}
         <tr style="border: 1px dashed black;">
-          <td style="padding-left: 10px;">
-            <span style="font-weight: bold;">{{ tenant.name }}</span><br />
+          <td style="padding-left: 10px; vertical-align: top;">
+            <span style="font-weight: bold; border-bottom: 1px solid #ddd; width: 100%;">{{ tenant.name }}</span><br />
             {{ tenant.description }}
           </td>
 
@@ -58,6 +58,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </tr>
             {{/each}}
           </td>
+          <!-- Buttons -->
           <td style="padding-left: 10px; padding-right:10px;">
             {{#if tenantOwner tenant.owner_id }}
               <button id="edit-tenant"
