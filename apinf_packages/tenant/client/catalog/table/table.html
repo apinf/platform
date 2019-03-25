@@ -59,20 +59,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/each}}
           </td>
           <td style="padding-left: 10px; padding-right:10px;">
-            <button id="edit-tenant"
-                    type="button"
-                    data-value={{ @index }}
-                    class="btn btn-primary"
-                    style="margin-top: 1rem;">
-              {{_ "tenantCatalogTable_button_edit" }}
-            </button>
-            <button id="remove-tenant"
-                    type="button"
-                    data-value={{ @index }}
-                    class="btn btn-danger"
-                    style="margin-top: 1rem;">
-              {{_ "tenantCatalogTable_button_remove" }}
-            </button>
+            {{#if tenantOwner tenant.owner_id }}
+              <button id="edit-tenant"
+                      type="button"
+                      data-value={{ @index }}
+                      class="btn btn-primary"
+                      style="margin-top: 1rem;">
+                {{_ "tenantCatalogTable_button_edit" }}
+              </button>
+              <button id="remove-tenant"
+                      type="button"
+                      data-value={{ @index }}
+                      class="btn btn-danger"
+                      style="margin-top: 1rem;">
+                {{_ "tenantCatalogTable_button_remove" }}
+              </button>
+            {{/if}}
           </td>
         </tr>
         {{/each}}
