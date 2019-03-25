@@ -178,6 +178,8 @@ Template.tenantForm.events({
           -> all is done
        */
 
+      const usersNeedChecking = [];
+
        // Go through tenant's original user list and compare it against tenant's modified user list
        // Must loop array from right to left in order to get user indexes in reverse order
       const userChanges = originalTenant.users.reduceRight((changeList, origUser, index) => {
@@ -208,7 +210,17 @@ Template.tenantForm.events({
           };
           console.log('removeduser=', removedUser);
           changeList.push(removedUser);
-          // If user data is modified, set user to be removed
+
+          // Add user also to check list
+          const checkPath = path.concat('/name');
+          const checkUser = {
+            op: 'test',
+            value: origUser.name,
+            path: checkPath,
+          };
+          usersNeedChecking.push(checkUser);
+
+          // If user data is modified, set user to be replaced
         } else if (origUser.consumer !== sameUserInModified[0].consumer ||
                    origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
@@ -221,7 +233,7 @@ Template.tenantForm.events({
           let path = '/users/';
           // indicate user with original user data index
           path = path.concat(index);
-          path = path.concat('/roles');
+          const modifyPath = path.concat('/roles');
 
           // collect roles
           const tenantRoles = [];
@@ -234,11 +246,20 @@ Template.tenantForm.events({
           // add modified user info to list
           const modifiedUser = {
             op: 'replace',
-            path,
+            path: modifyPath,
             value: tenantRoles,
           };
           console.log('modifiedUser=', modifiedUser);
           changeList.push(modifiedUser);
+
+          // Add user also to check list
+          const checkPath = path.concat('/name');
+          const checkUser = {
+            op: 'test',
+            value: origUser.name,
+            path: checkPath,
+          };
+          usersNeedChecking.push(checkUser);
 
           // User data is changed, remove from modified list
           modifiedTenant.users.splice(modifiedUserIndex, 1);
@@ -293,53 +314,77 @@ Template.tenantForm.events({
       }
 
       console.log('update Tenant payload=', modifyTenantPayload);
-      if (modifyTenantPayload.body.length > 0) {
-        if (modifyTenantPayload.id) {
-          // PATCH /tenant
-          Meteor.call('updateTenant', modifyTenantPayload, (error, result) => {
-            if (result) {
-              console.log(+new Date(), ' 2 a result=', result);
-              if (result.status === 200) {
-                // New tenant successfully added on manager side, empty local list
-                const tenantList = [];
-                // Save to sessionStorage to be used while adding users to tenant
-                Session.set('tenantList', tenantList);
 
-                // Close modal
-                Modal.hide('tenantForm');
+      // Check if modified users exist on server side
+      const userCheckData = {};
+      if (usersNeedChecking.length > 0) {
+        console.log('Tarkistettavia=', usersNeedChecking);
+        userCheckData.id = originalTenant.id;
+        userCheckData.type = 'user';
+        userCheckData.body = usersNeedChecking;
+      }
 
-                // Get success message translation
-                let message = TAPi18n.__('tenantForm_update_Success_Message');
-                // Alert user of success
-                message = message.concat(modifiedTenant.name);
-                sAlert.success(message);
-              } else {
-                // Tenant update failure on manager side
-                let errorMessage = TAPi18n.__('tenantForm_update_Failure_Message');
-                errorMessage = errorMessage.concat(result);
-                sAlert.error(errorMessage, { timeout: 'none' });
-              }
-            }
-            if (error) {
-              console.log(+new Date(), ' 2 b error=', error);
-              // Tenant addition failure on manager side, save new tenant object to local array
-              let errorMessage = TAPi18n.__('tenantForm_update_error_Message');
-              errorMessage = errorMessage.concat(error);
+      // At first PATCH with op code "check"
+      Meteor.call('checkTenantUsers', userCheckData, (error, result) => {
+        if (result) {
+          console.log(+new Date(), ' Tenant User check OK');
+          if (modifyTenantPayload.body.length > 0) {
+            if (modifyTenantPayload.id) {
+              // After users are successfully checked, PATCH /tenant
+              Meteor.call('updateTenant', modifyTenantPayload, (error, result) => {
+                if (result) {
+                  console.log(+new Date(), ' 2 a result=', result);
+                  if (result.status === 200) {
+                    // New tenant successfully added on manager side, empty local list
+                    const tenantList = [];
+                    // Save to sessionStorage to be used while adding users to tenant
+                    Session.set('tenantList', tenantList);
+
+                    // Close modal
+                    Modal.hide('tenantForm');
+
+                    // Get success message translation
+                    let message = TAPi18n.__('tenantForm_update_Success_Message');
+                    // Alert user of success
+                    message = message.concat(modifiedTenant.name);
+                    sAlert.success(message);
+                  } else {
+                    // Tenant update failure on manager side
+                    let errorMessage = TAPi18n.__('tenantForm_update_Failure_Message');
+                    errorMessage = errorMessage.concat(result);
+                    sAlert.error(errorMessage, { timeout: 'none' });
+                  }
+                }
+                if (error) {
+                  console.log(+new Date(), ' 2 b error=', error);
+                  // Tenant addition failure on manager side, save new tenant object to local array
+                  let errorMessage = TAPi18n.__('tenantForm_update_error_Message');
+                  errorMessage = errorMessage.concat(error);
+                  sAlert.error(errorMessage, { timeout: 'none' });
+                }
+              });
+            } else {
+              // Get error message translation
+              const errorMessage = TAPi18n.__('tenantForm_id_missing_Message');
+              // Alert user of success
               sAlert.error(errorMessage, { timeout: 'none' });
             }
-          });
-        } else {
-          // Get error message translation
-          const errorMessage = TAPi18n.__('tenantForm_id_missing_Message');
-          // Alert user of success
+          } else {
+            // Get warning message translation
+            const message = TAPi18n.__('tenantForm_noChanges_Message');
+            // Alert user of success
+            sAlert.warning(message);
+          }
+        }
+
+        if (error) {
+          console.log(+new Date(), ' Tenant User check error=', error);
+          // Tenant check failure on manager side, alert
+          let errorMessage = TAPi18n.__('tenantForm_update_check_error_Message');
+          errorMessage = errorMessage.concat(error);
           sAlert.error(errorMessage, { timeout: 'none' });
         }
-      } else {
-        // Get warning message translation
-        const message = TAPi18n.__('tenantForm_noChanges_Message');
-        // Alert user of success
-        sAlert.warning(message);
-        }
+      });
     }
   },
 });

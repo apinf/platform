@@ -1447,6 +1447,7 @@
   "tenantForm_button_cancel": "No, cancel",
   "tenantForm_update_Failure_Message": "Tenant update failed! ",
   "tenantForm_update_error_Message": "Tenant update failed! ",
+  "tenantForm_update_check_error_Message": "Tenant user check failed! Refresh Tenant list and try again! ",
   "tenantForm_modifyButton_text": "Yes, Modify Tenant",
   "tenantForm_saveButton_text": "Yes, Add Tenant",
   "tenantForm_title_add": "Add new Tenant",

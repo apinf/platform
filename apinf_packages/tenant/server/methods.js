@@ -104,6 +104,7 @@ Meteor.methods({
           // Return tenant
           return {
             id: tenant.id,
+            owner_id: tenant.owner_id,
             name: tenant.name,
             description: tenant.description,
             users: convertedUserList,
@@ -527,6 +528,77 @@ Meteor.methods({
       throw new Meteor.Error(errorMessage);
     }
     console.log(+new Date(), ' 4 PATCH response=', response);
+    return response;
+  },
+  checkTenantUsers (userCheckData) {
+    check(userCheckData, Object);
+
+    const response = {};
+    // If no changes in user, return here always OK
+    if (userCheckData.type !== 'user') {
+      response.status = 200;
+      return response;
+    }
+
+    // Fetch tenant endpoint and token
+    let tenantUrl = getTenantInfo();
+
+    if (tenantUrl) {
+      // Make sure endPoint is a String
+      // eslint-disable-next-line new-cap
+      check(tenantUrl, Match.Maybe(String));
+      // Add endpoint to base path
+      tenantUrl = tenantUrl.concat('tenant/');
+      tenantUrl = tenantUrl.concat(userCheckData.id);
+
+      // Get user's tenant access token
+      const accessToken = getTenantToken();
+
+       // Serialize to JSON
+      const payLoadToSend = JSON.stringify(userCheckData.body);
+
+      console.log('\n ----------------- Check tenant ---------------------\n');
+      console.log('check users tuli =', userCheckData);
+      console.log('tenant url=', tenantUrl);
+      console.log('check users  payload=\n', JSON.stringify(userCheckData.body, null, 2));
+
+      try {
+        const result = HTTP.patch(
+          tenantUrl,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`,
+            },
+            content: payLoadToSend,
+          }
+        );
+        console.log('3 PATCH check a ok, result=', result);
+        console.log('3 a ok, response=', response);
+        // Only 200 is acceptable status code
+        if (result.statusCode === 200) {
+          response.status = result.statusCode;
+        } else {
+          // Return error object
+          let errMsg = 'Error in user, refresh tenants and try again! ';
+          errMsg = errMsg.concat(result);
+          throw new Meteor.Error(errMsg);
+        }
+      } catch (err) {
+        console.log(+new Date(), ' 3 PATCH b err=', err);
+        response.status = err.response.statusCode;
+        response.content = err.response.content;
+        console.log('3 b PATCH check nok, response=', response);
+
+        // Return error object
+        throw new Meteor.Error(err.message);
+      }
+    } else {
+      // Return error object
+      const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
+      throw new Meteor.Error(errorMessage);
+    }
+    console.log(+new Date(), ' 4 PATCH check response=', response);
     return response;
   },
 });
