@@ -9,6 +9,7 @@ import { Template } from 'meteor/templating';
 import { Session } from 'meteor/session';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
+import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.ensureTenantRemovalForm.events({
   'click #remove-tenant-confirmed': function (event) {
