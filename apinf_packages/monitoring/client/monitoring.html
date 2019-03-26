@@ -22,7 +22,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <tbody>
       {{# each record in  apiStatusData }}
         <tr>
-          <td>{{ record.date }}</td>
+          <td>{{ showDate(record.date) }}</td>
           <td>
             <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
           </td>
@@ -51,7 +51,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <p class="help-block">
     {{_ "apiMonitoring_helpIcon_text_1" }} &nbsp;
 
-    <span data-toggle="collapse" data-target="#monitoring-details" 
+    <span data-toggle="collapse" data-target="#monitoring-details"
           aria-expanded="false" aria-controls="monitoring-details">
       <i class="mdi mdi-chevron-down mdi-18px more-info ">More...</i>
     </span>
@@ -93,8 +93,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ api.url }}
         </span>
 
-        {{> afFieldInput 
-          name='endPoint' 
+        {{> afFieldInput
+          name='endPoint'
           value=endPoint
         }}
       </div>
