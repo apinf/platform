@@ -436,9 +436,6 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-      console.log('\n ----------------- Delete tenant ---------------------\n');
-      console.log('url=', tenantUrl);
-
       try {
         const result = HTTP.del(
           tenantUrl,
@@ -451,13 +448,9 @@ Meteor.methods({
         );
         // Create a monitoring data
         response.status = result.statusCode;
-        console.log('3 DELETE a ok, result=', result);
-        console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log(+new Date(), ' 3 DELETE b err=', err);
         response.status = err.response.statusCode;
         response.content = err.response.content;
-        console.log('3 b nok, response=', response);
 
         // Return error object
         throw new Meteor.Error(err.message);
@@ -467,8 +460,6 @@ Meteor.methods({
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-
-    console.log(+new Date(), ' 4 DELETE response=', response);
     return response;
   },
 
@@ -494,11 +485,6 @@ Meteor.methods({
        // Serialize to JSON
       const payLoadToSend = JSON.stringify(tenantPayload.body);
 
-      console.log('\n ----------------- Update tenant ---------------------\n');
-      console.log('tenant tuli =', tenantPayload);
-      console.log('tenant url=', tenantUrl);
-      console.log('update tenant payload=\n', JSON.stringify(tenantPayload.body, null, 2));
-
       try {
         const result = HTTP.patch(
           tenantUrl,
@@ -512,13 +498,9 @@ Meteor.methods({
         );
         // Create a monitoring data
         response.status = result.statusCode;
-        console.log('3 PATCH a ok, result=', result);
-        console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log(+new Date(), ' 3 PATCH b err=', err);
         response.status = err.response.statusCode;
         response.content = err.response.content;
-        console.log('3 b nok, response=', response);
 
         // Return error object
         throw new Meteor.Error(err.message);
@@ -528,7 +510,6 @@ Meteor.methods({
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-    console.log(+new Date(), ' 4 PATCH response=', response);
     return response;
   },
   checkTenantUsers (userCheckData) {
@@ -569,8 +550,6 @@ Meteor.methods({
             content: payLoadToSend,
           }
         );
-        console.log('3 PATCH check a ok, result=', result);
-        console.log('3 a ok, response=', response);
         // Only 200 is acceptable status code
         if (result.statusCode === 200) {
           response.status = result.statusCode;

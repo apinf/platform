@@ -46,16 +46,12 @@ Template.tenantForm.events({
         });
       }
 
-      console.log('notifyUserList=', notifyUserList);
-
       // Set local tenant list empty
       let tenantList = [];
 
-      console.log('call addTenant with =', tenant);
       // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
-          console.log(+new Date(), ' 2 a result=', result);
           if (result.status === 201) {
             // In successful case we can empty the input fields
 
@@ -91,7 +87,6 @@ Template.tenantForm.events({
           }
         }
         if (error) {
-          console.log(+new Date(), ' 2 b error=', error);
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant operation failed!  (${error}).`;
           sAlert.error(errorMessage, { timeout: 'none' });
