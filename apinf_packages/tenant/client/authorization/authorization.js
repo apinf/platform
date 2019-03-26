@@ -11,7 +11,6 @@ import { Template } from 'meteor/templating';
 import { TAPi18n } from 'meteor/tap:i18n';
 import moment from 'moment';
 
-
 Template.authorizationForm.helpers({
   tenantToken () {
     // Get user id
@@ -58,7 +57,6 @@ Template.authorizationForm.helpers({
 
 Template.authorizationForm.events({
   'click #refreshTenantAuthorization': function () {
-    console.log('Here will be auth refresh!');
+    // TODO Here the refresh functionality, if needed
   },
-
 });

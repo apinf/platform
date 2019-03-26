@@ -237,7 +237,6 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    console.log('\n ------------ Fetch User list -------------- \n');
     if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
@@ -258,9 +257,7 @@ Meteor.methods({
             },
           }
         );
-
-        console.log('users=', result.content);
-        // deserialize JSON from manager
+        // deserialize JSON gotten from manager
         const resultFromTenantManager = JSON.parse(result.content);
         // We need only id and username, so pick them
         const completeUserList = resultFromTenantManager.users.map(user => {
@@ -277,7 +274,11 @@ Meteor.methods({
         response.completeUserList = completeUserList;
         response.status = result.statusCode;
       } catch (err) {
-
+        // Return error object
+        let errorMessage = TAPi18n.__('tenantRequest_missingUserlist');
+        errorMessage = errorMessage.concat(err);
+        throw new Meteor.Error(errorMessage);
+        /*
         response.status = err.response.statusCode;
         response.content = err.response.content;
 
@@ -320,14 +321,13 @@ Meteor.methods({
             username: 'Umberto',
           },
         ];
+        */
       }
     } else {
       // Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-
-    console.log('4 GET userlist response=', response);
     return response;
   },
 

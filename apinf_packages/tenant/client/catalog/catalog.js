@@ -18,9 +18,6 @@ import moment from 'moment';
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
 
-// Npm packages imports
-import _ from 'lodash';
-
 Template.tenantCatalog.onCreated(function () {
   // Get reference to template instance
   const instance = this;

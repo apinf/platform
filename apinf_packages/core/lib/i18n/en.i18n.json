@@ -1463,6 +1463,7 @@
   "tenantRemoveForm_question": "Are you sure you want to remove this tenant?",
   "tenantRemoveForm_title": "Tenant removal",
   "tenantRequest_missingBasepath": "Tenant Manager basepath is missing from Settings",
+  "tenantRequest_missingUserlist": "Userlist fetch failed! ",
   "tenantUserForm_addButton_text": "Add user for Tenant",
   "tenantUserForm_errorTextUserNotSelected": "No User is selected for addition!",
   "tenantUserForm_errorTextDuplicateUser": "This user already exists on Tenants user list: ",
