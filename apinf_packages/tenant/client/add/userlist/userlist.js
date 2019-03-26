@@ -70,7 +70,6 @@ Template.tenantUsersList.events({
     Session.set('tenantUsers', tenantUsers);
   },
   'change .notificationToUser': function (event) {
-    console.log('notif=', event);
     let tenantUsers = [];
     // Get possible previous users of tenant
     if (Session.get('tenantUsers')) {
@@ -88,5 +87,4 @@ Template.tenantUsersList.events({
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
   },
-
 });

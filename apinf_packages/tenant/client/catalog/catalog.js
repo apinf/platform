@@ -45,15 +45,11 @@ Template.tenantCatalog.onRendered(function () {
   // Here are tenants fetched from tenant manager
   instance.autorun(() => {
     // get possible local tenant list
-
-    // Problem, falls into perpetuum loop here!!!
-
     let tenantList = Session.get('tenantList');
 
     // fetch list of tenants from tenant manager
     Meteor.call('getTenantList', (error, result) => {
       if (result) {
-        console.log('tenant list haku, result=', result);
         tenantList = result.tenantList;
         Session.set('tenantList', tenantList);
       }
@@ -65,11 +61,9 @@ Template.tenantCatalog.onRendered(function () {
     // fetch list of users from tenant manager
     Meteor.call('getTenantUserList', (error, result) => {
       if (result) {
-        console.log('userlist haku, result=', result);
         Session.set('completeUserList', result.completeUserList);
       }
       if (error) {
-        console.log(' userlist haku, error=', error);
         sAlert.error(error, { timeout: 'none' });
       }
     });

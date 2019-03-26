@@ -279,7 +279,6 @@ Template.tenantForm.events({
       }
 
       // If there are any modified users left, they are to be added into request
-      console.log('muutetut vaiheen 1 jälkeen=', modifiedTenant.users);
       const newUsers = modifiedTenant.users.map((user) => {
         // collect roles
         const tenantRoles = [];
@@ -307,7 +306,6 @@ Template.tenantForm.events({
       });
 
       // Include added users to request
-      console.log('newUsers=', newUsers);
       if (newUsers.length > 0) {
         modifyTenantPayload.id = originalTenant.id;
         modifyTenantPayload.body = modifyTenantPayload.body.concat(newUsers);
@@ -318,22 +316,21 @@ Template.tenantForm.events({
       // Check if modified users exist on server side
       const userCheckData = {};
       if (usersNeedChecking.length > 0) {
-        console.log('Tarkistettavia=', usersNeedChecking);
         userCheckData.id = originalTenant.id;
+        // Indicates, that users need to be checked
         userCheckData.type = 'user';
         userCheckData.body = usersNeedChecking;
       }
 
       // At first PATCH with op code "check"
-      Meteor.call('checkTenantUsers', userCheckData, (error, result) => {
-        if (result) {
+      Meteor.call('checkTenantUsers', userCheckData, (errorInCheck, resultInCheck) => {
+        if (resultInCheck) {
           console.log(+new Date(), ' Tenant User check OK');
           if (modifyTenantPayload.body.length > 0) {
             if (modifyTenantPayload.id) {
               // After users are successfully checked, PATCH /tenant
               Meteor.call('updateTenant', modifyTenantPayload, (error, result) => {
                 if (result) {
-                  console.log(+new Date(), ' 2 a result=', result);
                   if (result.status === 200) {
                     // New tenant successfully added on manager side, empty local list
                     const tenantList = [];
@@ -356,7 +353,6 @@ Template.tenantForm.events({
                   }
                 }
                 if (error) {
-                  console.log(+new Date(), ' 2 b error=', error);
                   // Tenant addition failure on manager side, save new tenant object to local array
                   let errorMessage = TAPi18n.__('tenantForm_update_error_Message');
                   errorMessage = errorMessage.concat(error);
@@ -377,11 +373,11 @@ Template.tenantForm.events({
           }
         }
 
-        if (error) {
-          console.log(+new Date(), ' Tenant User check error=', error);
+        if (errorInCheck) {
+          console.log(+new Date(), ' Tenant User check error=', errorInCheck);
           // Tenant check failure on manager side, alert
           let errorMessage = TAPi18n.__('tenantForm_update_check_error_Message');
-          errorMessage = errorMessage.concat(error);
+          errorMessage = errorMessage.concat(errorInCheck);
           sAlert.error(errorMessage, { timeout: 'none' });
         }
       });
