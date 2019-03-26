@@ -13,8 +13,6 @@ import { TAPi18n } from 'meteor/tap:i18n';
 
 Template.tenantForm.events({
   'click #save-tenant': function (event) {
-    console.log('save tenant this=', this);
-    console.log('save tenant event=', event);
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -30,10 +28,8 @@ Template.tenantForm.events({
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
-        console.log('tenantUsers=', tenantUsers);
         // convert user objects to a list for POST operation
         tenant.users = tenantUsers.map((userdata) => {
-          console.log('userdata=', userdata);
           const usersRow = {
             id: userdata.id,
             name: userdata.name,
@@ -108,7 +104,6 @@ Template.tenantForm.events({
   'click #modify-tenant': function () {
     // get values of original tenant
     const originalTenant = this.tenantToModify;
-    console.log('original tenant=', originalTenant);
 
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
@@ -133,8 +128,6 @@ Template.tenantForm.events({
         // Read list of users of the tenant at hand
         modifiedTenant.users = Session.get('tenantUsers');
       }
-
-      console.log('modified tenant=', modifiedTenant);
 
       // Any changes in name
       if (originalTenant.name !== modifiedTenant.name) {
@@ -185,11 +178,9 @@ Template.tenantForm.events({
        // Note! Must loop array from right to left in order to get user indexes in descending order,
        //       which makes server side handling possible
       const userChanges = originalTenant.users.reduceRight((changeList, origUser, index) => {
-        console.log('origUser=', origUser);
         let modifiedUserIndex = false;
         // Check if same user is present in modified tenant data
         const sameUserInModified = modifiedTenant.users.filter((user, modifiedIndex) => {
-          console.log('mod user=', user);
           // Return modified user if found
           if (user.id === origUser.id) {
             modifiedUserIndex = modifiedIndex;
@@ -208,7 +199,7 @@ Template.tenantForm.events({
             op: 'remove',
             path,
           };
-          console.log('removeduser=', removedUser);
+          // Add user to remove list
           changeList.push(removedUser);
 
           // Add user also to check list
@@ -218,6 +209,7 @@ Template.tenantForm.events({
             value: origUser.name,
             path: checkPath,
           };
+          // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
           // If user data is modified, set user to be replaced
@@ -244,7 +236,7 @@ Template.tenantForm.events({
             path: modifyPath,
             value: tenantRoles,
           };
-          console.log('modifiedUser=', modifiedUser);
+          // Add user to change list
           changeList.push(modifiedUser);
 
           // Add user also to check list
@@ -254,6 +246,7 @@ Template.tenantForm.events({
             value: origUser.name,
             path: checkPath,
           };
+          // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
           // User data is changed, remove from modified list
