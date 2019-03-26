@@ -140,7 +140,7 @@ Template.tenantForm.events({
       if (originalTenant.name !== modifiedTenant.name) {
         // Fill in tenant id
         modifyTenantPayload.id = originalTenant.id;
-        // Fill in change
+        // Fill in replace for name
         const changedDescription = {
           op: 'replace',
           value: $('#add-tenant-name').val(),
@@ -153,7 +153,7 @@ Template.tenantForm.events({
       if (originalTenant.description !== modifiedTenant.description) {
         // Fill in tenant id
         modifyTenantPayload.id = originalTenant.id;
-        // Fill in change
+        // Fill in replace for description
         const changedDescription = {
           op: 'replace',
           value: $('#add-tenant-description').val(),
@@ -165,15 +165,16 @@ Template.tenantForm.events({
       // Any changes in users
       /* At first checkings based on old tenant:
          - if user is present in old tenant, but not in new one
-           -> fill remove op for user
-         - if user is present in both, but no changes, skip (remove user from new tenant user list)
+           -> fill "remove" op for user
+         - if user is present in both, but no changes,
+           -> remove user from new tenant user list
          - if user is present in both, and there are changes
-           -> fill remove op for user
-           + DO NOT remove user from new tenant user list
+           -> fill "replace" op for user
+           -> remove user from new tenant user list
 
         Secondly check remaining list of users in new tenant
         - user(s) left
-          -> fill add op with new data
+          -> fill "add" op with new data
         - no users left
           -> all is done
        */
@@ -181,7 +182,8 @@ Template.tenantForm.events({
       const usersNeedChecking = [];
 
        // Go through tenant's original user list and compare it against tenant's modified user list
-       // Must loop array from right to left in order to get user indexes in reverse order
+       // Note! Must loop array from right to left in order to get user indexes in descending order,
+       //       which makes server side handling possible
       const userChanges = originalTenant.users.reduceRight((changeList, origUser, index) => {
         console.log('origUser=', origUser);
         let modifiedUserIndex = false;
@@ -195,8 +197,6 @@ Template.tenantForm.events({
           }
           return false;
         });
-
-        console.log('sameusers=', sameUserInModified);
 
         // If not found in modified user list, the user is removed
         if (sameUserInModified.length === 0) {
@@ -224,11 +224,6 @@ Template.tenantForm.events({
         } else if (origUser.consumer !== sameUserInModified[0].consumer ||
                    origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
-
-          console.log('origUser.prov=', origUser.provider);
-          console.log('mod.prov=', sameUserInModified[0].provider);
-          console.log('origUser.cust=', origUser.consumer);
-          console.log('mod.cust=', sameUserInModified[0].consumer);
 
           let path = '/users/';
           // indicate user with original user data index
@@ -272,7 +267,6 @@ Template.tenantForm.events({
       }, []);
 
       // Include removed users to request
-      console.log('userChanges=', userChanges);
       if (userChanges.length > 0) {
         modifyTenantPayload.id = originalTenant.id;
         modifyTenantPayload.body = modifyTenantPayload.body.concat(userChanges);
@@ -311,8 +305,6 @@ Template.tenantForm.events({
         modifyTenantPayload.body = modifyTenantPayload.body.concat(newUsers);
       }
 
-      console.log('update Tenant payload=', modifyTenantPayload);
-
       // Check if modified users exist on server side
       const userCheckData = {};
       if (usersNeedChecking.length > 0) {
@@ -325,7 +317,6 @@ Template.tenantForm.events({
       // At first PATCH with op code "check"
       Meteor.call('checkTenantUsers', userCheckData, (errorInCheck, resultInCheck) => {
         if (resultInCheck) {
-          console.log(+new Date(), ' Tenant User check OK');
           if (modifyTenantPayload.body.length > 0) {
             if (modifyTenantPayload.id) {
               // After users are successfully checked, PATCH /tenant
@@ -374,7 +365,6 @@ Template.tenantForm.events({
         }
 
         if (errorInCheck) {
-          console.log(+new Date(), ' Tenant User check error=', errorInCheck);
           // Tenant check failure on manager side, alert
           let errorMessage = TAPi18n.__('tenantForm_update_check_error_Message');
           errorMessage = errorMessage.concat(errorInCheck);

@@ -72,15 +72,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <!-- footer -->
         <div class="modal-footer">
-          <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
+          <button type="submit" class="btn btn-secondary"
+                  data-dismiss="modal" aria-label="Close" id="close-window" title={{_ "tenantForm_button_cancel_title" }}>
             {{_ "tenantForm_button_cancel" }}
           </button>
           {{# if tenantToModify }}
-            <button type="submit" class="btn btn-success" id="modify-tenant">
+            <button type="submit" class="btn btn-success" id="modify-tenant" title={{_ "tenantForm_button_modify_title" }}>
               {{_ "tenantForm_modifyButton_text" }}
             </button>
           {{ else }}
-            <button type="submit" class="btn btn-success" id="save-tenant">
+            <button type="submit" class="btn btn-success" id="save-tenant" title={{_ "tenantForm_button_save_title" }}>
               {{_ "tenantForm_saveButton_text" }}
             </button>
           {{/ if }}

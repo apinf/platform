@@ -56,7 +56,6 @@ Meteor.methods({
 
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
-    console.log('tenant url=', tenantUrl);
 
     console.log('\n ------------ Fetch Tenant list -------------- \n');
     if (tenantUrl) {
@@ -101,7 +100,7 @@ Meteor.methods({
             };
           });
 
-          // Return tenant
+          // Return tenant, pick necessary fields for internal use
           return {
             id: tenant.id,
             owner_id: tenant.owner_id,
@@ -112,10 +111,16 @@ Meteor.methods({
         });
 
         response.status = result.statusCode;
-        // console.log('3 tenant a ok, response=', response);
       } catch (err) {
         console.log('3 tenant b nok, err=\n', err);
 
+        // Return error object
+        let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
+        errorMessage = errorMessage.concat(err);
+        throw new Meteor.Error(errorMessage);
+
+        // TODO remove test material
+        /*
         response.tenantList = [
           {
             id: 1123456789,
@@ -217,7 +222,7 @@ Meteor.methods({
             ],
           },
         ];
-        console.log('3 b tenant nok, artificial response=', response);
+        */
       }
     } else {
       // Return error object
@@ -553,11 +558,6 @@ Meteor.methods({
        // Serialize to JSON
       const payLoadToSend = JSON.stringify(userCheckData.body);
 
-      console.log('\n ----------------- Check tenant ---------------------\n');
-      console.log('check users tuli =', userCheckData);
-      console.log('tenant url=', tenantUrl);
-      console.log('check users  payload=\n', JSON.stringify(userCheckData.body, null, 2));
-
       try {
         const result = HTTP.patch(
           tenantUrl,
@@ -581,10 +581,8 @@ Meteor.methods({
           throw new Meteor.Error(errMsg);
         }
       } catch (err) {
-        console.log(+new Date(), ' 3 PATCH b err=', err);
         response.status = err.response.statusCode;
         response.content = err.response.content;
-        console.log('3 b PATCH check nok, response=', response);
 
         // Return error object
         throw new Meteor.Error(err.message);
@@ -594,7 +592,6 @@ Meteor.methods({
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-    console.log(+new Date(), ' 4 PATCH check response=', response);
     return response;
   },
 });

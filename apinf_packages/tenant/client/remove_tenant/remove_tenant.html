@@ -43,11 +43,15 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <!-- footer -->
         <div class="modal-footer">
           <!-- Cancel operation with button -->
-          <button type="submit" class="btn btn-secondary" data-dismiss="modal" aria-label="Close" id="close-window">
+          <button type="submit" class="btn btn-secondary"
+                  data-dismiss="modal" aria-label="Close" id="close-window"
+                  title={{_ "ensureTenantRemovalForm_button_cancel_title" }}>
             {{_ "tenantForm_button_cancel" }}
           </button>
           <!-- Confirm operation with this button -->
-          <button type="submit" class="btn btn-success" id="remove-tenant-confirmed" data-value={{ tenantRemoveIndex }}>
+          <button type="submit" class="btn btn-success" id="remove-tenant-confirmed"
+                  data-value={{ tenantRemoveIndex }}
+                  title={{_ "ensureTenantRemovalForm_button_remove_title" }}>
             {{_ "tenantRemoveForm_button_remove" }}
           </button>
         </div>
