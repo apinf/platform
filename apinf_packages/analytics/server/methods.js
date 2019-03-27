@@ -154,7 +154,7 @@ Meteor.methods({
       matchQuery.requestNumber = { $ne: 0 };
 
       // Get the number of date when requests were no 0
-      //using async - await due to breaking changes in meteor 1.5-1.8 update
+      // using async - await due to breaking changes in meteor 1.5-1.8 update
       const existedValuesCount = await AnalyticsData.find(matchQuery).count();
 
       // Calculate average (mean) value of Response time and Uniques users during period
