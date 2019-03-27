@@ -148,13 +148,14 @@ Meteor.methods({
           },
         },
       ]
-    ).forEach(dataset => {
+    ).forEach(async dataset => {
       // Expend query
       matchQuery.prefix = dataset._id;
       matchQuery.requestNumber = { $ne: 0 };
 
       // Get the number of date when requests were no 0
-      const existedValuesCount = AnalyticsData.find(matchQuery).count();
+      // using async - await due to breaking changes in meteor 1.5-1.8 update
+      const existedValuesCount = await AnalyticsData.find(matchQuery).count();
 
       // Calculate average (mean) value of Response time and Uniques users during period
       requestPathsData[dataset._id] = {

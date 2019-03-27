@@ -20,17 +20,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>{{_ "apiAuthorizedUsersList_role_collaborator" }}</td>
-          {{# each authorizedUsers }}
-          <td>{{ email }}</td>
-          <td>
-            <button class="remove-authorized-user btn btn-danger btn-xs" style="height:auto;">
-              <i class="fa mdi mdi-delete" aria-hidden="true"></i>
-            </button>
-          </td>
-          {{/ each }}
-        </tr>
+        {{# each authorizedUsers }}
+          <tr>
+            <td>{{_ "apiAuthorizedUsersList_role_collaborator" }}</td>
+            <td>{{ email }}</td>
+            <td>
+              <button class="remove-authorized-user btn btn-danger btn-xs" style="height:auto;">
+                <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        {{/ each }}
       </tbody>
     </table>
   {{/ if }}

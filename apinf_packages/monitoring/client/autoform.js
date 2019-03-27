@@ -49,7 +49,7 @@ AutoForm.hooks({
           // Restart cron with new url
           if (monitoringData.enabled) {
             Meteor.call('startCron',
-             monitoringData.apiId, monitoringData.url, monitoringData.endPoint);
+             monitoringData.apiId, monitoringData.url);
           }
           // Success result
           return doc;
@@ -80,7 +80,7 @@ AutoForm.hooks({
           Apis.update(apiId, { $set: { monitoringId: result } });
 
           // Start Cron
-          Meteor.call('startCron', apiId, monitoring.url, monitoring.endPoint);
+          Meteor.call('startCron', apiId, monitoring.url);
         }
       },
     },
