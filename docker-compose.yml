@@ -1,7 +1,7 @@
 version: '2'
 services:
   apinf:
-    image: apinf/platform
+    image: apinf/platform:0.58.0
     restart: always
     env_file:
       - 'docker/env.apinf'
@@ -13,9 +13,8 @@ services:
     links:
       - elasticsearch:elasticsearch.docker
   apiumbrella:
-    image: nrel/api-umbrella:0.13.0
+    image: apinf/api-umbrella:0.15.0-apinf2
     restart: always
-    command: bash -c "apt-get update && apt-get install -qq -y --no-install-recommends curl && api-umbrella run"
     volumes:
       - ./docker/api-umbrella/config:/etc/api-umbrella
       - letsencrypt:/etc/letsencrypt
@@ -54,6 +53,8 @@ services:
     restart: always
     volumes:
       - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
 volumes:
     letsencrypt: {}
     letsencrypt_backups: {}

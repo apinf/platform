@@ -5,6 +5,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { Template } from 'meteor/templating';
+import moment from 'moment';
 
 // Collection imports
 import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/collection';
@@ -54,6 +55,9 @@ Template.apiMonitoring.helpers({
     }
 
     return 'insert';
+  },
+  showDate (date) {
+    return moment(date).format();
   },
   apiStatusData () {
     const apiId = this.api._id;
