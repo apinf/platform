@@ -1,6 +1,6 @@
 sudo: false
 
-#group: deprecated-2017Q4
+group: deprecated-2017Q4
 
 language: node_js
 node_js:
