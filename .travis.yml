@@ -5,13 +5,13 @@ sudo: false
 language: node_js
 node_js:
   - '8'
-dist: xenial #try new build env
+#dist: xenial #try new build env, did not work 
 addons:
   apt:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-#      - g++-7.4
+      - g++-7
   chrome: stable
 
 branches:
