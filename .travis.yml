@@ -59,4 +59,4 @@ env:
   global:
   - DISPLAY=:99.0
   - TEST_MODE: "true"
- # - CXX=g++-7.4
+  - CXX=g++-7
