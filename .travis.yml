@@ -11,7 +11,7 @@ addons:
     sources:
       - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+#      - g++-7.4
   chrome: stable
 
 branches:
@@ -33,6 +33,7 @@ before_install:
   - free -m
   - pwd
   - ls -la
+  - g++ --version
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
@@ -41,7 +42,7 @@ before_script:
   - yarn
   - yarn run lint
   - npm view chimp version
-  - npm view chromedriver version
+  - npm view chromedriver version  
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
@@ -58,4 +59,4 @@ env:
   global:
   - DISPLAY=:99.0
   - TEST_MODE: "true"
-  - CXX=g++-4.8
+ # - CXX=g++-7.4
