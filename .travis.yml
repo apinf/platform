@@ -33,6 +33,7 @@ before_install:
   - free -m
   - pwd
   - ls -la
+  - g++ --version
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
@@ -41,7 +42,7 @@ before_script:
   - yarn
   - yarn run lint
   - npm view chimp version
-  - npm view chromedriver version
+  - npm view chromedriver version  
   # Start X Virtual Frame Buffer for headless testing with real browsers
   - ./.scripts/start-xvfb.sh
 
