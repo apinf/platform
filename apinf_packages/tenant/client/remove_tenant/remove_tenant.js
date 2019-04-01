@@ -11,7 +11,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-Template.ensureTenantRemovalForm.onCreated(function () {
+Template.ensureTenantRemovalForm.onCreated(() => {
   // Turn off spinner if it was on
   Session.set('tenantRemoveOngoing', false);
 });

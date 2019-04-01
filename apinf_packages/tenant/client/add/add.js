@@ -11,7 +11,7 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 
-Template.tenantForm.onCreated(function () {
+Template.tenantForm.onCreated(() => {
   // Turn off spinner if it was on
   Session.set('tenantUpdateOngoing', false);
 });
@@ -28,7 +28,6 @@ Template.tenantForm.events({
     } else if ($('#add-tenant-description').val() === '') {
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
-
       // Save new Tenant operation began, inform spinner
       Session.set('tenantUpdateOngoing', true);
 
