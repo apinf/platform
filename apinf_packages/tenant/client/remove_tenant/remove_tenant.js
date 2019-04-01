@@ -11,10 +11,23 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+Template.ensureTenantRemovalForm.onCreated(function () {
+  // Turn off spinner if it was on
+  Session.set('tenantRemoveOngoing', false);
+});
+
+Template.ensureTenantRemovalForm.onDestroyed(() => {
+  // Unset sessions
+  Session.set('tenantRemoveOngoing', undefined);
+});
+
 Template.ensureTenantRemovalForm.events({
   'click #remove-tenant-confirmed': function (event) {
     // The button sends the index of tenant to be removed
     const tenantRemoveIndex = $(event.target).data('value');
+
+    // Save new Tenant operation began, inform spinner
+    Session.set('tenantRemoveOngoing', true);
 
     // Read tenant list
     let tenantList = Session.get('tenantList');
@@ -31,6 +44,9 @@ Template.ensureTenantRemovalForm.events({
           // Save to sessionStorage to be used while adding users to tenant
           Session.set('tenantList', tenantList);
 
+          // Operation finished, inform spinner
+          Session.set('tenantRemoveOngoing', false);
+
           // Close confirmation modal
           Modal.hide('ensureTenantRemovalForm');
 
@@ -40,15 +56,29 @@ Template.ensureTenantRemovalForm.events({
           message = message.concat(tenantToRemove.name);
           sAlert.success(message);
         } else {
+          // Operation finished, inform spinner
+          Session.set('tenantRemoveOngoing', false);
+
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
           sAlert.error(errorMessage, { timeout: 'none' });
         }
       } else {
+        // Operation finished, inform spinner
+        Session.set('tenantRemoveOngoing', false);
+
         // Tenant addition failure on manager side, save new tenant object to local array
         const errorMessage = `Tenant removal failed!  (${error}).`;
         sAlert.error(errorMessage, { timeout: 'none' });
       }
     });
+  },
+});
+
+Template.ensureTenantRemovalForm.helpers({
+  tenantRemoveOngoing () {
+    const tenantRemoveOngoing = Session.get('tenantRemoveOngoing');
+    // Return spinner status
+    return tenantRemoveOngoing;
   },
 });

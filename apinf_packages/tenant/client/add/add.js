@@ -11,13 +11,27 @@ import { sAlert } from 'meteor/juliancwirko:s-alert';
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 import { TAPi18n } from 'meteor/tap:i18n';
 
+Template.tenantForm.onCreated(function () {
+  // Turn off spinner if it was on
+  Session.set('tenantUpdateOngoing', false);
+});
+
+Template.tenantForm.onDestroyed(() => {
+  // Unset sessions
+  Session.set('tenantUpdateOngoing', undefined);
+});
+
 Template.tenantForm.events({
-  'click #save-tenant': function (event) {
+  'click #save-tenant': function () {
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
+
+      // Save new Tenant operation began, inform spinner
+      Session.set('tenantUpdateOngoing', true);
+
       const tenant = {};
       let tenantUsers = [];
       let notifyUserList = [];
@@ -43,6 +57,7 @@ Template.tenantForm.events({
           if (userdata.notification === 'checked') {
             return userdata.email;
           }
+          return false;
         });
       }
 
@@ -65,6 +80,9 @@ Template.tenantForm.events({
             // Empty tenant description field
             $('#add-tenant-description').val('');
 
+            // Operation finished, inform spinner
+            Session.set('tenantUpdateOngoing', false);
+
             // New tenant successfully added on manager side, empty local list
             tenantList = [];
             // Save to sessionStorage to be used while adding users to tenant
@@ -82,6 +100,8 @@ Template.tenantForm.events({
 
             console.log('Perhaps following users need to be notified=', notifyUserList);
           } else {
+            // Operation finished, inform spinner
+            Session.set('tenantUpdateOngoing', false);
             // Tenant addition failure on manager side, save new tenant object to local array
             const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
             sAlert.error(errorMessage, { timeout: 'none' });
@@ -89,6 +109,8 @@ Template.tenantForm.events({
           }
         }
         if (error) {
+          // Operation finished, inform spinner
+          Session.set('tenantUpdateOngoing', false);
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant operation failed!  (${error}).`;
           sAlert.error(errorMessage, { timeout: 'none' });
@@ -107,6 +129,9 @@ Template.tenantForm.events({
     } else if ($('#add-tenant-description').val() === '') {
       sAlert.error('Tenant must have a description!', { timeout: 'none' });
     } else {
+      // Update Tenant operation began, inform spinner
+      Session.set('tenantUpdateOngoing', true);
+
       // initiate the object for changes
       // It will contain the id of tenant to be modified and the changes in an array
       const modifyTenantPayload = {};
@@ -152,18 +177,18 @@ Template.tenantForm.events({
         modifyTenantPayload.body.push(changedDescription);
       }
 
-      // Any changes in users
-      /* At first checkings based on old tenant:
+      // Logic for any changes in users
+      /* First: checkings based on old tenant:
          - if user is present in old tenant, but not in new one
            -> fill "remove" op for user
          - if user is present in both, but no changes,
-           -> remove user from new tenant user list
+           -> remove user from NEW tenant user list
          - if user is present in both, and there are changes
            -> fill "replace" op for user
-           -> remove user from new tenant user list
+           -> remove user from NEW tenant user list
 
-        Secondly check remaining list of users in new tenant
-        - user(s) left
+        Second: check remaining list of users in NEW tenant
+        - if there are user(s) still on new list
           -> fill "add" op with new data
         - no users left
           -> all is done
@@ -327,6 +352,9 @@ Template.tenantForm.events({
                     message = message.concat(modifiedTenant.name);
                     sAlert.success(message);
                   } else {
+                    // Operation finished, inform spinner
+                    Session.set('tenantUpdateOngoing', false);
+
                     // Tenant update failure on manager side
                     let errorMessage = TAPi18n.__('tenantForm_update_Failure_Message');
                     errorMessage = errorMessage.concat(result);
@@ -334,6 +362,9 @@ Template.tenantForm.events({
                   }
                 }
                 if (error) {
+                  // Operation finished, inform spinner
+                  Session.set('tenantUpdateOngoing', false);
+
                   // Tenant addition failure on manager side, save new tenant object to local array
                   let errorMessage = TAPi18n.__('tenantForm_update_error_Message');
                   errorMessage = errorMessage.concat(error);
@@ -341,12 +372,18 @@ Template.tenantForm.events({
                 }
               });
             } else {
+              // Operation finished, inform spinner
+              Session.set('tenantUpdateOngoing', false);
+
               // Get error message translation
               const errorMessage = TAPi18n.__('tenantForm_id_missing_Message');
               // Alert user of success
               sAlert.error(errorMessage, { timeout: 'none' });
             }
           } else {
+            // Operation finished, inform spinner
+            Session.set('tenantUpdateOngoing', false);
+
             // Get warning message translation
             const message = TAPi18n.__('tenantForm_noChanges_Message');
             // Alert user of success
@@ -355,6 +392,9 @@ Template.tenantForm.events({
         }
 
         if (errorInCheck) {
+          // Operation finished, inform spinner
+          Session.set('tenantUpdateOngoing', false);
+
           // Tenant check failure on manager side, alert
           let errorMessage = TAPi18n.__('tenantForm_update_check_error_Message');
           errorMessage = errorMessage.concat(errorInCheck);
@@ -362,5 +402,13 @@ Template.tenantForm.events({
         }
       });
     }
+  },
+});
+
+Template.tenantForm.helpers({
+  tenantUpdateOngoing () {
+    const tenantUpdateOngoing = Session.get('tenantUpdateOngoing');
+    // Return spinner status
+    return tenantUpdateOngoing;
   },
 });

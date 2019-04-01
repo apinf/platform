@@ -72,6 +72,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         <!-- footer -->
         <div class="modal-footer">
+
+          {{# if tenantUpdateOngoing }}
+            {{> spinner }}
+          {{/ if }}
+
           <button type="submit" class="btn btn-secondary"
                   data-dismiss="modal" aria-label="Close" id="close-window" title={{_ "tenantForm_button_cancel_title" }}>
             {{_ "tenantForm_button_cancel" }}

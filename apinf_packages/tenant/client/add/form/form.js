@@ -51,6 +51,7 @@ Template.tenantUserForm.events({
 
         // unselect username
         $('#completeUserList option:selected').prop('selected', false);
+        $('#addUserToTenant').prop('disabled', true);
       }
     }
   },
