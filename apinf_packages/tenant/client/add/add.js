@@ -41,6 +41,7 @@ Template.tenantForm.events({
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
+        console.log('tenant users=', tenantUsers);
         // convert user objects to a list for POST operation
         tenant.users = tenantUsers.map((userdata) => {
           const usersRow = {
@@ -53,10 +54,13 @@ Template.tenantForm.events({
         });
         // gather list of notified users email addresses
         notifyUserList = tenantUsers.filter((userdata) => {
-          if (userdata.notification === 'checked') {
-            return userdata.email;
-          }
-          return false;
+      //    if (userdata.notification === 'checked') {
+            return {
+              username: userdata.name,
+              email: userdata.email,
+            }
+      //    }
+      //    return false;
         });
       }
 
@@ -90,14 +94,21 @@ Template.tenantForm.events({
             // Close modal
             Modal.hide('tenantForm');
 
+            // Notification to users of tenant
+            console.log('Perhaps following users need to be notified=', notifyUserList);
+            Meteor.call('informTenantUser', notifyUserList, 'userRoleChange', tenant.name, (error, result) => {
+              if (error) {
+                sAlert.error('Error in notifying users', { timeout: 'none' });
+              }
+            });
+
             // Get success message translation
             let message = TAPi18n.__('tenantForm_addTenant_Success_Message');
             message = message.concat(tenant.name);
 
-            // Alert user of success
+            // Inform user about success
             sAlert.success(message);
 
-            console.log('Perhaps following users need to be notified=', notifyUserList);
           } else {
             // Operation finished, inform spinner
             Session.set('tenantUpdateOngoing', false);
@@ -194,6 +205,8 @@ Template.tenantForm.events({
        */
 
       const usersNeedChecking = [];
+      const notifyChangedUsers = [];
+      const notifyRemovedUsers = [];
 
        // Go through tenant's original user list and compare it against tenant's modified user list
        // Note! Must loop array from right to left in order to get user indexes in descending order,
@@ -233,6 +246,9 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
+          // Add user to list for notification about removal
+          notifyRemovedUsers.push(origUser);
+
           // If user data is modified, set user to be replaced
         } else if (origUser.consumer !== sameUserInModified[0].consumer ||
                    origUser.provider !== sameUserInModified[0].provider) {
@@ -270,6 +286,9 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
+          // Add user to notification about modification list
+          notifyChangedUsers.push(sameUserInModified[0]);
+
           // User data is changed, remove from modified list
           modifiedTenant.users.splice(modifiedUserIndex, 1);
         } else {
@@ -288,6 +307,9 @@ Template.tenantForm.events({
 
       // If there are any modified users left, they are to be added into request
       const newUsers = modifiedTenant.users.map((user) => {
+        // Add user to notification about modification list
+        notifyChangedUsers.push(user);
+
         // collect roles
         const tenantRoles = [];
         if (user.provider) {
@@ -344,6 +366,26 @@ Template.tenantForm.events({
 
                     // Close modal
                     Modal.hide('tenantForm');
+
+                    // if there are modified users, send notifications
+                    if (notifyChangedUsers.length > 0) {
+                      console.log('Perhaps following users need to be notified about change=', notifyChangedUsers);
+                      Meteor.call('informTenantUser', notifyChangedUsers, 'userRoleChange', modifiedTenant.name, (notifyModifyError, notifyModifyResult) => {
+                        if (notifyModifyError) {
+                          sAlert.error('Error in notifying users', { timeout: 'none' });
+                        }
+                      });
+                    }
+
+                    if (notifyRemovedUsers.length > 0) {
+                      // if there are removed users, send notifications
+                      console.log('Perhaps following users need to be notified about removal=', notifyRemovedUsers);
+                      Meteor.call('informTenantUser', notifyRemovedUsers, 'userRemoval', modifiedTenant.name, (notifyRemoveError, notifyRemoveResult) => {
+                        if (notifyRemoveError) {
+                          sAlert.error('Error in notifying users', { timeout: 'none' });
+                        }
+                      });
+                    }
 
                     // Get success message translation
                     let message = TAPi18n.__('tenantForm_update_Success_Message');

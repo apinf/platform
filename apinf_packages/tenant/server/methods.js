@@ -63,7 +63,6 @@ Meteor.methods({
       // eslint-disable-next-line new-cap
       check(tenantUrl, Match.Maybe(String));
       tenantUrl = tenantUrl.concat('tenant');
-      console.log(+new Date(), ' 2 send GET tenant request to = ', tenantUrl);
 
       // Get user's tenant access token
       const accessToken = getTenantToken();
@@ -78,10 +77,6 @@ Meteor.methods({
             },
           }
         );
-        // Create a monitoring data
-
-        console.log('3 tenant GET a ok, result=', result.content);
-
         // deserialize JSON
         const tenantList = JSON.parse(result.content);
 
@@ -112,7 +107,6 @@ Meteor.methods({
 
         response.status = result.statusCode;
       } catch (err) {
-        console.log('3 tenant b nok, err=\n', err);
 
         // Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
@@ -283,50 +277,6 @@ Meteor.methods({
         let errorMessage = TAPi18n.__('tenantRequest_missingUserlist');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
-        /*
-        response.status = err.response.statusCode;
-        response.content = err.response.content;
-
-        // For mock purposes we fill the list here ourself
-        response.completeUserList = [
-          {
-            id: '123456789',
-            username: 'Håkan',
-          },
-          {
-            id: '223456789',
-            username: 'Luis',
-          },
-          {
-            id: '323456789',
-            username: 'Pär',
-          },
-          {
-            id: '423456789',
-            username: 'Ivan',
-          },
-          {
-            id: '523456789',
-            username: 'Hans',
-          },
-          {
-            id: '62345689',
-            username: 'Pierre',
-          },
-          {
-            id: '723456789',
-            username: 'Väinämöinen',
-          },
-          {
-            id: '82356789',
-            username: 'Jack',
-          },
-          {
-            id: '92356789',
-            username: 'Umberto',
-          },
-        ];
-        */
       }
     } else {
       // Return error object
@@ -399,10 +349,6 @@ Meteor.methods({
         console.log('3 POST a ok, result=', result);
         console.log('3 a ok, response=', response);
       } catch (err) {
-        console.log(+new Date(), ' 3 POST b err=', err);
-      //  response.status = err.response.statusCode || 500;
-      //  response.content = err.response.content || err.error;
-
         // Return error object
         throw new Meteor.Error(err.message);
       }
@@ -572,5 +518,42 @@ Meteor.methods({
       throw new Meteor.Error(errorMessage);
     }
     return response;
+  },
+  informTenantUser (userlist, notificationType, tenantName) {
+    // Check the type of notification
+    let text;
+    if (notificationType === "userRoleChange") {
+      text = ` has changes in roles in tenant ${tenantName}.`;
+      console.log('Notify change');
+    } else if (notificationType === "userRemoval") {
+      text = ` is no more a user of tenant ${tenantName}. `;
+      console.log('Notify user removal');
+    }
+
+    // Send notification for each user in list
+    if (text) {
+      // Get settings
+      const settings = Settings.findOne();
+
+      // Check if email settings are configured
+      if (settings.mail && settings.mail.enabled) {
+        userlist.forEach( user => {
+          console.log('postia tulossa=', user);
+          // send notification
+          let message = user.name;
+          message = message.concat(text);
+          console.log('actual sending to ', user.email);
+          console.log('message=', message);
+
+          // Send the e-mail
+          Email.send({
+            to: settings.mail.toEmail,
+            from: settings.mail.fromEmail,
+            subject: `Tenant user related changes`,
+            text,
+          });
+        });
+      }
+    }
   },
 });

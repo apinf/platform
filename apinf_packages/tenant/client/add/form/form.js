@@ -17,11 +17,24 @@ Template.tenantUserForm.events({
       // Alert user of error
       sAlert.error(errorMmessage, { timeout: 'none' });
     } else {
+      // get the selected user's email address from complete user list
+      const userId = $('#completeUserList option:selected').val();
+      const completeUserList = Session.get('completeUserList');
+      const thisUser = completeUserList.filter((userdata) => {
+        if (userdata.id === userId) {
+          return {
+            userdata,
+          }
+        }
+        return false;
+      });
+
       const newUser = {
         id: $('#completeUserList option:selected').val(),
         name: $('#completeUserList option:selected').text(),
         provider: false,
         consumer: false,
+        email: thisUser[0].email,
       };
 
       let tenantUsers = [];
@@ -46,12 +59,14 @@ Template.tenantUserForm.events({
         // Add new user object to array
         tenantUsers.push(newUser);
 
+        console.log('new userlist on tenant=', tenantUsers);
         // Save to localStorage to be used while listing users of tenant
         Session.set('tenantUsers', tenantUsers);
 
         // unselect username
         $('#completeUserList option:selected').prop('selected', false);
-        $('#addUserToTenant').prop('disabled', true);
+        // Disable add button, when no user is selected
+        // $('#addUserToTenant').prop('disabled', true);
       }
     }
   },
