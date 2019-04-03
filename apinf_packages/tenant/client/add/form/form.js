@@ -60,14 +60,11 @@ Template.tenantUserForm.events({
         // Add new user object to array
         tenantUsers.push(newUser);
 
-        console.log('new userlist on tenant=', tenantUsers);
         // Save to localStorage to be used while listing users of tenant
         Session.set('tenantUsers', tenantUsers);
 
         // unselect username
         $('#completeUserList option:selected').prop('selected', false);
-        // Disable add button, when no user is selected
-        // $('#addUserToTenant').prop('disabled', true);
       }
     }
   },

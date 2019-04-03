@@ -50,7 +50,6 @@ Template.tenantUsersList.events({
 
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
-    console.log('tenant users consumer change', tenantUsers);
   },
   'change .tenantUserRoleProvider': function (event) {
     let tenantUsers = [];
@@ -69,7 +68,6 @@ Template.tenantUsersList.events({
 
     // Save to localStorage to be used while listing users of tenant
     Session.set('tenantUsers', tenantUsers);
-    console.log('tenant users provider change', tenantUsers);
   },
   'change .notificationToUser': function (event) {
     let tenantUsers = [];
@@ -88,6 +86,5 @@ Template.tenantUsersList.events({
 
     // Save to localStorage to be used while user roles change
     Session.set('tenantUsers', tenantUsers);
-    console.log('tenant users notif change', tenantUsers);
   },
 });

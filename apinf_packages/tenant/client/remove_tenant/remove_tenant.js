@@ -43,8 +43,7 @@ Template.ensureTenantRemovalForm.events({
           const tenantUsers = Session.get('tenantUsers');
 
           // Notification to users of tenant
-          console.log('Perhaps following users need to be notified about removal=', tenantUsers);
-          Meteor.call('informTenantUser', tenantUsers, 'userRemoval', tenantToRemove.name, (notifyError, notifyResult) => {
+          Meteor.call('informTenantUser', tenantUsers, 'tenantRemoval', tenantToRemove.name, (notifyError, notifyResult) => {
             if (notifyError) {
               sAlert.error('Error in notifying users', { timeout: 'none' });
             }

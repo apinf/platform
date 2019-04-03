@@ -92,9 +92,9 @@ Template.tenantForm.events({
             Modal.hide('tenantForm');
 
             // Notification to users of tenant
-            console.log('Perhaps following users need to be notified=', notifyUserList);
-            Meteor.call('informTenantUser', notifyUserList, 'userRoleChange', tenant.name, (error, result) => {
-              if (error) {
+            // eslint-disable-next-line max-len
+            Meteor.call('informTenantUser', notifyUserList, 'userRoleChange', tenant.name, (nofityChangeError) => {
+              if (nofityChangeError) {
                 sAlert.error('Error in notifying users', { timeout: 'none' });
               }
             });
@@ -112,7 +112,6 @@ Template.tenantForm.events({
             // Tenant addition failure on manager side, save new tenant object to local array
             const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
             sAlert.error(errorMessage, { timeout: 'none' });
-            // tenantList.unshift(tenant);
           }
         }
         if (error) {
@@ -121,7 +120,6 @@ Template.tenantForm.events({
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant operation failed!  (${error}).`;
           sAlert.error(errorMessage, { timeout: 'none' });
-          // tenantList.unshift(tenant);
         }
       });
     }
@@ -243,7 +241,6 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
-          console.log('orig usr to be removed=', origUser);
           // Always add user to list for notification about removal
           notifyRemovedUsers.push(origUser);
 
@@ -372,8 +369,8 @@ Template.tenantForm.events({
 
                     // if there are modified users, send notifications
                     if (notifyChangedUsers.length > 0) {
-                      console.log('Perhaps following users need to be notified about change=', notifyChangedUsers);
-                      Meteor.call('informTenantUser', notifyChangedUsers, 'userRoleChange', modifiedTenant.name, (notifyModifyError, notifyModifyResult) => {
+                      // eslint-disable-next-line max-len
+                      Meteor.call('informTenantUser', notifyChangedUsers, 'userRoleChange', modifiedTenant.name, (notifyModifyError) => {
                         if (notifyModifyError) {
                           sAlert.error('Error in notifying users', { timeout: 'none' });
                         }
@@ -382,8 +379,8 @@ Template.tenantForm.events({
 
                     if (notifyRemovedUsers.length > 0) {
                       // if there are removed users, send notifications
-                      console.log('Perhaps following users need to be notified about removal=', notifyRemovedUsers);
-                      Meteor.call('informTenantUser', notifyRemovedUsers, 'userRemoval', modifiedTenant.name, (notifyRemoveError, notifyRemoveResult) => {
+                      // eslint-disable-next-line max-len
+                      Meteor.call('informTenantUser', notifyRemovedUsers, 'userRemoval', modifiedTenant.name, (notifyRemoveError) => {
                         if (notifyRemoveError) {
                           sAlert.error('Error in notifying users', { timeout: 'none' });
                         }

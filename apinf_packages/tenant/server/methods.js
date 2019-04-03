@@ -8,12 +8,18 @@ import { Meteor } from 'meteor/meteor';
 import { Match, check } from 'meteor/check';
 import { HTTP } from 'meteor/http';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Email } from 'meteor/email';
 
 // Npm packages imports
 import _ from 'lodash';
 
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
+
+// Global array of users.
+// It is filled while fetching complete user list
+// and used when user email address is needed for notification
+let completeUserList = [];
 
 const getTenantToken = function () {
   // Get user
@@ -112,111 +118,6 @@ Meteor.methods({
         let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
-
-        // TODO remove test material
-        /*
-        response.tenantList = [
-          {
-            id: 1123456789,
-            owner_id: 1987654321,
-            tenant_organization: '1111',
-            name: 'First tenant',
-            description: 'This is a first class tenant',
-            users: [
-              {
-                id: '123qwe',
-                name: 'Spede',
-                provider: false,
-                consumer: 'checked',
-              },
-              {
-                id: '223qwe',
-                name: 'Simo',
-                provider: 'checked',
-                consumer: false,
-              },
-              {
-                id: '323qwe',
-                name: 'Vesku',
-                provider: 'checked',
-                consumer: 'checked',
-              },
-            ],
-          },
-          {
-            id: 2123456789,
-            owner_id: 2987654321,
-            tenant_organization: '1111',
-            name: 'Second tenant',
-            description: 'This is a second class tenant',
-            users: [
-              {
-                id: '423qwe',
-                name: 'Tupu',
-                provider: 'checked',
-                consumer: false,
-              },
-              {
-                id: '523qwe',
-                name: 'Hupu',
-                provider: 'checked',
-                consumer: 'checked',
-              },
-              {
-                id: '623qwe',
-                name: 'Lupu',
-                provider: false,
-                consumer: 'checked',
-              },
-              {
-                id: '723qwe',
-                name: 'Skrupu',
-                provider: false,
-                consumer: 'checked',
-              },
-            ],
-          },
-          {
-            id: 3123456789,
-            owner_id: 31987654321,
-            tenant_organization: '1111',
-            description: 'This is a third class tenant',
-            name: 'Third tenant',
-            users: [
-              {
-                id: 'a123qwe',
-                name: 'Ismo',
-                provider: 'checked',
-                consumer: false,
-              },
-              {
-                id: 'b123qwe',
-                name: 'Asmo',
-                provider: 'checked',
-                consumer: 'checked',
-              },
-              {
-                id: 'c123qwe',
-                name: 'Osmo',
-                provider: false,
-                consumer: 'checked',
-              },
-              {
-                id: 'd123qwe',
-                name: 'Atso',
-                provider: 'checked',
-                consumer: 'checked',
-              },
-              {
-                id: 'e123qwe',
-                name: 'Matso',
-                provider: false,
-                consumer: 'checked',
-              },
-            ],
-          },
-        ];
-        */
       }
     } else {
       // Return error object
@@ -235,6 +136,8 @@ Meteor.methods({
 
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
+
+    console.log('\n ------------ Fetch User list -------------- \n');
 
     if (tenantUrl) {
       // Make sure endPoint is a String
@@ -259,7 +162,7 @@ Meteor.methods({
         // deserialize JSON gotten from manager
         const resultFromTenantManager = JSON.parse(result.content);
         // We need only id and username, so pick them
-        const completeUserList = resultFromTenantManager.users.map(user => {
+        completeUserList = resultFromTenantManager.users.map(user => {
           return {
             id: user.id,
             username: user.username,
@@ -268,6 +171,7 @@ Meteor.methods({
           };
         });
 
+        // Sort list to ascending order
         completeUserList.sort(compare);
         // prepare response
         response.completeUserList = completeUserList;
@@ -346,8 +250,6 @@ Meteor.methods({
         );
         // Create a monitoring data
         response.status = result.statusCode;
-        console.log('3 POST a ok, result=', result);
-        console.log('3 a ok, response=', response);
       } catch (err) {
         // Return error object
         throw new Meteor.Error(err.message);
@@ -357,8 +259,6 @@ Meteor.methods({
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-
-    console.log(+new Date(), ' 4 POST response=', response);
     return response;
   },
 
@@ -521,37 +421,53 @@ Meteor.methods({
   },
   informTenantUser (userlist, notificationType, tenantName) {
     // Check the type of notification
-    let text;
-    if (notificationType === "userRoleChange") {
-      text = ` has changes in roles in tenant ${tenantName}.`;
-      console.log('Notify change');
-    } else if (notificationType === "userRemoval") {
-      text = ` is no more a user of tenant ${tenantName}. `;
-      console.log('Notify user removal');
+    let emailText;
+    let emailSubject;
+    if (notificationType === 'userRoleChange') {
+      emailSubject = `Changes in user roles in tenant ${tenantName}`;
+      emailText = `In the tenant ${tenantName} there are changes in roles of following user: `;
+    } else if (notificationType === 'userRemoval') {
+      emailSubject = `User removed from tenant ${tenantName}`;
+      emailText = `Changes in tenant ${tenantName}. Removed following user: `;
+    } else if (notificationType === 'tenantRemoval') {
+      emailSubject = `Tenant ${tenantName} removed`;
+      emailText = `Tenant ${tenantName} is removed. One of the users was: `;
     }
 
     // Send notification for each user in list
-    if (text) {
+    if (emailText) {
       // Get settings
       const settings = Settings.findOne();
 
       // Check if email settings are configured
       if (settings.mail && settings.mail.enabled) {
-        userlist.forEach( user => {
-          console.log('postia tulossa=', user);
-          // send notification
-          let message = user.name;
-          message = message.concat(text);
-          console.log('actual sending to ', user.email);
-          console.log('message=', message);
+        userlist.forEach(user => {
+          // Get the email address for user in question
+          const toUser = completeUserList.find(userData => userData.id === user.id);
+
+          // fill notification
+          let emailTextToSend = emailText.concat(user.name);
+          console.log('user=', user);
+
+          // In case roles were changed, anticipate new roles
+          if (notificationType === 'userRoleChange') {
+            emailTextToSend = emailTextToSend.concat('. Current roles: data-consumer');
+            if (user.provider) {
+              emailTextToSend = emailTextToSend.concat(', data-provider.');
+            }
+          }
+
+          const emailContent = {
+            to: toUser.email,
+            from: settings.mail.fromEmail,
+            subject: emailSubject,
+            text: emailTextToSend,
+          };
+
+          console.log('emali lähtee näinikkäästi=', emailContent);
 
           // Send the e-mail
-          Email.send({
-            to: settings.mail.toEmail,
-            from: settings.mail.fromEmail,
-            subject: `Tenant user related changes`,
-            text,
-          });
+          Email.send(emailContent);
         });
       }
     }
