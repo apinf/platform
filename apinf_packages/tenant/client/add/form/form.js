@@ -35,6 +35,7 @@ Template.tenantUserForm.events({
         provider: false,
         consumer: false,
         email: thisUser[0].email,
+        notification: "checked",
       };
 
       let tenantUsers = [];

@@ -39,16 +39,18 @@ Template.ensureTenantRemovalForm.events({
     Meteor.call('deleteTenant', tenantToRemove, (error, result) => {
       if (result) {
         if (result.status === 204) {
-          // Tenant successfully removed from manager side, empty local list
-          const notifyUserList = Session.get('tenantUsers');
+          // Always notify users when the tenant is removed
+          const tenantUsers = Session.get('tenantUsers');
+
           // Notification to users of tenant
-          console.log('Perhaps following users need to be notified about removal=', notifyUserList);
-          Meteor.call('informTenantUser', notifyUserList, 'userRemoval', tenantToRemove.name, (notifyError, notifyResult) => {
+          console.log('Perhaps following users need to be notified about removal=', tenantUsers);
+          Meteor.call('informTenantUser', tenantUsers, 'userRemoval', tenantToRemove.name, (notifyError, notifyResult) => {
             if (notifyError) {
               sAlert.error('Error in notifying users', { timeout: 'none' });
             }
           });
 
+          // Tenant successfully removed from manager side, empty local list
           tenantList = [];
           // Save to sessionStorage to be used while adding users to tenant
           Session.set('tenantList', tenantList);

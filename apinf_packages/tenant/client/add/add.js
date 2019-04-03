@@ -52,15 +52,12 @@ Template.tenantForm.events({
           };
           return usersRow;
         });
-        // gather list of notified users email addresses
+        // gather list of notified users' email addresses
         notifyUserList = tenantUsers.filter((userdata) => {
-      //    if (userdata.notification === 'checked') {
-            return {
-              username: userdata.name,
-              email: userdata.email,
-            }
-      //    }
-      //    return false;
+          if (userdata.notification === 'checked') {
+            return true;
+          }
+          return false;
         });
       }
 
@@ -155,12 +152,6 @@ Template.tenantForm.events({
         description: $('#add-tenant-description').val(),
       };
 
-      // Get possible users in changed tenant
-      if (Session.get('tenantUsers')) {
-        // Read list of users of the tenant at hand
-        modifiedTenant.users = Session.get('tenantUsers');
-      }
-
       // Any changes in name
       if (originalTenant.name !== modifiedTenant.name) {
         // Fill in tenant id
@@ -204,6 +195,12 @@ Template.tenantForm.events({
           -> all is done
        */
 
+      // Get possible users in changed tenant
+      if (Session.get('tenantUsers')) {
+        // Read list of users of the tenant at hand
+        modifiedTenant.users = Session.get('tenantUsers');
+      }
+
       const usersNeedChecking = [];
       const notifyChangedUsers = [];
       const notifyRemovedUsers = [];
@@ -233,10 +230,10 @@ Template.tenantForm.events({
             op: 'remove',
             path,
           };
-          // Add user to remove list
+          // Add remove operation for user to request list
           changeList.push(removedUser);
 
-          // Add user also to check list
+          // Add user info also to check list
           const checkPath = path.concat('/name');
           const checkUser = {
             op: 'test',
@@ -246,7 +243,8 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
-          // Add user to list for notification about removal
+          console.log('orig usr to be removed=', origUser);
+          // Always add user to list for notification about removal
           notifyRemovedUsers.push(origUser);
 
           // If user data is modified, set user to be replaced
@@ -286,8 +284,11 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
-          // Add user to notification about modification list
-          notifyChangedUsers.push(sameUserInModified[0]);
+          // If notification is indicated, add to notify list
+          if (sameUserInModified[0].notification) {
+            // Add user to notification about modification list
+            notifyChangedUsers.push(sameUserInModified[0]);
+          }
 
           // User data is changed, remove from modified list
           modifiedTenant.users.splice(modifiedUserIndex, 1);
@@ -307,8 +308,10 @@ Template.tenantForm.events({
 
       // If there are any modified users left, they are to be added into request
       const newUsers = modifiedTenant.users.map((user) => {
-        // Add user to notification about modification list
-        notifyChangedUsers.push(user);
+        if (user.notification === 'checked') {
+          // Add user to notification about modification list
+          notifyChangedUsers.push(user);
+        }
 
         // collect roles
         const tenantRoles = [];
