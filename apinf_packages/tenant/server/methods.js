@@ -454,15 +454,18 @@ Meteor.methods({
         // Send email for each changed user
         userlist.forEach(user => {
           // Get the email address for user in question
+          // eslint-disable-next-line
           const toUser = completeUserList.find(userData => userData.id === user.id);
 
           // Add user name to notification
           let emailTextToSend = emailText.concat(user.name);
 
-          // In case roles were changed, anticipate new roles. Consumer as default, provider, if indicated.
+          // In case roles were changed, anticipate new roles.
+          // Consumer as default, provider, if indicated.
           if (notificationType === 'userRoleChange' || notificationType === 'tenantAddition') {
             emailTextToSend = emailTextToSend.concat('. ');
-            emailTextToSend = emailTextToSend.concat(TAPi18n.__('informTenantUser_emailText_roleInfo'));
+            emailTextToSend =
+              emailTextToSend.concat(TAPi18n.__('informTenantUser_emailText_roleInfo'));
             emailTextToSend = emailTextToSend.concat(' data-consumer');
             if (user.provider) {
               emailTextToSend = emailTextToSend.concat(', data-provider.');
