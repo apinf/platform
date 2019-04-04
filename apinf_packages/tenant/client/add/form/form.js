@@ -24,7 +24,7 @@ Template.tenantUserForm.events({
         if (userdata.id === userId) {
           return {
             userdata,
-          }
+          };
         }
         return false;
       });
@@ -35,7 +35,7 @@ Template.tenantUserForm.events({
         provider: false,
         consumer: false,
         email: thisUser[0].email,
-        notification: "checked",
+        notification: 'checked',
       };
 
       let tenantUsers = [];

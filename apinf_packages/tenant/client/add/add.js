@@ -93,7 +93,7 @@ Template.tenantForm.events({
 
             // Notification to users of tenant
             // eslint-disable-next-line max-len
-            Meteor.call('informTenantUser', notifyUserList, 'userRoleChange', tenant.name, (nofityChangeError) => {
+            Meteor.call('informTenantUser', notifyUserList, 'tenantAddition', tenant.name, (nofityChangeError) => {
               if (nofityChangeError) {
                 sAlert.error('Error in notifying users', { timeout: 'none' });
               }
@@ -105,7 +105,6 @@ Template.tenantForm.events({
 
             // Inform user about success
             sAlert.success(message);
-
           } else {
             // Operation finished, inform spinner
             Session.set('tenantUpdateOngoing', false);

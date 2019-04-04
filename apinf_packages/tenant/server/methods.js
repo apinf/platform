@@ -113,7 +113,6 @@ Meteor.methods({
 
         response.status = result.statusCode;
       } catch (err) {
-
         // Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
         errorMessage = errorMessage.concat(err);
@@ -420,18 +419,29 @@ Meteor.methods({
     return response;
   },
   informTenantUser (userlist, notificationType, tenantName) {
-    // Check the type of notification
+    check(userlist, Array);
+    check(notificationType, String);
+    check(tenantName, String);
+
     let emailText;
     let emailSubject;
+    // To convey variables to text strings
+    const params = { tenant: tenantName };
+
+    // Check the type of notification
     if (notificationType === 'userRoleChange') {
-      emailSubject = `Changes in user roles in tenant ${tenantName}`;
-      emailText = `In the tenant ${tenantName} there are changes in roles of following user: `;
+      emailSubject = TAPi18n.__('informTenantUser_emailSubject_userRoleChange', params);
+      emailText = TAPi18n.__('informTenantUser_emailText_userRoleChange', params);
     } else if (notificationType === 'userRemoval') {
-      emailSubject = `User removed from tenant ${tenantName}`;
-      emailText = `Changes in tenant ${tenantName}. Removed following user: `;
+      emailSubject = TAPi18n.__('informTenantUser_emailSubject_userRemoval', params);
+      emailText = TAPi18n.__('informTenantUser_emailText_userRemoval', params);
     } else if (notificationType === 'tenantRemoval') {
-      emailSubject = `Tenant ${tenantName} removed`;
-      emailText = `Tenant ${tenantName} is removed. One of the users was: `;
+      emailSubject = TAPi18n.__('informTenantUser_emailSubject_tenantRemoval', params);
+      emailText = TAPi18n.__('informTenantUser_emailText_tenantRemoval', params);
+    } else if (notificationType === 'tenantAddition') {
+      emailSubject = TAPi18n.__('informTenantUser_emailSubject_tenantAddition', params);
+      // Note! Same text as in user role change
+      emailText = TAPi18n.__('informTenantUser_emailText_userRoleChange', params);
     }
 
     // Send notification for each user in list
@@ -439,32 +449,33 @@ Meteor.methods({
       // Get settings
       const settings = Settings.findOne();
 
-      // Check if email settings are configured
+      // Email can be sent only when email settings are configured
       if (settings.mail && settings.mail.enabled) {
+        // Send email for each changed user
         userlist.forEach(user => {
           // Get the email address for user in question
           const toUser = completeUserList.find(userData => userData.id === user.id);
 
-          // fill notification
+          // Add user name to notification
           let emailTextToSend = emailText.concat(user.name);
-          console.log('user=', user);
 
-          // In case roles were changed, anticipate new roles
-          if (notificationType === 'userRoleChange') {
-            emailTextToSend = emailTextToSend.concat('. Current roles: data-consumer');
+          // In case roles were changed, anticipate new roles. Consumer as default, provider, if indicated.
+          if (notificationType === 'userRoleChange' || notificationType === 'tenantAddition') {
+            emailTextToSend = emailTextToSend.concat('. ');
+            emailTextToSend = emailTextToSend.concat(TAPi18n.__('informTenantUser_emailText_roleInfo'));
+            emailTextToSend = emailTextToSend.concat(' data-consumer');
             if (user.provider) {
               emailTextToSend = emailTextToSend.concat(', data-provider.');
             }
           }
 
+          // Fill data to be sent
           const emailContent = {
             to: toUser.email,
             from: settings.mail.fromEmail,
             subject: emailSubject,
             text: emailTextToSend,
           };
-
-          console.log('emali lähtee näinikkäästi=', emailContent);
 
           // Send the e-mail
           Email.send(emailContent);

@@ -43,7 +43,8 @@ Template.ensureTenantRemovalForm.events({
           const tenantUsers = Session.get('tenantUsers');
 
           // Notification to users of tenant
-          Meteor.call('informTenantUser', tenantUsers, 'tenantRemoval', tenantToRemove.name, (notifyError, notifyResult) => {
+            // eslint-disable-next-line max-len
+          Meteor.call('informTenantUser', tenantUsers, 'tenantRemoval', tenantToRemove.name, (notifyError) => {
             if (notifyError) {
               sAlert.error('Error in notifying users', { timeout: 'none' });
             }
