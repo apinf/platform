@@ -63,7 +63,6 @@ Meteor.methods({
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
 
-    console.log('\n ------------ Fetch Tenant list -------------- \n');
     if (tenantUrl) {
       // Make sure endPoint is a String
       // eslint-disable-next-line new-cap
@@ -135,8 +134,6 @@ Meteor.methods({
 
     // Fetch tenant endpoint and token
     let tenantUrl = getTenantInfo();
-
-    console.log('\n ------------ Fetch User list -------------- \n');
 
     if (tenantUrl) {
       // Make sure endPoint is a String
@@ -486,4 +483,19 @@ Meteor.methods({
       }
     }
   },
+  askMailEnableStatus () {
+    console.log('asking email status');
+    Meteor.call('getSettings', (error, result) => {
+      if (result) {
+        if (result.mail && result.mail.enabled) {
+          console.log('...yes= ', result);
+          return true;
+        }
+      } else {
+        console.log('false tuli')
+        return false;
+      }
+    });
+  },
+
 });

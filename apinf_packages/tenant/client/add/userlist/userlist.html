@@ -21,18 +21,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <tr>
               <td>
                 {{ name }}
-                <div class="checkbox pull-right" style="margin-bottom: 0px;">
-                  <label for="notifyUser">
-                    <span>Notify User &nbsp; &nbsp; &nbsp;</span>
-                  </label>
+                {{# if isMailEnabled }}
+                  <!-- Email notification tick box is shown only when mail sending is enabled -->
+                  <div class="checkbox pull-right" style="margin-bottom: 0px;">
+                    <label for="notifyUser">
+                      <span>Notify User &nbsp; &nbsp; &nbsp;</span>
+                    </label>
 
-                  <input type="checkbox"
-                          checked={{ notification }}
-                          id="notifyUser"
-                          name=notifyUser
-                          value="notify-user"
-                          class="notificationToUser">
-                </div>
+                    <input type="checkbox"
+                            checked={{ notification }}
+                            id="notifyUser"
+                            name=notifyUser
+                            value="notify-user"
+                            class="notificationToUser">
+                  </div>
+                {{/ if }}
               </td>
               <td>
                 <input type="checkbox"

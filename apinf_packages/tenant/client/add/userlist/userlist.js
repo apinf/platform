@@ -13,6 +13,13 @@ Template.tenantUsersList.helpers({
     const tenantUsers = Session.get('tenantUsers');
     return tenantUsers;
   },
+  isMailEnabled () {
+    if (Session.get('mailStatusResponse')) {
+      return Session.get('mailStatusResponse');
+    } else {
+      return false;
+    }
+  },
 });
 
 Template.tenantUsersList.events({

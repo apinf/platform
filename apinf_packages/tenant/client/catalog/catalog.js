@@ -67,6 +67,20 @@ Template.tenantCatalog.onRendered(function () {
         sAlert.error(error, { timeout: 'none' });
       }
     });
+
+    // Notification to users of tenant
+    // eslint-disable-next-line max-len
+    Meteor.call('getSettings', (error, result) => {
+      if (result) {
+        if (result.mail && result.mail.enabled) {
+          Session.set('mailStatusResponse', true);
+        } else {
+          Session.set('mailStatusResponse', false);
+        }
+      } else {
+        Session.set('mailStatusResponse', false);
+      }
+    });
   });
 });
 
