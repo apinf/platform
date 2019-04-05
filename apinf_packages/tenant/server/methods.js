@@ -26,6 +26,7 @@ const getTenantToken = function () {
   const userId = Meteor.userId();
   const user = Meteor.users.findOne(userId);
 
+  // Get fiware token for HTTP requests
   let tenantToken;
   if (user && user.services && user.services.fiware) {
     tenantToken = user.services.fiware.accessToken;
@@ -37,10 +38,10 @@ const getTenantInfo = function () {
   // Get settings document
   const settings = Settings.findOne();
 
-  // Get url and token from settings
+  // Get url from settings to be used in HTTP requests
   const tenantUrl = _.get(settings, 'tenantIdm.basepath');
 
-  // Return URL and token, if they are set
+  // Return URL, if it is set
   if (tenantUrl) {
     return tenantUrl;
   }
@@ -48,6 +49,7 @@ const getTenantInfo = function () {
   return false;
 };
 
+// For sorting tenant user names to ascending order
 function compare (a, b) {
   if (a.username < b.username) return -1;
   if (a.username > b.username) return 1;
@@ -60,7 +62,7 @@ Meteor.methods({
     // In case of failure
     response.status = 400;
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant host URL and basepath
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -85,13 +87,10 @@ Meteor.methods({
         // deserialize JSON
         const tenantList = JSON.parse(result.content);
 
-        response.tenantList = tenantList;
-
         // Modify parameters according to tenant manager API from object to array
         response.tenantList = tenantList.map(tenant => {
-          // console.log('tenant=', tenant);
           const convertedUserList = tenant.users.map(user => {
-            // Return converted user list
+            // Convert user roles to be managed with tick box
             return {
               id: user.id,
               name: user.name,
@@ -100,7 +99,7 @@ Meteor.methods({
             };
           });
 
-          // Return tenant, pick necessary fields for internal use
+          // Return tenant, pick only necessary fields for internal use
           return {
             id: tenant.id,
             owner_id: tenant.owner_id,
@@ -112,18 +111,16 @@ Meteor.methods({
 
         response.status = result.statusCode;
       } catch (err) {
-        // Return error object
+        // Failure: Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
       }
     } else {
-      // Return error object
+      // Missing URL, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
-
-    // console.log('4 GET tenant response=', response);
     return response;
   },
 
@@ -132,7 +129,7 @@ Meteor.methods({
     // In case of failure
     response.status = 400;
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant host url
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -167,19 +164,19 @@ Meteor.methods({
           };
         });
 
-        // Sort list to ascending order
+        // Sort user list to ascending order
         completeUserList.sort(compare);
         // prepare response
         response.completeUserList = completeUserList;
         response.status = result.statusCode;
       } catch (err) {
-        // Return error object
+        // Failure, Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingUserlist');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
       }
     } else {
-      // Return error object
+      // No url, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
@@ -191,7 +188,7 @@ Meteor.methods({
 
     const response = {};
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant url
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -204,8 +201,9 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-      // Convert parameters to array in tenant manager API from internal object
+      // Convert user data to array for tenant manager API from internal object
       const userlist = tenant.users.map(user => {
+        // Roles from tick boxes to array
         const tenantRoles = [];
         if (user.provider) {
           tenantRoles.push('data-provider');
@@ -230,9 +228,6 @@ Meteor.methods({
       // Serialize to JSON
       const tenantJSON = JSON.stringify(tenantToSend);
 
-      console.log('\n ----------------- Add tenant ---------------------\n');
-      console.log('add tenant userlist=\n', JSON.stringify(tenantToSend, null, 2));
-
       try {
         const result = HTTP.post(
           tenantUrl,
@@ -244,14 +239,14 @@ Meteor.methods({
             content: tenantJSON,
           }
         );
-        // Create a monitoring data
+        // Status to be shown
         response.status = result.statusCode;
       } catch (err) {
-        // Return error object
+        // Failure, Return error object
         throw new Meteor.Error(err.message);
       }
     } else {
-      // Return error object
+      // No url, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
@@ -263,7 +258,7 @@ Meteor.methods({
 
     const response = {};
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant URL and basepath
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -288,17 +283,17 @@ Meteor.methods({
             },
           }
         );
-        // Create a monitoring data
+        // Status to be shown
         response.status = result.statusCode;
       } catch (err) {
         response.status = err.response.statusCode;
         response.content = err.response.content;
 
-        // Return error object
+        // Failure, Return error object
         throw new Meteor.Error(err.message);
       }
     } else {
-      // Return error object
+      // No url, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
@@ -310,7 +305,7 @@ Meteor.methods({
 
     const response = {};
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant url and basepath
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -338,17 +333,17 @@ Meteor.methods({
             content: payLoadToSend,
           }
         );
-        // Create a monitoring data
+        // Convey operation status
         response.status = result.statusCode;
       } catch (err) {
         response.status = err.response.statusCode;
         response.content = err.response.content;
 
-        // Return error object
+        // Failure, Return error object
         throw new Meteor.Error(err.message);
       }
     } else {
-      // Return error object
+      // No url, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
@@ -357,6 +352,7 @@ Meteor.methods({
   checkTenantUsers (userCheckData) {
     check(userCheckData, Object);
 
+    // Initiate response
     const response = {};
     // If no changes in user, return here always OK
     if (userCheckData.type !== 'user') {
@@ -364,7 +360,7 @@ Meteor.methods({
       return response;
     }
 
-    // Fetch tenant endpoint and token
+    // Fetch tenant url and basepath
     let tenantUrl = getTenantInfo();
 
     if (tenantUrl) {
@@ -392,7 +388,7 @@ Meteor.methods({
             content: payLoadToSend,
           }
         );
-        // Only 200 is acceptable status code
+        // Only 200 is acceptable status code for User checking
         if (result.statusCode === 200) {
           response.status = result.statusCode;
         } else {
@@ -405,24 +401,26 @@ Meteor.methods({
         response.status = err.response.statusCode;
         response.content = err.response.content;
 
-        // Return error object
+        // Failure, Return error object
         throw new Meteor.Error(err.message);
       }
     } else {
-      // Return error object
+      // No url, Return error object
       const errorMessage = TAPi18n.__('tenantRequest_missingBasepath');
       throw new Meteor.Error(errorMessage);
     }
     return response;
   },
   informTenantUser (userlist, notificationType, tenantName) {
+    // Here is sent an email notification for user about role changes
     check(userlist, Array);
     check(notificationType, String);
     check(tenantName, String);
 
+    // Initiate content
     let emailText;
     let emailSubject;
-    // To convey variables to text strings
+    // An object to convey variables to text strings
     const params = { tenant: tenantName };
 
     // Check the type of notification
@@ -441,9 +439,9 @@ Meteor.methods({
       emailText = TAPi18n.__('informTenantUser_emailText_userRoleChange', params);
     }
 
-    // Send notification for each user in list
+    // Notification type correct, can send notifications
     if (emailText) {
-      // Get settings
+      // Get settings to find out, if mail is enabled
       const settings = Settings.findOne();
 
       // Email can be sent only when email settings are configured
@@ -454,7 +452,7 @@ Meteor.methods({
           // eslint-disable-next-line
           const toUser = completeUserList.find(userData => userData.id === user.id);
 
-          // Add user name to notification
+          // Add user name to notification text content
           let emailTextToSend = emailText.concat(user.name);
 
           // In case roles were changed, anticipate new roles.
@@ -483,19 +481,4 @@ Meteor.methods({
       }
     }
   },
-  askMailEnableStatus () {
-    console.log('asking email status');
-    Meteor.call('getSettings', (error, result) => {
-      if (result) {
-        if (result.mail && result.mail.enabled) {
-          console.log('...yes= ', result);
-          return true;
-        }
-      } else {
-        console.log('false tuli')
-        return false;
-      }
-    });
-  },
-
 });

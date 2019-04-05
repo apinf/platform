@@ -17,7 +17,7 @@ Template.tenantForm.onCreated(() => {
 });
 
 Template.tenantForm.onDestroyed(() => {
-  // Unset sessions
+  // Unset spinner
   Session.set('tenantUpdateOngoing', undefined);
 });
 
@@ -31,17 +31,18 @@ Template.tenantForm.events({
       // Save new Tenant operation began, inform spinner
       Session.set('tenantUpdateOngoing', true);
 
+      // Initiate payload
       const tenant = {};
       let tenantUsers = [];
       let notifyUserList = [];
 
+      // Get name and description from modal fields
       tenant.name = $('#add-tenant-name').val();
       tenant.description = $('#add-tenant-description').val();
 
       // Get possible users in tenant
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
-        console.log('tenant users=', tenantUsers);
         // convert user objects to a list for POST operation
         tenant.users = tenantUsers.map((userdata) => {
           const usersRow = {
@@ -52,7 +53,7 @@ Template.tenantForm.events({
           };
           return usersRow;
         });
-        // gather list of notified users' email addresses
+        // gather list of notified users' email addresses for notification sending
         notifyUserList = tenantUsers.filter((userdata) => {
           if (userdata.notification === 'checked') {
             return true;
@@ -68,8 +69,6 @@ Template.tenantForm.events({
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
           if (result.status === 201) {
-            // In successful case we can empty the input fields
-
             // Empty the tenant user list
             tenantUsers.splice(0, tenantUsers.length);
             // Remove users from session
@@ -80,18 +79,18 @@ Template.tenantForm.events({
             // Empty tenant description field
             $('#add-tenant-description').val('');
 
-            // Operation finished, inform spinner
-            Session.set('tenantUpdateOngoing', false);
-
             // New tenant successfully added on manager side, empty local list
             tenantList = [];
             // Save to sessionStorage to be used while adding users to tenant
             Session.set('tenantList', tenantList);
 
+            // Operation successfully finished, inform spinner
+            Session.set('tenantUpdateOngoing', false);
+
             // Close modal
             Modal.hide('tenantForm');
 
-            // Notification to users of tenant
+            // Send notification to the users of the tenant
             // eslint-disable-next-line max-len
             Meteor.call('informTenantUser', notifyUserList, 'tenantAddition', tenant.name, (nofityChangeError) => {
               if (nofityChangeError) {
@@ -106,7 +105,7 @@ Template.tenantForm.events({
             // Inform user about success
             sAlert.success(message);
           } else {
-            // Operation finished, inform spinner
+            // Operation finished, failure, inform spinner
             Session.set('tenantUpdateOngoing', false);
             // Tenant addition failure on manager side, save new tenant object to local array
             const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
@@ -114,7 +113,7 @@ Template.tenantForm.events({
           }
         }
         if (error) {
-          // Operation finished, inform spinner
+          // Operation finished, failure, inform spinner
           Session.set('tenantUpdateOngoing', false);
           // Tenant addition failure on manager side, save new tenant object to local array
           const errorMessage = `Tenant operation failed!  (${error}).`;
@@ -128,6 +127,7 @@ Template.tenantForm.events({
     // get values of original tenant
     const originalTenant = this.tenantToModify;
 
+    // Name and description must be given in order to be able to send modify
     if ($('#add-tenant-name').val() === '') {
       sAlert.error('Tenant must have a name!', { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -153,7 +153,7 @@ Template.tenantForm.events({
       if (originalTenant.name !== modifiedTenant.name) {
         // Fill in tenant id
         modifyTenantPayload.id = originalTenant.id;
-        // Fill in replace for name
+        // Fill in replace for name operation
         const changedDescription = {
           op: 'replace',
           value: $('#add-tenant-name').val(),
@@ -166,7 +166,7 @@ Template.tenantForm.events({
       if (originalTenant.description !== modifiedTenant.description) {
         // Fill in tenant id
         modifyTenantPayload.id = originalTenant.id;
-        // Fill in replace for description
+        // Fill in replace for description operation
         const changedDescription = {
           op: 'replace',
           value: $('#add-tenant-description').val(),
@@ -198,6 +198,7 @@ Template.tenantForm.events({
         modifiedTenant.users = Session.get('tenantUsers');
       }
 
+      // Initiate payload
       const usersNeedChecking = [];
       const notifyChangedUsers = [];
       const notifyRemovedUsers = [];
@@ -217,11 +218,11 @@ Template.tenantForm.events({
           return false;
         });
 
-        // If not found in modified user list, the user is removed
+        // If not found in modified user list, the user is to be removed
         if (sameUserInModified.length === 0) {
           modifyTenantPayload.id = originalTenant.id;
           let path = '/users/';
-          // indicate user with original user data index
+          // identify user with original user data index
           path = path.concat(index);
           const removedUser = {
             op: 'remove',
@@ -248,6 +249,7 @@ Template.tenantForm.events({
                    origUser.provider !== sameUserInModified[0].provider) {
           modifyTenantPayload.id = originalTenant.id;
 
+          // endpoint for modification
           let path = '/users/';
           // indicate user with original user data index
           path = path.concat(index);
@@ -280,23 +282,23 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
-          // If notification is indicated, add to notify list
+          // If notification is indicated, add user to notify list
           if (sameUserInModified[0].notification) {
             // Add user to notification about modification list
             notifyChangedUsers.push(sameUserInModified[0]);
           }
 
-          // User data is changed, remove from modified list
+          // User data is changed, remove user from modified list
           modifiedTenant.users.splice(modifiedUserIndex, 1);
         } else {
-          // User data not changed, remove from modified list only
+          // User data not changed, remove user from modified list only
           modifiedTenant.users.splice(modifiedUserIndex, 1);
         }
 
         return changeList;
       }, []);
 
-      // Include removed users to request
+      // Include removed users to request payload
       if (userChanges.length > 0) {
         modifyTenantPayload.id = originalTenant.id;
         modifyTenantPayload.body = modifyTenantPayload.body.concat(userChanges);
@@ -309,7 +311,7 @@ Template.tenantForm.events({
           notifyChangedUsers.push(user);
         }
 
-        // collect roles
+        // collect roles and convert them for tenant manager
         const tenantRoles = [];
         if (user.provider) {
           tenantRoles.push('data-provider');
@@ -334,13 +336,13 @@ Template.tenantForm.events({
         return addedUser;
       });
 
-      // Include added users to request
+      // Include added users to request payload
       if (newUsers.length > 0) {
         modifyTenantPayload.id = originalTenant.id;
         modifyTenantPayload.body = modifyTenantPayload.body.concat(newUsers);
       }
 
-      // Check if modified users exist on server side
+      // Prepare checking for modified users existing on server side
       const userCheckData = {};
       if (usersNeedChecking.length > 0) {
         userCheckData.id = originalTenant.id;
@@ -376,8 +378,8 @@ Template.tenantForm.events({
                       });
                     }
 
+                    // if there are removed users, send notifications
                     if (notifyRemovedUsers.length > 0) {
-                      // if there are removed users, send notifications
                       // eslint-disable-next-line max-len
                       Meteor.call('informTenantUser', notifyRemovedUsers, 'userRemoval', modifiedTenant.name, (notifyRemoveError) => {
                         if (notifyRemoveError) {
