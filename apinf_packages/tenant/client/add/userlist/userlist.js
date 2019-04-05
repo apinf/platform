@@ -14,11 +14,11 @@ Template.tenantUsersList.helpers({
     return tenantUsers;
   },
   isMailEnabled () {
+    let response = false;
     if (Session.get('mailStatusResponse')) {
-      return Session.get('mailStatusResponse');
-    } else {
-      return false;
+      response = Session.get('mailStatusResponse');
     }
+    return response;
   },
 });
 
