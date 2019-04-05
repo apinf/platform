@@ -39,7 +39,7 @@ Template.tenantUserForm.events({
       };
 
       let tenantUsers = [];
-      // Get possible previous users of tenant
+      // Get current users of tenant
       if (Session.get('tenantUsers')) {
         tenantUsers = Session.get('tenantUsers');
       }
