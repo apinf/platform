@@ -31,6 +31,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> apiUmbrellaProxyForm proxy=proxy proxyHost=proxyHost api=api }}
     {{/ if }}
 
+    <!-- Proxy 42 -->
+    {{# if equals proxy.type "proxy42" }}
+      {{> proxy42ProxyForm proxy=proxy proxyHost=proxyHost api=api }}
+    {{/ if }}
+
     <!-- EMQ -->
     {{# if equals proxy.type "emq" }}
       {{> emqProxyForm }}

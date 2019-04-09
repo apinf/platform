@@ -16,57 +16,6 @@ import {
   apiBasePathRegEx,
   subSettingRequestHeaderRegEx } from '../regex';
 
-const RateLimitSchema = new SimpleSchema({
-  duration: {
-    type: Number,
-    optional: true,
-  },
-  limit_by: {
-    type: String,
-    optional: true,
-    autoform: {
-      firstOption: false,
-      options () {
-        const commonList = [
-          {
-            label: 'API Key',
-            value: 'apiKey',
-          },
-          {
-            label: 'IP Address',
-            value: 'ip',
-          },
-        ];
-
-        const settings = Settings.findOne();
-        const supportsGraphql = settings ? settings.supportsGraphql : false;
-
-        if (supportsGraphql) {
-          commonList.push({
-            label: 'Origin Header',
-            value: 'origin',
-          });
-        }
-
-        return commonList;
-      },
-      defaultValue: 'apiKey',
-    },
-  },
-  limit: {
-    type: Number,
-    optional: true,
-  },
-  response_headers: {
-    type: Boolean,
-    optional: true,
-    defaultValue: false,
-  },
-});
-
-// Internationalize Rate limit schema texts
-RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
-
 const SubSettings = new SimpleSchema({
   http_method: {
     type: String,
@@ -177,10 +126,6 @@ const SettingsSchema = new SimpleSchema({
     type: String,
     optional: true,
   },
-  rate_limits: {
-    type: [RateLimitSchema],
-    optional: true,
-  },
   append_query_string: {
     type: String,
     optional: true,
@@ -231,7 +176,7 @@ const SettingsSchema = new SimpleSchema({
 // Internationalize settings schema texts
 SettingsSchema.i18n('schemas.proxyBackends.apiUmbrella.settings');
 
-const ApiUmbrellaSchema = new SimpleSchema({
+const Proxy42Schema = new SimpleSchema({
   id: {
     type: String,
     optional: true,
@@ -318,6 +263,6 @@ SimpleSchema.messages({
     TAPi18n.__('invalidProxyBackendForm_headerStringMessage'),
 });
 // Internationalize API Umbrella schema texts
-ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
+Proxy42Schema.i18n('schemas.proxyBackends.apiUmbrella');
 
-export default ApiUmbrellaSchema;
+export default Proxy42Schema;

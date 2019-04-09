@@ -34,6 +34,7 @@ Template.proxyBackend.onCreated(() => {
 
     // First case: Proxy is only one
     if (proxyCount === 1) {
+      console.log('haettu=', Proxies.findOne());
       // Set these id as current
       currentProxyId = Proxies.findOne()._id;
     } else {
