@@ -11,7 +11,7 @@ import { Counts } from 'meteor/tmeasday:publish-counts';
 
 Template.apiSettings.helpers({
   proxyIsConfigured () {
-    // Get count of Proxies
+    // Get count of Proxies (apinfUmbrella and proxy42)
     const proxyCount = Counts.get('proxyCount');
 
     // Check that a proxy is defined

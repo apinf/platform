@@ -23,13 +23,12 @@ Meteor.publish('allProxies', function () {
   if (Roles.userIsInRole(this.userId, ['admin'])) {
     proxies = Proxies.find();
   }
-
   return proxies;
 });
 
 Meteor.publish('proxyCount', function () {
-  // Publish count of proxies
-  Counts.publish(this, 'proxyCount', Proxies.find({ type: 'apiUmbrella' }));
+  // Publish count of proxies (apinfUmbrella and proxy42)
+  Counts.publish(this, 'proxyCount', Proxies.find({ type: { $in: ['apiUmbrella', 'proxy42'] } }));
 });
 
 Meteor.publish('emqProxyCount', function () {

@@ -12,6 +12,7 @@ import _ from 'lodash';
 const requiredFieldsForProxy = {
   emqtt: ['proxyUrl', 'apiUrl', 'adminUsername', 'adminPassword', 'elasticsearch'],
   apiUmbrella: ['url', 'apiKey', 'authToken', 'elasticsearch'],
+  proxy42: ['url'],
 };
 
 export default function validateSchema (proxyType, proxyFields) {
