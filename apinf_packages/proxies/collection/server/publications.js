@@ -36,14 +36,15 @@ Meteor.publish('emqProxyCount', function () {
   Counts.publish(this, 'emqProxyCount', Proxies.find({ type: 'emq' }));
 });
 
-Meteor.publish('publicProxyDetails', (type) => {
-  check(type, String);
+Meteor.publish('publicProxyDetails', () => {
   // Return all proxies with public data: name, url, type
-  return Proxies.find({ type }, {
+  return Proxies.find({ }, {
     fields: {
       _id: 1,
       name: 1,
       'apiUmbrella.url': 1,
+      emq: 1,
+      'proxy42.url': 1,
       type: 1,
     },
   });
