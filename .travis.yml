@@ -30,6 +30,8 @@ services:
   - docker
 
 before_install:
+#update to the latest version of yarn to support package-lock.json
+  - curl -o- -L https://yarnpkg.com/install.sh | bash
   - free -m
   - pwd
   - ls -la
