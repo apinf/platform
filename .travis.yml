@@ -33,7 +33,7 @@ before_install:
 #update to the latest version of yarn to support package-lock.json
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - yarn import
+  #- yarn import
   - free -m
   - pwd
   - ls -la
