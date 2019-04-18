@@ -30,7 +30,7 @@ services:
   - docker
 
 before_install:
-  - free -m
+  #- free -m
   - pwd
   - ls -la
   # Install meteor locally on CI
