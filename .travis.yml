@@ -30,15 +30,13 @@ services:
   - docker
 
 before_install:
-  #- free -m
-  - pwd
   - ls -la
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
 
 before_script:
-  #- yarn
+#Previously used yarn, but now after migrating to meteor 1.8, yarn fails to create some binaries.
   - meteor npm install
   - yarn run lint
   - npm view chimp version
