@@ -38,7 +38,8 @@ before_install:
 
 
 before_script:
-  - yarn --verbose
+  #- yarn
+  - meteor npm install
   - yarn run lint
   - npm view chimp version
   - npm view chromedriver version
