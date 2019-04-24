@@ -4,11 +4,14 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
+import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { DocHead } from 'meteor/kadira:dochead';
 import { TAPi18n } from 'meteor/tap:i18n';
+import { Counts } from 'meteor/tmeasday:publish-counts';
+import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
 import Branding from '/apinf_packages/branding/collection';
@@ -51,5 +54,17 @@ Template.settings.helpers({
   },
   editDoc () {
     return Settings.findOne();
+  },
+  userCanViewMqttDashboard () {
+    // Get current user Id
+    const userId = Meteor.userId();
+    // User is admin
+    const userIsAdmin = Roles.userIsInRole(userId, ['admin']);
+
+    // Get count of EMQ Proxies
+    const proxyCount = Counts.get('emqProxyCount');
+
+    // Can view if he is Admin and Emq Proxy is defined
+    return userIsAdmin && proxyCount > 0;
   },
 });

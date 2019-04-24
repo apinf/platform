@@ -11,6 +11,7 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // Collection imports
+import Settings from '/apinf_packages/settings/collection';
 import StoredTopics from '../collection';
 
 // APInf imports
@@ -48,7 +49,15 @@ Meteor.methods({
     const deliveredQuery = topicsTableDeliveredType(filters, dateRange);
     const subscribeQuery = topicsTableSubscribedType(clientFilters, dateRange);
 
-    const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
+    let url;
+
+    const settings = Settings.findOne();
+
+    // If the access permission 'only admins can add APIs' is defined, use it
+    if (settings && settings.esDashboardData && settings.esDashboardData.enabled) {
+      // Make sure current user is admin
+      url = settings.esDashboardData.request;
+    }
     const content =
       `{"index" : "${publishedIndex}", "ignoreUnavailable": true}\n${publishedQuery}\n` +
       `{"index" : "${deliveredIndex}", "ignoreUnavailable": true}\n${deliveredQuery}\n` +

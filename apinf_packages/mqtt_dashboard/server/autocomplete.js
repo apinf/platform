@@ -11,6 +11,7 @@ import { check } from 'meteor/check';
 import _ from 'lodash';
 
 // APInf imports
+import Settings from '/apinf_packages/settings/collection';
 import promisifyCall from '../../core/helper_functions/promisify_call';
 import { autoCompleteRequest } from '../lib/topics_requests';
 import { indexesSet } from '../lib/helpers';
@@ -25,7 +26,16 @@ Meteor.methods({
     // Build query body for each event type
     const queryBody = autoCompleteRequest(topic);
 
-    const url = 'http://hap.cinfra.fi:9200/_msearch?pretty=true';
+    let url;
+
+    const settings = Settings.findOne();
+
+    // If the access permission 'only admins can add APIs' is defined, use it
+    if (settings && settings.esDashboardData && settings.esDashboardData.enabled) {
+      // Make sure current user is admin
+      url = settings.esDashboardData.request;
+    }
+
     const content =
       `{"index" : "${indexName}", "ignoreUnavailable": true}\n${queryBody}\n`;
 
