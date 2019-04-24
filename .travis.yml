@@ -7,14 +7,14 @@ node_js:
   - '8'
 
 addons:
-  apt:
+  #apt:
     #sources:
     #  - ubuntu-toolchain-r-test
-    packages:
-      - g++
-      - build-essential
-      - xvfb
-  chrome: stable
+    #packages:
+    #  - g++
+    #  - build-essential
+    #  - xvfb
+ chrome: stable
 
 branches:
   only:
@@ -33,6 +33,9 @@ services:
 
 before_install:
   - ls -la
+  - sudo apt-get update
+  - sudo apt-get install g++ build-essential xvfb chrome
+  
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
