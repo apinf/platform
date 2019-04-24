@@ -34,7 +34,7 @@ services:
 before_install:
   - ls -la
   - sudo apt-get update
-  - sudo apt-get install g++ build-essential xvfb chrome
+  - sudo apt-get install g++ build-essential xvfb
   
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
@@ -62,4 +62,4 @@ env:
   global:
   - DISPLAY=:99.0
   - TEST_MODE: "true"
-  - CXX=g++-4.8
+  #- CXX=g++-4.8
