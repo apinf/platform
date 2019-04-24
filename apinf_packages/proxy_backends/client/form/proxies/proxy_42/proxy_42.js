@@ -15,8 +15,10 @@ import ProxyBackends from '/apinf_packages/proxy_backends/collection';
 // Npm packages imports
 import URI from 'urijs';
 
-// Collection imports
-import Settings from '/apinf_packages/settings/collection';
+// APInf imports
+import {
+  proxyBasePathRegEx,
+  apiBasePathRegEx } from '../../../../collection/regex';
 
 // eslint-disable-next-line prefer-arrow-callback
 Template.proxy42ProxyForm.onRendered(function () {
@@ -45,16 +47,23 @@ Template.proxy42ProxyForm.onRendered(function () {
   }
 });
 
-
-
-
-
-
-
-
-
-
 Template.proxy42ProxyForm.helpers({
+  proxyPrefixPattern () {
+    return proxyBasePathRegEx;
+  },
+
+  apiPrefixPattern () {
+    return apiBasePathRegEx;
+  },
+
+  isProxyBasePathInvalid (field) {
+    console.log('field=', field);
+  },
+
+
+
+
+
   apiHost () {
     // Get API information
     const api = this.api;
@@ -100,10 +109,5 @@ Template.proxy42ProxyForm.helpers({
 
     // Return the API URL protocol
     return apiUrl.protocol();
-  },
-  supportsGraphql () {
-    const settings = Settings.findOne();
-    // Boolean value of "supportsGraphql" field
-    return settings ? settings.supportsGraphql : false;
   },
 });

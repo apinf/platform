@@ -46,12 +46,13 @@ AutoForm.hooks({
     },
     before: {
       insert (proxyBackend) {
-        console.log('inserttiä puskee');
+        console.log('inserttiä puskee=');
         // TODO: Refactor this method. It is too long and complex
 
         // Get reference to autoform instance, for form submission callback
         const form = this;
 
+        console.log('form=', form);
         // Empty fields case, check doc exists & has apiUmbrella object
         if (proxyBackend.type === 'apiUmbrella') {
           // Make sure all required fields are filled
@@ -132,6 +133,15 @@ AutoForm.hooks({
           // Save proxy backend
           form.result(proxyBackend);
         } else if (proxyBackend.type === 'proxy42') {
+          console.log('proxy 42=', proxyBackend);
+          console.log('proxy 42 apiU=', proxyBackend.apiUmbrella);
+          console.log('proxy 42 sett=', proxyBackend.apiUmbrella.settings);
+          //console.log('proxy 42 apiumb=', proxyBackend.settings.apiUmbrella);
+
+          const settings = {
+            rate_limit_mode: 'unlimited',
+          };
+          proxyBackend.apiUmbrella.settings = settings;
           console.log('proxy 42 talteen=', proxyBackend);
           // Save proxy backend
           form.result(proxyBackend);
@@ -356,6 +366,7 @@ AutoForm.hooks({
       }
     },
     onError (formType, error) {
+      console.log('erreys sattui');
       sAlert.error(error.message, { timeout: 'none' });
     },
   },

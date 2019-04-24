@@ -1,20 +1,20 @@
 <template name="proxy42ProxyForm">
+
+  <!-- TODO
+      - validation:
+        - regex for basepaths
+        - > 0 for port
+   -->
+
   <!-- hidden fields, auto-value -->
   {{> afQuickField name="type" type="hidden" value="proxy42" }}
-
-  {{> afQuickField name="apiUmbrella.name" value=api.name type="hidden" }}
-  {{> afQuickField name="apiUmbrella.frontend_host" value=proxyHost type="hidden" }}
-  {{> afQuickField name="apiUmbrella.backend_host" value=apiHost type="hidden" }}
-  {{> afQuickField name="apiUmbrella.backend_protocol" value=apiUrlProtocol type="hidden" }}
-  {{> afQuickField name="apiUmbrella.servers.0.host" value=apiHost type="hidden" }}
-  {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper type="hidden" }}
 
   <div class="api-settings">
     <div class="form-group col-md-4" data-required="true" style="padding-left: 0 !important;">
       <!-- Proxy base path (frontend prefix) -->
-      {{_ "proxyBackendForm_proxyBasePath_title" }}
+      {{_ "proxy42BackendForm_proxyBasePath_title" }}
       <label for="proxy-base-path-field" style="padding-left: 3px">
-        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
+        {{_ "proxy42BackendForm_proxyBasepath_label" }}
       </label>
 
       <div class="input-group">
@@ -22,16 +22,18 @@
           {{ proxy.proxy42.url }}
         </span>
 
-        {{> afFieldInput
-          name="apiUmbrella.url_matches.0.frontend_prefix"
-          class="form-control"
-          aria-describedby="proxy-url"
-          id="proxy-base-path-field"
-        }}
+        <input type="text"
+               id="proxy-base-path-field"
+               name="front_prefix"
+               class="form-control"
+               required
+               value={{ proxyBackend.frontPrefix }}
+               pattern={{ proxyPrefixPattern }}
+               >
       </div>
 
       <!-- validation messages -->
-      {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.frontend_prefix' }}
+      {{# if isProxyBasePathInvalid }}
         <p class="text-danger">
           {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
         </p>
@@ -60,7 +62,7 @@
 
         {{_ "proxyBackendForm_apiBasePath_title" }}
         <label for="api-base-path-field" style="padding-left: 3px">
-          {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
+          {{_ "proxy42BackendForm_apiBasepath_label" }}
         </label>
 
         <div class="input-group">
@@ -69,12 +71,14 @@
             {{ api.url }}
           </span>
 
-          {{> afFieldInput
-            name="apiUmbrella.url_matches.0.backend_prefix"
-            class="form-control"
-            aria-describedby="api-url"
-            id="api-base-path-field"
-          }}
+          <input type="text"
+                 id="api-base-path-field"
+                 name="front_prefix"
+                 class="form-control"
+                 required
+                 value={{ proxyBackend.backendPrefix }}
+                 pattern={{ apiPrefixPattern }}
+                 >
         </div>
 
         <!-- validation messages -->
@@ -94,16 +98,16 @@
       <!-- API port (servers.port) -->
       <div class="form-group col-md-2" data-required="true">
         <label for="api-port-field" id="api-port-field-label">
-          {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
+          {{_ "proxy42BackendForm_apiPort_label" }}
         </label>
 
-        {{> afFieldInput
-          name="apiUmbrella.servers.0.port"
-          value=apiPortHelper
-          class="form-control"
-          aria-describedby="api-port-field-label"
-          id="api-port-field"
-        }}
+        <input type="text"
+               id="api-port-field"
+               name="api-port-field-label"
+               class="form-control"
+               required
+               value={{ proxyBackend.apiPort }}
+               >
 
         <!-- validation messages -->
         {{# if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
