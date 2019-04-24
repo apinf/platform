@@ -1,6 +1,6 @@
 sudo: false
 
-#dist: xenial
+dist: xenial
 
 language: node_js
 node_js:
@@ -8,10 +8,12 @@ node_js:
 
 addons:
   apt:
-    sources:
-      - ubuntu-toolchain-r-test
+    #sources:
+    #  - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
+      - g++
+      - build-essential
+      - xvfb
   chrome: stable
 
 branches:
@@ -21,10 +23,10 @@ branches:
 before_cache:
   - rm -f $HOME/.meteor/log/*.log
 
-cache:
-  yarn: true
-  directories:
-    - $HOME/.meteor
+#cache:
+  #yarn: true
+  #directories:
+   # - $HOME/.meteor
 
 services:
   - docker
