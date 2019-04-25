@@ -23,10 +23,11 @@ Template.tenantForm.onDestroyed(() => {
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
+
     if ($('#add-tenant-name').val() === '') {
-      sAlert.error('Tenant must have a name!', { timeout: 'none' });
+      sAlert.error(TAPi18n.__('tenantForm_tenant_noName_error'), { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
-      sAlert.error('Tenant must have a description!', { timeout: 'none' });
+      sAlert.error(TAPi18n.__('tenantForm_tenant_noDescription_error'), { timeout: 'none' });
     } else {
       // Save new Tenant operation began, inform spinner
       Session.set('tenantUpdateOngoing', true);
@@ -62,15 +63,12 @@ Template.tenantForm.events({
         });
       }
 
-      // Set local tenant list empty
-      let tenantList = [];
-
       // POST /tenant
       Meteor.call('addTenant', tenant, (error, result) => {
         if (result) {
           if (result.status === 201) {
             // Empty the tenant user list
-            tenantUsers.splice(0, tenantUsers.length);
+            tenantUsers = [];
             // Remove users from session
             Session.set('tenantUsers', tenantUsers);
 
@@ -80,7 +78,7 @@ Template.tenantForm.events({
             $('#add-tenant-description').val('');
 
             // New tenant successfully added on manager side, empty local list
-            tenantList = [];
+            const tenantList = [];
             // Save to sessionStorage to be used while adding users to tenant
             Session.set('tenantList', tenantList);
 
@@ -94,7 +92,7 @@ Template.tenantForm.events({
             // eslint-disable-next-line max-len
             Meteor.call('informTenantUser', notifyUserList, 'tenantAddition', tenant.name, (nofityChangeError) => {
               if (nofityChangeError) {
-                sAlert.error('Error in notifying users', { timeout: 'none' });
+                sAlert.error(TAPi18n.__('tenantForm_addTenant_notify_error'), { timeout: 'none' });
               }
             });
 
@@ -108,7 +106,8 @@ Template.tenantForm.events({
             // Operation finished, failure, inform spinner
             Session.set('tenantUpdateOngoing', false);
             // Tenant addition failure on manager side, save new tenant object to local array
-            const errorMessage = `Tenant manager error! Returns code (${result.status}).`;
+            let errorMessage = TAPi18n.__('tenantForm_addTenant_failure_Message');
+            errorMessage = errorMessage.concat(` (${result.status}).`);
             sAlert.error(errorMessage, { timeout: 'none' });
           }
         }
@@ -116,7 +115,8 @@ Template.tenantForm.events({
           // Operation finished, failure, inform spinner
           Session.set('tenantUpdateOngoing', false);
           // Tenant addition failure on manager side, save new tenant object to local array
-          const errorMessage = `Tenant operation failed!  (${error}).`;
+          let errorMessage = TAPi18n.__('tenantForm_addTenant_error_Message');
+          errorMessage = errorMessage.concat(` (${error}).`);
           sAlert.error(errorMessage, { timeout: 'none' });
         }
       });
@@ -129,9 +129,9 @@ Template.tenantForm.events({
 
     // Name and description must be given in order to be able to send modify
     if ($('#add-tenant-name').val() === '') {
-      sAlert.error('Tenant must have a name!', { timeout: 'none' });
+      sAlert.error(TAPi18n.__('tenantForm_tenant_noName_error'), { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
-      sAlert.error('Tenant must have a description!', { timeout: 'none' });
+      sAlert.error(TAPi18n.__('tenantForm_tenant_noDescription_error'), { timeout: 'none' });
     } else {
       // Update Tenant operation began, inform spinner
       Session.set('tenantUpdateOngoing', true);
@@ -154,12 +154,12 @@ Template.tenantForm.events({
         // Fill in tenant id
         modifyTenantPayload.id = originalTenant.id;
         // Fill in replace for name operation
-        const changedDescription = {
+        const changedName = {
           op: 'replace',
           value: $('#add-tenant-name').val(),
           path: '/name',
         };
-        modifyTenantPayload.body.push(changedDescription);
+        modifyTenantPayload.body.push(changedName);
       }
 
       // Any changes in description
@@ -181,7 +181,7 @@ Template.tenantForm.events({
            -> fill "remove" op for user
          - if user is present in both, but no changes,
            -> remove user from NEW tenant user list
-         - if user is present in both, and there are changes
+         - if user is present in both, and there are changes in roles
            -> fill "replace" op for user
            -> remove user from NEW tenant user list
 
@@ -231,7 +231,7 @@ Template.tenantForm.events({
           // Add remove operation for user to request list
           changeList.push(removedUser);
 
-          // Add user info also to check list
+          // Add user info also to check list to be checked from tenant manager
           const checkPath = path.concat('/name');
           const checkUser = {
             op: 'test',
@@ -241,7 +241,7 @@ Template.tenantForm.events({
           // Add user to to-be-checked list
           usersNeedChecking.push(checkUser);
 
-          // Always add user to list for notification about removal
+          // Always add user to list for notification about removal by email
           notifyRemovedUsers.push(origUser);
 
           // If user data is modified, set user to be replaced

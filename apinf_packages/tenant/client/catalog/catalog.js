@@ -54,7 +54,7 @@ Template.tenantCatalog.onRendered(function () {
         Session.set('tenantList', tenantList);
       }
       if (error) {
-        sAlert.error(error, { timeout: 'none' });
+        sAlert.error(error.error, { timeout: 'none', html: true });
       }
     });
 
@@ -64,7 +64,7 @@ Template.tenantCatalog.onRendered(function () {
         Session.set('completeUserList', result.completeUserList);
       }
       if (error) {
-        sAlert.error(error, { timeout: 'none' });
+        sAlert.error(error.error, { timeout: 'none', html: true });
       }
     });
 

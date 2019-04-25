@@ -39,7 +39,7 @@ const getTenantInfo = function () {
   const settings = Settings.findOne();
 
   // Get url from settings to be used in HTTP requests
-  const tenantUrl = _.get(settings, 'tenantIdm.basepath');
+  const tenantUrl = _.get(settings, 'tenantIdm.url_and_basepath');
 
   // Return URL, if it is set
   if (tenantUrl) {
@@ -113,6 +113,7 @@ Meteor.methods({
       } catch (err) {
         // Failure: Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingTenantList');
+        errorMessage = errorMessage.concat('<br />');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
       }
@@ -172,6 +173,7 @@ Meteor.methods({
       } catch (err) {
         // Failure, Return error object
         let errorMessage = TAPi18n.__('tenantRequest_missingUserlist');
+        errorMessage = errorMessage.concat('<br />');
         errorMessage = errorMessage.concat(err);
         throw new Meteor.Error(errorMessage);
       }
