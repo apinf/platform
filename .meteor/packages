@@ -86,7 +86,7 @@ useraccounts:bootstrap
 useraccounts:core
 useraccounts:flow-routing
 vsivsi:file-collection
-zimme:active-route
+zimme:active-route@2.3.2
 aldeed:autoform-select2
 natestrauser:select2
 meteorhacks:aggregate
@@ -96,6 +96,6 @@ cleandersonlobo:mdi-icons
 yasaricli:textcounter
 oauth@1.2.6
 
-underscore
+underscore@1.0.10
 kurounin:pagination
 kurounin:pagination-blaze@=1.0.6

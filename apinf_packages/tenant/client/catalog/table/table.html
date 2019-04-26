@@ -1,0 +1,86 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantCatalogTable">
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered organization-catalog-table">
+      <thead>
+        <tr>
+          <th>
+            {{_ "tenantCatalogTable_header_tenants" }} ({{ tenantsCount }})
+          </th>
+          <th style="width: 45%">
+            {{_ "tenantCatalogTable_header_username" }}
+          </th>
+          <th style="width: 25%">
+            {{_ "tenantCatalogTable_header_action" }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each tenant in tenantList}}
+        <tr style="border: 1px dashed black;">
+          <td style="padding-left: 10px; vertical-align: top;">
+            <span style="font-weight: bold; border-bottom: 1px solid #ddd; width: 100%;">{{ tenant.name }}</span><br />
+            {{ tenant.description }}
+          </td>
+
+          <td style="padding-bottom: 10px;">
+            <tr>
+              <th style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_username" }}
+              </th>
+              <th style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_provider" }}
+              </th>
+              <th style="padding-left: 10px; border-bottom: 1px solid #ddd;">
+                {{_ "tenantCatalogTable_row_title_consumer" }}
+              </th>
+            </tr>
+
+            {{#each user in tenant.users}}
+            <tr>
+              <td style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
+                {{user.name}}
+              </td>
+              <td style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
+                {{#if user.provider}}
+                  data-provider
+                {{/if}}
+              </td>
+              <td style="padding-left: 10px; border-bottom: 1px solid #ddd;">
+                {{#if user.consumer}}
+                  data-consumer
+                {{/if}}
+              </td>
+            </tr>
+            {{/each}}
+          </td>
+          <!-- Buttons -->
+          <td style="padding-left: 10px; padding-right:10px;">
+            {{#if tenantOwner tenant.owner_id }}
+              <button id="edit-tenant"
+                      type="button"
+                      data-value={{ @index }}
+                      class="btn btn-primary"
+                      title={{_ "tenantCatalogTable_button_edit_title" }}>
+                {{_ "tenantCatalogTable_button_edit" }}
+              </button>
+              <button id="remove-tenant"
+                      type="button"
+                      data-value={{ @index }}
+                      class="btn btn-danger"
+                      style="margin-left: 1rem;"
+                      title={{_ "tenantCatalogTable_button_remove_title" }}>
+                {{_ "tenantCatalogTable_button_remove" }}
+              </button>
+            {{/if}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</template>

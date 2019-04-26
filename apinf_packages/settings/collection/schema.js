@@ -170,6 +170,22 @@ Settings.schema = new SimpleSchema({
     type: Boolean,
     optional: true,
   },
+  tenantIdm: {
+    type: Object,
+    optional: true,
+  },
+  'tenantIdm.enabled': {
+    type: Boolean,
+    optional: true,
+  },
+  'tenantIdm.url_and_basepath': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true,
+    autoform: {
+      placeholder: 'https://tenantservice/tenant',
+    },
+  },
 });
 
 // Enable translations (i18n)

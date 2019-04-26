@@ -22,6 +22,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
       <ul class="nav navbar-nav" id="main-navbar">
+        <!-- Dashboard -->
         {{# if currentUser }}
           {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
@@ -33,6 +34,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           {{/ if }}
         {{/ if }}
+
+        <!-- MQTT Dashboard -->
         {{# if userCanViewMqttDashboard }}
           <li class="{{ isActiveRoute 'mqtt' }} main-links">
             <a href="{{ pathFor 'mqtt' }}" id="mqtt-button">
@@ -40,16 +43,31 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
         {{/ if }}
-          <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
-            <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
-              {{_ "navbar_apis" }}
+
+        <!-- API catalog -->
+        <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
+          <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
+            {{_ "navbar_apis" }}
+          </a>
+        </li>
+
+        <!-- Organizations -->
+        <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
+          <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
+            {{_ "navbar_organizations" }}
+          </a>
+        </li>
+
+        <!-- Tenants -->
+        <!-- TODO tenant: Show only in case user has logged in via Keyrock -->
+        {{# if canManageTenants }}
+          <li class="{{ isActiveRoute 'tenantCatalog' }} main-links">
+            <a href="{{ pathFor 'tenantCatalog' }}" id="tenants-button">
+              Tenants
             </a>
           </li>
-          <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
-            <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
-              {{_ "navbar_organizations" }}
-            </a>
-          </li>
+        {{/ if }}
+
         {{# if currentUser }}
           {{# if userCanAddApi }}
             <li class="{{ isActiveRoute 'addApi' }} main-links">
@@ -59,6 +77,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </li>
           {{/ if }}
 
+          <!-- Users management -->
           {{# if isInRole 'admin' }}
             <li class="{{ isActiveRoute 'accountsAdmin' }} main-links">
               <a href="{{ pathFor 'accountsAdmin' }}" id="users-button">
@@ -67,6 +86,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </li>
           {{/ if }}
         {{/ if }}
+
+        <!-- Pricing block -->
         {{# if homeCustomBlock }}
           <li class="{{ isActiveRoute 'pricing' }} main-links">
             <a href="{{ pathFor 'pricing' }}" id="pricing-button">
@@ -75,6 +96,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
         {{/ if }}
+
+        <!-- Configuration of site -->
         {{# if isInRole 'admin' }}
           <li class="mobile-links-only hide-link">
             <a href="{{ pathFor 'branding' }}" id="branding-button">
@@ -97,6 +120,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </a>
           </li>
         {{/ if }}
+
+        <!-- User own menu -->
         {{# if currentUser }}
           <li class="mobile-links-only hide-link">
             <a href="{{ pathFor 'profile' }}" id="profile-button">

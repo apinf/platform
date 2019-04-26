@@ -135,6 +135,16 @@ Template.navbar.helpers({
   currentUser () {
     return Meteor.user();
   },
+  canManageTenants () {
+    // Get user id
+    const userId = Meteor.userId();
+    const user = Meteor.users.findOne(userId);
+
+    if (user && user.services && user.services.fiware) {
+      return true;
+    }
+    return false;
+  },
   userCanViewMqttDashboard () {
     // Get current user Id
     const userId = Meteor.userId();
