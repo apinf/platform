@@ -23,7 +23,6 @@ Template.tenantForm.onDestroyed(() => {
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
-
     if ($('#add-tenant-name').val() === '') {
       sAlert.error(TAPi18n.__('tenantForm_tenant_noName_error'), { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
@@ -77,8 +76,9 @@ Template.tenantForm.events({
             // Empty tenant description field
             $('#add-tenant-description').val('');
 
-            // New tenant successfully added on manager side, empty local list
-            const tenantList = [];
+            // New tenant successfully added on manager side, change the value of local list
+            // This triggers fetching of tenant list from Tenant manager
+            const tenantList = ['refresh'];
             // Save to sessionStorage to be used while adding users to tenant
             Session.set('tenantList', tenantList);
 

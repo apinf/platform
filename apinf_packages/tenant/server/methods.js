@@ -204,21 +204,26 @@ Meteor.methods({
       const accessToken = getTenantToken();
 
       // Convert user data to array for tenant manager API from internal object
-      const userlist = tenant.users.map(user => {
-        // Roles from tick boxes to array
-        const tenantRoles = [];
-        if (user.provider) {
-          tenantRoles.push('data-provider');
-        }
-        if (user.consumer) {
-          tenantRoles.push('data-consumer');
-        }
-        return {
-          id: user.id,
-          name: user.name,
-          roles: tenantRoles,
-        };
-      });
+      let userlist = [];
+
+      // If there are users in this tenant, convert the roles for request
+      if (tenant.users) {
+        userlist = tenant.users.map(user => {
+          // Roles from tick boxes to array
+          const tenantRoles = [];
+          if (user.provider) {
+            tenantRoles.push('data-provider');
+          }
+          if (user.consumer) {
+            tenantRoles.push('data-consumer');
+          }
+          return {
+            id: user.id,
+            name: user.name,
+            roles: tenantRoles,
+          };
+        });
+      }
 
       // New tenant object to be sent
       const tenantToSend = {

@@ -61,7 +61,8 @@ Template.tenantCatalog.onRendered(function () {
     // fetch list of users from tenant manager
     Meteor.call('getTenantUserList', (error, result) => {
       if (result) {
-        Session.set('completeUserList', result.completeUserList);
+        const completeUserList = result.completeUserList;
+        Session.set('completeUserList', completeUserList);
       }
       if (error) {
         sAlert.error(error.error, { timeout: 'none', html: true });
