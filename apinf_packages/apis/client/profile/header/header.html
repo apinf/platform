@@ -1,30 +1,23 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2019 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="viewApiPageHeader">
   <div class="container-fluid secondary-menu-block api-page-header">
-    <nav class="container secondary-menu_navigation secondary-menu-block-inner">
-      <span style="float: left;top: 3px; position: relative;">
+    <nav class="container secondary-menu_navigation secondary-menu-block-inner" style="margin-top:1em;">
+      <span style="float: left;">
         {{> viewApiLogo }}
       </span>
-      <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 5px; text-overflow: ellipsis; overflow: hidden; max-width: 600px;}">
+      <h1 class="special-headings" style="font-size: 1.2em; color: #37474F; display: block; float: left; padding-left: 0; padding-right: 0; margin-left: 0.5em; margin-bottom: 1em; text-overflow: ellipsis; overflow: hidden; max-width: 600px;}">
+        {{# if api.organization }}
+          <a class="organization-name" href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">{{ api.organization.name }}</a>
+          <span class="path-divider">/</span>
+        {{/ if }}
         {{ api.name }}
         {{# unless api.isPublic }}
           <i class="mdi mdi-lock"></i>
         {{/ unless }}
-        <span class="path-divider">/</span>
-        {{# if api.organization }}
-          <a class="organization-name" 
-             href="{{ pathFor 'organizationProfile' orgSlug=api.organization.slug }}">
-            {{ api.organization.name }}
-          </a>
-        {{ else }}
-          <span style="color: #555;line-height: 27px;font-weight: 400;">
-            {{ api.getApiManagersByName }}
-          </span>
-        {{/ if }}
       </h1>
       {{> viewApiStatus api=api width="0.4" }}
       <!-- <a class="btn btn-default pull-right" style="background: #fff;border: 2px solid #e5eef4;;position: absolute; right: 15px; top: 15px;color: #6d859e;font-weight: 500;font-size:1.2rem;">SAVE FOR LATER</a> -->
@@ -62,11 +55,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 <a href="#analytics" data-toggle="tab">
                   {{_ "apiViewAnalytics_button_viewAnalytics" }}
                 </a>
-              </li>              
+              </li>
               <!-- Monitoring -->
               <li id="api-monitoring-tab">
                 <a href="#monitoring" data-toggle="tab">
-                  {{_ "viewApiNavigationMenu_monitoring" }}
+                    {{_ "viewApiNavigationMenu_monitoring" }}
                 </a>
               </li>
             {{/ if }}
