@@ -18,7 +18,7 @@ import _ from 'lodash';
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
 
 Meteor.methods({
-  // Made all functions in async - await mode so that appropriate and intended data is returned - Sumedh
+  // Made all functions in async - await mode for intended data - Sumedh
   async timelineChartData (filter) {
     check(filter, Object);
 
@@ -124,7 +124,7 @@ Meteor.methods({
 
     const requestPathsData = {};
 
-    var summaryAggregateData = await AnalyticsData.aggregate(
+    const summaryAggregateData = await AnalyticsData.aggregate(
       [
         {
           $match: matchQuery,
@@ -150,7 +150,7 @@ Meteor.methods({
         },
       ]
     ).toArray();
-    // Removed async - await from 'forEach' below and made the 'forEach' itself to await for the current async function - Sumedh
+    // Removed async - await from 'forEach' below and made the 'forEach' itself to await - Sumedh
     await summaryAggregateData.forEach(dataset => {
       // Expend query
       matchQuery.prefix = dataset._id;
