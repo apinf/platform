@@ -18,13 +18,14 @@ import _ from 'lodash';
 import { calculateTrend } from '/apinf_packages/dashboard/lib/trend_helpers';
 
 Meteor.methods({
-  timelineChartData (filter) {
+  // Made all functions in async - await mode for intended data - Sumedh
+  async timelineChartData (filter) {
     check(filter, Object);
 
     const requestPathsData = {};
 
     // Get list of all requested path of particular Proxy Backend
-    const allPathsMatrix = AnalyticsData.find(
+    const allPathsMatrix = await AnalyticsData.find(
       { proxyBackendId: filter.proxyBackendId,
         date: { $gte: filter.fromDate, $lt: filter.toDate },
       }).map(data => {
@@ -42,7 +43,7 @@ Meteor.methods({
     // Keep only unique paths
     const uniquePathsList = [...new Set(allPathsList)];
 
-    AnalyticsData.aggregate(
+    await AnalyticsData.aggregate(
       [
         {
           $match: {
@@ -93,13 +94,13 @@ Meteor.methods({
 
     return { allRequestPaths: uniquePathsList, requestPathsData };
   },
-  errorsStatisticsData (filter) {
+  async errorsStatisticsData (filter) {
     check(filter, Object);
 
     let errors = [];
 
     // Fetch all data for Errors table
-    AnalyticsData.find(
+    await AnalyticsData.find(
       { date: { $gte: filter.fromDate, $lt: filter.toDate },
         proxyBackendId: filter.proxyBackendId,
         errors: { $ne: [] } },
@@ -111,7 +112,7 @@ Meteor.methods({
 
     return errors;
   },
-  summaryStatisticNumber (filter, proxyBackendIds) {
+  async summaryStatisticNumber (filter, proxyBackendIds) {
     check(filter, Object);
     check(proxyBackendIds, Array);
 
@@ -123,7 +124,7 @@ Meteor.methods({
 
     const requestPathsData = {};
 
-    AnalyticsData.aggregate(
+    const summaryAggregateData = await AnalyticsData.aggregate(
       [
         {
           $match: matchQuery,
@@ -148,14 +149,16 @@ Meteor.methods({
           },
         },
       ]
-    ).forEach(async dataset => {
+    ).toArray();
+    // Removed async - await from 'forEach' below and made the 'forEach' itself to await - Sumedh
+    await summaryAggregateData.forEach(dataset => {
       // Expend query
       matchQuery.prefix = dataset._id;
       matchQuery.requestNumber = { $ne: 0 };
 
       // Get the number of date when requests were no 0
       // using async - await due to breaking changes in meteor 1.5-1.8 update
-      const existedValuesCount = await AnalyticsData.find(matchQuery).count();
+      const existedValuesCount = AnalyticsData.find(matchQuery).count();
 
       // Calculate average (mean) value of Response time and Uniques users during period
       requestPathsData[dataset._id] = {
@@ -176,10 +179,9 @@ Meteor.methods({
 
       Object.assign(requestPathsData[dataset._id], dataset);
     });
-
     return requestPathsData;
   },
-  statusCodesData (filter) {
+  async statusCodesData (filter) {
     check(filter, Object);
 
     // Create query to $match
@@ -197,7 +199,7 @@ Meteor.methods({
 
     const requestPathsData = {};
 
-    AnalyticsData.aggregate(
+    await AnalyticsData.aggregate(
       [
         {
           $match: matchQuery,
@@ -223,7 +225,7 @@ Meteor.methods({
 
     return requestPathsData;
   },
-  overviewChartsData (filter) {
+  async overviewChartsData (filter) {
     // Return aggregated data for overview charts
     check(filter, Object);
 
@@ -241,7 +243,7 @@ Meteor.methods({
 
     const requestPathsData = {};
 
-    AnalyticsData.aggregate(
+    await AnalyticsData.aggregate(
       [
         {
           $match: matchQuery,
@@ -268,16 +270,15 @@ Meteor.methods({
     ).forEach(dataset => {
       requestPathsData[dataset._id] = dataset;
     });
-
     return requestPathsData;
   },
-  totalNumberRequestsAndTrend (filter, proxyBackendIds) {
+  async totalNumberRequestsAndTrend (filter, proxyBackendIds) {
     check(filter, Object);
     check(proxyBackendIds, Array);
 
     // Get data for Current period
     const currentPeriodResponse =
-      Meteor.call('summaryStatisticNumber', filter, proxyBackendIds);
+      await Meteor.call('summaryStatisticNumber', filter, proxyBackendIds);
 
     // Create date range filter for Previous period
     const previousPeriodFilter = {
@@ -287,12 +288,12 @@ Meteor.methods({
 
     // Get data for Previous period
     const previousPeriodResponse =
-      Meteor.call('summaryStatisticNumber', previousPeriodFilter, proxyBackendIds);
+      await Meteor.call('summaryStatisticNumber', previousPeriodFilter, proxyBackendIds);
 
     const response = [];
 
     // Compare the current and previous periods data
-    _.mapKeys(currentPeriodResponse, (dataset, path) => {
+    await _.mapKeys(currentPeriodResponse, (dataset, path) => {
       const proxyBackend = ProxyBackends.findOne({
         'apiUmbrella.url_matches.frontend_prefix': dataset.prefix,
       });
