@@ -4,16 +4,26 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiProxy">
+  <h2 style="font-size: 16px;margin-top: 0;">
+    Basic configuration
+  </h2>
 
-  <!-- help text -->
-  <p class="help-block">
+    <p style="color: #6d859e;margin-bottom: 1em;">
+      Follow these steps to connect your API to a Proxy and control various proxy settings.
+      <br/>
+      <span class="text-danger">{{_ "apiProxy_network_message_attention" }}</span>
+      {{_ "apiProxy_network_message" }}
+    </p>
+
+
+  <!-- <p class="help-block">
     <p style="color: #6d859e;margin-bottom: 1em;">
       {{_ "apiProxy_network_setting_guidance_1" }}
-      <span data-toggle="collapse" data-target="#proxy-backend-general-details" 
+      <span data-toggle="collapse" data-target="#proxy-backend-general-details"
             aria-expanded="false" aria-controls="proxy-backend-general-details">
         <i class="mdi mdi-chevron-down mdi-18px more-info">More...</i>
       </span>
-      
+
       <div id="proxy-backend-general-details" class="collapse" style="margin-top: 0.5em;">
         {{_ "apiProxy_network_setting_guidance_2" }}
         <ol>
@@ -44,11 +54,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <span class="text-danger">{{_ "apiProxy_network_message_attention" }}&nbsp;</span>
         {{_ "apiProxy_network_message" }}
       </div>
-        
+
     </p>
   </p>
 
-  <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
+  <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;"> -->
 
   {{> proxyBackend }}
 </template>

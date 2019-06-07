@@ -11,18 +11,17 @@
   {{> afQuickField name="apiUmbrella.servers.0.port" value=apiPortHelper type="hidden" }}
 
   <div class="api-settings">
-    <div class="form-group col-md-4" data-required="true" style="padding-left: 0 !important;">
+    <div class="form-group col-md-12" data-required="true" style="padding-left: 0 !important; margin-bottom: 0 !important;">
       <!-- Proxy base path (frontend prefix) -->
-      {{_ "proxyBackendForm_proxyBasePath_title" }} 
-      <label for="proxy-base-path-field" style="padding-left: 3px">
-        {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
+      <label for="proxy-base-path-field">
+        <span class="num">1</span> {{ afFieldLabelText name='apiUmbrella.url_matches.0.frontend_prefix' }}
       </label>
-      
+
       <div class="input-group">
         <span class="input-group-addon" id="proxy-url" >
           {{ proxy.apiUmbrella.url }}
         </span>
-        
+
         {{> afFieldInput
           name="apiUmbrella.url_matches.0.frontend_prefix"
           class="form-control"
@@ -40,36 +39,32 @@
 
       <!-- help text -->
       <p class="help-block">
-        {{_ "proxyBackendForm_proxyBasePath_helpText" }}&nbsp;<b>{{_ "general_example" }}</b><br />
-        {{ proxy.apiUmbrella.url }}<b>{{_ "proxyBackendForm_proxyBasePath_helpText_example" }}</b>{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
+        {{_ "proxyBackendForm_proxyBasePath_helpText" }}<br/>{{_ "general_example" }}
+        {{ proxy.apiUmbrella.url }}{{_ "proxyBackendForm_proxyBasePath_helpText_example" }}{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
       </p>
     </div>
 
     <!-- symbol for redirection -->
-    <div class="col-md-2" style="text-align: center;">
-      <!--  {{_ "proxyBackendForm_redirect_helpText" }} <br /> -->
-      <br />
-      <span style="font-weight: bold;">{{_ "proxyBackendForm_request_helpText" }}</span>
-      <span class="glyphicon glyphicon-arrow-right"></span><br />
-      <span class="glyphicon glyphicon-arrow-left"></span>
-      <span style="font-weight: bold;">{{_ "proxyBackendForm_response_helpText" }}</span>
+    <div class="col-md-12" style="text-align: left; padding-bottom:20px; padding-left:0;font-weight: 500;color: #6d859e;">
+      <span style="font-size: 16px; text-transform: uppercase;">{{_ "proxyBackendForm_request_helpText" }}</span>
+      <span class="mdi mdi-arrow-up"></span>
+      <span class="mdi mdi-arrow-down"></span>
+      <span style="font-size: 16px; text-transform: uppercase;">{{_ "proxyBackendForm_response_helpText" }}</span>
     </div>
 
     <!-- API base path (backend prefix) -->
     <div class="row">
-      <div class="form-group col-md-4" data-required="true" style="margin-bottom: 0;">
-
-        {{_ "proxyBackendForm_apiBasePath_title" }}
-        <label for="api-base-path-field" style="padding-left: 3px">
+      <div class="form-group col-md-10" data-required="true" style="margin-bottom: 0;">
+        <span class="num">2</span> <label for="api-base-path-field">
           {{ afFieldLabelText name='apiUmbrella.url_matches.0.backend_prefix' }}
         </label>
-          
+
         <div class="input-group">
           <!-- API url addon -->
           <span class="input-group-addon" id="api-url">
             {{ api.url }}
           </span>
-          
+
           {{> afFieldInput
             name="apiUmbrella.url_matches.0.backend_prefix"
             class="form-control"
@@ -87,15 +82,15 @@
 
         <!-- help text -->
         <p class="help-block">
-          {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;<b>{{_ "general_example" }}</b><br />
-          {{ api.url }}<b>{{_ "proxyBackendForm_apiBasePath_helpText_example" }}</b>{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
+          {{_ "proxyBackendForm_apiBasePath_helpText" }}<br/>{{_ "general_example" }}
+          {{ api.url }}{{_ "proxyBackendForm_apiBasePath_helpText_example" }}{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
         </p>
       </div>
 
       <!-- API port (servers.port) -->
       <div class="form-group col-md-2" data-required="true">
         <label for="api-port-field" id="api-port-field-label">
-          {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
+          <span class="num">3</span> {{ afFieldLabelText name="apiUmbrella.servers.0.port" }}
         </label>
 
         {{> afFieldInput
@@ -135,21 +130,18 @@
     <p class="help-block" style="margin-top: -1em;">
       {{_ "proxyBackendForm_disableApiKey_helpText" }}
     </p>
-    
+
     <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;">
-    
-    <div data-toggle="collapse" 
+
+    <div data-toggle="collapse"
          data-target="#advance-proxy-settings"
          style="cursor: pointer">
-      <label style="color: #4c6072;
-                    font-weight: 500;
-                    font-size:1.6rem;
-                    cursor: pointer;">
+      <label style="color: #4c6072;font-weight: 500;font-size:1.6rem;cursor: pointer;">
         {{_ "proxyBackendForm_advancedSettings_title" }}
       </label>
       <i class="mdi mdi-chevron-down mdi-18px"></i>
     </div>
-    
+
     <div id="advance-proxy-settings" class="collapse" style="margin-top: 0.5em;">
 
       <!-- Query String Parameters -->
@@ -158,7 +150,7 @@
         <label for="query-string-param">
           {{ afFieldLabelText name='apiUmbrella.settings.append_query_string' }}
         </label>
-  
+
         {{> afFieldInput
           name="apiUmbrella.settings.append_query_string"
           class="form-control"
@@ -211,21 +203,21 @@
         <label for="idp-app-id-field">
           {{ afFieldLabelText name='apiUmbrella.settings.idp_app_id' }}
         </label>
-  
+
         {{> afFieldInput
           name="apiUmbrella.settings.idp_app_id"
           class="form-control"
           id="idp-app-id-field"
           placeholder="externalid1234"
         }}
-  
+
         <!-- validation messages -->
         {{# if afFieldIsInvalid name='apiUmbrella.settings.idp_app_id' }}
           <p class="text-danger">
             {{{ afFieldMessage name='apiUmbrella.settings.idp_app_id' }}}
           </p>
         {{/ if }}
-  
+
         <!-- help text -->
         <p class="help-block">
           {{_ "proxyBackendForm_IDPappID_helpText" }}&nbsp;
@@ -241,7 +233,7 @@
           </div>
         </p>
       </div>
-  
+
       <!-- Rate limiting -->
       <div id="rate-limiting">
         <div class="col-md-12" id="rate-limit-mode">
@@ -297,7 +289,7 @@
                 {{_ "proxyBackendForm_subsettings_additional_helpText_3" }}<br />
               </li>
               <li>
-                {{_ "proxyBackendForm_subsettings_additional_helpText_4" }} &nbsp; &nbsp; &nbsp; 
+                {{_ "proxyBackendForm_subsettings_additional_helpText_4" }} &nbsp; &nbsp; &nbsp;
                 {{_ "proxyBackendForm_subsettings_additional_helpText_5" }}
               </li>
             </ul>
