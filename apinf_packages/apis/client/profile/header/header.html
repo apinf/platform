@@ -29,15 +29,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{_ "viewApiNavigationMenu_details" }}
           </a>
         </li>
-        {{# if proxyBackend }}
-          {{# if currentUser }}
-            <li id ="api-auth-tab">
-              <a href="#api-auth" data-toggle="tab">
-                {{_ "viewApiNavigationMenu_authentication" }}
-              </a>
-            </li>
-          {{/ if }}
-        {{/ if }}
         {{# if currentUser }}
           {{# if userShouldSeeApiDocsTab }}
             <li id="api-documentation-tab">
@@ -71,6 +62,17 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{_ "viewApiNavigationMenu_collaborators" }}
             </a>
           </li>
+        {{/ if }}
+        {{# if proxyBackend }}
+          {{# if currentUser }}
+            <li id ="api-auth-tab">
+              <a href="#api-auth" data-toggle="tab">
+                {{_ "viewApiNavigationMenu_authentication" }}
+              </a>
+            </li>
+          {{/ if }}
+        {{/ if }}
+        {{# if api.currentUserCanManage }}
           <li id="api-settings-tab">
             <a href="#api-settings" data-toggle="tab">
               {{_ "viewApiNavigationMenu_settings" }}
