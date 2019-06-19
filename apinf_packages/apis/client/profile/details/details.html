@@ -25,9 +25,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <!-- Show Endpoint URL -->
           <h2 id="api-url-title">
             {{# unless disableApiKey }}
-              {{# if hasApiKey }}
-                <span class="num">1</span>
-              {{/ if }}
+              <span class="num">1</span>
             {{/ unless }}
             {{_ "apiDetails_baseUrl_headingText" }}
           </h2>
@@ -35,9 +33,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <!-- Display value (which can also be copied) -->
             <a href="{{ proxyUrl }}" target="_blank" id="proxy-url">{{ proxyUrl }}</a>
             <!-- Clipboard copy button -->
-            <i id="copyProxyUrl" 
-               class="mdi mdi-content-copy pull-right" 
-               data-clipboard-target="#proxy-url" 
+            <i id="copyProxyUrl"
+               class="mdi mdi-content-copy pull-right"
+               data-clipboard-target="#proxy-url"
                style="padding-left:5px;"></i>
           </span>
           <p style="color:#6d859e;margin-top:10px;">
@@ -60,18 +58,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                         {{ apiKey }}
                       </span>
                       <!-- Clipboard copy button -->
-                      <i id="copyApiUrl" 
-                         class="mdi mdi-content-copy pull-right" 
-                         data-clipboard-target="#api-url" 
+                      <i id="copyApiUrl"
+                         class="mdi mdi-content-copy pull-right"
+                         data-clipboard-target="#api-url"
                          style="padding-left:5px;"></i>
                     </span>
                     <p style="color:#6d859e;margin-top:10px;">
                       {{_ "apiDetails_xApiKey_message1" }}
-                      <br>
-                      <br>
-                      <span style="font-style:italic;">
-                        {{_ "apiDetails_xApiKey_message2" }}
-                      </span>
                     </p>
                   </div>
                   <!-- Show examples of using API key -->
@@ -88,9 +81,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                           curl <span style="color: #F44336;">'{{ proxyUrl }}?api_key={{ apiKey }}'</span>
                         </span>
                         <!-- Clipboard copy button -->
-                        <i id="copyExampleOne" 
-                           class="mdi mdi-content-copy pull-right" 
-                           data-clipboard-target="#example-one" 
+                        <i id="copyExampleOne"
+                           class="mdi mdi-content-copy pull-right"
+                           data-clipboard-target="#example-one"
                            style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">
@@ -103,9 +96,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                           curl -H <span style="color: #F44336;">'X-Api-Key: {{ apiKey }}' '{{ proxyUrl }}'</span>
                         </span>
                         <!-- Clipboard copy button -->
-                        <i id="copyExampleTwo" 
-                           class="mdi mdi-content-copy pull-right" 
-                           data-clipboard-target="#example-two" 
+                        <i id="copyExampleTwo"
+                           class="mdi mdi-content-copy pull-right"
+                           data-clipboard-target="#example-two"
                            style="padding-left:5px;"></i>
                       </span>
                       <p style="color:#6d859e;margin-top:10px;">

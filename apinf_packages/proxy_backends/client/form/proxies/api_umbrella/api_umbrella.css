@@ -6,3 +6,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 .api-settings .input-group-addon {
   background-color: #F5F5F5;
 }
+
+.api-settings .num {
+  background: #6d859e;
+  border-radius: 50px;
+  color: #fff;
+  display: inline-block;
+  font-size: 13px;
+  height: 20px;
+  line-height: 21px;
+  margin-right: 3px;
+  text-align: center;
+  width: 20px;
+}

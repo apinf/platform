@@ -7,11 +7,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div data-overview-id="{{ proxyBackendId }}" class="block-wrapper">
     <div class="api-settings">
       <!-- Date picker -->
-      <div style='text-align: right;'>
+      <div class="pull-right">
         {{> dateRangePicker }}
       </div>
+      <h2 style="font-size:1.6em; display: inline;">Analytics</h2>
       <!-- Nav tabs -->
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs" style="margin-top:2em;">
         <li class="active"><a href="#requests-number" data-toggle="tab">{{_ "apiAnalyticPageBody_title_requestNumber" }}</a></li>
         <li><a href="#response-time-chart" data-toggle="tab">{{_ "apiAnalyticPageBody_title_responseTime" }}</a></li>
         <li><a href="#unique-users-chart" data-toggle="tab">{{_ "apiAnalyticPageBody_title_developers" }}</a></li>
@@ -54,7 +55,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           <div class="row">
             <div class="col-xs-12 col-md-12">
               <div class="api-view-card form-group">
-                <h2 class="api-view-card-title">  
+                <h2 class="api-view-card-title">
                   {{_ 'apiAnalyticPageBody_chartTitle_medianResponseTime' }}
                 </h2>
                 <p class="overview-col-title" style="margin-bottom: 1em;font-size: 20px;font-weight: 500;">
