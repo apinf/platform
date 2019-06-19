@@ -27,9 +27,9 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if currentUser }}
           {{# if api.currentUserCanManage }}
             {{# if proxyBackend._id }}
-            <div id="analytics" class="block-wrapper tab-pane fade">
+            <div id="analytics" class="tab-pane fade">
               {{> apiAnalyticPageBody proxyBackendId=proxyBackend._id }}
-            </div>    
+            </div>
             {{/ if }}
             <div id="monitoring" class="block-wrapper tab-pane fade">
               {{> apiMonitoring api=api }}
