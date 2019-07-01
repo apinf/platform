@@ -38,6 +38,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                           id="add-tenant-name"
                           required=""
                           data-schema-key="name"
+                          pattern="[a-z]{1,15}"
+                          title="Tenant name should only contain lowercase letters. e.g. john"
                           class="form-control"
                           value={{ tenantToModify.name }}>
                   <span class="help-block"></span>
