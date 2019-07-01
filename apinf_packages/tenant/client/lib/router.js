@@ -36,3 +36,10 @@ FlowRouter.route('/tenants', {
     BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'tenantCatalog' });
   },
 });
+
+FlowRouter.route('/tenants/auth', {
+  name: 'authorizationForm',
+  action () {
+    BlazeLayout.render('masterLayout', { bar: 'navbar', main: 'authorizationForm' });
+  },
+});

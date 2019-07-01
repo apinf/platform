@@ -4,60 +4,53 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="authorizationForm">
-  <div
-    class="modal fade"
-    id="tenantAuthorizationModal"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="tenantAuthorizationModalLabel" >
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <!-- header -->
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          <h2 class="modal-title" id="tenantAuthorizationModalLabel">
-            {{_ "tenantAuthorization_title" }}
-          </h2>
-        </div>
-        <div >
-          <!-- body -->
-          <div class="modal-body">
-            <fieldset>
-              <!-- Show user's tokens -->
-              <p class="help-block">
-                <h4>{{_ "tenantCatalogPage_token_title" }}</h4>
-                <ol>
-                  <li>
-                    {{_ "tenantCatalogPage_token_details_1" }}
-                  </li>
-                  <li>
-                    {{_ "tenantCatalogPage_token_details_2" }}<br />
-                    <span style="font-weight: bold; color: black;">{{ tenantToken }}</span><br />
-                    {{_ "tenantCatalogPage_token_details_2b" }}
-                    <span style="{{ tenantTokenExpiration.expirationEffect }}">{{ tenantTokenExpiration.expirationTime }}</span>
-                    {{# if tenantTokenExpiration.expirationEffect }}
-                    <br /><span style="{{ tenantTokenExpiration.expirationEffect }}">{{_ "tenantCatalogPage_token_details_2c" }}</span>
-                    {{/ if }}
-                  </li>
-                  <!--li>
-                    {{_ "tenantCatalogPage_token_details_3" }}<br />
-                    <span style="font-weight: bold; color: black;">{{ tenantRefreshToken }}</span>
-                  </li-->
-                </ol>
-              </p>
-            </fieldset>
-          </div>
-        </div>
-        <!-- footer -->
-        <div class="modal-footer">
-          <!-- Perhaps later we can refresh programmatically -->
-          <!--button type="submit" class="btn btn-success" id="refreshTenantAuthorization">
-            {{_ "tenantAuthorization_button_refresh" }}
-          </button-->
-        </div>
-      </div>
+  <div class="container-fluid secondary-menu-block" style="height: 60px;">
+    <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
+      <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
+        {{_ "tenantCatalog_Title" }}
+        <span class="label label-default"
+        style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">
+        Alpha
+      </span>
+    </h1>
+    <ul class="links">
+      <li class="{{ isActiveRoute 'tenantCatalog' }}">
+        <a href="{{ pathFor route='tenantCatalog' }}"
+        id="button-tenantList">
+        List
+      </a>
+    </li>
+    <li class="{{ isActiveRoute 'authorizationForm' }}">
+      <a href="{{ pathFor route='authorizationForm' }}"
+      id="button-tenantAuthorization">
+      Authorization
+    </a>
+  </li>
+</ul>
+</nav>
+</div>
+<div class="container">
+  <div class="block-wrapper settings-fields">
+    <h2>{{_ "tenantAuthorization_title" }}</h2>
+    <div id="tenantAuthorization">
+      <p class="help-block">
+        <h4>{{_ "tenantCatalogPage_token_title" }}</h4>
+        <ol>
+          <li>
+            {{_ "tenantCatalogPage_token_details_1" }}
+          </li>
+          <li>
+            {{_ "tenantCatalogPage_token_details_2" }}<br />
+            <span style="font-weight: bold; color: black;">{{ tenantToken }}</span><br />
+            {{_ "tenantCatalogPage_token_details_2b" }}
+            <span style="{{ tenantTokenExpiration.expirationEffect }}">{{ tenantTokenExpiration.expirationTime }}</span>
+            {{# if tenantTokenExpiration.expirationEffect }}
+            <br /><span style="{{ tenantTokenExpiration.expirationEffect }}">{{_ "tenantCatalogPage_token_details_2c" }}</span>
+            {{/ if }}
+          </li>
+        </ol>
+      </p>
     </div>
   </div>
+</div>
 </template>
