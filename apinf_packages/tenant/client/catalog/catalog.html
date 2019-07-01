@@ -32,18 +32,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
   <div class="container">
     {{# if userCanAddTenant }}
-      <!-- <button id="add-tenant"
-              type="button"
-              class="btn btn-success btn-success-special"
-              style="margin-top: 1rem;">
-        {{_ "tenantCatalog_buttonText_addTenant" }}
-      </button> -->
     {{/ if }}
     {{# if Template.subscriptionsReady }}
       {{# if tenantsCount }}
         {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
       {{ else }}
-        <div class="block-wrapper">
+        <div class="block-wrapper settings-fields">
+          <div class="pull-right">
+            <button id="add-tenant"
+                    type="button"
+                    class="btn btn-success"
+                    style="position: relative; bottom: 10px;">
+              {{_ "tenantCatalog_buttonText_addTenant" }}
+            </button>
+          </div>
+          <h5 class="panel-title" id="documentation-title" style="display: inline;">Tenants list</h5>
+          <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
           No tenants available
         </div>
       {{/ if }}
