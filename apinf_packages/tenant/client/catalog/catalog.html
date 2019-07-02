@@ -31,26 +31,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
 
   <div class="container">
-    {{# if userCanAddTenant }}
-    {{/ if }}
-    {{# if Template.subscriptionsReady }}
-      {{# if tenantsCount }}
-        {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
-      {{ else }}
-        <div class="block-wrapper settings-fields">
-          <div class="pull-right">
-            <button id="add-tenant"
-                    type="button"
-                    class="btn btn-success"
-                    style="position: relative; bottom: 10px;">
-              {{_ "tenantCatalog_buttonText_addTenant" }}
-            </button>
-          </div>
-          <h5 class="panel-title" id="documentation-title" style="display: inline;">Tenants list</h5>
-          <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
-          No tenants available
+    <div class="block-wrapper settings-fields">
+      {{# if userCanAddTenant }}
+        <div class="pull-right">
+          <button id="add-tenant"
+                  type="button"
+                  class="btn btn-success"
+                  style="position: relative; bottom: 10px;">
+            {{_ "tenantCatalog_buttonText_addTenant" }}
+          </button>
         </div>
       {{/ if }}
-    {{/ if }}
+      <h5 class="panel-title" id="documentation-title" style="display: inline;">Tenants list ({{ tenantsCount }})</h5>
+      <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
+      {{# if tenantsCount }}
+        {{# if Template.subscriptionsReady }}
+          {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
+        {{ else }}
+          {{> spinner }}
+        {{/ if }}
+      {{ else }}
+        No tenants available
+      {{/ if }}
+    </div>
   </div>
 </template>
