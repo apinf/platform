@@ -112,12 +112,14 @@ Apis.helpers({
       const apiBackendRatingsArray = _.map(apiBackendRatings, rating => { return rating.rating; });
 
       // Get the average (mean) value for API Backend ratings
-      const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
-      // Return average with precision of 2 significant numbers
-      const result = Number(apiBackendRatingsAverage.toPrecision(2));
+      if(apiBackendRatingsArray.length !== 0) {
+      	const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
+      	// Return average with precision of 2 significant numbers
+      	const result = Number(apiBackendRatingsAverage.toPrecision(2));
 
-      if (!isNaN(result)) {
-        return Number(apiBackendRatingsAverage.toPrecision(2));
+      	if (!isNaN(result)) {
+        	return Number(apiBackendRatingsAverage.toPrecision(2));
+      	}
       }
     }
 
