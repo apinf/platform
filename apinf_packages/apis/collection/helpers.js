@@ -115,7 +115,7 @@ Apis.helpers({
       if (apiBackendRatingsArray.length !== 0) {
         const apiBackendRatingsAverage = ss.mean(apiBackendRatingsArray);
         // Return average with precision of 2 significant numbers
-        const result = Number(apiBackendRatingsAverage.toPrecision(2));        
+        const result = Number(apiBackendRatingsAverage.toPrecision(2));
         if (!isNaN(result)) {
           return Number(apiBackendRatingsAverage.toPrecision(2));
         }
