@@ -11,6 +11,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
+import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
 
 // Npm packages imports
 import Clipboard from 'clipboard';
@@ -56,7 +57,33 @@ Template.apiKey.onRendered(() => {
     .attr('data-original-title', 'Copied!')
     .tooltip('show');
   });
+  /*
+  // Get reference of template instance
+  const instance = this;
+
+  // Initialize Clipboard copy button
+  instance.copyButton = new Clipboard('#api-key');
+
+  // Tell the user when copy is successful
+  instance.copyButton.on('success', (event) => {
+    // Get localized success message
+    const message = TAPi18n.__('apiKeys_copySuccessful');
+
+    // Display success message to user
+    sAlert.success(message);
+    // Show success message only once
+    event.clearSelection();
+  }); */
 });
+
+/*
+Template.apiKey.onDestroyed(function () {
+  // Get object of Clipboard
+  const copyButton = this.copyButton;
+  // Free up memory
+  copyButton.destroy();
+});
+*/
 
 Template.apiKey.events({
   'click #get-api-key': function () {
@@ -92,43 +119,21 @@ Template.apiKey.events({
       });
     }
   },
-  'click #regenerate-api-key': function (event, templateInstance) {
-    // Get apiKey from template data
-    const apiKey = templateInstance.data.apiKey;
+  'click #regenerate-api-key': function () {
+    // Get current template instance
+    const instance = Template.instance();
 
-    // Get api from template data
-    const api = templateInstance.data.api;
+    const api = Template.currentData().api;
 
-    // Get processing message translation
-    const message = TAPi18n.__('apiKeys_getApiKeyButton_processing');
-    // Set bootstrap loadingText
-    $('#regenerate-api-key').button({ loadingText: message });
+    // Get api Key from template data
+    const apiKey = instance.$('#api-key').text();
+    // console.log(apiKey);
 
-    // Set button to processing state
-    $('#regenerate-api-key').button('loading');
+    // Get all api list linked to a api key
+    const apisList = instance.apisList.get();
 
-    // Check api and apikey is defined
-    if (api && apiKey) {
-      // Call regenerateApiKey function
-      Meteor.call('regenerateApiKey', api._id, apiKey, (error) => {
-        if (error) {
-          // Show human-readable reason for error
-          sAlert.error(error.reason, { timeout: 'none' });
-        } else {
-          // Get success message translation
-          const successMessage = TAPi18n.__('apiKeys_getApiKeyButton_success');
-
-          // Alert the user of success
-          sAlert.success(successMessage);
-
-          // Reset processing button
-          $('#regenerate-api-key').button('reset');
-        }
-      });
-    }
-
-    // Dismiss the confirmation modal
-    $('#regenerate-api-key-confirmation-modal').modal('hide');
+    // Show regenerate api key modal
+    Modal.show('regenerateApiKey', { apisList, api, apiKey });
   },
 });
 
