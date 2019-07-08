@@ -23,15 +23,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </span>
             {{_ "regenerateApiKeyConfirmation_confirmRegenerateInformation" }}
           </p>
-          <ol>
-            {{# if apisList.length }}
-              {{# each api in apisList }}
-                <li>
-                  {{ api.name }}
-                </li>
-              {{/ each }}
-            {{/ if }}
-          </ol>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel-regenerate-api-key">
