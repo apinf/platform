@@ -6,9 +6,10 @@ This product is an Incubated FIWARE Generic Enabler.  If you would like to learn
 
 **Short term (next release of the product)**
 The following list of features are planned to be addressed in the short term, and incorporated in the next release of the product planned for February 2019:
-- Meteor update to 1.6 or let's see how high we get
+- Meteor update to 1.8 or let's see how high we get
 - Package updates related to Meteor update
 - New "Next" UI. Redesigned more simplified user flow and UI. It's going to be great!
+- Alpha UI support for tenant manager.
   
 **Medium term (9 months following next release)**
 The following list of features are planned to be addressed in the medium term, typically within the subsequent release(s) generated in the next 9 months after next planned release:
@@ -25,6 +26,6 @@ The following list of features are proposals regarding the longer-term evolution
 - Improved monetization
 - Continue Proxy 42 integration
 
-Long term goals can be a bit illusive, so we keep those high level.
+Long term goals can be a bit illusive, so we keep those high level. Some of those Medium term goals have been worked on outside the scope of a component development.
 
 If you have any questions about roadmap or other things here, do give us a ping here or email: info@apinf.io
