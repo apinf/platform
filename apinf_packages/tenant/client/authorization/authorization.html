@@ -34,7 +34,25 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <h5 class="panel-title" id="documentation-title" style="display: inline;">{{_ "tenantAuthorization_title" }}</h5>
     <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
     <div id="tenantAuthorization">
-      <p class="help-block">
+      {{# if tenantToken }}
+        <label style="font-weight: 500;font-size: 14px;color: #4c6072;">Access token</label>
+        <p class="api-profile_details-text-wrapper">{{ tenantToken }}</p>
+        <p style="color:#6d859e; margin-top:10px;margin-bottom: 2em;">
+          Check our <a href="/" target="_blank" rel="noopener noreferrer">documentation</a> for instructions.
+        </p>
+      {{/ if }}
+      <div class="form-group has-feedback" style="max-width: 400px;" data-required="true">
+        <label>Confirm your password</label>
+        <input type="password" class="form-control" id="tenantPasswordInput" required="">
+        <i class="mdi mdi-eye form-control-feedback toggle-password"></i>
+        <button id="refreshTenantAuthorization"
+                type="submit"
+                class="btn btn-success"
+                style="margin-top: 1em;">
+          Get token
+        </button>
+      </div>
+      <!-- <p class="help-block">
         <h4>{{_ "tenantCatalogPage_token_title" }}</h4>
         <ol>
           <li>
@@ -50,7 +68,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           </li>
         </ol>
-      </p>
+      </p> -->
     </div>
   </div>
 </div>
