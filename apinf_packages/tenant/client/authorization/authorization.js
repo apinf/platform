@@ -10,7 +10,6 @@ import { Session } from 'meteor/session';
 
 // Meteor contributed packages imports
 import { TAPi18n } from 'meteor/tap:i18n';
-import moment from 'moment';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.authorizationForm.helpers({
@@ -20,37 +19,6 @@ Template.authorizationForm.helpers({
     if (tenantTokenObj) {
       const str = JSON.stringify(tenantTokenObj, null, 4);
       return str;
-    }
-    return false;
-  },
-  tenantTokenExpiration () {
-    // Get user id
-    const userId = Meteor.userId();
-    const user = Meteor.users.findOne(userId);
-
-    if (user && user.services && user.services.fiware) {
-      // emphasize expiration date if it has passed
-      let effect;
-      if (moment() > user.services.fiware.expiresAt) {
-        effect = 'font-weight: bold; color: red;';
-      }
-      // Get current language
-      const language = TAPi18n.getLanguage();
-      // Return timestamp and effect
-      return {
-        expirationTime: moment(user.services.fiware.expiresAt).locale(language),
-        expirationEffect: effect,
-      };
-    }
-    return false;
-  },
-  tenantRefreshToken () {
-    // Get user id
-    const userId = Meteor.userId();
-    const user = Meteor.users.findOne(userId);
-
-    if (user && user.services && user.services.fiware) {
-      return user.services.fiware.refreshToken;
     }
     return false;
   },

@@ -8,68 +8,45 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
       <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
         {{_ "tenantCatalog_Title" }}
-        <span class="label label-default"
-        style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">
-        Alpha
-      </span>
-    </h1>
-    <ul class="links">
-      <li class="{{ isActiveRoute 'tenantCatalog' }}">
-        <a href="{{ pathFor route='tenantCatalog' }}"
-        id="button-tenantList">
-        List
-      </a>
-    </li>
-    <li class="{{ isActiveRoute 'authorizationForm' }}">
-      <a href="{{ pathFor route='authorizationForm' }}"
-      id="button-tenantAuthorization">
-      Authorization
-    </a>
-  </li>
-</ul>
-</nav>
-</div>
-<div class="container">
-  <div class="block-wrapper settings-fields">
-    <h5 class="panel-title" id="documentation-title" style="display: inline;">{{_ "tenantAuthorization_title" }}</h5>
-    <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
-    <div id="tenantAuthorization">
-      {{# if tenantToken }}
+        <span class="label label-default" style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">Alpha</span>
+      </h1>
+      <ul class="links">
+        <li class="{{ isActiveRoute 'tenantCatalog' }}">
+          <a href="{{ pathFor route='tenantCatalog' }}" id="button-tenantList">List</a>
+        </li>
+        <li class="{{ isActiveRoute 'authorizationForm' }}">
+          <a href="{{ pathFor route='authorizationForm' }}" id="button-tenantAuthorization">Authorization</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+  <div class="container">
+    <div class="block-wrapper settings-fields">
+      <h5 class="panel-title" id="documentation-title" style="display: inline;">{{_ "tenantAuthorization_title" }}</h5>
+      <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
+      <div id="tenantAuthorization">
+        {{# if tenantToken }}
         <label style="font-weight: 500;font-size: 14px;color: #4c6072;">Access token</label>
         <p class="api-profile_details-text-wrapper">{{ tenantToken }}</p>
         <p style="color:#6d859e; margin-top:10px;margin-bottom: 2em;">
-          Check our <a href="/" target="_blank" rel="noopener noreferrer">documentation</a> for instructions.
+          Check out our guide <a href="/" target="_blank" rel="noopener noreferrer">to generating tenant tokens</a> or troubleshoot common problems.
         </p>
-      {{/ if }}
-      <div class="form-group has-feedback" style="max-width: 400px;" data-required="true">
-        <label>Confirm your password</label>
-        <input type="password" class="form-control" id="tenantPasswordInput" required="">
-        <i class="mdi mdi-eye form-control-feedback toggle-password"></i>
-        <button id="refreshTenantAuthorization"
-                type="submit"
-                class="btn btn-success"
-                style="margin-top: 1em;">
-          Get token
-        </button>
+        {{/ if }}
+        {{# unless tenantToken }}
+        <p>There are no access tokens associated with your account. Confirm your user password to generate new access token.</p>
+        <p style="color:#6d859e; margin-top:10px;margin-bottom: 2em;">
+          Check out our guide <a href="/" target="_blank" rel="noopener noreferrer">to generating access tokens</a> or troubleshoot common problems.
+        </p>
+        {{/ unless }}
+        <div class="form-group has-feedback" style="max-width: 400px;" data-required="true">
+          <label>Confirm your password</label>
+          <input type="password" class="form-control" id="tenantPasswordInput" required="">
+          <i class="mdi mdi-eye form-control-feedback toggle-password"></i>
+          <button id="refreshTenantAuthorization" type="submit" class="btn btn-success" style="margin-top: 1em;">
+            Get new token
+          </button>
+        </div>
       </div>
-      <!-- <p class="help-block">
-        <h4>{{_ "tenantCatalogPage_token_title" }}</h4>
-        <ol>
-          <li>
-            {{_ "tenantCatalogPage_token_details_1" }}
-          </li>
-          <li>
-            {{_ "tenantCatalogPage_token_details_2" }}<br />
-            <span style="font-weight: bold; color: black;">{{ tenantToken }}</span><br />
-            {{_ "tenantCatalogPage_token_details_2b" }}
-            <span style="{{ tenantTokenExpiration.expirationEffect }}">{{ tenantTokenExpiration.expirationTime }}</span>
-            {{# if tenantTokenExpiration.expirationEffect }}
-            <br /><span style="{{ tenantTokenExpiration.expirationEffect }}">{{_ "tenantCatalogPage_token_details_2c" }}</span>
-            {{/ if }}
-          </li>
-        </ol>
-      </p> -->
     </div>
   </div>
-</div>
 </template>
