@@ -5,9 +5,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 // Meteor packages imports
 import { SimpleSchema } from 'meteor/aldeed:simple-schema';
+import { TAPi18n } from 'meteor/tap:i18n';
+
+// Collection imports
+import Settings from '/apinf_packages/settings/collection';
 
 // APInf imports
-import { proxyBasePathRegEx, apiBasePathRegEx } from '../regex';
+import {
+  proxyBasePathRegEx,
+  apiBasePathRegEx,
+  subSettingRequestHeaderRegEx } from '../regex';
 
 const RateLimitSchema = new SimpleSchema({
   duration: {
@@ -17,11 +24,34 @@ const RateLimitSchema = new SimpleSchema({
   limit_by: {
     type: String,
     optional: true,
-    allowedValues: [
-      'apiKey',
-      'ip',
-    ],
-    defaultValue: 'apiKey',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label: 'API Key',
+            value: 'apiKey',
+          },
+          {
+            label: 'IP Address',
+            value: 'ip',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label: 'Origin Header',
+            value: 'origin',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'apiKey',
+    },
   },
   limit: {
     type: Number,
@@ -37,6 +67,68 @@ const RateLimitSchema = new SimpleSchema({
 // Internationalize Rate limit schema texts
 RateLimitSchema.i18n('schemas.proxyBackends.apiUmbrella.settings.rate_limit');
 
+const SubSettings = new SimpleSchema({
+  http_method: {
+    type: String,
+    optional: false,
+    allowedValues: [
+      'GET',
+      'POST',
+      'PUT',
+      'DELETE',
+      'HEAD',
+      'TRACE',
+      'OPTIONS',
+      'CONNECT',
+      'PATCH',
+    ],
+  },
+  regex: {
+    type: String,
+    optional: false,
+  },
+  settings: {
+    type: Object,
+    optional: true,
+  },
+  'settings.required_headers_string': {
+    type: String,
+    custom () {
+      /* Because it is possible to have multiline content, the checking needs to be done
+         line by line */
+
+      let validation = null;
+      // get regex condition
+      const re = subSettingRequestHeaderRegEx;
+      // make an array of input data, each line will be own item
+      const headers = this.value.split('\n');
+      // check each item against regex, return the failing ones
+      const list = headers.filter(header => {
+        if (!re.test(header)) {
+          return header;
+        }
+        return false;
+      });
+      // List the problematic headers, if there are any
+      if (list.length > 0) {
+        validation = list.join(', ');
+      }
+      // If not null is returned, an error message is triggered
+      if (validation) {
+        validation = 'invalidProxyBackendForm_headerStringMessage';
+      }
+      return validation;
+    },
+    autoform: {
+      rows: 3,
+    },
+    optional: true,
+  },
+});
+
+// Internationalize Rate limit schema texts
+SubSettings.i18n('schemas.proxyBackends.apiUmbrella.sub_settings');
+
 const SettingsSchema = new SimpleSchema({
   disable_api_key: {
     type: Boolean,
@@ -46,11 +138,44 @@ const SettingsSchema = new SimpleSchema({
   rate_limit_mode: {
     type: String,
     optional: false,
-    allowedValues: [
-      'custom',
-      'unlimited',
-    ],
-    defaultValue: 'unlimited',
+    autoform: {
+      firstOption: false,
+      options () {
+        const commonList = [
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.unlimited');
+            },
+            value: 'unlimited',
+          },
+          {
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom');
+            },
+            value: 'custom',
+          },
+        ];
+
+        const settings = Settings.findOne();
+        const supportsGraphql = settings ? settings.supportsGraphql : false;
+
+        if (supportsGraphql) {
+          commonList.push({
+            label () {
+              return TAPi18n.__('apiUmbrellaProxyForm_rateLimitMode_options.custom-header');
+            },
+            value: 'custom-header',
+          });
+        }
+
+        return commonList;
+      },
+      defaultValue: 'unlimited',
+    },
+  },
+  rate_limit_cost_header: {
+    type: String,
+    optional: true,
   },
   rate_limits: {
     type: [RateLimitSchema],
@@ -62,9 +187,43 @@ const SettingsSchema = new SimpleSchema({
   },
   headers_string: {
     type: String,
+    custom () {
+      /* Because it is possible to have multiline content, the checking needs to be done
+         line by line */
+
+      let validation = null;
+      // check value if there is any
+      if (this.value) {
+        // get regex condition
+        const re = subSettingRequestHeaderRegEx;
+        // make an array of input data, each line will be own item
+        const headers = this.value.split('\n');
+        // check each item against regex, return the failing ones
+        const list = headers.filter(header => {
+          if (!re.test(header)) {
+            return header;
+          }
+          return false;
+        });
+        // List the problematic headers, if there are any
+        if (list.length > 0) {
+          validation = list.join(', ');
+        }
+        // If not null is returned, an error message is triggered
+        if (validation) {
+          validation = 'invalidProxyBackendForm_headerStringMessage';
+        }
+      }
+      return validation;
+    },
+
     autoform: {
       rows: 3,
     },
+    optional: true,
+  },
+  idp_app_id: {
+    type: String,
     optional: true,
   },
 });
@@ -114,6 +273,15 @@ const ApiUmbrellaSchema = new SimpleSchema({
     optional: true,
     unique: true,
     regEx: proxyBasePathRegEx,
+    custom () {
+      let validation = null;
+      const admin = '/admin/';
+      const result = this.value.includes(admin);
+      if (this.value === '/signup/' || this.value === '/signin/' || result) {
+        validation = 'invalidProxyBackendForm_forbiddenPrefixMessage';
+      }
+      return validation;
+    },
   },
   'url_matches.$.backend_prefix': {
     type: String,
@@ -137,8 +305,18 @@ const ApiUmbrellaSchema = new SimpleSchema({
     type: SettingsSchema,
     optional: true,
   },
+  sub_settings: {
+    type: [SubSettings],
+    optional: true,
+  },
 });
 
+SimpleSchema.messages({
+  invalidProxyBackendForm_forbiddenPrefixMessage:
+    TAPi18n.__('invalidProxyBackendForm_forbiddenPrefixMessage'),
+  invalidProxyBackendForm_headerStringMessage:
+    TAPi18n.__('invalidProxyBackendForm_headerStringMessage'),
+});
 // Internationalize API Umbrella schema texts
 ApiUmbrellaSchema.i18n('schemas.proxyBackends.apiUmbrella');
 

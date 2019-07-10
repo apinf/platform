@@ -175,12 +175,12 @@ Meteor.methods({
 
     let response;
 
-    // "Today"
-    if (params.timeframe === '12') {
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
       // Make ES request to aggregated by hour
       response = Meteor.call('totalNumberRequestFromElasticsearch', params, proxyBackendIds);
     } else {
-      // Last N days And Yesterday
+      // Last N days
       // Fetch from MongoDB
       response = Meteor.call('totalNumberRequestsAndTrend', params, proxyBackendIds);
     }
@@ -196,12 +196,12 @@ Meteor.methods({
 
     let response;
 
-    // "Today"
-    if (params.timeframe === '12') {
+    // "Yesterday" or "Today"
+    if (params.timeframe === '48' || params.timeframe === '12') {
       // Make ES request to aggregated by hour
       response = Meteor.call('statusCodesFromElasticsearch', params);
     } else {
-      // Last N days And Yesterday
+      // Last N days
       // Fetch from MongoDB
       response = Meteor.call('statusCodesData', params);
     }

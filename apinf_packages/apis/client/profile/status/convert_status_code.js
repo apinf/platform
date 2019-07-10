@@ -61,7 +61,7 @@ export default function convertStatusCode (serverStatusCode) {
     // Server Error code
     case 5:
       className = 'status-danger';
-      statusIcon: 'mdi-close-circle';
+      statusIcon = 'mdi-close-circle';
       statusText = `
           ${TAPi18n.__('viewApiStatus_statusMessage_ErrorCodeText')}
           ${serverStatusCode}.

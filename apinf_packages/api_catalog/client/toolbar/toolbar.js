@@ -4,15 +4,15 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
-import { Roles } from 'meteor/alanning:roles';
+// import { Roles } from 'meteor/alanning:roles';
 
 // Collection imports
-import Settings from '/apinf_packages/settings/collection';
+// import Settings from '/apinf_packages/settings/collection';
 
 Template.apiCatalogToolbar.onRendered(function () {
   // Get reference to template instance

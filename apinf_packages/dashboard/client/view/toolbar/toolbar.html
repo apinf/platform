@@ -4,5 +4,17 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dashboardToolbar">
+  <label for="proxy_id" class="dashboard-form-label">
+    {{_ "dashboardProxySelection_optionText_title" }}
+  </label>
+  <select name="proxy_id" class="form-control toolbar-select">
+      {{# each proxy in proxiesList }}
+        {{# with proxy }}
+          <option value="{{ _id }}" {{ selectedProxy }}>
+            {{ name }}
+          </option>
+        {{/ with }}
+      {{/ each }}
+    </select>
   {{> dateRangePicker }}
 </template>

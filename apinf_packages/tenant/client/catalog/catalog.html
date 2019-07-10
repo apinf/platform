@@ -1,0 +1,46 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantCatalog">
+  <div class="container-fluid secondary-menu-block"
+       style="padding-left: 45px; padding-right: 45px;height: 60px; position: sticky; top: 50px;">
+    <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
+      <li class="col-md-4">
+        <h1 style="margin-top:0; margin-bottom:0; line-height: 60px;">
+          {{_ "tenantCatalog_Title" }}
+          <span class="label label-default"
+          style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">
+            Alpha
+          </span>
+        </h1>
+      </li>
+      <li class="col-md-4 text-center toolbar" style="padding-right: 0;margin-top: 0.9em;">
+        {{> tenantCatalogToolbar }}
+      </li>
+      <li class="col-md-4 text-right pull-right add-organization">
+        {{# if userCanAddTenant }}
+          <button id="add-tenant"
+                  type="button"
+                  class="btn btn-success btn-success-special"
+                  style="margin-top: 1rem;">
+            {{_ "tenantCatalog_buttonText_addTenant" }}
+          </button>
+        {{/ if }}
+      </li>
+    </ul>
+  </div>
+
+  <div class="container" style="margin-top:20px;">
+    {{# if Template.subscriptionsReady }}
+      <!-- {{# if paginationReady }} -->
+      {{# if tenantsCount }}
+        {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
+      {{ else }}
+        <!-- Show no organizations message -->
+        {{> noTenantsMessage }}
+      {{/ if }}
+    {{/ if }}
+  </div>
+</template>

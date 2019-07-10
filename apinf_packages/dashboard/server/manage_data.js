@@ -83,7 +83,7 @@ Meteor.methods({
           const index = timerange.indexOf(currentDateValue);
           // Replace "0" to the value
           requestNumber[index].value = data.doc_count;
-          medianTime[index].value = data.percentiles_response_time.values['50.0'];
+          medianTime[index].value = data.percentiles_response_time.values['50.0'] | 0;
           uniqueUsers[index].value = data.unique_users.value;
         });
         response[prefix] = {
@@ -120,7 +120,6 @@ Meteor.methods({
       // Process data
       const aggregatedData = result.aggregations.group_by_request_path.buckets;
       const allRequestPaths = [];
-
       const dates = generateDate({
         startAt: moment(params.fromDate),
         endAt: moment(params.toDate),
@@ -128,11 +127,11 @@ Meteor.methods({
         interval: params.interval,
       });
 
+
       // If not data
       if (aggregatedData.length === 0) {
         // Add placeholder values
         allRequestPaths.push('');
-
         requestPathsData[''] = {
           dates,
           success: arrayWithZeros(dates.length),
@@ -140,9 +139,13 @@ Meteor.methods({
           fail: arrayWithZeros(dates.length),
           error: arrayWithZeros(dates.length),
           median: arrayWithZeros(dates.length),
-          percentiles95: arrayWithZeros(dates.length),
+          shortest: arrayWithZeros(dates.length),
+          short: arrayWithZeros(dates.length),
+          long: arrayWithZeros(dates.length),
+          longest: arrayWithZeros(dates.length),
         };
       } else {
+     //   let index = 0;
         _.forEach(aggregatedData, (dataset) => {
           // Add a request path to list
           allRequestPaths.push(dataset.key);
@@ -152,21 +155,28 @@ Meteor.methods({
           const fail = arrayWithZeros(dates.length);
           const error = arrayWithZeros(dates.length);
           const median = arrayWithZeros(dates.length);
-          const percentiles95 = arrayWithZeros(dates.length);
-
+          const shortest = arrayWithZeros(dates.length);
+          const short = arrayWithZeros(dates.length);
+          const long = arrayWithZeros(dates.length);
+          const longest = arrayWithZeros(dates.length);
           dataset.requests_over_time.buckets.forEach(backendData => {
             // Format Date
+
             const currentDateValue = moment(backendData.key).format();
             // Find spot
             const index = dates.indexOf(currentDateValue);
-            // Replace "0" to the value
             success[index] = backendData.response_status.buckets.success.doc_count;
             redirect[index] = backendData.response_status.buckets.redirect.doc_count;
             fail[index] = backendData.response_status.buckets.fail.doc_count;
             error[index] = backendData.response_status.buckets.error.doc_count;
-            median[index] = backendData.percentiles_response_time.values['50.0'];
-            percentiles95[index] = backendData.percentiles_response_time.values['95.0'];
+            median[index] = backendData.percentiles_response_time.values['50.0'] | 0;
+            shortest[index] = backendData.percentiles_response_time.values['0.0'] | 0;
+            short[index] = backendData.percentiles_response_time.values['25.0'] | 0;
+            long[index] = backendData.percentiles_response_time.values['75.0'] | 0;
+            longest[index] = backendData.percentiles_response_time.values['100.0'] | 0;
           });
+
+//          index += 1;
 
           requestPathsData[dataset.key] = {
             dates,
@@ -175,7 +185,10 @@ Meteor.methods({
             fail,
             error,
             median,
-            percentiles95,
+            shortest,
+            short,
+            long,
+            longest,
           };
         });
       }

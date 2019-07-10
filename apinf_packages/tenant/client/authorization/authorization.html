@@ -1,0 +1,63 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="authorizationForm">
+  <div
+    class="modal fade"
+    id="tenantAuthorizationModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="tenantAuthorizationModalLabel" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title" id="tenantAuthorizationModalLabel">
+            {{_ "tenantAuthorization_title" }}
+          </h2>
+        </div>
+        <div >
+          <!-- body -->
+          <div class="modal-body">
+            <fieldset>
+              <!-- Show user's tokens -->
+              <p class="help-block">
+                <h4>{{_ "tenantCatalogPage_token_title" }}</h4>
+                <ol>
+                  <li>
+                    {{_ "tenantCatalogPage_token_details_1" }}
+                  </li>
+                  <li>
+                    {{_ "tenantCatalogPage_token_details_2" }}<br />
+                    <span style="font-weight: bold; color: black;">{{ tenantToken }}</span><br />
+                    {{_ "tenantCatalogPage_token_details_2b" }}
+                    <span style="{{ tenantTokenExpiration.expirationEffect }}">{{ tenantTokenExpiration.expirationTime }}</span>
+                    {{# if tenantTokenExpiration.expirationEffect }}
+                    <br /><span style="{{ tenantTokenExpiration.expirationEffect }}">{{_ "tenantCatalogPage_token_details_2c" }}</span>
+                    {{/ if }}
+                  </li>
+                  <!--li>
+                    {{_ "tenantCatalogPage_token_details_3" }}<br />
+                    <span style="font-weight: bold; color: black;">{{ tenantRefreshToken }}</span>
+                  </li-->
+                </ol>
+              </p>
+            </fieldset>
+          </div>
+        </div>
+        <!-- footer -->
+        <div class="modal-footer">
+          <!-- Perhaps later we can refresh programmatically -->
+          <!--button type="submit" class="btn btn-success" id="refreshTenantAuthorization">
+            {{_ "tenantAuthorization_button_refresh" }}
+          </button-->
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

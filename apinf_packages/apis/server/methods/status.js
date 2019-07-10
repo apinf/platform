@@ -6,6 +6,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 // Meteor packages imports
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
+import { HTTP } from 'meteor/http';
 
 // Collection imports
 import Apis from '/apinf_packages/apis/collection';
@@ -18,7 +19,7 @@ Meteor.publish('getApiStatusRecordData', (apiId) => {
   const startDate = new Date();
   const lastDate = new Date();
   lastDate.setDate(lastDate.getDate() - 1);
-  const query = { responses: { $elemMatch: { date: { $gte: startDate, $lte: lastDate } } } };
+  const query = { responses: { $elemMatch: { date: { $gte: lastDate, $lte: startDate } } } };
   return MonitoringData.find({ apiId }, query);
 });
 
@@ -26,21 +27,19 @@ Meteor.methods({
   getApiStatus (apiId, url) {
     // Make sure apiId is a string
     check(apiId, String);
-
     // Make sure url is a string
     check(url, String);
-
     // Call HTTP request
-    Meteor.http.get(url, {}, (error, result) => {
+    HTTP.get(url, {}, (error, result) => {
       // Set status code
       const serverStatusCode = result ? result.statusCode : 404;
 
-      // Create a monitoring data
+      // Create a monitoring data. Save complete path = URL + endpoint
       const monitoringData = {
         date: new Date(),
         server_status_code: serverStatusCode,
+        end_point: url,
       };
-
 
       // Update an api status
       Apis.update(apiId, { $set: { latestMonitoringStatusCode: serverStatusCode } });

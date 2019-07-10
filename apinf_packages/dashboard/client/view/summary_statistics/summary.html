@@ -8,7 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <!-- Table head -->
     <h2 style="margin: 0;font-size: 14px;margin-left: -20px;margin-right: -20px;margin-bottom: 0;padding: 20px 20px;font-weight: 400;border-bottom: 1px solid #ecf3f8;">
       {{ tableTitle }} ({{ count }})
-      <span class="pull-right" style="color: #6d859e;font-size: 12px;padding-top: 2px;">Analytics summary</span>
+      <span class="pull-right" style="color: #6d859e;font-size: 12px;padding-top: 2px;">{{_ "dashboard_analyticsSummary_title"}}</span>
     </h2>
 
     <div class="statistic-block">
@@ -26,7 +26,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
                 <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
-                    <span class="summary-number-label">Requests</span>
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_requests"}}</span>
                     <span class="request-number">
                       {{ localeString requestNumber }}
                     </span>
@@ -38,7 +38,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
                 <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
-                    <span class="summary-number-label">Response Time</span>
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_responseTime"}}</span>
                     <span class="response-time">
                       {{ medianResponseTime }} ms
                     </span>
@@ -50,7 +50,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                 </div>
                 <div class="col-md-2 col-xs-12 text-left">
                   <div style="display:inline;">
-                    <span class="summary-number-label">Developers</span>
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_developers"}}</span>
                     <span class="unique-users">
                       {{ avgUniqueUsers }}
                     </span>

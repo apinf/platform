@@ -22,6 +22,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ if }}
       </div>
       <ul class="nav navbar-nav" id="main-navbar">
+        <!-- Dashboard -->
         {{# if currentUser }}
           <li class="{{ isActiveRoute 'overview' }} main-links">
             <a href="{{ pathFor 'overview' }}" id="overview-button">
@@ -41,25 +42,51 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             {{/ if }}
           {{/ if }}
         {{/ if }}
+
+        <!-- MQTT Dashboard -->
+        {{# if userCanViewMqttDashboard }}
+          <li class="{{ isActiveRoute 'mqtt' }} main-links">
+            <a href="{{ pathFor 'mqtt' }}" id="mqtt-button">
+              {{_ "navbar_mqttDashboard" }}
+            </a>
+          </li>
+        {{/ if }}
+
+        <!-- API catalog -->
         <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
           <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
             {{_ "navbar_apis" }}
           </a>
         </li>
+
+        <!-- Organizations -->
         <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
           <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
             {{_ "navbar_organizations" }}
           </a>
         </li>
-        {{# if currentUser }}
-          {{# if userCanAddApi }}
-          <li class="{{ isActiveRoute 'addApi' }} main-links">
-            <a href="{{ pathFor 'addApi' }}" id="addapi-button">
-              {{_ "navbar_addAPIBackend" }}
+
+        <!-- Tenants -->
+        <!-- TODO tenant: Show only in case user has logged in via Keyrock -->
+        {{# if canManageTenants }}
+          <li class="{{ isActiveRoute 'tenantCatalog' }} main-links">
+            <a href="{{ pathFor 'tenantCatalog' }}" id="tenants-button">
+              Tenants
+              <i class="mdi mdi-alpha" style="position: absolute;top: 1px;right: 2px;color: #ffc80f;"></i>
             </a>
           </li>
+        {{/ if }}
+
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+            <li class="{{ isActiveRoute 'addApi' }} main-links">
+              <a href="{{ pathFor 'addApi' }}" id="addapi-button">
+                {{_ "navbar_addAPIBackend" }}
+              </a>
+            </li>
           {{/ if }}
 
+          <!-- Users management -->
           {{# if isInRole 'admin' }}
             <li class="{{ isActiveRoute 'accountsAdmin' }} main-links">
               <a href="{{ pathFor 'accountsAdmin' }}" id="users-button">
@@ -68,62 +95,67 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </li>
           {{/ if }}
         {{/ if }}
-        {{# if branding.homeCustomBlock }}
-        <li class="{{ isActiveRoute 'pricing' }} main-links">
-          <a href="{{ pathFor 'pricing' }}" id="pricing-button">
-            <i class="fa fa-credit-card" aria-hidden="true"></i>
-            {{_ "navbar_pricing" }}
-          </a>
-        </li>
+
+        <!-- Pricing block -->
+        {{# if homeCustomBlock }}
+          <li class="{{ isActiveRoute 'pricing' }} main-links">
+            <a href="{{ pathFor 'pricing' }}" id="pricing-button">
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              {{_ "navbar_pricing" }}
+            </a>
+          </li>
         {{/ if }}
+
+        <!-- Configuration of site -->
         {{# if isInRole 'admin' }}
-        <li class="mobile-links-only hide-link">
-          <a href="{{ pathFor 'branding' }}" id="branding-button">
-            {{_ "userMenu_branding" }}
-          </a>
-        </li>
-        <li class="mobile-links-only hide-link">
-          <a href="{{ pathFor 'settings' }}" id="settings-button">
-            {{_ "userMenu_settings" }}
-          </a>
-        </li>
-        <li class="mobile-links-only hide-link">
-          <a href="{{ pathFor 'proxies' }}" id="proxies-button">
-            {{_ "userMenu_proxies" }}
-          </a>
-        </li>
-        <li class="mobile-links-only hide-link">
-          <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
-            {{_ "userMenu_loginPlatforms" }}
-          </a>
-        </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'branding' }}" id="branding-button">
+              {{_ "userMenu_branding" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'settings' }}" id="settings-button">
+              {{_ "userMenu_settings" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'proxies' }}" id="proxies-button">
+              {{_ "userMenu_proxies" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
+              {{_ "userMenu_loginPlatforms" }}
+            </a>
+          </li>
+        {{/ if }}
+
+        <!-- User own menu -->
+        {{# if currentUser }}
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'profile' }}" id="profile-button">
+              {{_ "userMenu_profile" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="/sign-out" id="signout-button">
+              {{_ "userMenu_signout" }}
+            </a>
+          </li>
         {{/ if }}
         {{# if currentUser }}
-        <li class="mobile-links-only hide-link">
-          <a href="{{ pathFor 'profile' }}" id="profile-button">
-            <!-- {{_ "userMenu_profile" }} -->
-            Account Settings
-          </a>
-        </li>
-        <li class="mobile-links-only hide-link">
-          <a href="/sign-out" id="signout-button">
-            {{_ "userMenu_signout" }}
-          </a>
-        </li>
-        {{/ if }}
-        {{# if currentUser }}
-        {{> userMenu user=currentUser }}
+          {{> userMenu user=currentUser }}
         {{ else }}
-        <li class="main-links pull-right">
-          <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
-            {{_ "navbar_signUp" }}
-          </a>
-        </li>
-        <li class="main-links pull-right">
-          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
-            {{_ "navbar_signIn" }}
-          </a>
-        </li>
+          <li class="main-links pull-right">
+            <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
+              {{_ "navbar_signUp" }}
+            </a>
+          </li>
+          <li class="main-links pull-right">
+            <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
+              {{_ "navbar_signIn" }}
+            </a>
+          </li>
         {{/ if }}
       </ul>
     </div>

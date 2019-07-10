@@ -34,6 +34,58 @@ Template.apiDetails.onRendered(() => {
   const copyProxyUrl = new Clipboard('#copyProxyUrl');
   const copyExampleOne = new Clipboard('#copyExampleOne');
   const copyExampleTwo = new Clipboard('#copyExampleTwo');
+
+  // Tooltip position for copyApiUrl
+  $('#copyApiUrl').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyProxyUrl
+  $('#copyProxyUrl').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleOne
+  $('#copyExampleOne').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleTwo
+  $('#copyExampleTwo').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tell the user when copying API URL is successful
+  copyApiUrl.on('success', () => {
+    $('#copyApiUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyProxyUrl.on('success', () => {
+    $('#copyProxyUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleOne.on('success', () => {
+    $('#copyExampleOne').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleTwo.on('success', () => {
+    $('#copyExampleTwo').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
 });
 
 Template.apiDetails.helpers({

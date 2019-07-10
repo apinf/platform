@@ -1,17 +1,10 @@
-sudo: false
-
-group: deprecated-2017Q4
+dist: xenial
 
 language: node_js
 node_js:
-  - '4'
+  - '8'
 
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - g++-4.8
+addons:  
   chrome: stable
 
 branches:
@@ -21,40 +14,36 @@ branches:
 before_cache:
   - rm -f $HOME/.meteor/log/*.log
 
-cache:
-  yarn: true
-  directories:
-    - $HOME/.meteor
-
 services:
   - docker
+  - xvfb
 
 before_install:
-  - pwd
   - ls -la
+  - sudo apt-get update
+  - sudo apt-get install g++ build-essential xvfb  
+  
   # Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
 
 
 before_script:
-  - yarn
-  - yarn run lint
+#Previously used yarn, but now after migrating to meteor 1.8, yarn fails to create some binaries.
+  - meteor npm install
+  - npm run lint
   - npm view chimp version
   - npm view chromedriver version
-  # Start X Virtual Frame Buffer for headless testing with real browsers
-  - ./.scripts/start-xvfb.sh
-
+  
 install:
   - export PATH="$HOME/.meteor:$PATH"
 
 script:
   # Run meteor and chimp from node.js
-  - travis_retry yarn test
+  - travis_retry npm run test
   # Build docker image
   - ./.scripts/docker_build.sh
 
 env:
   global:
   - DISPLAY=:99.0
-  - TEST_MODE: "true"
-  - CXX=g++-4.8
+  - TEST_MODE: "true" 

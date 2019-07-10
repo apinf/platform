@@ -1,4 +1,4 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
@@ -24,6 +24,11 @@ Settings.schema = new SimpleSchema({
     defaultValue: false,
   },
   developmentFeatures: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
+  supportsGraphql: {
     type: Boolean,
     optional: true,
     defaultValue: false,
@@ -141,6 +146,44 @@ Settings.schema = new SimpleSchema({
         validation = 'required';
       }
       return validation;
+    },
+  },
+  // Following fields are used in Login methods' disable
+  // which is implemented after Next
+  loginMethods: {
+    type: Object,
+    optional: true,
+  },
+  'loginMethods.fiware': {
+    type: Boolean,
+    optional: true,
+  },
+  'loginMethods.github': {
+    type: Boolean,
+    optional: true,
+  },
+  'loginMethods.hsl_id': {
+    type: Boolean,
+    optional: true,
+  },
+  'loginMethods.username_psw': {
+    type: Boolean,
+    optional: true,
+  },
+  tenantIdm: {
+    type: Object,
+    optional: true,
+  },
+  'tenantIdm.enabled': {
+    type: Boolean,
+    optional: true,
+  },
+  'tenantIdm.url_and_basepath': {
+    type: String,
+    regEx: SimpleSchema.RegEx.Url,
+    optional: true,
+    autoform: {
+      placeholder: 'https://tenantservice/tenant',
     },
   },
 });

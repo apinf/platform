@@ -78,7 +78,7 @@ Template.medianResponseTime.onRendered(function () {
   instance.autorun(() => {
     // Get aggregated chart data
     const chartData = Template.currentData().chartData;
-    
+
     // Get Date format
     const dateFormat = Template.currentData().dateFormat;
 
@@ -102,7 +102,6 @@ Template.medianResponseTime.onRendered(function () {
     // Update chart with relevant data
     instance.chart.update();
   });
-
 
   // Reactive update Chart Axis translation
   instance.autorun(() => {

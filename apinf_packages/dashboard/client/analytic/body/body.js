@@ -46,8 +46,8 @@ Template.apiAnalyticPageBody.onCreated(function () {
   instance.lastUpdateTime = new ReactiveVar();
 
   instance.autorun(() => {
-    const timeframe = FlowRouter.getQueryParam('timeframe');
-
+    // Initiate fimeframe to 'Today' if not exists
+    const timeframe = FlowRouter.getQueryParam('timeframe') || 12;
     const queryOption = getDateRange(timeframe);
 
     const params = {

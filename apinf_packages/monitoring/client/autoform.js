@@ -17,6 +17,24 @@ import { MonitoringSettings, MonitoringData } from '/apinf_packages/monitoring/c
 
 AutoForm.hooks({
   apiMonitoringForm: {
+    formToDoc: (doc) => {
+      // doc.url =  doc.baseUrl + doc.endPoint;
+      if (doc.endPoint) {
+        doc.endPoint = doc.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+        doc.url = (doc.url + doc.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      }
+      return doc;
+    },
+
+    formToModifier: (doc) => {
+      // doc.$set.url = doc.$set.baseUrl + doc.$set.endPoint;
+      if (doc.$set.endPoint) {
+        doc.$set.endPoint = doc.$set.endPoint.replace(/([^:]\/)\/+/g, '$1').replace(/\/\//g, '/');
+        doc.$set.url = (doc.$set.url + doc.$set.endPoint).replace(/([^:]\/)\/+/g, '$1');
+      }
+      return doc;
+    },
+
     before: {
       update: (doc) => {
         // Check form on validation
@@ -30,7 +48,8 @@ AutoForm.hooks({
 
           // Restart cron with new url
           if (monitoringData.enabled) {
-            Meteor.call('startCron', monitoringData.apiId, monitoringData.url);
+            Meteor.call('startCron',
+             monitoringData.apiId, monitoringData.url);
           }
           // Success result
           return doc;
@@ -71,7 +90,8 @@ AutoForm.hooks({
 
       // If monitoring is enabled then get the API status immediately
       if (updateFormValues.enabled) {
-        Meteor.call('getApiStatus', updateFormValues.apiId, updateFormValues.url);
+        Meteor.call('getApiStatus',
+         updateFormValues.apiId, updateFormValues.url, updateFormValues.endPoint);
       }
 
       // Get success message translation

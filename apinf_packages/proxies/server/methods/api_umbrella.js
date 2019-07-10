@@ -118,11 +118,13 @@ Meteor.methods({
       // Send the API Backend to API Umbrella's endpoint for creation in the backend
       response.result = umbrella.adminApi.v1.apiBackends.createApiBackend(backend);
     } catch (error) {
+     // const errorMessagePretext = {{_ createApiBackendOnApiUmbrella_errorMessagePretext }};
       // Set the errors object
-      response.errors = { default: [error.message] };
+      response.errors = {
+        default: [TAPi18n.__('createApiBackendOnApiUmbrella_errorMessagePretext') + error.message],
+      };
       response.http_status = 422;
     }
-
     return response;
   },
   updateApiBackendOnApiUmbrella (apiBackend, proxyId) {
@@ -146,6 +148,35 @@ Meteor.methods({
       http_status: 204,
       errors: {},
     };
+
+    /* Extra handling to update emptied fields to apiUmbrella:
+
+       Empty (or just emptied) fields are not in object in DB.
+
+       Because only the fields, which are present in object,
+       are sent to apiUmbrella, we force including empty fields
+       in object as value NULL.
+
+       NOTE! When adding a new field for apiUmbrella update,
+       add also handling of emptying case here!
+    */
+    // Force removal of emptied sub settings
+    if (backend.api.sub_settings === undefined) {
+      // eslint-disable-next-line dot-notation
+      backend.api['sub_settings'] = [];
+    }
+    // Force removal of emptied headers string
+    if (backend.api.settings.headers_string === undefined) {
+      backend.api.settings.headers_string = null;
+    }
+    // Force removal of emptied query string parameters
+    if (backend.api.settings.append_query_string === undefined) {
+      backend.api.settings.append_query_string = null;
+    }
+    // Force removal of emptied IDP app ID
+    if (backend.api.settings.idp_app_id === undefined) {
+      backend.api.settings.idp_app_id = null;
+    }
 
     try {
       // Get API Umbrella's endpoint

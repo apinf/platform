@@ -9,15 +9,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     id="contactForm"
     type="method"
     meteormethod="sendContactFormEmail" }}
-  <fieldset>
-    {{> afQuickField name="name" }}
-    {{> afQuickField name="email" }}
-    {{> afQuickField name="message" }}
-    <div id="form-buttons">
-      <button type="submit" class="btn btn-primary">
-        {{_ "contactForm_submit" }}
-      </button>
-    </div>
-  </fieldset>
+    
+    <fieldset>
+      {{> afQuickField name="name" }}
+      {{> afQuickField name="email" }}
+      {{> afQuickField name="message" }}
+      <div id="form-buttons">
+        <button type="submit" class="btn btn-primary">
+          {{_ "contactForm_submit" }}
+        </button>
+      </div>
+    </fieldset>
   {{/ autoForm }}
 </template>

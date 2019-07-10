@@ -101,18 +101,18 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             </tr>
             <tr>
               <th scope="row">
-                {{_ "proxyItem_httpApi" }}
-              </th>
-              <td>
-                {{ hideCredentials proxy.emq.httpApi }}
-              </td>
-            </tr>
-            <tr>
-              <th scope="row">
                 {{_ "proxyItem_elasticsearch" }}
               </th>
               <td>
                 {{ proxy.emq.elasticsearch }}
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">
+                {{_ "proxyItem_postgresEndpoint" }}
+              </th>
+              <td>
+                {{ proxy.emq.postgresEndpoint }}
               </td>
             </tr>
           </tbody>

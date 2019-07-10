@@ -20,15 +20,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             collection=apiDocsCollection
             doc=apiDoc
             id="apiDocumentationForm"
-            type=formType }}
+            type=formType
+            validation="keyup"
+            }}
 
             <p style="color: #6d859e;">
               {{_ 'manageApiDocumentationModal_hints_uploadApiDocumentation' }}
               {{_ 'manageApiDocumentationModal_helpText_useHttpsProtocol' }}
             </p>
+            <!-- Drop-down selection for type of documentation (URL/File) -->
             {{> afQuickField name="type" firstOption=false }}
 
             {{#if afFieldValueIs name="type" value="file" }}
+              <!-- selection for file -->
               <div class="documentation-file">
                 {{# unless documentationFile }}
                   {{> manageApiDocumentationModalUploadButton }}
@@ -38,28 +42,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                       <i class="fa fa-file-text-o" aria-hidden="true"></i>
                       {{ documentationFile.filename }}
                       <span class="pull-right">
-                    <button type="button" class="btn btn-xs btn-danger delete-documentation" style="height:auto;">
-                      <i class="fa mdi mdi-delete" aria-hidden="true"></i>
-                    </button>
-                  </span>
+                        <button type="button" class="btn btn-xs btn-danger delete-documentation" style="height:auto;">
+                          <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+                        </button>
+                      </span>
                     </li>
                   </ul>
                 {{/ unless }}
               </div>
             {{ else }}
+              <!-- Input field for url -->
               {{> afQuickField name='remoteFileUrl' }}
             {{/ if }}
+
+            <!-- Checkboxes for used methods -->
             {{> afQuickField
               name="submit_methods"
               options=supportedSubmitMethods
               type="select-checkbox-inline"
               noselect=false
             }}
+
+            <!-- Submit button -->
             <div class="text-right">
               <button type="submit" class="btn btn-success btn-success-special" id="save-documentation-link">
                 {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
               </button>
             </div>
+
+            <!-- Some entertainment for user, if loading takes time -->
             {{# if fileUploding }}
               {{> spinner }}
             {{/ if }}

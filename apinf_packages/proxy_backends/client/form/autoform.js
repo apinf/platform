@@ -23,6 +23,26 @@ import requiredFieldsFilled from './required_fields';
 
 AutoForm.hooks({
   proxyBackendForm: {
+    formToModifier: (doc) => {
+      if (doc.$set['apiUmbrella.sub_settings']) {
+        doc.$set['apiUmbrella.sub_settings'] = _.compact(doc.$set['apiUmbrella.sub_settings']);
+      }
+      if (doc.$set['apiUmbrella.settings.rate_limits']) {
+        for (let i = 0; i < doc.$set['apiUmbrella.settings.rate_limits'].length; i++) {
+          // eslint-disable-next-line dot-notation
+          if ((doc.$set['apiUmbrella.settings.rate_limits'][i]['duration'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit'] === undefined) &&
+            // eslint-disable-next-line dot-notation
+            (doc.$set['apiUmbrella.settings.rate_limits'][i]['limit_by'] === undefined)) {
+            delete doc.$set['apiUmbrella.settings.rate_limits'][i];
+          }
+        }
+        doc.$set['apiUmbrella.settings.rate_limits'] =
+        _.compact(doc.$set['apiUmbrella.settings.rate_limits']);
+      }
+      return doc;
+    },
     before: {
       insert (proxyBackend) {
         // TODO: Refactor this method. It is too long and complex
@@ -32,7 +52,7 @@ AutoForm.hooks({
 
         // Empty fields case, check doc exists & has apiUmbrella object
         if (proxyBackend.type === 'apiUmbrella') {
-          // Make sure all required fileds are filled
+          // Make sure all required fields are filled
           const requiredFields = requiredFieldsFilled(proxyBackend);
 
           if (!requiredFields) {
@@ -54,7 +74,7 @@ AutoForm.hooks({
                   return false;
                 }
 
-                  // If response has errors object, notify about it
+                // If response has errors object, notify about it
                 if (response.errors && response.errors.default) {
                   // Notify about error
                   sAlert.error(response.errors.default[0], { timeout: 'none' });
@@ -258,20 +278,26 @@ AutoForm.hooks({
           Meteor.call(
             'updateApiBackendOnApiUmbrella',
             apiUmbrellaBackend, proxyBackend.proxyId,
-            (error) => {
+            (error, response) => {
               // Check for error
-              if (error) {
+              if (response.errors && response.errors.default && response.errors.default[0]) {
                 // Throw error for debugging
                 // TODO: indicate that API Umbrella may be out of sync with local collection
-                Meteor.throw(500, error);
+                const errorMessage = TAPi18n.__('proxyBackendForm_update_failureMessage');
+                sAlert.error(errorMessage + response.errors.default[0], { timeout: 'none' });
               } else {
                 // Publish the API Backend on API Umbrella
                 Meteor.call(
                   'publishApiBackendOnApiUmbrella',
                   apiUmbrellaBackend.id, proxyBackend.proxyId,
-                  (publishError) => {
-                    if (publishError) {
-                      Meteor.throw(500, publishError);
+                  (publishError, resp) => {
+                    // There are two ways the error response can come
+                    if (resp && resp.errors && resp.errors.default) {
+                      const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
+                      sAlert.error(errorPublish + resp.errors.default[0], { timeout: 'none' });
+                    } else if (publishError) {
+                      const errorPublish = TAPi18n.__('proxyBackendForm_publish_failureMessage');
+                      sAlert.error(errorPublish + publishError.message, { timeout: 'none' });
                     } else {
                       // Get update success message translation
                       const message = TAPi18n.__('proxyBackendForm_update_successMessage');

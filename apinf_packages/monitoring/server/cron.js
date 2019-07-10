@@ -21,7 +21,6 @@ Meteor.methods({
   startCron (apiId, url) {
     // Make sure apiId is a String
     check(apiId, String);
-
     // Make sure url is a String
     check(url, String);
 

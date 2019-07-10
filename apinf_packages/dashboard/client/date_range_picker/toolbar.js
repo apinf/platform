@@ -15,7 +15,6 @@ import Apis from '/apinf_packages/apis/collection';
 Template.dateRangePicker.onRendered(() => {
   // Get value of timeframe parameter
   const timeframeParameter = FlowRouter.getQueryParam('timeframe');
-
   // Set value
   this.$('#date-range-picker').val(timeframeParameter);
 });

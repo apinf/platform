@@ -166,13 +166,13 @@ Template.organizationApis.events({
   },
   'click #edit': (event) => {
     // Remove active class
-    $(`.secondary-menu_navigation .links li#organization-apis-tab`).removeClass('active');
+    $('.secondary-menu_navigation .links li#organization-apis-tab').removeClass('active');
 
     // Add active class to settings tab link
-    $(`.secondary-menu_navigation .links li#organization-settings-tab`).addClass('active');
+    $('.secondary-menu_navigation .links li#organization-settings-tab').addClass('active');
 
     // Show settings tab
-    $(`.about-organization a[href='#settings']`).tab('show');
+    $('.about-organization a[href="#settings"]').tab('show');
 
     // Show hash value in url
     window.location = `${event.currentTarget.hash}`;

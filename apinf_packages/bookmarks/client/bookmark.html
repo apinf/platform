@@ -8,10 +8,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     {{ api.bookmarkCount }}
   </span>
   {{# if isBookmarked }}
-    <span class="small-tooltiptext">Unbookmark</span>
+    <span class="small-tooltiptext">{{_ "bookmark_buttonText_unbookmark" }}</span>
     <i class="bookmark-button bookmark bookmarked fa fa-star"></i>
   {{ else }}
-    <span class="small-tooltiptext">Bookmark</span>
+    <span class="small-tooltiptext">{{_ "bookmark_buttonText_bookmark" }}</span>
     <i class="bookmark-button bookmark fa fa-star-o"></i>
   {{/ if }}
 </template>

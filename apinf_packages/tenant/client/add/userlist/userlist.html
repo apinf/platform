@@ -1,0 +1,70 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantUsersList">
+
+  <span itemprop="tenantUsers">
+    <div class="form-group">
+      <label for="tenant-user-list" class="control-label">{{_ "tenantUsersList_title" }}</label>
+      <table class="rtable" id="tenant-user-list">
+        <thead>
+          <tr>
+            <th>{{_ "tenantUsersList_thead_username" }}</th>
+            <th>{{_ "tenantUsersList_thead_roles" }}</th>
+          </tr>
+        </thead>
+        {{# if tenantUsers }}
+          <tbody>
+            {{# each tenantUsers }}
+            <tr>
+              <td>
+                {{ name }}
+                {{# if isMailEnabled }}
+                  <!-- Email notification tick box is shown only when mail sending is enabled -->
+                  <div class="checkbox pull-right" style="margin-bottom: 0px;">
+                    <label for="notifyUser">
+                      <span>Notify User &nbsp; &nbsp; &nbsp;</span>
+                    </label>
+
+                    <input type="checkbox"
+                            checked={{ notification }}
+                            id="notifyUser"
+                            name=notifyUser
+                            value="notify-user"
+                            class="notificationToUser">
+                  </div>
+                {{/ if }}
+              </td>
+              <td>
+                <input type="checkbox"
+                        checked={{ provider }}
+                        id="tenantUserRoleProvider"
+                        name=tenantUserRoleProvider
+                        value="data-provider"
+                        class="tenantUserRoleProvider"> Data-provider <br />
+                <input type="checkbox"
+                        checked={{ consumer }}
+                        id="tenantUserRoleConsumer"
+                        name=tenantUserRoleConsumer
+                        value="data-consumer"
+                        class="tenantUserRoleConsumer"> Data-consumer
+              </td>
+              <td>
+                <button class="remove-tenant-user btn btn-danger btn-xs"
+                        style="height:auto;"
+                        title={{_ "tenantUsers_button_title_removeUser" }}>
+                  <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+                </button>
+              </td>
+            </tr>
+            {{/ each }}
+          </tbody>
+          {{/ if }}
+        </table>
+
+        <span class="help-block"></span>
+    </div>
+  </span>
+</template>

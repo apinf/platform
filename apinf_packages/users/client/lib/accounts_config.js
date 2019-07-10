@@ -13,7 +13,7 @@ AccountsTemplates.configure({
   defaultLayout: 'atForm',
   defaultContentRegion: 'main',
   /* Behavior */
-  confirmPassword: false,
+  confirmPassword: true,
   enablePasswordChange: true,
   forbidClientAccountCreation: false,
   overrideLoginErrors: false,
@@ -37,11 +37,11 @@ AccountsTemplates.configure({
   termsUrl: 'terms-of-use',
   texts: {
     title: {
-      signUp: "Sign Up",
+      signUp: 'Sign Up',
     },
     button: {
-      signIn: "Sign In",
-      signUp: "Sign Up",
+      signIn: 'Sign In',
+      signUp: 'Sign Up',
     },
   },
 });
@@ -84,6 +84,9 @@ AccountsTemplates.configureRoute('signIn', {
   layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
+  layoutRegions: {
+    bar: 'navbar',
+  },
 });
 
 // Sign up
@@ -94,4 +97,7 @@ AccountsTemplates.configureRoute('signUp', {
   layoutTemplate: 'atLayout',
   contentRegion: 'main',
   redirect: '/apis',
+  layoutRegions: {
+    bar: 'navbar',
+  },
 });

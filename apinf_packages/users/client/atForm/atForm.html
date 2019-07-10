@@ -5,31 +5,37 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="customAtForm">
   {{#unless hide}}
-  <div class="at-form">
-    {{#if showTitle}}
-    {{> atTitle}}
-    {{/if}}
-    {{#if showError}}
-    {{> atError}}
-    {{/if}}
-    {{#if showResult}}
-    {{> atResult}}
-    {{/if}}
-    {{#if showPwdForm}}
-    {{> atPwdForm}}
-    {{/if}}
-    {{#if showTermsLink}}
-    {{> atTermsLink}}
-    {{/if}}
-    {{#if showOauthServices}}
-    {{> atOauth}}
-    {{/if}}
-    {{#if showSignUpLink}}
-    {{> atSignupLink}}
-    {{/if}}
-    {{#if showSignInLink}}
-    {{> atSigninLink}}
-    {{/if}}
-  </div>
+    <div class="at-form">
+      {{#if showTitle}}
+        {{> atTitle}}
+      {{/if}}
+      {{#if showError}}
+        {{> atError}}
+      {{/if}}
+      {{#if showResult}}
+        {{> atResult}}
+      {{/if}}
+      {{#if showPwdForm}}
+        {{> atPwdForm}}
+      {{/if}}
+      {{#if showConfirmPassword}}
+        {{> atConfirmPassword}}
+      {{/if}}
+      {{#if showTermsLink}}
+        {{> atTermsLink}}
+      {{/if}}
+      {{#if showOauthServices}}
+        {{> atOauth}}
+      {{/if}}
+      {{#if showSignUpLink}}
+        {{> atSignupLink}}
+      {{/if}}
+      {{#if showSignInLink}}
+        {{> atSigninLink}}
+      {{/if}}
+      {{#if showResendVerificationEmailLink}}
+        {{> atResendVerificationEmailLink}}
+      {{/if}}
+    </div>
   {{/unless}}
 </template>

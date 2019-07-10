@@ -12,25 +12,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       id="settings"
       type=formType }}
     <div class="block-wrapper settings-fields">
-      <h2>General</h2>
+      <h2>{{_ "settingsPage_title" }}</h2>
       {{> afQuickField name='access.onlyAdminsCanAddApis' id="addapi-adminonly" }}
       {{> afQuickField name='access.onlyAdminsCanAddOrganizations' id="addorganization-adminonly" }}
       {{> afQuickField name='developmentFeatures' id="development-features" }}
+
+      <!-- GraphQL settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
-            <span class="panel-title">
-              {{_ "settings_sdkCode_generator" }}
-            </span>
-            <span class="pull-right">
-              {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
-            </span>
+          <span class="panel-title">
+            {{_ "settings_title_supportsGraphql" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='supportsGraphql' id="supports-graphql" }}
+          </span>
+        </div>
+      </div>
+
+      <!-- SDK Code Generator settings -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_sdkCode_generator" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='sdkCodeGenerator.enabled' id="SDK-code-generator" }}
+          </span>
         </div>
         {{# if afFieldValueIs name="sdkCodeGenerator.enabled" value=true }}
+        <div class="panel panel-default">
           <div class="panel-body">
             {{> afQuickField name='sdkCodeGenerator.host' id="SDK-host" }}
           </div>
+        </div>
         {{/ if }}
       </div>
+
+      <!-- Mail settings -->
       <div class="panel panel-default">
         <div class="panel-heading">
           <span class="panel-title">
@@ -67,6 +85,57 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         {{/ if }}
       </div>
+
+      <!-- Possibility to hide login methods -->
+      <div class="panel panel-default" style="border-color: red; border-width: 2px;">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_disabled_login_methods" }}
+          </span>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-sm-4">
+              {{> afQuickField name='loginMethods.fiware' id="fiware-login" }}
+              {{> afQuickField name='loginMethods.github' id="github-login" }}
+              {{> afQuickField name='loginMethods.hsl_id' id="hsl-login" }}
+              {{> afQuickField name='loginMethods.username_psw' id="username-psw-login" }}
+            </div>
+
+            <div class="col-sm-8">
+                <span style="color: red;">{{_ "settings_disabled_login_methods_caution" }}</span>
+                {{_ "settings_disabled_login_methods_caution_text" }}
+                <ul>
+                  <li>
+                    {{_ "settings_disabled_login_methods_caution_warning_1"}}
+                  </li>
+                  <li>
+                    {{_ "settings_disabled_login_methods_caution_warning_2" }}
+                  </li>
+                </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tenant settings -->
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <span class="panel-title">
+            {{_ "settings_tenant" }}
+          </span>
+          <span class="pull-right">
+            {{> afQuickField name='tenantIdm.enabled' id="tenantIdm" }}
+          </span>
+        </div>
+        {{# if afFieldValueIs name='tenantIdm.enabled' value=true }}
+          <div class="panel-body">
+            {{> afQuickField name='tenantIdm.url_and_basepath' id="tenantIdm-basepath" }}
+          </div>
+        {{/ if }}
+      </div>
+
+      <!-- Save settings -->
       <button
         type="submit"
         class="btn btn-success btn-success-special"

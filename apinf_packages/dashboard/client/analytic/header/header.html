@@ -10,11 +10,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <a href="{{ pathFor 'viewApi' slug=api.slug }}">
           {{ api.name }}
         </a>
-        analytics
+        {{_ "apiAnalyticPageHeader_title" }}
       </h1>
-    </div>
-    <div class="col-md-4 dashboard-filter-buttons" style="padding-right: 0;text-align: right;">
-      {{> dateRangePicker }}
     </div>
   </div>
 </template>

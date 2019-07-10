@@ -11,6 +11,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       doc=editDoc
       id="loginPlatforms"
       type=formType }}
+    
     <div class="block-wrapper login-platforms-fields">
       <h2 style="font-size:1.4em;margin-top:0;text-transform: none;margin-bottom: 1em;">Login Platforms</h2>
       <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
@@ -20,16 +21,28 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{> afQuickField name='fiwareConfiguration.secret' id="fiware-secret" }}
       {{> afQuickField name='fiwareConfiguration.rootURL' id="fiware-rootURL" }}
       <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-top: 2em;margin-bottom: 2em;">
+      
       <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
         {{_ "settings_github" }}
       </h3>
       {{> afQuickField name='githubConfiguration.clientId' id="github-id" }}
-      {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}
+      {{> afQuickField name='githubConfiguration.secret' id="github-secret" }}      
+      <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-top: 2em;margin-bottom: 2em;">
+      
+      <h3 style="font-size:16px;margin-top:0;margin-bottom:1em;">
+        {{_ "settings_hsl" }}
+      </h3>
+      {{> afQuickField name='hslConfiguration.clientId' id="hsl-id" }}
+      {{> afQuickField name='hslConfiguration.secret' id="hsl-secret" }}
+      {{> afQuickField name='hslConfiguration.serverUrl' id="hsl-server" }}
+      {{> afQuickField name='hslConfiguration.authorizationEndpoint' id="hsl-authEp" }}
+      {{> afQuickField name='hslConfiguration.tokenEndpoint' id="hsl-tokenEp" }}
+      {{> afQuickField name='hslConfiguration.userinfoEndpoint' id="hsl-uInfoEp" }}
 
       <div id="form-buttons">
         <button
           type="submit"
-          class="btn btn-success btn-success-special"
+          class="btn btn-lg btn-success"
           id="save-settings">
           {{_ "settings_save" }}
         </button>

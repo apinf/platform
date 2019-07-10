@@ -15,10 +15,10 @@ import Branding from '/apinf_packages/branding/collection';
 import Apis from '../../collection';
 
 Template.addApi.onRendered(() => {
-  function checkForm() {
+  function checkForm () {
     // here, "this" is an input element
-    var isValidForm = true;
-    $('#addApiForm').find(':input[required]:visible').each(function() {
+    let isValidForm = true;
+    $('#addApiForm').find(':input[required]:visible').each(function () {
       if (!this.value.trim()) {
         isValidForm = false;
       }
@@ -29,7 +29,7 @@ Template.addApi.onRendered(() => {
 
   $('#submitapi-button').closest('form')
   // indirectly bind the handler to form
-  .submit(function() {
+  .submit(function () {
     return checkForm.apply($(this).find(':input')[0]);
   })
   // look for input elements
