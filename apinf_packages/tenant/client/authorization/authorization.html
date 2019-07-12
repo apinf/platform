@@ -8,7 +8,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
       <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
         {{_ "tenantCatalog_Title" }}
-        <span class="label label-default" style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">Alpha</span>
+        <span class="label label-default" style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">Beta</span>
       </h1>
       <ul class="links">
         <li class="{{ isActiveRoute 'tenantCatalog' }}">
@@ -22,6 +22,22 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   </div>
   <div class="container">
     <div class="block-wrapper settings-fields">
+      <div class="pull-right">
+        <a
+          tabindex="0"
+          role="button"
+          id="tenant-helpIcon"
+          data-toggle="popover"
+          data-trigger="focus"
+          data-placement="left"
+          data-content="And here's some amazing content. It's very engaging. Right?"
+        >
+          <i
+            class="mdi mdi-help-circle-outline"
+            style="font-size: 21px; line-height: 19px;"
+          ></i>
+        </a>
+      </div>
       <h5 class="panel-title" id="documentation-title" style="display: inline;">{{_ "tenantAuthorization_title" }}</h5>
       <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
       <div id="tenantAuthorization">

@@ -12,6 +12,10 @@ import { Session } from 'meteor/session';
 import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
+Template.authorizationForm.onRendered(() => {
+  $('#tenant-helpIcon').popover();
+});
+
 Template.authorizationForm.helpers({
   tenantToken () {
     const tenantTokenObj = Session.get('tenantTokenObj');
