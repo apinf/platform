@@ -13,7 +13,9 @@ import { TAPi18n } from 'meteor/tap:i18n';
 import { sAlert } from 'meteor/juliancwirko:s-alert';
 
 Template.authorizationForm.onRendered(() => {
-  $('#tenant-helpIcon').popover();
+  $('#tenant-helpIcon').popover({
+    html: true,
+  });
 });
 
 Template.authorizationForm.helpers({

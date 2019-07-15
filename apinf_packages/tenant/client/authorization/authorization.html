@@ -30,7 +30,8 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           data-toggle="popover"
           data-trigger="focus"
           data-placement="left"
-          data-content="And here's some amazing content. It's very engaging. Right?"
+          data-content="To access Tenant(s) you need to pass a valid <code>OAuth token</code> with the request.
+          For more information, please refer to <a href='https://apinf-fiware.readthedocs.io/en/latest/' target='_blank' rel='noopener noreferrer'>documentation</a>."
         >
           <i
             class="mdi mdi-help-circle-outline"
@@ -45,7 +46,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <label style="font-weight: 500;font-size: 14px;color: #4c6072;">Access token</label>
         <p class="api-profile_details-text-wrapper">{{ tenantToken }}</p>
         <p style="color:#6d859e; margin-top:10px;margin-bottom: 2em;">
-          Check out our guide <a href="/" target="_blank" rel="noopener noreferrer">to generating tenant tokens</a> or troubleshoot common problems.
+          Check out our guide <a href="https://apinf-fiware.readthedocs.io/en/latest/" target="_blank" rel="noopener noreferrer">to generating tenant tokens</a> or troubleshoot common problems.
         </p>
         {{/ if }}
         {{# unless tenantToken }}
