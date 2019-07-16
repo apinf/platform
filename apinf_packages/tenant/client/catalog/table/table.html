@@ -4,79 +4,54 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="tenantCatalogTable">
-  <div class="table-responsive">
-    <table class="table table-striped table-bordered organization-catalog-table">
+  <div class="table-responsive tenats-table">
+    <table class="rtable">
       <thead>
         <tr>
           <th>
-            {{_ "tenantCatalogTable_header_tenants" }} ({{ tenantsCount }})
+            {{_ "tenantCatalogTable_header_tenants" }}
           </th>
-          <th style="width: 45%">
+          <th style="width: 70%">
             {{_ "tenantCatalogTable_header_username" }}
-          </th>
-          <th style="width: 25%">
-            {{_ "tenantCatalogTable_header_action" }}
           </th>
         </tr>
       </thead>
       <tbody>
         {{#each tenant in tenantList}}
-        <tr style="border: 1px dashed black;">
-          <td style="padding-left: 10px; vertical-align: top;">
-            <span style="font-weight: bold; border-bottom: 1px solid #ddd; width: 100%;">{{ tenant.name }}</span><br />
-            {{ tenant.description }}
-          </td>
-
-          <td style="padding-bottom: 10px;">
-            <tr>
-              <th style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
-                {{_ "tenantCatalogTable_row_title_username" }}
-              </th>
-              <th style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
-                {{_ "tenantCatalogTable_row_title_provider" }}
-              </th>
-              <th style="padding-left: 10px; border-bottom: 1px solid #ddd;">
-                {{_ "tenantCatalogTable_row_title_consumer" }}
-              </th>
-            </tr>
-
-            {{#each user in tenant.users}}
-            <tr>
-              <td style="padding-left: 10px; padding-right: 5px; border-bottom: 1px solid #ddd;">
-                {{user.name}}
-              </td>
-              <td style="padding-left: 10px;  padding-right: 5px; border-left: 1px solid #ddd; border-right: 1px solid #ddd; border-bottom: 1px solid #ddd;">
-                {{#if user.provider}}
-                  data-provider
-                {{/if}}
-              </td>
-              <td style="padding-left: 10px; border-bottom: 1px solid #ddd;">
-                {{#if user.consumer}}
-                  data-consumer
-                {{/if}}
-              </td>
-            </tr>
-            {{/each}}
-          </td>
-          <!-- Buttons -->
-          <td style="padding-left: 10px; padding-right:10px;">
+        <tr>
+          <td>
+            <span style="font-weight: 500;">{{ tenant.name }}</span>
+            <p class="tenant-description" style="padding:0; margin-top: 5px; color: #5c617b;">
+              {{ tenant.description }}
+            </p>
             {{#if tenantOwner tenant.owner_id }}
-              <button id="edit-tenant"
-                      type="button"
-                      data-value={{ @index }}
-                      class="btn btn-primary"
-                      title={{_ "tenantCatalogTable_button_edit_title" }}>
-                {{_ "tenantCatalogTable_button_edit" }}
-              </button>
-              <button id="remove-tenant"
-                      type="button"
-                      data-value={{ @index }}
-                      class="btn btn-danger"
-                      style="margin-left: 1rem;"
-                      title={{_ "tenantCatalogTable_button_remove_title" }}>
-                {{_ "tenantCatalogTable_button_remove" }}
-              </button>
+            <button id="edit-tenant" type="button" data-value={{ @index }} class="btn btn-default" style="font-size: 12px;text-transform: uppercase;" title={{_ "tenantCatalogTable_button_edit_title" }}>
+              {{_ "tenantCatalogTable_button_edit" }}
+            </button>
+            <button id="remove-tenant" type="button" data-value={{ @index }} class="btn btn-default" style="margin-left: 0.5rem;font-size: 12px;text-transform: uppercase;color:#cc1410;" title={{_ "tenantCatalogTable_button_remove_title" }}>
+              {{_ "tenantCatalogTable_button_remove" }}
+            </button>
             {{/if}}
+          </td>
+
+          <td style="padding:0;">
+            <ul class="tenats-users">
+              {{#each user in tenant.users}}
+              <li>
+                <span style="font-weight: 500;">{{user.name}}</span>
+                {{#if user.provider}}
+                <span class="label label-default" style="color: #5c617b;border: 1px solid #C1C7CD;font-weight: 400;background-color: transparent;margin-left: 5px;font-size: 10px;text-transform: uppercase;padding: .1em .4em .1em;">
+                  data-provider
+                </span>
+                {{/if}}
+                {{#if user.consumer}}
+                <span class="label label-default" style="color: #5c617b;border: 1px solid #C1C7CD;font-weight: 400;background-color: transparent;margin-left: 5px;font-size: 10px;text-transform: uppercase;padding: .1em .4em .1em;">
+                  data-consumer
+                </span>
+                {{/if}}
+              </li>
+              {{/each}}
+            </ul>
           </td>
         </tr>
         {{/each}}

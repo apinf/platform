@@ -23,10 +23,16 @@ Template.tenantForm.onDestroyed(() => {
 
 Template.tenantForm.events({
   'click #save-tenant': function () {
+    const regEx = /^(?=.*[a-z])[a-z0-9]{1,20}$/;
+    const validName = regEx.test($('#add-tenant-name').val());
+
     if ($('#add-tenant-name').val() === '') {
       sAlert.error(TAPi18n.__('tenantForm_tenant_noName_error'), { timeout: 'none' });
     } else if ($('#add-tenant-description').val() === '') {
       sAlert.error(TAPi18n.__('tenantForm_tenant_noDescription_error'), { timeout: 'none' });
+    } else if (validName === false) {
+      sAlert.error(('The tenant name must contain only lowercase letters and numbers'),
+      { timeout: 'none' });
     } else {
       // Save new Tenant operation began, inform spinner
       Session.set('tenantUpdateOngoing', true);
