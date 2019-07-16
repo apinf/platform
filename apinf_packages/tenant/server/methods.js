@@ -15,6 +15,7 @@ import _ from 'lodash';
 
 // Collection imports
 import Settings from '/apinf_packages/settings/collection';
+import LoginPlatforms from '/apinf_packages/login_platforms/collection';
 
 // Global array of users.
 // It is filled while fetching complete user list
@@ -57,6 +58,41 @@ function compare (a, b) {
 }
 
 Meteor.methods({
+  getTenantTokenObj (tenantPassword) {
+    check(tenantPassword, String);
+
+    // Get Fiware
+    const fiwareConfiguration = LoginPlatforms.findOne().fiwareConfiguration;
+    const appUrl = `${fiwareConfiguration.rootURL}/oauth2/password`;
+    const authUsername = fiwareConfiguration.clientId;
+    const authPassword = fiwareConfiguration.secret;
+
+    // Encode Fiware for auth
+    const base64encodedData = new Buffer(`${authUsername}:${authPassword}`).toString('base64');
+
+    // Get user
+    const userId = Meteor.userId();
+    const user = Meteor.users.findOne(userId);
+    const email = user.services.fiware.email;
+
+    // Make POST call to obtain auth token obj
+    const data = {
+      headers: {
+        Authorization: `Basic ${base64encodedData}`,
+      },
+      params: {
+        grant_type: 'password',
+        username: `${email}`,
+        password: `${tenantPassword}`,
+      },
+    };
+    try {
+      const result = HTTP.post(appUrl, data);
+      return result;
+    } catch (err) {
+      return err;
+    }
+  },
   getTenantList () {
     const response = {};
     // In case of failure
@@ -285,7 +321,7 @@ Meteor.methods({
           tenantUrl,
           {
             headers: {
-            //  'Content-Type': 'application/json',
+              //  'Content-Type': 'application/json',
               Authorization: `Bearer ${accessToken}`,
             },
           }
@@ -326,7 +362,7 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-       // Serialize to JSON
+      // Serialize to JSON
       const payLoadToSend = JSON.stringify(tenantPayload.body);
 
       try {
@@ -381,7 +417,7 @@ Meteor.methods({
       // Get user's tenant access token
       const accessToken = getTenantToken();
 
-       // Serialize to JSON
+      // Serialize to JSON
       const payLoadToSend = JSON.stringify(userCheckData.body);
 
       try {
@@ -467,7 +503,7 @@ Meteor.methods({
           if (notificationType === 'userRoleChange' || notificationType === 'tenantAddition') {
             emailTextToSend = emailTextToSend.concat('. ');
             emailTextToSend =
-              emailTextToSend.concat(TAPi18n.__('informTenantUser_emailText_roleInfo'));
+            emailTextToSend.concat(TAPi18n.__('informTenantUser_emailText_roleInfo'));
             emailTextToSend = emailTextToSend.concat(' data-consumer');
             if (user.provider) {
               emailTextToSend = emailTextToSend.concat(', data-provider.');

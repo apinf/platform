@@ -3,24 +3,24 @@ This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
-.organization-catalog-table {
-  tbody > tr > td {
-    vertical-align: middle;
-  }
-  .organization-catalog-table-logo img {
-    width: 70px;
-    height: 70px;
-    display: block;
-    margin-right: auto;
-    margin-left: auto;
-  }
+.tenats-users li:last-child {
+  border-bottom: none;
+}
 
-  .organization-catalog-table-title {
-    margin-top: 0;
-    display: inline;
-  }
+.tenats-users {
+  padding: 0;
+  list-style: none;
+  margin-bottom: 0;
 
-  .organization-catalog-table-description {
-    margin-top: 0.5em;
+  li {
+    border-bottom: 1px solid #ecf3f8;
+    padding: 15px 20px;
   }
+}
+
+.tenant-description {
+  width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
