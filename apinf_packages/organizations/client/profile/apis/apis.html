@@ -32,21 +32,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               {{ organization.url }}
             </p>
           </a>
-          {{# if organization.contact.phone }}
-            <p class="link-color-wrapper" style="margin-bottom: 0;">
-              {{_ "organizationApis_contact_phone" }}: {{ organization.contact.phone }}
-            </p>
-          {{/ if }}
-          {{# if organization.contact.email }}
-            <p class="link-color-wrapper" style="margin-bottom: 0;">
-              {{_ "organizationApis_contact_email" }}:
-              <a href="mailto:{{ organization.contact.email }}">
-                {{ organization.contact.email }}
-              </a>
-            </p>
-          {{/ if }}
-        </div>
-        <div class="block-wrapper">
+          <div style="margin-bottom: 1.5em;">
+            {{# if organization.contact.phone }}
+              <p class="link-color-wrapper">
+                {{_ "organizationApis_contact_phone" }}: {{ organization.contact.phone }}
+              </p>
+            {{/ if }}
+            {{# if organization.contact.email }}
+              <p class="link-color-wrapper">
+                {{_ "organizationApis_contact_email" }}:
+                <a href="mailto:{{ organization.contact.email }}">
+                  {{ organization.contact.email }}
+                </a>
+              </p>
+            {{/ if }}
+          </div>
           {{> relatedMedia entity=organization }}
         </div>
       </div>
