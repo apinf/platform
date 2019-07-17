@@ -1,7 +1,27 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2019 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+.admin-settings-menu {
+  height: 60px;
+}
+
+@media (max-width: 767px) {
+  .admin-settings-menu {
+    height: 120px;
+
+    .links {
+      justify-content: center;
+      overflow-y: scroll;
+      flex: none;
+      overflow: auto;
+    }
+    nav {
+      display: inherit;
+    }
+  }
+}
 
 .settings-fields {
   margin-bottom: 20px;

@@ -30,6 +30,10 @@ Template.apiMonitoring.onRendered(() => {
 
   // Init tooltip
   $('[data-toggle="tooltip"]').tooltip();
+
+  $('#monitoring-helpIcon').popover({
+    html: true,
+  });
 });
 
 Template.apiMonitoring.helpers({

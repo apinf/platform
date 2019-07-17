@@ -1,4 +1,4 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2019 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
@@ -15,63 +15,36 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             title="{{_ 'apiDocumentation_tooltipSDKGeneratorButton' }}">
             {{_ "apiDocumentation_sdkGenerateButton" }}
           </button>
-        {{/ if }} <!-- /if documentation exists -->
-      {{/ if }}<!-- /if codegen server exists -->
+        {{/ if }}
+      {{/ if }}
       {{# if api.currentUserCanManage }}
         {{# if displayEditor }}
           <button
-            class="btn btn-xs btn-default editor">
-            <i class="fa fa-file-text-o"></i>&nbsp;
+            class="btn btn-default editor"
+            style="text-transform: uppercase;font-size:12px;position: relative; bottom: 6px;">
             {{_ "apiDocumentation_buttonText_closeEditor" }}
           </button>
         {{ else }}
           {{# if developmentFeatures }}
             <button
-              class="btn btn-xs btn-info editor">
-              <i class="fa fa-file-text-o"></i>&nbsp;
+              class="btn btn-info editor"
+              style="text-transform: uppercase;font-size:12px;position: relative; bottom: 6px;">
               {{_ "apiDocumentation_buttonText_openEditor" }}
             </button>
           {{/ if }}
         {{/ if }}
         <button
           id="manage-api-documentation"
-          class="btn btn-xs btn-default">
+          class="btn btn-default"
+          style="text-transform: uppercase;font-size:12px;position: relative; bottom: 6px;">
           {{_ "apiDocumentation_manageDocumentation_buttonText" }}
         </button>
-      {{/ if }} <!-- /if currentUserCanManage -->
+      {{/ if }}
     </div>
     <h2 id="documentation-title" style="font-size:1.6em;display: inline;">
       {{_ "apiConsole_title_text" }}
     </h2>
     <hr style="margin-top:1em;" />
-
-    <!-- <div class="panel-body"> -->
-      <!-- {{# if displayLinkBlock }}
-        <div id="documentation-link-panel" class="panel panel-default">
-          <div class="panel-heading">
-            <h2 id="documentation-link-title" class="panel-title">
-              {{_ "apiDocumentation_Link_Title" }}
-            </h2>
-          </div>
-          <div class="panel-body">
-            {{# if apiDoc.otherUrl }}
-              {{# each link in apiDoc.otherUrl }}
-                <div id="documentation-link" class="documentation-link">
-                  <i class="fa fa-external-link"></i>&nbsp;
-                  <a href="{{ link }}" target="_blank">
-                    {{ link }}
-                  </a>
-                </div>
-              {{/ each }}
-            {{ else }}
-              <i>
-                {{_ "apiDocumentation_No_Link_Manager_Message" }}
-              </i>
-            {{/ if }}
-          </div>
-        </div>
-      {{/ if }} -->
-
       {{# if displayViewBlock }}
         <div id="documentation-viewer-panel" style="margin-top:1em;">
           {{# if displayEditor }}
@@ -89,5 +62,5 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{/ if }}
     {{ else }}
       {{> spinner }}
-    {{/ if }}<!-- /if template subscriptions ready -->
+    {{/ if }}
 </template>
