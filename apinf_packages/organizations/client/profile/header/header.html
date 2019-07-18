@@ -8,75 +8,44 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   <div class="organization-cover-block">
     {{> viewOrganizationCover organization=organization }}
   </div>
-  <!-- About organization block -->
-  <div class="container organization-about-block">
-    <div id="organization-file-browse" class="org-logo-wrapper col-md-2">
-      {{> viewOrganizationLogo organization=organization }}
-      <span class="fa fa-camera"></span>
-    </div>
-    <div class="about-organization col-md-10">
-      <div class="organization-header">
-        <h1 id="organization-name" class="pull-left">
-          {{ organization.name }}
-        </h1>
-        
-      </div>
-      <div class="form-inline organization-header-side-icon pull-right">
-        <a href="/rss/organizations?slug={{organization.slug}}" target="_blank" class="rss-feed fa fa-rss-square fa-2x btn" title="{{_ 'organizationProfileHeader_rss_feed'}}"></a>
-        {{> organizationSocialMediaIcons organization=organization }}
-      </div>
-      <p>
-        <i class="fa fa-link" aria-hidden="true"></i>
-        <a href="{{ organization.url }}">
-          {{ organization.url }}
-        </a>
-      </p>
-      <ul class="list-inline">
-        {{# if organization.contact.person }}
-          <li>
-            <i class="fa fa-user" aria-hidden="true"></i>
-            {{ organization.contact.person }}
-          </li>
+  <!-- Navigation -->
+  <div class="container-fluid secondary-menu-block">
+    <nav class="container secondary-menu-block-inner secondary-menu_navigation">
+      <div class="organization-header-logo" id="organization-file-browse">
+        {{# if organization.currentUserCanManage }}
+          <span class="organization-header-logo_hover">
+            {{_ "organizationProfileHeader_tabs_newLogo" }}
+          </span>
         {{/ if }}
-        {{# if organization.contact.phone }}
-          <li>
-            <i class="fa fa-phone" aria-hidden="true"></i>
-            {{ organization.contact.phone }}
-          </li>
+        {{> viewOrganizationLogo organization=organization }}
+      </div>
+      <h1 id="organization-name" class="special-headings" style="font-size: 1.6em;color: #37474F;display: inline;float: left;margin-top: 18px;padding-left: 2rem;">
+        {{ organization.name }}
+      </h1>
+      <ul class="links">
+        <li id="organization-apis-tab" class="active">
+          <a href="#apis" data-toggle="tab">
+            <!-- {{_ "organizationProfileHeader_tabs_apis" }} -->
+            {{_ "organizationProfileHeader_tabs_profile" }}
+          </a>
+        </li>
+        {{# if organization.currentUserCanManage }}
+        <li id="organization-managers-tab">
+          <a href="#managers" data-toggle="tab">
+            {{_ "organizationProfileHeader_tabs_managers" }}
+          </a>
+        </li>
         {{/ if }}
-        {{# if organization.contact.email }}
-          <li>
-            <i class="fa fa-envelope" aria-hidden="true"></i>
-            <a href="mailto:{{ organization.contact.email }}">
-              {{ organization.contact.email }}
-            </a>
-          </li>
+        {{# if organization.currentUserCanManage }}
+        <li id="organization-settings-tab">
+          <a href="#settings" data-toggle="tab">
+            {{_ "organizationProfileHeader_tabs_settings" }}
+          </a>
+        </li>
         {{/ if }}
       </ul>
-      {{# if organization.description }}
-        <p>
-          {{ organization.description }}
-        </p>
-      {{/ if }}
-      <!-- Navigation -->
-      <div id="organization-navigation-tabs" class="navigation-tabs">
-        <ul class="nav nav-tabs">
-          <li id ="organization-apis-tab" class="active">
-            <a href="#organization-apis" data-toggle="tab">
-              <i class="fa fa-info-circle"></i>
-              {{_ "organizationProfileHeader_tabs_apis" }}
-            </a>
-          </li>
-          {{# if organization.currentUserCanManage }}
-            <li id="organization-settings-tab">
-              <a href="#organization-settings" data-toggle="tab">
-                <i class="fa fa-file-text"></i>
-                {{_ "organizationProfileHeader_tabs_settings" }}
-              </a>
-            </li>
-          {{/ if }}
-        </ul>
-      </div>
-    </div>
+      <button>MENU</button>
+      <ul class='hidden-links hidden'></ul>
+    </nav>
   </div>
 </template>

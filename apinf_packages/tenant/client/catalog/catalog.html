@@ -1,0 +1,58 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantCatalog">
+  <div class="container-fluid secondary-menu-block" style="height: 60px;">
+    <nav class="container secondary-menu_navigation secondary-menu-block-inner" id="settings-menu">
+      <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px; padding-left: 0;">
+        {{_ "tenantCatalog_Title" }}
+        <span class="label label-default"
+        style="color: #5c617b; border: 1px solid #C1C7CD; font-weight: 400; background-color: transparent; margin-left: 5px; font-size: 10px; text-transform: uppercase; padding: .1em .4em .1em; position: relative; bottom: 14px; right: 6px;">
+          Beta
+        </span>
+      </h1>
+      <ul class="links">
+        <li class="{{ isActiveRoute 'tenantCatalog' }}">
+          <a href="{{ pathFor route='tenantCatalog' }}"
+             id="button-tenantList">
+            List
+          </a>
+          </li>
+        <li class="{{ isActiveRoute 'authorizationForm' }}">
+          <a href="{{ pathFor route='authorizationForm' }}"
+             id="button-tenantAuthorization">
+            Authorization
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div class="block-wrapper settings-fields">
+      {{# if userCanAddTenant }}
+        <div class="pull-right">
+          <button id="add-tenant"
+                  type="button"
+                  class="btn btn-success"
+                  style="position: relative; bottom: 10px;">
+            {{_ "tenantCatalog_buttonText_addTenant" }}
+          </button>
+        </div>
+      {{/ if }}
+      <h5 class="panel-title" id="documentation-title" style="display: inline;">Tenants list ({{ tenantsCount }})</h5>
+      <hr style="background-color: #ecf3f8; margin-top:1em; margin-bottom:1em;" />
+      {{# if tenantsCount }}
+        {{# if Template.subscriptionsReady }}
+          {{> tenantCatalogTable tenantList=tenantList tenantsCount=tenantsCount}}
+        {{ else }}
+          {{> spinner }}
+        {{/ if }}
+      {{ else }}
+        No tenants available
+      {{/ if }}
+    </div>
+  </div>
+</template>

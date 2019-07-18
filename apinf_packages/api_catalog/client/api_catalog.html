@@ -4,41 +4,49 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiCatalog">
+  <div class="container-fluid secondary-menu-block" style="height: 60px;">
+    <ul class="container list-inline catalog-header" style="margin-bottom: 0;">
+      <li class="col-md-8">
+        <h1 style="margin-top: 0; margin-bottom:0; line-height: 60px;">
+          {{_ "catalog_Title" }}
+        </h1>
+      </li>
+      <li class="col-md-4 pull-right text-right">
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+            <a href="{{ pathFor 'addApi' }}" id="addapi-button" class="btn btn-success btn-success-special" style="margin-top: 1rem;">
+              {{_ "apiCatalog_button_addApi" }}
+            </a>
+          {{/ if }}
+        {{/ if }}
+      </li>
+    </ul>
+  </div>
   <div class="container">
-    <h1 class="page-header">
-      {{_ "catalog_Title" }}
-      {{# if apisCount }}
-      <small>
-        {{_ 'apiCatalog_apisCount' count=apisCount }}
-      </small>
-      {{/ if }}
-      <div class="col-xs-12 col-sm-4 pull-right"> 
-       {{> search_form }}
+    <div class="row">
+      <div class="col-md-9 slide-up-animation">
+        {{# if Template.subscriptionsReady }}
+          <!-- if viewMode is table, show table -->
+          {{# if tableViewMode }}
+            <div class="block-wrapper" style="min-height: 200px;">
+              {{> search_form }}
+              {{> apiCatalogTable apis=apis }}
+            </div>
+          {{/ if }}
+
+          <a href="/rss/apis" target="_blank" class="rss-feed" title="{{_ 'apisRssIcon_tooltipText_Rss'}}" style="color: #657786;margin-top: 10px;display: block;float: right;font-size: 10px;">
+            RSS Feed
+          </a>
+
+          <!-- show pagination button only if APIs are available -->
+          {{# if apis }}
+            {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
+          {{/ if }}
+        {{ else }}
+          {{> spinner }}
+        {{/ if }}
       </div>
-    </h1>
-    {{> apiCatalogToolbar apis=apis }}
-
-    <p>
-      {{> apiFilteredBy apisCount=apisCount }}
-    </p>
-
-    {{# if Template.subscriptionsReady }}
-      <!-- if viewMode is grid, show grid -->
-      {{# if gridViewMode }}
-        {{> apiCatalogGrid apis=apis }}
-      {{/ if }}
-
-      <!-- if viewMode is table, show table -->
-      {{# if tableViewMode }}
-        {{> apiCatalogTable apis=apis }}
-      {{/ if }}
-
-      <!-- show pagination button only if APIs are available -->
-      {{# if apis }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" onClick=clickEvent }}
-      {{/ if }}
-    {{ else }}
-      {{> spinner }}
-    {{/ if }}
+      {{> apiCatalogToolbar apis=apis }}
+    </div>
   </div>
 </template>

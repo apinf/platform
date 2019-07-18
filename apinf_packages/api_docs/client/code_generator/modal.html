@@ -4,30 +4,32 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="sdkCodeGeneratorModal">
-<div class="modal fade">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <h1 class="modal-title">
-            {{_ "sdkCodeGeneratorModal_Title" }}
-        </h1>
-      </div>
-      <div class="modal-body">
-        {{# autoForm id="downloadSDK" type="normal" schema=codeGeneratorSchema }}
-          <fieldset>
-            {{> afQuickField name='selectLanguage' }}
-            {{> afQuickField name='host' value=host type='hidden' }}
-            {{> afQuickField name='documentationFileURL' value=api.documentationUrl type='hidden' }}
-          </fieldset>
-          <button type="submit" class="btn btn-primary">
-            {{_ "sdkCodeGeneratorModal_buttonText_download" }}
+  <div class="modal fade">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
           </button>
-        {{/ autoForm }}
+          <h1 class="modal-title">
+            {{_ "sdkCodeGeneratorModal_Title" }}
+          </h1>
+        </div>
+        <div class="modal-body">
+          {{# autoForm id="downloadSDK" type="normal" schema=codeGeneratorSchema }}
+            <fieldset>
+              {{> afQuickField name='selectLanguage' }}
+              {{> afQuickField name='host' value=host type='hidden' }}
+              {{> afQuickField name='documentationFileURL' value=api.documentationUrl type='hidden' }}
+            </fieldset>
+            <div class="text-right">
+              <button type="submit" class="btn btn-primary">
+                {{_ "sdkCodeGeneratorModal_buttonText_download" }}
+              </button>
+            </div>
+          {{/ autoForm }}
+        </div>
       </div>
     </div>
   </div>
-</div>
 </template>

@@ -8,7 +8,7 @@ import { Template } from 'meteor/templating';
 
 // NPM packages
 import moment from 'moment';
-import Chart from '../../../../../node_modules/chart.js/src/chart';
+import Chart from 'chart.js';
 import { arrayWithZeros, generateDate } from '../../chart_helpers';
 
 Template.mqttDashboardDisplayRealTimeChart.onRendered(function () {

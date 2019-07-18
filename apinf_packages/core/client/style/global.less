@@ -7,11 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 @import "/apinf_packages/core/client/style/bootstrap-variables.less";
 
 body {
-  /* The fixed navbar will overlay your other content,
-  unless you add padding to the top of the <body> */
-  padding-top: 3em;
-
-  /* hide horizontal scroll*/
+  background-color: #e5eef4;
   overflow-x: hidden;
 }
 
@@ -19,19 +15,44 @@ html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: @font-family-default;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: #37474F;
+  font-family: @headings-font-family;
+  font-weight: @headings-font-weight;
+}
+
+h1 {
+  font-size: 1.6em;
+}
+
 html, body, #__blaze-root {
   height: 100%
 }
 
+.btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn.active.focus {
+  outline: none;
+  border-color: transparent;
+}
+
 a:hover, a:focus {
   color: @link-hover-color;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 a {
   color: @link-color;
   text-decoration: none;
 }
+
+.btn {
+  border-radius: .5rem;
+}
+
+.dropdown-menu {
+  min-width: 180px !important;
+}
+
+textarea, select, input, button, a { outline: none!important; }
 
 [data-required] label:after,
 .at-pwd-form label:after {
@@ -52,11 +73,16 @@ a {
 
 .help-block {
   margin-bottom: 1.4em;
+  color: #6d859e;
 }
 
 hr {
   margin-bottom: 0.5em;
   margin-top: 0;
+}
+
+pre {
+  border: none;
 }
 
 .no-margin-row {
@@ -76,34 +102,10 @@ hr {
 }
 
 .navigation-tabs {
-  position: relative;
-  top: 9px; // needs to be in px
-  margin-top: 0.6em;
-  clear: both;
-
+  margin-top: 1.5em;
   .nav-tabs {
     border-bottom: none;
-    display: inline-block;
-    margin-bottom: 0.23em;
-  }
-
-  .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-    font-weight: bold;
-    line-height: initial;
-    color: #333;
-    background-color: #fff;
-    border-top-right-radius: 3px;
-    border-top-left-radius: 3px;
-    border-top: 3px @brand-primary;
-    border-right-color: #EEE;
-    border-left-color: #EEE;
-  }
-
-  .nav-tabs > li {
-    border: solid transparent;
-    border-width: 3px 1px 1px;
-    border-radius: 3px 3px 0 0;
-    height: 42px;
+    margin-bottom: 1px;
   }
 
   .nav-tabs > li > a {
@@ -112,9 +114,7 @@ hr {
 
   .nav > li > a:hover, .nav > li > a:focus {
     text-decoration: none;
-    background-color: transparent;
     color: #333;
-    border-color: transparent;
   }
 }
 
@@ -125,7 +125,122 @@ hr {
 .rss-feed {
   color: #ff9d00;
 }
+
 .rss-feed:hover {
-  color: #ff9d00!important;
-  text-decoration: none!important;
+  color: #ff9d00 !important;
+  text-decoration: none !important;
+}
+
+.control-label, .form-group label {
+  font-weight: 500 !important;
+  font-size: 14px;
+  color: #4c6072;
+}
+
+.block-wrapper {
+  background-color: #fff;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px 0 rgba(59,59,88,.15);
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.slide-up-animation {
+  -webkit-animation-duration: 0.5s;
+  animation-duration: 0.5s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  -webkit-animation-name: slideUp;
+  animation-name: slideUp;
+  -webkit-animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@-webkit-keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(6.25rem);
+    transform: translateY(6.25rem);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes slideUp {
+  0% {
+    -webkit-transform: translateY(6.25rem);
+    transform: translateY(6.25rem);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.mdi-delete {
+  font-size: 14px;
+}
+
+.form-control {
+  border: 1px solid #D1D5DA !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  -webkit-transition: none !important;
+  -o-transition: none !important;
+  transition: none !important;
+}
+
+.form-control::-webkit-input-placeholder { color: #6d859e; }  /* WebKit, Blink, Edge */
+.form-control:-moz-placeholder { color: #6d859e; }  /* Mozilla Firefox 4 to 18 */
+.form-control::-moz-placeholder { color: #6d859e; }  /* Mozilla Firefox 19+ */
+.form-control:-ms-input-placeholder { color: #6d859e; }  /* Internet Explorer 10-11 */
+.form-control::-ms-input-placeholder { color: #6d859e; }  /* Microsoft Edge */
+
+.s-alert-box {
+  max-width: 800px !important;
+  width: 500px !important;
+  margin: auto;
+  top: 20px;
+  border-radius: 5px;
+  padding: 20px !important;
+}
+
+.s-alert-success {
+  background-color: rgba(25,185,52,0.95);
+  text-align: center;
+}
+
+.s-alert-error {
+  background-color: rgba(244,67,54,0.95);
+  text-align: center;
+}
+
+.link-color-wrapper {
+  padding: 10px 15px;
+  background-color: #f1f8ff;
+  text-decoration: none;
+  border-radius: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.panel-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.modal-footer {
+  text-align: right;
+  .btn {
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    height: 34px;
+    line-height: 21px;
+  }
+}
+
+input[type="checkbox"] {
+  margin: 2px 0 0;
+  font-size: 16px !important;
 }

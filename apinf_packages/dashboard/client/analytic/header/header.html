@@ -4,40 +4,14 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiAnalyticPageHeader">
-  <h1>
-    <a href="{{ pathFor 'viewApi' slug=api.slug }}">
-      {{ api.name }}
-    </a>
-  </h1>
-  <div class="row">
-    <div class="col-xs-12 form-group">
-      {{# with api }}
-        <!-- Bookmark -->
-        <div class="item-list">
-          <i class="fa fa-bookmark bookmark-default"></i>
-          {{ bookmarkCount }}
-        </div>
-        <!-- Rating -->
-        <div class="item-list">
-          <i class="fa fa-star-half-o"></i>
-          {{# if averageRating }}
-            {{ averageRating }}
-          {{ else }}
-            0
-          {{/ if }}
-        </div>
-      {{/ with }}
-      <strong>
-        {{_ 'apiAnalyticPageHeader_labelText_proxyName' name=proxyName }} &nbsp;
-      </strong>
-      {{# if displayLastUpdateTime }}
-        <i>
-          {{_ 'apiAnalyticPageHeader_text_lastUpdateTime' time=(dateInTimeAgoFormat lastUpdateTime) }}
-        </i>
-      {{/ if }}
-      <div class="overview-help-text">
-        {{_ 'apiAnalyticPageHeader_helpText_serverTimezone' servertimezone=(serverTimeZone)}}
-      </div>
+  <div class="container">
+    <div class="col-md-8" style="padding-left: 0;">
+      <h1 style="margin-top: 0;margin-bottom: 0;line-height: 60px;">
+        <a href="{{ pathFor 'viewApi' slug=api.slug }}">
+          {{ api.name }}
+        </a>
+        {{_ "apiAnalyticPageHeader_title" }}
+      </h1>
     </div>
   </div>
 </template>

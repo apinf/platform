@@ -92,4 +92,27 @@ Meteor.methods({
       throw new Meteor.Error(message);
     }
   },
+
+  getSettings () {
+    // Try if settings exist
+    try {
+      // Get Settings collection
+      const settings = Settings.findOne();
+
+      if (settings) {
+        // With login methods it is controlled, whether different logins are visible or hidden
+        if (settings.loginMethods) {
+          return settings;
+        }
+      }
+    } catch (error) {
+      // otherwise prepare message about error
+      const message = `Reading settings failed: ${error}`;
+
+      // Show an error message
+      throw new Meteor.Error(message);
+    }
+    return false;
+  },
+
 });

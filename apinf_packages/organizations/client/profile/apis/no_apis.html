@@ -4,12 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationNoApis">
-  <div class="alert alert-warning" style="display: inline-block;">
-    <div class='no-apis-title'>
-      {{_ 'organizationNoApis_text_noConnectedApis' }}
-    </div>
-    {{# if organization.currentUserCanManage }}
-      {{_ 'organizationNoApis_text_useButton' }}
-    {{/ if }}
-  </div>
+  {{_ 'organizationNoApis_text_noConnectedApis' }}
+  <br/>
+  {{# if organization.currentUserCanManage }}
+    {{_ 'organizationNoApis_text_useButton' }}
+  {{/ if }}
 </template>

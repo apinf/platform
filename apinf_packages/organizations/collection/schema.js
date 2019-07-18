@@ -39,6 +39,11 @@ Organizations.schema = new SimpleSchema({
     },
     optional: true,
   },
+  isPublic: {
+    type: Boolean,
+    optional: true,
+    defaultValue: false,
+  },
   managerIds: {
     type: [String],
     regEx: SimpleSchema.RegEx.Id,

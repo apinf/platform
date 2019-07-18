@@ -1,0 +1,100 @@
+<!-- Copyright 2019 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantForm">
+  <div
+    class="modal fade"
+    id="tenantFormModal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="tenantFormModalLabel" >
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <!-- header -->
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <h2 class="modal-title" id="tenantFormModalLabel">
+            {{# if tenantToModify }}
+              {{_ "tenantForm_title_modify" }}
+            {{ else }}
+              {{_ "tenantForm_title_add" }}
+            {{/ if }}
+          </h2>
+        </div>
+        <div itemscope itemtype="http://schema.org/Organization">
+          <!-- body -->
+          <div class="modal-body">
+            <fieldset>
+              <!-- Tenant name -->
+              <span itemprop="tenantName">
+                <div class="form-group" data-required="true">
+                  <label for="add-tenant-name" class="control-label">{{_ "tenantForm_tenantName" }}</label>
+                  <input type="text"
+                          name="name"
+                          id="add-tenant-name"
+                          required=""
+                          data-schema-key="name"
+                          pattern="[a-z]{1,15}"
+                          title="Tenant name should only contain lowercase letters. e.g. john"
+                          class="form-control"
+                          value={{ tenantToModify.name }}>
+                  <span class="help-block"></span>
+                </div>
+              </span>
+
+              <!-- Tenant description -->
+              <span itemprop="tenantDescription">
+                <div class="form-group" data-required="true">
+                  <label for="add-tenant-description" class="control-label">{{_ "tenantForm_tenantDescription" }}</label>
+                    <textarea name="description"
+                              placeholder="Tell about your tenant"
+                              id="add-tenant-description"
+                              required=""
+                              data-schema-key="description"
+                              class="form-control">{{ tenantToModify.description }}</textarea>
+                    <span class="help-block"></span>
+                </div>
+              </span>
+
+              <!-- Tenant users -->
+              <div>
+                {{> tenantUsersList tenantUsers=tenantToModify.users }}
+              </div>
+              <hr>
+              <!-- Tenant user addition -->
+              <div style="padding-bottom: 10px;">
+                {{> tenantUserForm }}
+              </div>
+            </fieldset>
+          </div>
+        </div>
+        <!-- footer -->
+        <div class="modal-footer">
+
+          {{# if tenantUpdateOngoing }}
+            {{> spinner }}
+          {{/ if }}
+
+          <button type="submit" class="btn btn-default"
+                  data-dismiss="modal" aria-label="Close" id="close-window" title={{_ "tenantForm_button_cancel_title" }}>
+            {{_ "tenantForm_button_cancel" }}
+          </button>
+          {{# if tenantToModify }}
+            <button type="submit" class="btn btn-success" id="modify-tenant" title={{_ "tenantForm_button_modify_title" }}>
+              {{_ "tenantForm_modifyButton_text" }}
+            </button>
+          {{ else }}
+            <button type="submit" class="btn btn-success" id="save-tenant" title={{_ "tenantForm_button_save_title" }}>
+              {{_ "tenantForm_saveButton_text" }}
+            </button>
+          {{/ if }}
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>

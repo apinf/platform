@@ -1,33 +1,29 @@
+<!-- Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiKey">
   {{# if showButton }}
+    <h2 style="font-size: 16px;margin-top: 0;">{{_ "apiAuth_x_api_key" }}</h2>
     {{# if apiKey }}
-    <div id="api-key-copy" class="input-group">
-      <span class="input-group-btn">
-        <!-- Regenerate API key button -->
-        <button id="regenerate-api-key" class="btn btn-success">
-          {{_ "apiKeys_regenerateButton" }}
-        </button>
+      <!-- Regenerate API key button -->
+      <span class="api-profile_details-text-wrapper">
+        <span id="api-key">{{ apiKey }}</span>
+        <i id="api-key-copy" class="mdi mdi-content-copy pull-right" data-clipboard-target="#api-key" style="padding-left:5px;"></i>
       </span>
-      <input
-             type="text"
-             class="form-control"
-             id="api-key"
-             value="{{ apiKey }}">
-      <span class="input-group-btn">
-        <button
-                class="btn btn-default"
-                id="copy-api-key"
-                type="button"
-                data-original-title="Copied!"
-                data-clipboard-target="#api-key">
-          <i class="fa fa-clipboard" alt="Copy to clipboard"></i>
-          {{_ "apiKeys_copyButtonText" }}
-        </button>
-      </span>
-    </div>
+      <p style="color: #6d859e;margin-top:10px;">
+        {{_ "apiAuth_x_api_key_description" }}
+      </p>
+      <button class="btn btn-danger" id="regenerate-api-key">
+        {{_ "apiKeys_regenerateButton" }}
+      </button>
     {{ else }}
+      <p style="color: #6d859e;margin-top:10px;">
+        {{_ "apiAuth_x_api_key_description" }}
+      </p>
       <!-- Get API key button -->
-      <button id="get-api-key" class="btn btn-success">
+      <button id="get-api-key" class="btn btn-success btn-success-special">
         {{_ "apiKeys_getApiKeyButton" }}
       </button>
     {{/ if }}

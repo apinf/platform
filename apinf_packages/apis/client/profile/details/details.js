@@ -29,18 +29,60 @@ Template.apiDetails.onCreated(function () {
 });
 
 Template.apiDetails.onRendered(() => {
-  // Initialize Clipboard copy button
-  const copyButton = new Clipboard('#copyApiUrl');
+  // Initialize Clipboard copy buttons
+  const copyApiUrl = new Clipboard('#copyApiUrl');
+  const copyProxyUrl = new Clipboard('#copyProxyUrl');
+  const copyExampleOne = new Clipboard('#copyExampleOne');
+  const copyExampleTwo = new Clipboard('#copyExampleTwo');
 
-  // Tooltip position
+  // Tooltip position for copyApiUrl
   $('#copyApiUrl').tooltip({
     trigger: 'click',
     placement: 'bottom',
   });
 
-  // Tell the user when copy is successful
-  copyButton.on('success', () => {
+  // Tooltip position for copyProxyUrl
+  $('#copyProxyUrl').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleOne
+  $('#copyExampleOne').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tooltip position for copyExampleTwo
+  $('#copyExampleTwo').tooltip({
+    trigger: 'click',
+    placement: 'bottom',
+  });
+
+  // Tell the user when copying API URL is successful
+  copyApiUrl.on('success', () => {
     $('#copyApiUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyProxyUrl.on('success', () => {
+    $('#copyProxyUrl').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleOne.on('success', () => {
+    $('#copyExampleOne').tooltip('hide')
+      .attr('data-original-title', 'Copied!')
+      .tooltip('show');
+  });
+
+  // Tell the user when copying Proxy URL is successful
+  copyExampleTwo.on('success', () => {
+    $('#copyExampleTwo').tooltip('hide')
       .attr('data-original-title', 'Copied!')
       .tooltip('show');
   });
@@ -125,5 +167,19 @@ Template.apiDetails.helpers({
     }
     // Return apiKey
     return apiKey;
+  },
+  displayLinkBlock () {
+    const api = this.api;
+    const apiDoc = this.apiDoc;
+
+    // Display block if a user is manager of current API or URL is set
+    return api.currentUserCanManage() || (apiDoc && apiDoc.otherUrl);
+  },
+  displayViewBlock () {
+    const api = this.api;
+    const instance = Template.instance();
+
+    // Display block if a user is manager of current API or swagger documentation is available
+    return api.currentUserCanManage() || instance.documentationExists.get();
   },
 });

@@ -1,36 +1,60 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2019 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
 <template name="apiMonitoring">
-  {{# if apiMonitoringSettings.enabled }}
-    <h2 class="heading">
-      Status Messages
+  <div class="pull-right">
+    <a
+      tabindex="0"
+      role="button"
+      id="monitoring-helpIcon"
+      data-toggle="popover"
+      data-trigger="focus"
+      data-placement="left"
+      data-content="
+            {{_ 'apiMonitoring_helpIcon_text_2' }}
+            {{_ 'apiMonitoring_helpIcon_text_3' }}
+            {{_ 'apiMonitoring_helpIcon_text_4' }}"
+    >
+      <i
+        class="mdi mdi-help-circle-outline"
+        style="font-size: 21px; line-height: 19px;"
+      ></i>
+    </a>
+  </div>
+  <div class="monintoring-header" style="margin-bottom: 1em;">
+    <h2 style="font-size:1.4em;margin-top:0;">
+      {{_ "apiMonitoring_panelTitle_Monitoring" }}
     </h2>
-    <p class="sub-heading">
-      Historical data on API availability
+    <p style="color:#6d859e;">
+      {{_ "apiMonitoring_title_text_below" }}
     </p>
-    <table id="rtable">
-      <tr>
-        <th>Time</th>
-        <th>Endpoint</th>
-        <th>Status</th>
-        <th>Details</th>
-      </tr>
+  </div>
+  {{# if apiMonitoringSettings.enabled }}
+    <table class="rtable">
+      <thead>
+        <tr>
+          <th>{{_ "apiMonitoring_table_title_timestamp" }}</th>
+          <th>{{_ "apiMonitoring_table_title_endpoint" }}</th>
+          <th>{{_ "apiMonitoring_table_title_status" }}</th>
+          <th>{{_ "apiMonitoring_table_title_details" }}</th>
+        </tr>
+      </thead>
       <tbody>
         {{# each record in  apiStatusData }}
           <tr>
-            <td>{{ record.date }}</td>
-            <td>           
-             <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
+            <td>{{ showDate(record.date) }}</td>
+            <td>
+              <a href="{{ apiMonitoringSettings.url }}">{{ record.end_point }}</a>
             </td>
             <td>
               {{# if apiStatusCode (record.server_status_code) }}
-                <span class="glyphicon glyphicon-ok-sign success" aria-hidden="true">
+                <span class="glyphicon glyphicon-ok-sign success" style="font-size: 1.8rem;" aria-hidden="true">
                 </span>
               {{ else }}
-                <span class="glyphicon glyphicon-exclamation-sign failed" aria-hidden="true">
-                </span>
+                <i class="mdi mdi-alert-circle status-warning failed" style="font-size: 1.8rem;" aria-hidden="true">
+                </i>
               {{/ if}}
             </td>
             <td>{{ record.server_status_code }}</td>
@@ -38,42 +62,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{/ each }}
       </tbody>
     </table>
-    
     <hr class="header-line">
+  {{/ if }}
 
-  {{/if }}
-
-  <h3 class="panel-heading">
-    <i class="fa fa-binoculars" aria-hidden="true"></i>
-    {{_ "apiMonitoring_panelTitle_Monitoring" }}
-  </h3>
-  <p class="monitoring-panel">{{_ "apiMonitoring_helpIcon_text" }}</p>
-  <div class="form-group">
+  <div class="form-group" style="margin-bottom:0;">
     {{# autoForm collection=monitoringCollection id="apiMonitoringForm" type=formType doc=apiMonitoringSettings }}
-      <!-- hidden field, auto-value -->
-      {{> afQuickField name='apiId' value=api._id type="hidden" }}
-      {{> afQuickField name='enabled' }}
-      {{# if afFieldValueIs name='enabled' value=true }}
+
+    <!-- hidden field, auto-value -->
+    {{> afQuickField name='apiId' value=api._id type="hidden" }}
+    {{> afQuickField name='enabled' }}
+    {{# if afFieldValueIs name='enabled' value=true }}
       {{> afQuickField name='url' value=api.url type="hidden" }}
-        <label for="endpoint-monitor-field">
-          {{ afFieldLabelText name='endPoint' }}
-        </label>
-        <div class="input-group">
+
+      <label for="endpoint-monitor-field">
+        {{ afFieldLabelText name='endPoint' }}
+      </label>
+
+      <div class="input-group">
         <!-- API url addon -->
-          <span class="input-group-addon" id="api-url">
+        <span class="input-group-addon" id="api-url" style="border-right: 1px solid rgb(204, 204, 204)">
           {{ api.url }}
-          </span>
-          {{> afFieldInput name='endPoint' value=endPoint }}
-          </div>
-          {{# if afFieldIsInvalid name='endPoint' }}
-            <p class="text-danger">
-              {{{ afFieldMessage name='endPoint' }}}
-            </p>
-            {{/ if }}
+        </span>
+
+        {{> afFieldInput
+          name='endPoint'
+          value=endPoint
+        }}
+      </div>
+      {{# if afFieldIsInvalid name='endPoint' }}
+        <p class="text-danger">
+          {{{ afFieldMessage name='endPoint' }}}
+        </p>
       {{/ if }}
-      <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
-        {{_ "apiMonitoring_saveButton_text" }}
-      </button>
+    {{/ if }}
+    <button type="submit" class="btn btn-success btn-success-special" id="save-monitoring-settings">
+      {{_ "apiMonitoring_saveButton_text" }}
+    </button>
+
     {{/ autoForm }}
   </div>
 </template>

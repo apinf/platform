@@ -4,7 +4,7 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="navbar">
-  <nav class="navbar navbar-default navbar-fixed-top main-navigation">
+  <nav class="navbar navbar-default main-navigation navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         {{# if projectLogoExists }}
@@ -21,96 +21,135 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         </div>
         {{/ if }}
       </div>
-      <ul class="nav navbar-nav navbar-right" id="user-menu">
-        {{# if currentUser }}
-        {{> userMenu user=currentUser }}
-        {{ else }}
-        <li>
-          <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
-            <i class="fa fa-user-plus" aria-hidden="true"></i>
-            {{_ "navbar_signUp" }}
-          </a>
-        </li>
-        <li>
-          <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
-            <i class="fa fa-sign-in" aria-hidden="true"></i>
-            {{_ "navbar_signIn" }}
-          </a>
-        </li>
-        {{/ if }}
-      </ul>
-      <ul class="nav navbar-nav nanbar-left" id="main-navbar">
+      <ul class="nav navbar-nav" id="main-navbar">
+        <!-- Dashboard -->
         {{# if currentUser }}
           {{# if proxyIsDefined }}
             {{# if userCanViewDashboard }}
-              <li class="{{ isActiveRoute 'dashboardPage' }}">
+              <li class="{{ isActiveRoute 'dashboardPage' }} main-links">
                 <a href="{{ pathFor 'dashboardPage' }}" id="dashboard-button">
-                  <i class="fa fa-bar-chart" aria-hidden="true"></i>
                   {{_ "navbar_dashboard" }}
                 </a>
               </li>
             {{/ if }}
           {{/ if }}
         {{/ if }}
+
+        <!-- MQTT Dashboard -->
         {{# if userCanViewMqttDashboard }}
-          <li>
-            <a href="{{ pathFor 'mqtt' }}">
-              <i class="fa fa-area-chart" aria-hidden="true"></i>
+          <li class="{{ isActiveRoute 'mqtt' }} main-links">
+            <a href="{{ pathFor 'mqtt' }}" id="mqtt-button">
               {{_ "navbar_mqttDashboard" }}
             </a>
           </li>
         {{/ if }}
-        <li class="{{ isActiveRoute 'apiCatalog' }}">
+
+        <!-- API catalog -->
+        <li class="{{ isActiveRoute 'apiCatalog' }} main-links">
           <a href="{{ pathFor 'apiCatalog' }}" id="apis-button">
-            <i class="fa fa-book" aria-hidden="true"></i>
             {{_ "navbar_apis" }}
           </a>
         </li>
-        {{# if currentUser }}
-          <li class="{{ isActiveRoute 'myApiCatalog' }}">
-            <a href="{{ pathFor 'myApiCatalog' }}" id="apis-button">
-              <i class="fa fa-book" aria-hidden="true"></i>
-              {{_ "navbar_my_apis" }}
-            </a>
-          </li>
-        {{/ if }}
-        <li class="{{ isActiveRoute 'organizationCatalog' }}">
+
+        <!-- Organizations -->
+        <li class="{{ isActiveRoute 'organizationCatalog' }} main-links">
           <a href="{{ pathFor 'organizationCatalog' }}" id="organizations-button">
-            <i class="fa fa-address-card" aria-hidden="true"></i>
             {{_ "navbar_organizations" }}
           </a>
         </li>
-        {{# if currentUser }}
-          {{# if userCanAddApi }}
-          <li class="{{ isActiveRoute 'addApi' }}">
-            <a href="{{ pathFor 'addApi' }}" id="addapi-button">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              {{_ "navbar_addAPIBackend" }}
+
+        <!-- Tenants -->
+        <!-- TODO tenant: Show only in case user has logged in via Keyrock -->
+        {{# if canManageTenants }}
+          <li class="{{ isActiveRoute 'tenantCatalog' }} main-links">
+            <a href="{{ pathFor 'tenantCatalog' }}" id="tenants-button">
+              Tenants
+              <i class="mdi mdi-beta" style="position: absolute;top: 1px;right: 2px;color: #ffc80f;"></i>
             </a>
           </li>
+        {{/ if }}
+
+        {{# if currentUser }}
+          {{# if userCanAddApi }}
+            <li class="{{ isActiveRoute 'addApi' }} main-links">
+              <a href="{{ pathFor 'addApi' }}" id="addapi-button">
+                {{_ "navbar_addAPIBackend" }}
+              </a>
+            </li>
           {{/ if }}
 
+          <!-- Users management -->
           {{# if isInRole 'admin' }}
-            <li class="{{ isActiveRoute 'accountsAdmin' }}">
+            <li class="{{ isActiveRoute 'accountsAdmin' }} main-links">
               <a href="{{ pathFor 'accountsAdmin' }}" id="users-button">
-                <i class="fa fa-users" aria-hidden="true"></i>
                 {{_ "navbar_users" }}
               </a>
             </li>
           {{/ if }}
         {{/ if }}
-        {{# if branding.homeCustomBlock }}
-        <li class="{{ isActiveRoute 'pricing' }}">
-          <a href="{{ pathFor 'pricing' }}" id="pricing-button">
-            <i class="fa fa-credit-card" aria-hidden="true"></i>
-            {{_ "navbar_pricing" }}
-          </a>
-        </li>
+
+        <!-- Pricing block -->
+        {{# if homeCustomBlock }}
+          <li class="{{ isActiveRoute 'pricing' }} main-links">
+            <a href="{{ pathFor 'pricing' }}" id="pricing-button">
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
+              {{_ "navbar_pricing" }}
+            </a>
+          </li>
+        {{/ if }}
+
+        <!-- Configuration of site -->
+        {{# if isInRole 'admin' }}
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'branding' }}" id="branding-button">
+              {{_ "userMenu_branding" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'settings' }}" id="settings-button">
+              {{_ "userMenu_settings" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'proxies' }}" id="proxies-button">
+              {{_ "userMenu_proxies" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'login-platforms' }}" id="login-platforms-button">
+              {{_ "userMenu_loginPlatforms" }}
+            </a>
+          </li>
+        {{/ if }}
+
+        <!-- User own menu -->
+        {{# if currentUser }}
+          <li class="mobile-links-only hide-link">
+            <a href="{{ pathFor 'profile' }}" id="profile-button">
+              {{_ "userMenu_profile" }}
+            </a>
+          </li>
+          <li class="mobile-links-only hide-link">
+            <a href="/sign-out" id="signout-button">
+              {{_ "userMenu_signout" }}
+            </a>
+          </li>
+        {{/ if }}
+        {{# if currentUser }}
+          {{> userMenu user=currentUser }}
+        {{ else }}
+          <li class="main-links pull-right">
+            <a class="navbar-login" href="{{ pathFor 'signUp' }}" id="signup-button">
+              {{_ "navbar_signUp" }}
+            </a>
+          </li>
+          <li class="main-links pull-right">
+            <a class="navbar-login" href="{{ pathFor 'signIn' }}" id="signin-button">
+              {{_ "navbar_signIn" }}
+            </a>
+          </li>
         {{/ if }}
       </ul>
-    </div>
-    <div class="container">
-      {{> searchField }}
     </div>
   </nav>
 </template>

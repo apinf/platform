@@ -1,32 +1,33 @@
-<!-- Copyright 2017 Apinf Oy
+<!-- Copyright 2018 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiOrganization">
   {{# if userIsOrganizationManager }}
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h2 class="panel-title">
-          <i class="fa fa-exchange" aria-hidden="true"></i>
+    <div class="row">
+      <div class="col-md-8">
+        <h2 style="font-size:16px;margin-top:0;">
           {{_ "apiOrganization_panelTitle" }}
         </h2>
+        <p>
+          {{_ "apiOrganization_title_text" }}
+        </p>
       </div>
-
-      <div class="panel-body">
-        {{# if api.organization }}
+      {{# if api.organization }}
+        <div class="col-md-4 text-right">
           <!-- Show API Organization details -->
-          <p>
-            {{ api.organization.name }}
-          </p>
-          <button class="btn btn-danger" id="disconnect-from-organization">
-            {{_ "apiOrganization_disconnectButton" }}
-          </button>
-        {{ else }}
-          <!-- Show API Organization form -->
-          {{> organizationApisForm api=api organizationApi=organizationApi }}
-        {{/ if }}
+          <a href="#" class="btn btn-danger" id="disconnect-from-organization">
+            {{_ "apiOrganization_disconnectButton" }} from {{ api.organization.name }}
+          </a>
+        </div>
+      {{ else }}
+      <div class="col-md-12">
+        <!-- Show API Organization form -->
+        {{> organizationApisForm api=api organizationApi=organizationApi }}
       </div>
+      {{/ if }}
     </div>
+    <hr class="panel-hr" />
   {{/ if }}
 </template>

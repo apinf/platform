@@ -7,6 +7,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 import { Mongo } from 'meteor/mongo';
 import { Session } from 'meteor/session';
 import { Template } from 'meteor/templating';
+import { AutoForm } from 'meteor/aldeed:autoform';
 
 // Meteor contributed packages imports
 import { Modal } from 'meteor/peppelg:bootstrap-3-modal';
@@ -144,6 +145,7 @@ Template.manageApiDocumentationModal.events({
     }
   },
   'click #save-documentation-link': function () {
+    AutoForm.resetForm('apiDocumentationForm');
     // Hide modal
     Modal.hide('manageApiDocumentationModal');
   },

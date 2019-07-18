@@ -164,7 +164,7 @@ Meteor.methods({
               requestPath: dataset.key,
               // Get value of request code status
               status: status.key,
-              // Get value of request number
+              // Get value of request count
               calls: status.doc_count,
             });
           });
@@ -214,10 +214,5 @@ Meteor.methods({
     const analytics = AnalyticsData.findOne(query, { sort: { date: -1 }, limit: 1 });
     // Return "date" value
     return analytics && analytics.date;
-  },
-  getServerTimeZone () {
-    const serverTime = new Date();
-    const timeZone = serverTime.toString().substring(25);
-    return timeZone;
   },
 });

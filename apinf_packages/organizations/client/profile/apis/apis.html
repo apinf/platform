@@ -4,42 +4,81 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationApis">
-  <div class="form-inline pull-right filter-dropdown">
-    {{# if hasApi }}
-      {{> apiSortingToolbar }}
-      {{> apisFilterIcon }}
-    {{/ if }}
-    <!-- Connection API button -->
-    {{# if organization.currentUserCanManage }}
-      <button type="button" class="btn btn-default" id="connect-api">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        {{_ 'organizationProfile_buttonText_connectApi' }}
-      </button>
+  <div class="row">
+    {{# if Template.subscriptionsReady }}
+      <div class="col-md-4 organization-side-block">
+        <div class="about-organization block-wrapper" style="margin-left: 0;">
+          <h5 class="organization-name panel-title clearfix" style="margin-top:0;text-transform: none;margin-bottom: 14px;">
+            {{_ "organizationApis_title_about" }}
+            {{# if organization.currentUserCanManage }}
+              <a href="#settings" class="btn-link pull-right" id="edit" style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+                <small style="font-size:12px;color:#9bacbf;font-weight:500;">
+                  {{_ "organizationApis_title_edit" }}
+                </small>
+              </a>
+            {{/ if }}
+          </h5>
+          {{# if organization.description }}
+            <p style="color:#37474F;font-size:1.4rem;">
+              {{ organization.description }}
+            </p>
+          {{/ if }}
+          <div class="organization-header-side-icon">
+            {{> organizationSocialMediaIcons organization=organization }}
+          </div>
+          <a href="{{ organization.url }}" target="_blank">
+            <p class="link-color-wrapper">
+              <i class="mdi mdi-open-in-new"></i>
+              {{ organization.url }}
+            </p>
+          </a>
+          <div style="margin-bottom: 1.5em;">
+            {{# if organization.contact.phone }}
+              <p class="link-color-wrapper">
+                {{_ "organizationApis_contact_phone" }}: {{ organization.contact.phone }}
+              </p>
+            {{/ if }}
+            {{# if organization.contact.email }}
+              <p class="link-color-wrapper">
+                {{_ "organizationApis_contact_email" }}:
+                <a href="mailto:{{ organization.contact.email }}">
+                  {{ organization.contact.email }}
+                </a>
+              </p>
+            {{/ if }}
+          </div>
+          {{> relatedMedia entity=organization }}
+        </div>
+      </div>
+      <div class="col-md-8" style="padding-left: 5px;">
+        <div class="block-wrapper">
+          <div style="margin-bottom:1em;">
+            <h5 class="panel-title">
+              {{_ "organizationApis_title_apis" }}
+              {{# if organization.currentUserCanManage }}
+              <a type="button" class="btn-link pull-right" id="connect-api" style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+                <small style="color: #9bacbf;font-weight: 500;">
+                  {{_ "organizationApis_title_connectApi" }}
+                </small>
+              </a>
+              {{/ if }}
+            </h5>
+            <hr style="background-color: #ecf3f8; margin-top: 1em;">
+          </div>
+          <!-- Show or not content -->
+          {{# if paginationReady }}
+            {{# if hasApi }}
+              {{> apiCatalogTable apis=apis organization=organization }}
+            {{ else }}
+              <!-- Show no APIs message -->
+              {{> organizationNoApis organization=organization }}
+            {{/ if }}
+          {{/ if }}
+        </div>
+      </div>
+    {{ else }}
+      <!-- If no data yet available show spinner -->
+      {{> spinner }}
     {{/ if }}
   </div>
-  {{# if Template.subscriptionsReady }}
-    <!-- Show or not content -->
-    {{# if paginationReady }}
-      {{# if hasApi }}
-        <div class="block-header">
-          <!-- Title -->
-          <h3 class="apis-block-title">
-            {{_ 'organizationProfile_bigText_apisCount' }}
-            <small>
-              {{_ 'organizationProfile_smallText_apisCount' count=apisCount }}
-            </small>
-          </h3>
-          {{> apiFilteredBy }}
-        </div>
-        {{> apiCatalogGrid apis=apis organization=organization }}
-        {{> defaultBootstrapPaginator pagination=templatePagination limit=10 containerClass="text-center" }}
-      {{ else }}
-        <!-- Show no APIs message -->
-        {{> organizationNoApis organization=organization }}
-    {{/ if }}
-  {{/ if }}
-  {{ else }}
-    <!-- If no data yet available show spinner -->
-    {{> spinner }}
-  {{/ if }}
 </template>

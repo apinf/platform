@@ -4,60 +4,60 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="relatedMedia">
-  <!-- Show media area in case either -->
-  <!-- there are posts -->
   {{# if posts }}
-  <div class="panel panel-default related-media-panel">
-    <div class="panel-heading">
-      <h2 id="oembedded-title" class="panel-title clearfix">
-        <!-- Related Media -->
+    <div class="related-media-panel" style="margin-bottom:14px;">
+      <h5 id="oembedded-title" class="panel-title clearfix">
         {{_ "relatedMedia_Title" }}
         {{# if entity.currentUserCanManage }}
-            <button
-              type="button"
-              class="btn btn-success pull-right"
-              id="add-media"
-              title='{{_ "relatedMedia_addButton_help" }}'>
-                {{_ "relatedMedia_addButton" }}
-            </button>
+          <a type="button" class="btn-link pull-right" id="add-media"
+             title='{{_ "relatedMedia_addButton_help" }}'
+             style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+            <small style="color: #9bacbf;font-weight: 500;">
+              {{_ "relatedMedia_addNew" }}
+            </small>
+          </a>
         {{/ if }}
-      </h2>
+      </h5>
     </div>
-    <div class="panel-body">
-      <div class="container">
-        <div class="row">
-            {{# each post in posts }}
-              <div class="col-grid-post col-xl-2 col-md-3 col-sm-6 col-xs-12">
-                {{> postItem post=post entity=entity }}
-              </div>
-            {{/ each }}
-        </div>
-
-        <div class="centered">
-          {{> defaultBootstrapPaginator
-              pagination=templatePagination
-              limit=4
-              containerClass="text-center"
-             }}
-        </div>
-      </div>
-    </div>
-  </div>
+    <ul class="related-links-list">
+      {{# each post in posts }}
+        {{> postItem post=post entity=entity }}
+      {{/ each }}
+      {{# if entity.currentUserCanManage }}
+        <li class="related-link api-profile-visible">
+          <a type="button" class="btn-link"
+             id="add-media" title='{{_ "relatedMedia_addButton_help" }}'
+             style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;font-weight: 500;">
+            {{_ "relatedMedia_addNew" }}
+          </a>
+        </li>
+      {{/ if }}
+    </ul>
   {{ else }}
-    <!-- or user has rights -->
     {{# if entity.currentUserCanManage }}
-      <div class="well">
-        <button
-          type="button"
-          class="btn btn-success pull-right"
-          id="add-media"
-          title='{{_ "relatedMedia_addButton_help" }}'>
-            {{_ "relatedMedia_addButton" }}
-        </button>
-        <p>
-          {{ noRelatedMedia }}
-        </p>
+      <div class="related-media-panel" style="margin-bottom:0;">
+        <h5 id="oembedded-title" class="panel-title clearfix" style="color:#5c617b;">
+          {{_ "relatedMedia_Title" }}
+          <a type="button" class="btn-link pull-right" id="add-media"
+             title='{{_ "relatedMedia_addButton_help" }}'
+             style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;">
+            <small style="color: #9bacbf;font-weight: 500;">
+              {{_ "relatedMedia_addNew" }}
+            </small>
+          </a>
+        </h5>
       </div>
+      <ul class="related-links-list api-profile-visible">
+      {{# if entity.currentUserCanManage }}
+        <li class="related-link">
+          <a type="button" class="btn-link"
+             id="add-media" title='{{_ "relatedMedia_addButton_help" }}'
+             style="height:auto;cursor:pointer;text-transform: uppercase;text-decoration:none;font-weight: 500;">
+            {{_ "relatedMedia_addLink" }}
+          </a>
+        </li>
+      {{/ if }}
+      </ul>
     {{/ if }}
   {{/ if }}
 </template>

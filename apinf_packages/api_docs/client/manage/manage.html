@@ -12,7 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
           <h1 class="modal-title">
-            {{_ "manageApiDocumentationModal_Title" }}
+            {{_ "manageApiDocumentationModal_addDocumentation_title" }}
           </h1>
         </div>
         <div class="modal-body">
@@ -20,18 +20,19 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             collection=apiDocsCollection
             doc=apiDoc
             id="apiDocumentationForm"
-            type=formType }}
+            type=formType
+            validation="keyup"
+            }}
 
-            <legend>
-              {{> showHelp 'addApiDocumentation' }}
-              {{_ "manageApiDocumentationModal_addDocumentation_title" }}
-            </legend>
-            <p class="help-text">
+            <p style="color: #6d859e;">
+              {{_ 'manageApiDocumentationModal_hints_uploadApiDocumentation' }}
               {{_ 'manageApiDocumentationModal_helpText_useHttpsProtocol' }}
             </p>
+            <!-- Drop-down selection for type of documentation (URL/File) -->
             {{> afQuickField name="type" firstOption=false }}
 
             {{#if afFieldValueIs name="type" value="file" }}
+              <!-- selection for file -->
               <div class="documentation-file">
                 {{# unless documentationFile }}
                   {{> manageApiDocumentationModalUploadButton }}
@@ -41,68 +42,35 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                       <i class="fa fa-file-text-o" aria-hidden="true"></i>
                       {{ documentationFile.filename }}
                       <span class="pull-right">
-                    <button type="button" class="btn btn-xs btn-danger delete-documentation">
-                      <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-                    </button>
-                  </span>
+                        <button type="button" class="btn btn-xs btn-danger delete-documentation" style="height:auto;">
+                          <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+                        </button>
+                      </span>
                     </li>
                   </ul>
                 {{/ unless }}
               </div>
             {{ else }}
+              <!-- Input field for url -->
               {{> afQuickField name='remoteFileUrl' }}
             {{/ if }}
+
+            <!-- Checkboxes for used methods -->
             {{> afQuickField
               name="submit_methods"
               options=supportedSubmitMethods
               type="select-checkbox-inline"
               noselect=false
             }}
-            <legend>
-              {{> showHelp 'documentation_link' }}
-              {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
-            </legend>
-                 <div >
-                   <fieldset class="form-group">
-                     <label for="links">
-                      {{_ "manageApiDocumentationModal_DocumentationLinks_Title" }}
-                     </label>
-                     <div class="row">
-                       <div class="col-sm-10">
-                        <input id="link-value" name="links" class="form-control" title="">
-                       </div>
-                       <div class="col-sm-2">
-                         <button type="button" class="btn btn-primary" id="add-link" title={{ userCanAddUrl }}>
-                            <span class="fa fa-plus"></span>
-                          {{_ "manageApiDocumentationModal_CreateLinks_AddButton" }}
-                         </button>
-                      </div>
-                    </div>
-                     <small class="text-danger invisible" id="errorMessage">
-                      {{_ "invalidUrlMessage" }}
-                     </small>
-                   </fieldset>
-                 </div>
-               <div id="otherUrl-link" class="otherUrl-link">
-                 <ul class="list-group">
-                  {{# each url in otherUrls }}
-                    <li class="list-group-item">
-                      <a href="{{ url }}" id="other-url-@index" target="_blank">
-                        {{ url }}
-                      </a>
-                      <span class="pull-right btn-danger btn-xs">
-                        <i class="fa fa-trash-o fa-lg cursor delete-link" id="{{ @index }}"></i>
-                      </span>
-                    </li>
-                  {{/ each }}
-                 </ul>
-              </div>
-            <button type="submit" class="btn btn-success" id="save-documentation-link">
-              {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
-            </button>
-            <button type="button" class="btn btn-default" data-dismiss="modal" id="cancel-button">
-              {{_ "manageApiDocumentationModal_CreateDocumentation_CancelButton" }}
-            </button>
+
+            <!-- Submit button -->
+            <div class="text-right">
+              <button type="submit" class="btn btn-success btn-success-special" id="save-documentation-link">
+                {{_ "manageApiDocumentationModal_CreateDocumentation_SaveButton" }}
+              </button>
+            </div>
+
+            <!-- Some entertainment for user, if loading takes time -->
             {{# if fileUploding }}
               {{> spinner }}
             {{/ if }}

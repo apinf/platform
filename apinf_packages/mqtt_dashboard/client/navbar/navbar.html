@@ -21,29 +21,27 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           </div>
         {{/ if }}
       </div>
-      <ul class="nav navbar-nav nanbar-left" id="main-navbar">
-        <li class="{{ isActiveRoute 'mqtt' }}">
-          <a href="{{ pathFor 'mqtt' }}">
+      <ul class="nav navbar-nav navbar-left" id="main-navbar">
+        <li class="{{ isActiveRoute 'mqtt' }} main-links">
+          <a href="{{ pathFor 'mqtt' }}" id="mqtt-dashboard-button">
             {{_ 'mqttDashboardNavbar_linkText_mqttDashboard' }}
           </a>
         </li>
-        <li class="{{ isActiveRoute 'topics' }}">
-          <a href="{{ pathFor 'topics' }}">
+        <li class="{{ isActiveRoute 'topics' }} main-links">
+          <a href="{{ pathFor 'topics' }}"  id="topics-button">
             {{_ 'mqttDashboardNavbar_linkText_topics' }}
           </a>
         </li>
-        <li class="{{ isActiveRoute 'acl' }}">
-          <a href="{{ pathFor 'acl' }}">
+        <li class="{{ isActiveRoute 'acl' }} main-links">
+          <a href="{{ pathFor 'acl' }}" id="acl-button">
             {{_ 'mqttDashboardNavbar_linkText_acl' }}
           </a>
         </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" id="user-menu">
-        <li>
-          <a class="navbar-login" href="{{ pathFor 'dashboard' }}" id="rest-dashboard">
-            {{_ 'mqttDashboardNavbar_linkText_restDashboard' }}
-            <i class="fa fa-arrow-right" aria-hidden="true"></i>
-          </a>
+        <li class="nav navbar-nav navbar-right main-links">
+            <a href="{{ pathFor 'dashboard' }}" id="rest-dashboard">
+              {{_ 'mqttDashboardNavbar_linkText_restDashboard' }}
+              <i class="fa fa-arrow-right" aria-hidden="true"></i>
+            </a>
         </li>
         {{> userMenu user=currentUser }}
       </ul>

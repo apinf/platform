@@ -1,0 +1,17 @@
+<!-- Copyright 2018 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="apiAuth">
+  <h2 style="font-size:1.6em;margin-top:0;margin-bottom:1em;text-transform: none;">
+    {{_ "apiAuth_title" }}
+  </h2>
+  {{# if currentUser }}
+    {{# if proxyBackend }}
+      <span style="margin-top:0.9em;">
+        {{> apiKey api=api proxyBackend=proxyBackend }}
+      </span>
+    {{/ if }}
+  {{/ if }}
+</template>

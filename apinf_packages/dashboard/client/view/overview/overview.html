@@ -35,7 +35,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             proxyBackendId=dataset.proxyBackendId
             dateFormat=dateFormat
           }}
-          <div class="{{ arrowDirection 'requests' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'requests' }}"></i>
           <span>{{ overviewComparing 'requests' }}</span>
         </div>
       </div>
@@ -52,7 +52,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             proxyBackendId=dataset.proxyBackendId
             dateFormat=dateFormat
           }}
-          <div class="{{ arrowDirection 'time' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'time' }}"></i>
           <span>{{ overviewComparing 'time' }}</span>
         </div>
       </div>
@@ -72,7 +72,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
             proxyBackendId=dataset.proxyBackendId
             dateFormat=dateFormat
           }}
-          <div class="{{ arrowDirection 'users' }}"></div>
+          <i class="mdi mdi-{{ arrowDirection 'users' }}"></i>
           <span>{{ overviewComparing 'users' }}</span>
 
           <!-- For "Today" metrics for Users is not average, not display it -->
@@ -86,9 +86,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}" class="pull-right">
           {{_ 'dashboardOverviewStatistic_linkText_viewDetails' }}
         </a>
-      </div>
-      <div class="overview-help-text">
-        {{_ 'dashboardOverviewStatistic_helpText_serverTimezone' servertimezone=(serverTimeZone)}}
       </div>
     </div>
   </div>

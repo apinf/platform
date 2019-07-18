@@ -1,8 +1,8 @@
 /* Copyright 2017 Apinf Oy
- This file is covered by the EUPL license.
- You may obtain a copy of the licence at
- https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
- */
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11
+*/
 
 // Meteor packages imports
 import { ReactiveVar } from 'meteor/reactive-var';
@@ -140,6 +140,21 @@ Template.requestTimeline.onRendered(function () {
       ],
     };
 
+    instance.chart.options = {
+      legend: {
+        onHover (e) {
+          e.target.style.cursor = 'pointer';
+        },
+      },
+      hover: {
+        onHover (e) {
+          const point = this.getElementAtEvent(e);
+          if (point.length) e.target.style.cursor = 'pointer';
+          else e.target.style.cursor = 'default';
+        },
+      },
+    };
+
 
     // Update chart with relevant data
     instance.chart.update();
@@ -152,7 +167,7 @@ Template.requestTimeline.onRendered(function () {
     const dateFormat = Template.currentData().dateFormat;
     const scales = instance.chart.options.scales;
 
-    // If it's Day format
+    // If it is Day format
     if (dateFormat === 'L') {
       xAxesLabel = TAPi18n.__('requestTimeline_xAxisTitle_days');
     } else {

@@ -9,11 +9,10 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
       {{# if organization.currentUserCanManage }}
         <!-- Pin API -->
         <div class="pinApiCard pull-right">
-          <div
-             class="api-card-pin"
-             data-toggle="tooltip"
-             data-placement="bottom"
-             title="{{_ 'apiCard_pinTooltip_user' }}">
+          <div class="api-card-pin"
+               data-toggle="tooltip"
+               data-placement="bottom"
+               title="{{_ 'apiCard_pinTooltip_user' }}">
             {{> apiCardPin organization=organization api=api }}
           </div>
         </div>
@@ -23,25 +22,13 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           {{ api.name }}
         </h3>
       </a>
-      <p class="api-card-author text-center">
+      <p class="api-card-author text-center" style="margin-bottom: 0;">
         {{# if api.organization }}
           {{ api.organization.name }}
         {{ else }}
           {{ api.getApiManagersByName }}
         {{/ if }}
       </p>
-      <ul class="list-inline api-card-labels">
-        <li>
-          {{> apiLifecycleStatus api=api }}
-        </li>
-        <li>
-          {{# unless api.isPublic }}
-            <span class="label label-default">
-              {{_ "apiCard_labelText_private"}}
-            </span>
-          {{/ unless }}
-        </li>
-      </ul>
     </div>
     <div class="api-card-logo clearfix">
       <a href="{{ pathFor 'viewApi' slug=api.slug }}" title="{{ api.name }}">
@@ -58,7 +45,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
         {{# if api.created_at }}
         <li class="time">
           <span title='{{ localeFormatDate api.created_at }}'>
-            <i class="fa fa-clock-o"></i>
+            <i class="mdi mdi-clock"></i>
             {{ dateInTimeAgoFormat api.created_at }}
           </span>
         </li>
@@ -69,28 +56,26 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
                    data-toggle="tooltip"
                    data-placement="bottom"
                    title="{{_ 'apiCard_tooltipTitle_averageRating' }}">
-                    {{ api.averageRating }}
-                  <i class="fa fa-star-half-o"></i>
+                {{ api.averageRating }}
+                <i class="fa fa-star-half-o"></i>
               </div>
             {{/if}}
         </li>
         <li class="bookmark pull-right">
           {{# if currentUser }}
-            <div
-                 class="api-card-bookmark"
+            <div class="api-card-bookmark"
                  data-toggle="tooltip"
                  data-placement="bottom"
                  title="{{_ 'catalog_BookmarkTooltip_user' }}">
               {{> bookmark api=api catalogView=true }}
             </div>
           {{ else }}
-            <div
-                 class="api-card-bookmark"
+            <div class="api-card-bookmark"
                  data-toggle="tooltip"
                  data-placement="bottom"
                  title="{{_ 'catalog_bookmarkTooltip_nonUser' }}">
-                {{ api.bookmarkCount }}
-              <i class="fa fa-bookmark bookmark-default"></i>
+              {{ api.bookmarkCount }}
+              <i class="fa fa-star bookmark-default" style="color:#FFD600;"></i>
             </div>
           {{/ if }}
         </li>

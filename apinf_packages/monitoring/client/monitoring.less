@@ -5,15 +5,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 @import "/apinf_packages/core/client/style/bootstrap-variables.less";
 
+#apiMonitoringForm input {
+  margin-bottom: 0;
+}
+
 #rtable {
   font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   width: 100%;
 }
+
 #rtable td, #rtable th {
   border: 1px solid #808080;
   padding: 8px;
 }
+
 #rtable tr:nth-child(even){background-color: #f2f2f2;}
 
 #rtable th {
@@ -21,35 +27,50 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
   background-color: #cce6ff;
   color: #808080;
 }
-#save-monitoring-settings{
+
+#save-monitoring-settings {
   margin-bottom: 15px;
   margin-top: 15px;
 }
-.heading{
-  font-size:1.4em;
-  margin-top:0;
+
+.heading {
+  font-size: 1.4em;
+  margin-top: 0;
 }
-.sub-heading{
+
+.sub-heading {
   color:#6d859e;
 }
-.header-line{
-  color: rgba(59, 59, 88, 0.15); 
-  margin-right: -20px; 
-  margin-left: -20px; 
-  margin-top: 2em; 
+
+.header-line {
+  color: rgba(59, 59, 88, 0.15);
+  margin-right: -20px;
+  margin-left: -20px;
+  margin-top: 2em;
   margin-bottom: 2em;
 }
+
 .success {
-  color:green
+  color: green;
 }
+
 .failed {
-  color:red
+  color: red;
 }
-.panel-heading{
-  font-size:16px; 
-  margin-top:0;
-  padding-left:1em;
+
+.panel-heading {
+  font-size: 16px;
+  margin-top: 0;
+  padding-left: 1em;
 }
-.monitoring-panel{
-  color:#6d859e;
+
+.monitoring-panel {
+  color: #6d859e;
+}
+
+#monitoring-helpIcon {
+  color: #6d859e;
+  :hover {
+    color: #37474F;
+  }
 }

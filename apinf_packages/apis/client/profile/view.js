@@ -61,6 +61,8 @@ Template.viewApi.onCreated(function () {
         // Set a browser tab name
         DocHead.setTitle(`${branding.siteTitle} - ${api.name}`);
       }
+      // initiate timeframe
+      FlowRouter.setQueryParams({ timeframe: 12 });
     }
   });
 });

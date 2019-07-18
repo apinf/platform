@@ -4,21 +4,34 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiAuthorizedUsersList">
-  <h3>
-    {{_ 'apiAuthorizedUsersList_ header_text' }}
-  </h3>
-  <p>
+  <h2 style="font-size:1.4em;margin-top:0;">
+    {{_ "apiAuthorizedUsersList_title" }}
+  </h2>
+  <p style="color:#6d859e; margin-bottom: 1em;">
     {{_ 'apiAuthorizedUsersList_authorizedUsers'}}
   </p>
-  <ul class="list-group">
-    {{# each authorizedUsers }}
-      <li class="list-group-item">
-        <i class="fa fa-user" aria-hidden="true"></i>
-        {{ username }} ({{ email }})
-        <button class="remove-authorized-user btn btn-danger btn-xs pull-right">
-          <i class="fa fa-trash-o fa-lg" aria-hidden="true"></i>
-        </button>
-      </li>
-    {{/ each }}
-  </ul>
+  {{# if authorizedUsers }}
+    <table class="rtable">
+      <thead>
+        <tr>
+          <th>{{_ "apiAuthorizedUsersList_tableTitle_role" }}</th>
+          <th>{{_ "apiAuthorizedUsersList_tableTitle_email" }}</th>
+          <th>{{_ "apiAuthorizedUsersList_tableTitle_actions" }}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{# each authorizedUsers }}
+          <tr>
+            <td>{{_ "apiAuthorizedUsersList_role_collaborator" }}</td>
+            <td>{{ email }}</td>
+            <td>
+              <button class="remove-authorized-user btn btn-danger btn-xs" style="height:auto;">
+                <i class="fa mdi mdi-delete" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        {{/ each }}
+      </tbody>
+    </table>
+  {{/ if }}
 </template>

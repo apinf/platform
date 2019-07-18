@@ -4,41 +4,41 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="apiSettingsDetails">
-  <!-- Details panel -->
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <h2 class="panel-title">
-        <i class="fa fa-info-circle" aria-hidden="true"></i>
-        {{_ "apiSettingsDetails_title" }}
-      </h2>
-    </div>
-    <div class="panel-body">
-      <h3>
-        {{_ "apiSettingsDetails_uploadLogo_heading" }}
-      </h3>
-      <p>
-        {{_ "apiSettingsDetails_uploadLogoText" }}
-      </p>
-      {{> uploadApiLogo api=api }}
-      <hr class="panel-hr" />
-      {{# autoForm
-          collection=apisCollection
-          doc=api
-          id="apiDetailsForm"
-          type="update" }}
-        {{> afQuickField name='name' id="api-name" }}
-        {{> afQuickField name='description' id="api-description" }}
-        {{> afQuickField name='url' id="api-url" }}
-        {{> afQuickField name='lifecycleStatus' id="api-status" }}
-        <button type="submit" class="btn btn-success" id="save-settings">
-          {{_ "apiSettingsDetails_saveButton" }}
-        </button>
-      {{/ autoForm }}
-    </div>
-  </div>
+  <h2 style="font-size:16px;margin-top:0;">
+    {{_ "apiSettingsDetails_uploadLogo_heading" }}
+  </h2>
+  {{> uploadApiLogo api=api }}
+  <p style="color: #6d859e;margin-top: -0.5em;margin-bottom: 1em;">
+    {{_ "apiSettingsDetails_uploadLogoText" }}
+  </p>
+  {{# autoForm
+      collection=apisCollection
+      doc=api
+      id="apiDetailsForm"
+      type="update" }}
+    {{> afQuickField name='name' id="api-name" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
+      {{_ "apiSettingsDetails_name_text" }}
+    </p>
+    <counter>{{_ "apiSettingsDetails_description_remaining" }}:&nbsp;<span id="counter"></span></counter>
+    {{> afQuickField name='description' id="api-description" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 1em;">
+      {{_ "apiSettingsDetails_description_text" }}
+    </p>
+    {{> afQuickField name='url' id="api-url" }}
+    <p style="color: #6d859e;margin-top: -1em;margin-bottom: 2em;">
+      {{_ "apiSettingsDetails_url_text" }}
+    </p>
+    <button type="submit" class="btn btn-success btn-success-special" id="save-settings">
+      {{_ "apiSettingsDetails_saveButton" }}
+    </button>
+  {{/ autoForm }}
 
   <!-- Display status of logo uploading -->
   {{# if apiLogoUploading }}
     {{> spinner }}
   {{/ if }}
+  <hr style="border-top: 1px solid #ddd;margin-right: -20px;margin-left: -20px;margin-top: 2em;margin-bottom: 2em;height:2px;">
+  {{> apiOrganization api=api }}
+  {{> apiSettingsDelete api=api }}
 </template>

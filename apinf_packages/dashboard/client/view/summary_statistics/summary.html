@@ -6,65 +6,63 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 <template name="dashboardSummaryStatistic">
   {{# if displayTable }}
     <!-- Table head -->
-    <h4>
+    <h2 style="margin: 0;font-size: 14px;margin-left: -20px;margin-right: -20px;margin-bottom: 0;padding: 20px 20px;font-weight: 400;border-bottom: 1px solid #ecf3f8;">
       {{ tableTitle }} ({{ count }})
-    </h4>
-
-    <div class="dashboard-table-row statistic-title">
-      <div class="row">
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_apiName' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_requestsNumber' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_responseTime' }}
-        </div>
-        <div class="col-xs-3">
-          {{_ 'dashboardSummaryStatistic_columnTitle_users' }}
-        </div>
-      </div>
-    </div>
+      <span class="pull-right" style="color: #6d859e;font-size: 12px;padding-top: 2px;">{{_ "dashboard_analyticsSummary_title"}}</span>
+    </h2>
 
     <div class="statistic-block">
       <!-- Table body -->
       {{# each dataset in sortedAnalyticsData }}
         {{# with dataset }}
-          <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
-            <div class="row">
-              <div class="col-xs-3">
-                {{ apiName }}
-              </div>
-              <div class="col-xs-3">
-                <span class="request-number">
-                  {{ requestNumber }}
-                </span>
-                <div class="{{ arrowDirection 'requests' }}"></div>
-                <span class="{{ textColor 'requests' }}">
-                  {{ percentages 'requests' }}
-                </span>
-              </div>
-              <div class="col-xs-3">
-                <span class="response-time">
-                  {{ medianResponseTime }} ms
-                </span>
-                <div class="{{ arrowDirection 'time' }}"></div>
-                <span class="{{ textColor 'time' }}">
-                  {{ percentages 'time' }}
-                </span>
-              </div>
-              <div class="col-xs-3">
-                <span class="unique-users">
-                  {{ avgUniqueUsers }}
-                </span>
-                <div class="{{ arrowDirection 'users' }}"></div>
-                <span class="{{ textColor 'users' }}">
-                  {{ percentages 'users' }}
-                </span>
+          <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
+            <div data-id="{{ proxyBackendId }}" class="dashboard-table-row statistic-line">
+              <div class="row">
+                <div class="col-md-6 col-xs-12 dashboard-api-name">
+                  <a href="{{ pathFor 'apiAnalyticPage' apiSlug=dataset.apiSlug }}">
+                  <h2 class="special-headings" style="font-weight: 500;font-size: 16px;padding-bottom: 7px;color: #37474F;margin: 0;">{{ apiName }}</h2>
+                  </a>
+                  <span style="font-size: 12px;color:#1a75d2;border-radius: 2px;">{{ prefix }}</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_requests"}}</span>
+                    <span class="request-number">
+                      {{ localeString requestNumber }}
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'requests' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'requests' }}" style="font-size:12px;">
+                    {{ percentages 'requests' }}
+                  </span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_responseTime"}}</span>
+                    <span class="response-time">
+                      {{ medianResponseTime }} ms
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'time' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'time' }}" style="font-size:12px;">
+                    {{ percentages 'time' }}
+                  </span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-left">
+                  <div style="display:inline;">
+                    <span class="summary-number-label">{{_ "dashboard_analyticsSummary_developers"}}</span>
+                    <span class="unique-users">
+                      {{ avgUniqueUsers }}
+                    </span>
+                  </div>
+                  <i class="mdi mdi-{{ arrowDirection 'users' }}" style="font-size: inherit;"></i>
+                  <span class="{{ textColor 'users' }}" style="font-size:12px;">
+                    {{ percentages 'users' }}
+                  </span>
+                </div>
               </div>
             </div>
-          </div>
+          </a>
         {{/ with }}
         {{# if displayOverview dataset.proxyBackendId }}
           {{> dashboardOverviewStatistic dataset=dataset prefix=dataset.prefix

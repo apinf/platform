@@ -4,18 +4,26 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="organizationSettings">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
+  <h2 style="font-size:1.4em;margin-top:0;text-transform: none;margin-bottom: 1em;">{{_ "organizationSettings_title" }}</h2>
+  <div class="api-settings">
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#about" data-toggle="tab">{{_ "organizationSettings_nav_about" }}</a></li>
+      <li><a href="#logo-and-cover" data-toggle="tab">{{_ "organizationSettings_nav_logo" }}</a></li>
+      <li><a href="#social" data-toggle="tab">{{_ "organizationSettings_nav_social" }}</a></li>
+      <li><a href="#contact-information" data-toggle="tab">{{_ "organizationSettings_nav_contact" }}</a></li>
+    </ul>
 
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <div class="tab-pane active" id="about">
         {{> organizationSettingsGeneral organization=organization }}
-
+        <hr style="border-top: 1px solid #ddd;margin-right: -20px;margin-left: -20px;margin-top: 2em;margin-bottom: 2em;height:2px;">
+        {{> organizationSettingsDelete organization=organization }}
+      </div>
+      <div class="tab-pane fade" id="logo-and-cover">
         <div class="setting-section">
-          <h3>
-            {{_ "organizationSettingsCoverAndLogo_title" }}
-          </h3>
-
-          <label>
+          <label class="control-label">
             {{_ "organizationSettings_uploadLogo_heading" }}
           </label>
           <p>
@@ -24,7 +32,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           {{> uploadOrganizationLogo organization=organization }}
 
-          <label>
+          <label class="control-label">
             {{_ "organizationSettings_uploadCover_heading" }}
           </label>
 
@@ -34,24 +42,12 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
           {{> uploadOrganizationCover organization=organization }}
         </div>
-
-        {{> organizationSettingsPagination organization=organization }}
+      </div>
+      <div class="tab-pane fade" id="social">
         {{> organizationSettingsSocialMedia organization=organization }}
+      </div>
+      <div class="tab-pane fade" id="contact-information">
         {{> organizationSettingsContactInfo organization=organization }}
-
-        <div class="setting-section">
-          <h3>
-            {{_ "organizationSettings_title_organizationManagers" }}
-          </h3>
-          <p>
-            {{_ "organizationSettings_description_organizationManagers" }}
-          </p>
-          {{> organizationManagersList organization=organization }}
-          {{> addOrganizationManagerForm organization=organization }}
-        </div>
-
-        {{> organizationSettingsDelete organization=organization }}
-
       </div>
     </div>
   </div>

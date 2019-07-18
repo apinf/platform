@@ -5,33 +5,21 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
 <template name="footerSocialMediaLinks">
   {{# if socialMediaLinks }}
-    <ul class="list-inline social-media-block">
-      {{# with socialMediaLinks }}
-        <!-- Facebook icon -->
-        {{# if facebook }}
-          <li>
-            <a href="{{ facebook }}" target="_blank" class="social-media-link">
-              <img src="/img/social-media-icons/Facebook.png" alt="Facebook icon" class="social-media-icon">
-            </a>
-          </li>
-        {{/ if }}
-        <!-- twitter icon -->
-        {{# if twitter }}
-          <li>
-            <a href="{{ twitter }}" target="_blank" class="social-media-link">
-              <img src="/img/social-media-icons/Twitter.png" alt="Twitter icon" class="social-media-icon">
-            </a>
-          </li>
-        {{/ if }}
-        <!-- github icon -->
-        {{# if github }}
-          <li>
-            <a href="{{ github }}" target="_blank" class="social-media-link">
-              <img src="/img/social-media-icons/Github.png" alt="Github icon" class="social-media-icon">
-            </a>
-          </li>
-        {{/ if }}
-      {{/ with }}
-    </ul>
+    <div class="col-md-3 footer-social animated fadeInDown">
+      <h4 style="color: rgba(255,255,255,0.7);">{{_ "footerSocialMediaLinks_text" }}</h4>
+      <ul>
+        {{# with socialMediaLinks }}
+          {{# if facebook }}
+            <li><a href="{{ facebook }}" target="_blank">Facebook&nbsp;<i class="mdi mdi-open-in-new"></i></a></li>
+          {{/ if }}
+          {{# if twitter }}
+            <li><a href="{{ twitter }}" target="_blank">Twitter&nbsp;<i class="mdi mdi-open-in-new"></i></a></li>
+          {{/ if }}
+          {{# if github }}
+            <li><a href="{{ github }}" target="_blank">Github&nbsp;<i class="mdi mdi-open-in-new"></i></a></li>
+          {{/ if }}
+        {{/ with }}
+      </ul>
+    </div>
   {{/ if }}
 </template>

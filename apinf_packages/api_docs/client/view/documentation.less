@@ -1,0 +1,237 @@
+/* Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+/*
+Make sure iframe is full height and width
+source: http://stackoverflow.com/a/27853830/1191545
+*/
+
+/* Bootstrap */
+@import "/apinf_packages/core/client/style/bootstrap-variables.less";
+
+iframe {
+  display: block;       /* iframes are inline by default */
+  border: none;         /* Reset default border */
+  width: 100%;
+  height: 100vh;
+}
+
+.s-alert-box {
+  z-index: 10000
+}
+
+/* swagger viewer overides  */
+.swagger-ui {
+  .scheme-container, .topbar, .global-server-container {
+    display: none !important;
+  }
+}
+
+// .swagger-ui .information-container {
+//   display: none !important;
+// }
+
+.swagger-ui .info {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.swagger-ui .info hgroup.main {
+  margin: 0 0 0 !important;
+}
+
+.swagger-ui .info > div {
+  display: none !important;
+}
+
+.swagger-ui .info > a {
+  display: none !important;
+}
+
+.swagger-ui .info .title {
+  font-size: 18px !important;
+  font-family: @font-family-default !important;
+  color: #37474F !important;
+  margin-bottom: 5px !important;
+  display: none !important;
+}
+
+.swagger-ui .info .title small {
+  display: none !important;
+}
+
+.swagger-ui .information-container pre {
+  display: inline-block !important;
+  padding: 0 !important;
+  font-size: 12px !important;
+  background-color: none !important;
+  border: none !important;
+  border-radius: 4px !important;
+  float: right !important;
+}
+
+.swagger-ui .wrapper {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.swagger-ui .wrapper section span a img {
+  display: none !important;
+}
+
+/* buttons */
+.swagger-ui .opblock.opblock-post .opblock-summary-method {
+  background: #4CAF50 !important;
+}
+
+.swagger-ui .opblock.opblock-put .opblock-summary-method {
+  background: #FF9800 !important;
+}
+
+.swagger-ui .opblock.opblock-get .opblock-summary-method {
+  background: #2196F3 !important;
+}
+
+.swagger-ui .opblock.opblock-delete .opblock-summary-method {
+  background: #F44336 !important;
+}
+
+.swagger-ui .opblock .opblock-summary-method {
+  font-weight: 400 !important;
+  font-family: @font-family-default !important;
+  border-radius: 4px !important;
+  min-width: 70px !important;
+  padding: 3px 5px !important;
+}
+
+.swagger-ui .opblock-tag {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  font-family: @font-family-default !important;
+  color: #37474F !important;
+  font-size: 16px !important;
+}
+
+.swagger-ui .opblock-tag p {
+  margin-bottom: 0 !important;
+}
+
+.swagger-ui .opblock {
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  border-radius: 4px !important;
+  margin: 0 0 10px !important;
+}
+
+.swagger-ui .opblock .opblock-summary-operation-id,
+.swagger-ui .opblock .opblock-summary-path,
+.swagger-ui .opblock .opblock-summary-path__deprecated {
+  font-family: @font-family-default !important;
+  color: #37474F !important;
+  font-size: 14px !important;
+}
+
+.swagger-ui .models h4,
+.swagger-ui .models .model-title {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .opblock-body pre {
+  background: #333 !important;
+  border-radius: 4px !important;
+  font-family: @font-family-monospace !important;
+}
+
+.swagger-ui .opblock .opblock-summary {
+  padding: 5px !important;
+}
+
+.swagger-ui .opblock.opblock-post .opblock-summary {
+  border-color: #43A047 !important;
+}
+
+.swagger-ui .opblock.opblock-put .opblock-summary {
+  border-color: #FB8C00 !important;
+}
+
+.swagger-ui .opblock.opblock-get .opblock-summary {
+  border-color: #1E88E5 !important;
+}
+
+.swagger-ui .opblock.opblock-delete .opblock-summary {
+  border-color: #E53935 !important;
+}
+
+.swagger-ui table tbody tr td:first-of-type {
+  min-width: 4em !important;
+}
+
+.swagger-ui .response-col_description__inner div.markdown, .swagger-ui .response-col_description__inner div.renderedMarkdown {
+  background: #333 !important;
+  font-family: @font-family-monospace !important;
+  font-weight: 400 !important;
+  border-radius: 4px !important;
+}
+
+.swagger-ui select {
+  font-weight: 500 !important;
+  padding: 6px 12px !important;
+  line-height: 1.42857143 !important;
+  border: 1px solid #C1C7CD !important;
+  border-radius: 5px !important;
+  background-color: #fff !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+  font-family: @font-family-default !important;
+  color: #5c617b !important;
+}
+
+.swagger-ui .opblock .opblock-section-header h4,
+.swagger-ui .opblock .opblock-section-header label span {
+  font-family: @font-family-default !important;
+  font-weight: 500;
+}
+
+.swagger-ui .col_header {
+  font-family: @font-family-default !important;
+  font-weight: 500 !important;
+}
+
+.swagger-ui .tablinks {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .opblock .opblock-summary-description {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui section h3 {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .opblock-description-wrapper p, .swagger-ui .opblock-external-docs-wrapper p, .swagger-ui .opblock-title_normal p {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .opblock-description-wrapper, .swagger-ui .opblock-external-docs-wrapper, .swagger-ui .opblock-title_normal {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui label {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .btn.cancel {
+  border-color: #E53935 !important;
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui {
+  font-family: @font-family-default !important;
+}
+
+.swagger-ui .btn {
+  font-family: @font-family-default !important;
+}

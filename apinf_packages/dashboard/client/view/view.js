@@ -11,7 +11,7 @@ import { Template } from 'meteor/templating';
 // Meteor contributed packages imports
 import { FlowRouter } from 'meteor/kadira:flow-router';
 
-// COllection imports
+// Collection imports
 import Apis from '/apinf_packages/apis/collection';
 
 // APInf import

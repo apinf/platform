@@ -12,6 +12,7 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     aria-labelledby="organizationFormModalLabel" >
     <div class="modal-dialog" role="document">
       <div class="modal-content">
+        <!-- header -->
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close-window">
             <span aria-hidden="true">&times;</span>
@@ -28,41 +29,43 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
           doc=organization
         }}
         <div itemscope itemtype="http://schema.org/Organization">
+          <!-- body -->
           <div class="modal-body">
             <fieldset>
               <span itemprop="name">
-                  {{> afQuickField name='name' id="add-organization-name" }}
+                {{> afQuickField name='name' id="add-organization-name" }}
               </span>
               <span itemprop="url">
-                  {{> afQuickField name='url' id="add-organization-url" }}
+                {{> afQuickField name='url' id="add-organization-url" }}
               </span>
               <span itemprop="description">
-                  {{> afQuickField name='description' id="add-organization-description" }}
+                {{> afQuickField name='description' id="add-organization-description" }}
               </span>
               <div class="panel panel-default">
                 <div class="panel-heading">
                   {{_ "organizationForm_contact_panelTitle" }}
                 </div>
                 <div class="panel-body">
-                   <span itemprop="name">
-                       {{> afQuickField name='contact.person' id="add-contact-name" }}
-                    </span>
-                   <span itemprop="telephone">
-                       {{> afQuickField name='contact.phone' id="add-contact-phone" }}
-                    </span>
-                   <span itemprop="email">
-                       {{> afQuickField name='contact.email' id="add-contact-email" }}
-                    </span>
+                  <span itemprop="name">
+                    {{> afQuickField name='contact.person' id="add-contact-name" }}
+                  </span>
+                  <span itemprop="telephone">
+                    {{> afQuickField name='contact.phone' id="add-contact-phone" }}
+                  </span>
+                  <span itemprop="email">
+                    {{> afQuickField name='contact.email' id="add-contact-email" }}
+                  </span>
                 </div>
               </div>
             </fieldset>
           </div>
         </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" id="save-organization">
-              {{_ "organizationForm_saveButton_text" }}
-            </button>
-          </div>
+        <!-- footer -->
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-success" id="save-organization">
+            {{_ "organizationForm_saveButton_text" }}
+          </button>
+        </div>
         {{/ autoForm }}
       </div>
     </div>

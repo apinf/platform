@@ -1,7 +1,7 @@
 /* Copyright 2017 Apinf Oy
- This file is covered by the EUPL license.
- You may obtain a copy of the licence at
- https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
 
 // Meteor packages imports
 import { ReactiveDict } from 'meteor/reactive-dict';
@@ -109,13 +109,13 @@ Template.dashboardSummaryStatistic.helpers({
     const direction = arrowDirection(parameter, this);
 
     // Green color for text -  percentage value near arrow
-    if (direction === 'arrow-up' || direction === 'arrow-down_time') {
-      textColor = 'text-success';
+    if (direction === 'trending-up arrow-up' || direction === 'trending-down arrow-down_time') {
+      textColor = 'arrow-up';
     }
 
     // Red color for text - percentage value near arrow
-    if (direction === 'arrow-down' || direction === 'arrow-up_time') {
-      textColor = 'text-danger';
+    if (direction === 'trending-down arrow-down' || direction === 'trending-up arrow-up_time') {
+      textColor = 'arrow-down';
     }
 
     // Grey color for text
@@ -173,19 +173,7 @@ Template.dashboardSummaryStatistic.helpers({
     // Otherwise: display all data
     return Template.currentData().analyticsData.length;
   },
-});
-
-Template.dashboardSummaryStatistic.events({
-  'click [data-id]': (event, templateInstance) => {
-    const target = event.currentTarget;
-
-    // Get status of specified Overview template (shown or not)
-    const display = templateInstance.displayOverview.get(target.dataset.id);
-
-    // Inverse the value
-    templateInstance.displayOverview.set(target.dataset.id, !display);
-
-    // Display or not the box-shadow for table line
-    target.classList.toggle('open');
+  localeString (number) {
+    return number.toLocaleString();
   },
 });

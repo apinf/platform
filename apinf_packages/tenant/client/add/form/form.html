@@ -1,0 +1,32 @@
+<!-- Copyright 2017 Apinf Oy
+This file is covered by the EUPL license.
+You may obtain a copy of the licence at
+https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
+
+<template name="tenantUserForm">
+  <h3 style="font-size:16px; margin-top:0;">
+    {{_ "tenantUserForm_title_addUser" }}
+  </h3>
+  <p style="color:#6d859e;">
+    {{_ "tenantUserForm_help_addUser" }}
+  </p>
+
+  <fieldset>
+    <div class="row">
+      <!-- Usernames into a drop-down list -->
+      <div class="col-md-6">
+        <select id="completeUserList" style="width: 100%;"  size="4">
+          {{#each completeUserList}}
+            <option value="{{this.id}}">{{this.username}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <span class="help-block"></span>
+  </fieldset>
+
+  <button type="button" class="btn btn-primary" id="addUserToTenant" title={{_ "tenantUserForm_button_addUser_title" }}>
+    {{_ "tenantUserForm_addButton_text" }}
+  </button>
+
+</template>

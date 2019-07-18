@@ -1,16 +1,72 @@
-/* Copyright 2017 Apinf Oy
+/* Copyright 2019 Apinf Oy
 This file is covered by the EUPL license.
 You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 */
+
+.admin-settings-menu {
+  height: 60px;
+}
+
+@media (max-width: 767px) {
+  .admin-settings-menu {
+    height: 120px;
+
+    .links {
+      justify-content: center;
+      overflow-y: scroll;
+      flex: none;
+      overflow: auto;
+    }
+    nav {
+      display: inherit;
+    }
+  }
+}
 
 .settings-fields {
   margin-bottom: 20px;
   .checkbox {
     margin: 0;
   }
+
+  h2 {
+    font-size: 1.4em;
+    margin-top: 0;
+    text-transform: none;
+    margin-bottom: 1em;
+  }
 }
 
 [data-toggle="popover"] {
   float: right;
   margin-right: 5px;
+}
+
+.panel {
+  border-radius: 5px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.panel-default {
+  border-color: #C1C7CD;
+}
+
+.panel-default > .panel-heading {
+  color: #5c617b;
+  background-color: transparent;
+  border-color: #C1C7CD;
+  border-bottom: none;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  border-radius: 0;
+}
+
+.panel-body {
+  border-top: 1px solid #C1C7CD;
+}
+
+.panel-footer {
+  background-color: transparent;
+  border-top: 1px solid #C1C7CD;
 }

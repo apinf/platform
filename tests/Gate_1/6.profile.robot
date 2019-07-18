@@ -63,7 +63,7 @@ Go to profile
 	Click Element 	id=frontpage-button
 	confirm page loaded	Users
 	Click Element 	id=usermenu
-	Click Element	id=account-button
+	Click Element	id=profile-button
 	confirm page loaded	Company
 
 Go to account

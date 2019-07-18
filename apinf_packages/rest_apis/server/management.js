@@ -465,30 +465,6 @@ ManagementV1.swagger = {
         },
       },
     },
-
-    // Good: Structure for response
-    loginResponse: {
-      type: 'object',
-      properties: {
-        status: {
-          type: 'string',
-          example: 'success',
-        },
-        data: {
-          type: 'object',
-          properties: {
-            authToken: {
-              type: 'string',
-              example: 'auth-token-value',
-            },
-            userId: {
-              type: 'string',
-              example: 'user-id-value',
-            },
-          },
-        },
-      },
-    },
     // Scheme for describing single object of Users collection
     userItem: {
       type: 'object',

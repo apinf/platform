@@ -24,11 +24,9 @@ Template.viewApiStatus.helpers({
     // Create a new line using join
     return [
       `api-status-indicator-${api._id}`,
-      'icon-indicator',
       className,
     ].join(' ');
   },
-
   originalTitle () {
     // Get api
     const api = Template.currentData().api;
@@ -37,5 +35,13 @@ Template.viewApiStatus.helpers({
     const { statusText } = convertStatusCode(api.latestMonitoringStatusCode);
 
     return statusText;
+  },
+  statusIcon () {
+    // Get api
+    const api = Template.currentData().api;
+
+    const { statusIcon } = convertStatusCode(api.latestMonitoringStatusCode);
+
+    return statusIcon;
   },
 });

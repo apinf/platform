@@ -68,11 +68,10 @@ Meteor.methods({
     // Get any user with matching email
     const userByEmail = Accounts.findUserByEmail(manager.user);
     // Get any user with matching username
-    // const userByUsername = Accounts.findUserByUsername(manager.user);
+    const userByUsername = Accounts.findUserByUsername(manager.user);
 
     // "User" field can be e-mail value or username value
-    // temporarily only with email
-    const user = userByEmail; /* || userByUsername */
+    const user = userByEmail || userByUsername;
 
     // No matching in both direction
     if (!user) {

@@ -1,0 +1,8 @@
+.related-links-list {
+  padding-left: 0;
+  list-style: none;
+}
+
+.api-profile-visible {
+  display: none;
+}

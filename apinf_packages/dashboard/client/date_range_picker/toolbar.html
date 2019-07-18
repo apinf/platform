@@ -4,6 +4,9 @@ You may obtain a copy of the licence at
 https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence-eupl-v11 -->
 
 <template name="dateRangePicker">
+  <label for="timeframe" class="dashboard-form-label">
+    {{_ "dateRangePicker_optionText_title" }}
+  </label>
   <select name="timeframe" class="form-control" id="date-range-picker">
     <option value="12">
       {{_ 'dateRangePicker_optionText_today' }}
