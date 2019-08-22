@@ -35,7 +35,7 @@ before_script:
   - meteor npm install
 #Need to install chromedriver by hand
   - wget http://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.15/bin/
   - export CHROME_BIN=chromium-browser
   - npm run lint
   - npm view chimp version
