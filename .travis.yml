@@ -3,12 +3,13 @@ dist: xenial
 language: node_js
 node_js:
   - '8'
+  
+language: python
+python:
+  - "2.7"  
 
 addons:  
   chrome: stable
-  apt:
-    packages:
-      - chromium-chromedriver
 branches:
   only:
     - develop
@@ -32,10 +33,10 @@ before_install:
 before_script:
 #Previously used yarn, but now after migrating to meteor 1.8, yarn fails to create some binaries.
   - meteor npm install
-#Need to install chromedriver by hand
-#  - wget http://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip
-#  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
-#  - export CHROME_BIN=chromium-browser
+Need to install chromedriver by hand
+  - wget http://chromedriver.storage.googleapis.com/77.0.3865.40/chromedriver_linux64.zip
+  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python2.7.12/bin/
+  - export CHROME_BIN=chromium-browser
   - npm run lint
   - npm view chimp version
   - npm view chromedriver version
