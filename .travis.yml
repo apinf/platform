@@ -5,7 +5,7 @@ node_js:
   - '8'
 
 addons:  
-  chrome: stable
+  chrome: beta
 
 branches:
   only:
@@ -23,9 +23,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install g++ build-essential xvfb  
   
-  # Install meteor locally on CI
+# Install meteor locally on CI
   - if [ ! -e "$HOME/.meteor/meteor" ]; then cat .travis_install_meteor | sed s/--progress-bar/-sL/g | /bin/sh; fi
-
 
 before_script:
 #Previously used yarn, but now after migrating to meteor 1.8, yarn fails to create some binaries.
