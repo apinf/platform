@@ -71,5 +71,12 @@ APInf saas service: [apinf.io](https://apinf.io).
 
 APInf is licensed under the [EUPL-1.1](LICENSE) License.
 
+## FIWARE GE
+APInf API Management Framework is a FIWARE Generic Enabler. Therefore, it can be integrated as part of any platform “Powered by FIWARE”. FIWARE is a curated framework of open source platform components which can be assembled together with other third-party platform components to accelerate the development of Smart Solutions.
+
+You can find more info at the FIWARE developers website and the FIWARE website.
+
+The complete list of FIWARE GEs and Incubated FIWARE GEs can be found at the [FIWARE Catalogue](https://www.fiware.org/developers/catalogue/)
+
 © 2019 APInf Oy
 
