@@ -29,7 +29,7 @@
 # Installation
 
 ## Note on migration
-We are in the process of updating MeteorJS version from 1.5.2 to 1.8. If you need to update the installation which is based on Meteor 1.5.2 to version which uses Meteor 1.8, you need to run MongoDB migration. More information here: https://docs.mongodb.com/manual/release-notes/3.6-upgrade-standalone/
+We have updated MeteorJS version from 1.5.2 to 1.8. If you need to update the installation which is based on Meteor 1.5.2 to version which uses Meteor 1.8, you need to run MongoDB migration. More information here: https://docs.mongodb.com/manual/release-notes/3.6-upgrade-standalone/
 
 The issue is that new version of MongoDB which comes with MeteorJS version 1.8 has new database engine; Procedure is to 1) mongo dump 2) upgrade to version with meteor 1.8 3)meteor reset 4) mongo restore 
 
@@ -42,7 +42,11 @@ We have forked the NREL/api-umbrella: https://github.com/apinf/apinf-umbrella; W
 2. Install [Meteor.js](https://www.meteor.com/install)
 3. Clone [Apinf](https://github.com/apinf/platform)
 4. Run `meteor npm install` - using meteor instead npm makes sure the same npm is used that comes with meteor distribution
-5. Type `meteor` in the project directory
+5. Type `meteor` in the project directory:
+```
+ThinkPad-T430s:~/platform$ meteor
+                            
+```
 
 ## With Docker -OBSOLETED
 
