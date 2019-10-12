@@ -55,7 +55,7 @@ ThinkPad-T430s:~/platform$ meteor
                             
 ```
 
-## With Docker -OBSOLETED
+## With Docker
 
 1. Run API-umbrella container http://api-umbrella.readthedocs.io/en/latest/getting-started.html#running-with-docker
 2. Obtaining API Key and Authentication token. You can obtain the *Authentication Token* and *API Key* from the API Umbrella platform by following instructions in the [Getting Started](http://apiumbrella.io/docs/getting-started/) and [API Umbrella Admin API](http://apiumbrella.io/docs/admin-api/) documentation.
