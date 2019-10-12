@@ -1,0 +1,128 @@
+<template name="proxy42ProxyForm">
+
+  <!-- TODO
+      - validation:
+        - regex for basepaths
+        - > 0 for port
+   -->
+
+  <!-- hidden fields, auto-value -->
+  {{> afQuickField name="type" type="hidden" value="proxy42" }}
+
+  <div class="api-settings">
+    <div class="form-group col-md-4" data-required="true" style="padding-left: 0 !important;">
+      <!-- Proxy base path (frontend prefix) -->
+      {{_ "proxy42BackendForm_proxyBasePath_title" }}
+      <label for="proxy-base-path-field" style="padding-left: 3px">
+        {{_ "proxy42BackendForm_proxyBasepath_label" }}
+      </label>
+
+      <div class="input-group">
+        <span class="input-group-addon" id="proxy-url" >
+          {{ proxy.proxy42.url }}
+        </span>
+
+        <input type="text"
+               id="proxy-base-path-field"
+               name="front_prefix"
+               class="form-control"
+               required
+               value={{ proxyBackend.frontPrefix }}
+               pattern={{ proxyPrefixPattern }}
+               >
+      </div>
+
+      <!-- validation messages -->
+      {{# if isProxyBasePathInvalid }}
+        <p class="text-danger">
+          {{{ afFieldMessage name='apiUmbrella.url_matches.0.frontend_prefix' }}}
+        </p>
+      {{/ if }}
+
+      <!-- help text -->
+      <p class="help-block">
+        {{_ "proxyBackendForm_proxyBasePath_helpText" }}&nbsp;<b>{{_ "general_example" }}</b><br />
+        {{ proxy.apiUmbrella.url }}<b>{{_ "proxyBackendForm_proxyBasePath_helpText_example" }}</b>{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
+      </p>
+    </div>
+
+    <!-- symbol for redirection -->
+    <div class="col-md-2" style="text-align: center;">
+      <!--  {{_ "proxyBackendForm_redirect_helpText" }} <br /> -->
+      <br />
+      <span style="font-weight: bold;">{{_ "proxyBackendForm_request_helpText" }}</span>
+      <span class="glyphicon glyphicon-arrow-right"></span><br />
+      <span class="glyphicon glyphicon-arrow-left"></span>
+      <span style="font-weight: bold;">{{_ "proxyBackendForm_response_helpText" }}</span>
+    </div>
+
+    <!-- API base path (backend prefix) -->
+    <div class="row">
+      <div class="form-group col-md-4" data-required="true" style="margin-bottom: 0;">
+
+        {{_ "proxyBackendForm_apiBasePath_title" }}
+        <label for="api-base-path-field" style="padding-left: 3px">
+          {{_ "proxy42BackendForm_apiBasepath_label" }}
+        </label>
+
+        <div class="input-group">
+          <!-- API url addon -->
+          <span class="input-group-addon" id="api-url">
+            {{ api.url }}
+          </span>
+
+          <input type="text"
+                 id="api-base-path-field"
+                 name="front_prefix"
+                 class="form-control"
+                 required
+                 value={{ proxyBackend.backendPrefix }}
+                 pattern={{ apiPrefixPattern }}
+                 >
+        </div>
+
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name='apiUmbrella.url_matches.0.backend_prefix' }}
+        <p class="text-danger">
+          {{{ afFieldMessage name='apiUmbrella.url_matches.0.backend_prefix' }}}
+        </p>
+        {{/ if }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_apiBasePath_helpText" }}&nbsp;<b>{{_ "general_example" }}</b><br />
+          {{ api.url }}<b>{{_ "proxyBackendForm_apiBasePath_helpText_example" }}</b>{{_ "proxyBackendForm_apiBasePath_helpText_continued" }}
+        </p>
+      </div>
+
+      <!-- API port (servers.port) -->
+      <div class="form-group col-md-2" data-required="true">
+        <label for="api-port-field" id="api-port-field-label">
+          {{_ "proxy42BackendForm_apiPort_label" }}
+        </label>
+
+        <input type="text"
+               id="api-port-field"
+               name="api-port-field-label"
+               class="form-control"
+               required
+               value={{ proxyBackend.apiPort }}
+               >
+
+        <!-- validation messages -->
+        {{# if afFieldIsInvalid name="apiUmbrella.servers.0.port" }}
+          <p class="text-danger">
+            {{{ afFieldMessage name="apiUmbrella.servers.0.port" }}}
+          </p>
+        {{/ if }}
+
+        <!-- help text -->
+        <p class="help-block">
+          {{_ "proxyBackendForm_apiPort_helpText" }}
+        </p>
+      </div>
+    </div>
+
+    <hr style="color: rgba(59, 59, 88, 0.15);margin-right: -20px;margin-left: -20px;margin-bottom: 1em;margin-top: 0.5em;">
+  </div>
+</template>

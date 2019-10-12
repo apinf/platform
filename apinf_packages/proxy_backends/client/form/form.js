@@ -49,7 +49,6 @@ Template.proxyBackend.onCreated(() => {
       } else {
         // Get all proxies ordered by name
         const proxies = Proxies.find({}, { sort: { name: 1 } }).fetch();
-
         // Set current proxy ID as the first item of the proxies list
         currentProxyId = proxies[0]._id;
       }

@@ -27,10 +27,10 @@ Template.viewApi.onCreated(function () {
 
   templateInstance.api = new ReactiveVar();
 
-  // Subscribe to public proxy details
+  // Subscribe to public proxy details: apinfUmbrella and proxy42
   templateInstance.subscribe('proxyCount');
   // Subscribe to public proxy details (particular type)
-  templateInstance.subscribe('publicProxyDetails', 'apiUmbrella');
+  templateInstance.subscribe('publicProxyDetails');
   // Subscribe to Settings "supportsGraphql"
   templateInstance.subscribe('singleSetting', 'supportsGraphql');
   // Subscribe to development Features settings

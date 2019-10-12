@@ -17,7 +17,6 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
 
     <!-- visible fields -->
     <!-- Selector for proxy list if proxies are more one otherwise hidden field -->
-
     {{# if oneProxy }}
       {{> afQuickField name="proxyId" value=proxy._id type="hidden" }}
     {{ else }}
@@ -29,6 +28,11 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
     <!-- API Umbrella -->
     {{# if equals proxy.type "apiUmbrella" }}
       {{> apiUmbrellaProxyForm proxy=proxy proxyHost=proxyHost api=api }}
+    {{/ if }}
+
+    <!-- Proxy 42 -->
+    {{# if equals proxy.type "proxy42" }}
+      {{> proxy42ProxyForm proxy=proxy proxyHost=proxyHost api=api }}
     {{/ if }}
 
     <!-- EMQ -->
