@@ -78,5 +78,15 @@ You can find more info at the FIWARE developers website and the FIWARE website.
 
 The complete list of FIWARE GEs and Incubated FIWARE GEs can be found at the [FIWARE Catalogue](https://www.fiware.org/developers/catalogue/)
 
+## APInf API Management
+This project is part of [FIWARE](http://fiware.org/) and has been rated as follows:
+
+* **Version Tested:** ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Version&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.version&colorB=blue)
+* **Documentation:** ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Completeness&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.docCompleteness&colorB=blue) ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Usability&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.docSoundness&colorB=blue)
+* **Responsiveness:** ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Time%20to%20Respond&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.timeToCharge&colorB=blue) ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Time%20to%20Fix&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.timeToFix&colorB=blue)
+* **FIWARE Testing:** ![ ](https://img.shields.io/badge/dynamic/json.svg?label=Tests%20Passed&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.failureRate&colorB=blue)
+![ ](https://img.shields.io/badge/dynamic/json.svg?label=Scalability&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.scalability&colorB=blue)
+![ ](https://img.shields.io/badge/dynamic/json.svg?label=Performance&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.performance&colorB=blue)
+![ ](https://img.shields.io/badge/dynamic/json.svg?label=Stability&url=https://fiware.github.io/Generic-Enablers/json/apinf.json&query=$.stability&colorB=blue)
 © 2019 APInf Oy
 
