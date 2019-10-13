@@ -25,6 +25,10 @@ Template.languageSelect.onCreated(function () {
     TAPi18n.setLanguage(selectedLanguage);
     T9n.setLanguage(selectedLanguage);
   }
+  else{
+  //Set English by default
+  Session.setDefault('lang', 'en');
+  }
 });
 
 Template.languageSelect.helpers({
@@ -55,6 +59,7 @@ Template.languageSelect.helpers({
   activeLanguage () {
     // Get current language
     const activeLanguage = Session.get('lang');
+console.log(activeLanguage)
 
     // Get language from the current data context
     const languageTag = this.tag;
@@ -73,7 +78,7 @@ Template.languageSelect.events({
     const language = event.target.value;
 
     // Update selected language in Session
-    Session.update('lang', language);
+    Session.set('lang', language);
 
     // Update site language with selected language
     TAPi18n.setLanguage(language);
