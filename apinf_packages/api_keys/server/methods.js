@@ -96,7 +96,7 @@ Meteor.methods({
         // Check type & call appropriate function
         if (proxy && proxy.type === 'apiUmbrella') {
           // Call Umbrella method to create user with API key
-          Meteor.call('createApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
+          Meteor.call('deleteApiUmbrellaUser', currentUser, proxyId, (error, umbrellaUser) => {
             if (error) {
               // Throw apiumbrellauser error for client
               throw new Meteor.Error(
