@@ -31,7 +31,7 @@
     "json2csv": "^4.5.1",
     "limax": "^1.7.0",
     "locale-compare-polyfill": "0.0.2",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.21",
     "markdown-it": "^8.4.2",
     "meteor-node-stubs": "^0.4.1",
     "moment": "^2.24.0",
