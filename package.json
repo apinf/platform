@@ -11,7 +11,7 @@
     "JSONStream": "^1.3.5",
     "babel-runtime": "^6.26.0",
     "bcrypt": "^3.0.6",
-    "chart.js": "^2.8.0",
+    "chart.js": "^2.9.4",
     "chartjs-color": "^2.3.0",
     "clipboard": "^2.0.4",
     "crossfilter": "^1.3.12",
