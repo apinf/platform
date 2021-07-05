@@ -19,11 +19,16 @@ https://joinup.ec.europa.eu/community/eupl/og_page/european-union-public-licence
               </small>
             </h1>
             {{# if currentUser }}
-              <a class="btn btn-success btn-success-special" href="{{ pathFor 'addApi' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
+              <a class="btn btn-success btn-success-special" 
+                 href="{{ pathFor 'addApi' }}" 
+                 style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
                 Add new API
               </a>
             {{ else }}
-              <a class="btn btn-success btn-success-special" href="{{ pathFor 'signUp' }}" style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
+              <a class="btn btn-success btn-success-special"
+                 id="get-started-button" 
+                 href="{{ pathFor 'signUp' }}" 
+                 style="width: 160px;font-size: 1.1em;line-height: 48px;height:50px;">
                 Get started
               </a>
             {{/ if }}
