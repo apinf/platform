@@ -45,7 +45,7 @@
     "swagger-parser": "^6.0.5",
     "time-grunt": "^2.0.0",
     "tinycolor2": "^1.4.1",
-    "urijs": "^1.19.1",
+    "urijs": "^1.19.8",
     "xss": "^1.0.6"
   },
   "devDependencies": {
