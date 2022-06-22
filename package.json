@@ -21,7 +21,7 @@
     "elasticsearch": "^16.0.0",
     "fibers": "^4.0.1",
     "github": "^14.0.0",
-    "got": "^9.6.0",
+    "got": "^11.8.5",
     "intro.js": "^2.9.3",
     "jquery": "^3.4.1",
     "jquery-bbq": "^1.0.0",
