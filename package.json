@@ -41,7 +41,7 @@
     "select2": "^4.0.6",
     "select2-bootstrap-theme": "0.1.0-beta.10",
     "simple-statistics": "^7.0.2",
-    "swagger-client": "^3.8.25",
+    "swagger-client": "^3.18.5",
     "swagger-parser": "^6.0.5",
     "time-grunt": "^2.0.0",
     "tinycolor2": "^1.4.1",
